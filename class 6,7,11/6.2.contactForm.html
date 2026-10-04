@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contact us</title>
+</head>
+<body>
+    <h1>আমাদের সাথে যোগাযোগ</h1>
+    <p>্নিচের ফর্ম পুরন করুন, আমরা ২৪ ঘণ্টার মধ্যে সাড়া দিব।</p>
+
+    <form action="/contact" method="POST">
+        <fieldset>
+            <legend>আপ্নার তথ্য</legend>
+            <p>
+                <label for="name">পুর নাম</label>
+                <input type="text" id="name" name="name" required minlength="3" placeholder="john doe"/>
+            </p>
+
+            <p>
+                <label for="email"> email*</label><br/>
+                <input type ="email" id="email" name="email" required placeholder="you@example.com"/>
+            </p>
+
+            <p>
+                <label for="phone">ফোন</label><br/>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{11}" placeholder="01700000000"/>
+            </p>
+
+        </fieldset>
+
+        <fieldset>
+            <legend>বার্তা </legend>
+                <p>
+                    <label for="subject">বিষয়ঃ </label><br>
+                    <select id="subject" name="subject" required>
+                        <option value="">বেছে নিন</option>
+                        <option value="">সাধারণ প্রশ্ন</option>
+                        <option value="">technical support</option>
+                        <option value="">feedback</option>
+
+                    </select>
+                </p>
+
+                <p>
+                    <label for="msg">আপনার বার্তা</label><br>
+                    <texttaread id="msg" rows="5" cols="40" required minlength="10"></texttaread>
+                </p>
+          
+        </fieldset>
+
+        <button type = "submit"> send</button>
+        <button type = "reset"> clear</button>
+    </form>
+    
+</body>
+</html>
