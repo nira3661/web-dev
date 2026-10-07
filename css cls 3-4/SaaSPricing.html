@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple, Predictable SaaS Pricing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stylesSaaSPricing.css">
+</head>
+<body>
+
+  <main class="pricing-container">
+    
+    <!-- Hidden Checkbox for Pure CSS Billing Toggle -->
+    <input type="checkbox" id="billing-toggle" class="billing-checkbox" aria-label="Toggle between monthly and annual billing">
+
+    <!-- Header Section -->
+    <header class="pricing-header">
+      <span class="badge">Flexible Plans</span>
+      <h1 class="pricing-title">Plans that scale with your growth</h1>
+      <p class="pricing-subtitle">Start free for 14 days. No credit card required. Cancel anytime.</p>
+
+      <!-- Billing Toggle Control -->
+      <div class="toggle-container">
+        <label for="billing-toggle" class="toggle-label label-monthly">Monthly</label>
+        
+        <label for="billing-toggle" class="switch" aria-hidden="true">
+          <span class="switch-slider"></span>
+        </label>
+        
+        <label for="billing-toggle" class="toggle-label label-annual">
+          Annual
+          <span class="discount-pill">Save 20%</span>
+        </label>
+      </div>
+    </header>
+
+    <!-- 3-Tier Pricing Grid -->
+    <section class="pricing-grid" aria-label="Pricing tiers">
+
+      <!-- Plan 1: Starter -->
+      <article class="pricing-card">
+        <div class="card-header">
+          <h2 class="plan-name">Starter</h2>
+          <p class="plan-description">Essential tools for independent creators and early-stage projects.</p>
+          <div class="price-container">
+            <span class="currency">$</span>
+            <span class="price price-monthly">19</span>
+            <span class="price price-annual">15</span>
+            <span class="billing-cycle">/seat /month</span>
+          </div>
+          <span class="billed-annually-note">Billed annually ($180/yr)</span>
+        </div>
+
+        <ul class="feature-list">
+          <li class="feature-item">
+            <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>Up to 3 team members</span>
+          </li>
+          <li class="feature-item">
+            <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>10GB cloud asset storage</span>
+          </li>
+          <li class="feature-item">
+            <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>Standard API rate limits</span>
+          </li>
+          <li class="feature-item">
+            <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>Community forum support</span>
+          </li>
+        </ul>
+
+        <div class="card-footer">
+          <a href="#signup-starter" class="cta-button cta-secondary">Get Started</a>
+        </div>
+      </article>
+
+      <!-- Plan 2: Professional (Featured / Highlighted) -->
+      <article class="pricing-card featured">
+        <div class="featured-ribbon">Most Popular</div>
+        <div class="card-header">
+          <h2 class="plan-name">Professional</h2>
+          <p class="plan-description">Supercharge collaboration, analytics, and automation for scaling teams.</p>
+          <div class="price-container">
+            <span class="currency">$</span>
+            <span class="price price-monthly">49</span>
+            <span class="price price-annual">39</span>
+            <span class="billing-cycle">/seat /month</span>
+          </div>
+          <span class="billed-annually-note">Billed annually ($468/yr)</span>
+        </div>
+
+        <ul class="feature-list">
+          <li class="feature-item">
+            <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>Up to 25 team members</span>
+          </li>
+          <li class="feature-item">
+            <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>250GB high-speed cloud storage</span>
+          </li>
+          <li class="feature-item">
+            <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>Advanced analytics & webhook automations</span>
+          </li>
+          <li class="feature-item">
+            <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>Custom domain & white-labeling</span>
+          </li>
+          <li class="feature-item">
+            <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>Priority email & chat support</span>
+          </li>
+        </ul>
+
+        <div class="card-footer">
+          <a href="#signup-pro" class="cta-button cta-primary">Start 14-Day Free Trial</a>
+        </div>
+      </article>
+
+      <!-- Plan 3: Enterprise -->
+      <article class="pricing-card">
+        <div class="card-header">
+          <h2 class="plan-name">Enterprise</h2>
+          <p class="plan-description">Custom governance, compliance, and dedicated infrastructure.</p>
+          <div class="price-container">
+            <span class="currency">$</span>
+            <span class="price price-monthly">119</span>
+            <span class="price price-annual">95</span>
+            <span class="billing-cycle">/seat /month</span>
+          </div>
+          <span class="billed-annually-note">Billed annually ($1,140/yr)</span>
+        </div>
+
+        <ul class="feature-list">
+          <li class="feature-item">
+            <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>Unlimited team members</span>
+          </li>
+          <li class="feature-item">
+            <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>Unlimited cloud storage</span>
+          </li>
+          <li class="feature-item">
+            <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>SAML 2.0 Single Sign-On (SSO)</span>
+          </li>
+          <li class="feature-item">
+            <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>Custom SLA & 24/7 dedicated account manager</span>
+          </li>
+        </ul>
+
+        <div class="card-footer">
+          <a href="#contact-sales" class="cta-button cta-secondary">Contact Sales</a>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+</body>
+</html>

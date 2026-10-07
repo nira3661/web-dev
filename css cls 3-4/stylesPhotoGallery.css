@@ -1,0 +1,370 @@
+/* ==========================================================================
+   CSS Reset & Base Variables
+   ========================================================================== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+
+  /* Glassmorphism Variables */
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.85);
+  --glass-border-dark: rgba(0, 0, 0, 0.06);
+  --glass-blur: blur(16px);
+  --glass-shadow: 0 16px 36px -10px rgba(15, 23, 42, 0.12),
+                  0 4px 12px -2px rgba(15, 23, 42, 0.05);
+
+  /* Palette */
+  --text-dark: #121826;
+  --text-muted: #5c6479;
+  --accent-ink: #11141a;
+  --accent-glow: #6366f1;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  background-color: #f7f8fa;
+  color: var(--text-dark);
+}
+
+body {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   Floating Glassmorphism Island Navbar
+   ========================================================================== */
+.glass-island-header {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92%, 960px);
+  z-index: 1000;
+  pointer-events: none; /* Allows natural clicking around navbar boundary */
+}
+
+.island-nav {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.65rem 0.5rem 1.15rem;
+  border-radius: 9999px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.island-nav:hover {
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.18),
+              0 6px 14px -2px rgba(15, 23, 42, 0.06);
+}
+
+/* --- Brand / Monogram --- */
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.monogram-badge {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1f2937, #000000);
+  color: #ffffff;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.brand-link:hover .monogram-badge {
+  transform: scale(1.05);
+}
+
+.brand-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-dark);
+}
+
+/* --- Gallery Filter Links --- */
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-pill {
+  display: inline-block;
+  padding: 0.45rem 0.95rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+
+.nav-pill:hover {
+  color: var(--text-dark);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.nav-pill.active {
+  color: var(--text-dark);
+  background: rgba(0, 0, 0, 0.06);
+  font-weight: 600;
+}
+
+/* --- Inquire CTA Button --- */
+.nav-action {
+  flex-shrink: 0;
+}
+
+.inquire-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: var(--accent-ink);
+  color: #ffffff;
+  padding: 0.55rem 1.25rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.inquire-btn .arrow-icon {
+  width: 0.9rem;
+  height: 0.9rem;
+  transition: transform 0.2s ease;
+}
+
+.inquire-btn:hover {
+  background-color: #000000;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+}
+
+.inquire-btn:hover .arrow-icon {
+  transform: translateX(2px);
+}
+
+.inquire-btn:active {
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   Showcase Content & Gallery
+   ========================================================================== */
+.page-content {
+  padding-top: 7rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-inline: 1.5rem;
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  padding: 4rem 1rem 5rem;
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.hero-tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-glow);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.hero-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--text-dark);
+  margin-bottom: 1.25rem;
+}
+
+.hero-subtext {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Ambient Color Orbs to Emphasize Frosted Glass Refraction */
+.hero-bg-accent {
+  position: absolute;
+  filter: blur(80px);
+  z-index: -1;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.circle-1 {
+  width: 320px;
+  height: 320px;
+  top: -20px;
+  left: -80px;
+  background: radial-gradient(circle, #fbcfe8, #e0e7ff);
+}
+
+.circle-2 {
+  width: 350px;
+  height: 350px;
+  bottom: 0;
+  right: -60px;
+  background: radial-gradient(circle, #fed7aa, #fef08a);
+}
+
+/* Gallery Grid */
+.gallery-section {
+  padding-bottom: 6rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+}
+
+.gallery-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  background-color: #e5e7eb;
+  grid-column: span 6;
+  aspect-ratio: 4 / 3;
+}
+
+.gallery-card.tall {
+  grid-column: span 6;
+  aspect-ratio: 3 / 4;
+}
+
+.gallery-card.wide {
+  grid-column: span 12;
+  aspect-ratio: 16 / 9;
+}
+
+.gallery-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-card:hover img {
+  transform: scale(1.04);
+}
+
+.card-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem 1.5rem 1.25rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+  color: #ffffff;
+}
+
+.card-caption span {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.8;
+}
+
+.card-caption h3 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  margin-top: 0.2rem;
+}
+
+/* ==========================================================================
+   Pure CSS Responsive Rules (Zero JS)
+   ========================================================================== */
+/* Tablet & Medium Screens: Hide Secondary Filter Items */
+@media (max-width: 768px) {
+  .secondary-item {
+    display: none;
+  }
+
+  .brand-name {
+    display: none; /* Saves horizontal space while preserving the monogram */
+  }
+
+  .island-nav {
+    padding: 0.45rem 0.5rem 0.45rem 0.75rem;
+  }
+
+  .gallery-card,
+  .gallery-card.tall {
+    grid-column: span 12;
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* Small / Mobile Screens: Scale Pill Without Breaking Container */
+@media (max-width: 480px) {
+  .glass-island-header {
+    top: 1rem;
+    width: 95%;
+  }
+
+  .monogram-badge {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.85rem;
+  }
+
+  .nav-pill {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.8rem;
+  }
+
+  .inquire-btn {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.8rem;
+  }
+  
+  .inquire-btn .arrow-icon {
+    display: none;
+  }
+}

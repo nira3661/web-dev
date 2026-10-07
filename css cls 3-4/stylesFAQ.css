@@ -1,0 +1,390 @@
+/* ==========================================================================
+   CSS Reset & Custom Design Tokens
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  
+  /* Color Palette */
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-surface-hover: #fcfdfe;
+  --color-border: #e2e8f0;
+  --color-border-hover: #cbd5e1;
+  --color-border-active: #6366f1;
+  
+  --color-text-main: #0f172a;
+  --color-text-muted: #64748b;
+  --color-text-light: #475569;
+  
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
+  --color-badge-bg: #eef2ff;
+  --color-badge-text: #4f46e5;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -4px rgba(0, 0, 0, 0.02);
+  
+  /* Transitions */
+  --transition-standard: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.25rem;
+}
+
+/* ==========================================================================
+   Main FAQ Container
+   ========================================================================== */
+.faq-container {
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   Centered Header
+   ========================================================================== */
+.faq-header {
+  text-align: center;
+  margin-bottom: 2.75rem;
+}
+
+.faq-badge {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-badge-text);
+  background-color: var(--color-badge-bg);
+  padding: 0.3rem 0.85rem;
+  border-radius: 9999px;
+  margin-bottom: 0.875rem;
+  letter-spacing: 0.02em;
+}
+
+.faq-title {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text-main);
+  letter-spacing: -0.03em;
+  margin-bottom: 0.85rem;
+}
+
+.faq-subtext {
+  font-size: 1.0625rem;
+  color: var(--color-text-muted);
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.55;
+}
+
+/* ==========================================================================
+   Accordion Items (<details> & <summary>)
+   ========================================================================== */
+.faq-accordion-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+}
+
+.faq-item {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: border-color var(--transition-standard),
+              box-shadow var(--transition-standard),
+              background-color var(--transition-standard);
+}
+
+.faq-item:hover {
+  border-color: var(--color-border-hover);
+  background-color: var(--color-surface-hover);
+}
+
+/* Active Open State Accent */
+.faq-item[open] {
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: var(--shadow-md);
+}
+
+/* Summary Trigger */
+.faq-summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  user-select: none;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  transition: color var(--transition-standard);
+}
+
+/* Hide default disclosure triangle across browsers */
+.faq-summary::-webkit-details-marker {
+  display: none;
+}
+.faq-summary::marker {
+  display: none;
+}
+
+.faq-summary:focus-visible {
+  outline: 2px solid var(--color-border-active);
+  outline-offset: -2px;
+  border-radius: 16px;
+}
+
+.faq-question {
+  padding-right: 1.25rem;
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   Custom CSS + / − Rotating Icon Indicator
+   ========================================================================== */
+.faq-icon-indicator {
+  position: relative;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #f1f5f9;
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-standard),
+              border-color var(--transition-standard),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Horizontal line of plus */
+.faq-icon-indicator::before {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 2px;
+  background-color: var(--color-text-light);
+  border-radius: 2px;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color var(--transition-standard);
+}
+
+/* Vertical line of plus */
+.faq-icon-indicator::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 12px;
+  background-color: var(--color-text-light);
+  border-radius: 2px;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color var(--transition-standard);
+}
+
+.faq-item:hover .faq-icon-indicator {
+  background-color: #e2e8f0;
+}
+
+/* Icon transform when accordion is opened: collapses vertical line and rotates */
+.faq-item[open] .faq-icon-indicator {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: rotate(180deg);
+}
+
+.faq-item[open] .faq-icon-indicator::before {
+  background-color: #ffffff;
+}
+
+.faq-item[open] .faq-icon-indicator::after {
+  background-color: #ffffff;
+  transform: scaleY(0); /* Morphs "+" into "−" smoothly */
+}
+
+/* ==========================================================================
+   Answer Wrapper & Smooth Expansion Transition
+   ========================================================================== */
+.faq-answer-wrapper {
+  padding: 0 1.5rem 1.35rem 1.5rem;
+  animation: smoothSlideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.faq-answer {
+  color: var(--color-text-light);
+  font-size: 0.975rem;
+  line-height: 1.65;
+}
+
+@keyframes smoothSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   "Still have questions?" Contact Footer Card
+   ========================================================================== */
+.faq-footer-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 2.25rem 2rem;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.75rem;
+}
+
+.contact-avatar-cluster {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  background-size: cover;
+  background-position: center;
+  box-shadow: var(--shadow-sm);
+  margin-left: -12px;
+}
+
+.avatar:first-child {
+  margin-left: 0;
+}
+
+.avatar-1 {
+  background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80');
+}
+
+.avatar-2 {
+  background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80');
+}
+
+.avatar-3 {
+  background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80');
+}
+
+.contact-text-content {
+  flex: 1;
+}
+
+.contact-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.25rem;
+}
+
+.contact-subtext {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+}
+
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
+  transition: background-color var(--transition-standard),
+              transform var(--transition-standard),
+              box-shadow var(--transition-standard);
+}
+
+.contact-btn:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+}
+
+.contact-btn:active {
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 640px) {
+  body {
+    padding: 2rem 1rem;
+  }
+
+  .faq-header {
+    margin-bottom: 2rem;
+  }
+
+  .faq-summary {
+    padding: 1.1rem 1.25rem;
+    font-size: 0.975rem;
+  }
+
+  .faq-icon-indicator {
+    width: 28px;
+    height: 28px;
+  }
+
+  .faq-icon-indicator::before {
+    width: 10px;
+  }
+
+  .faq-icon-indicator::after {
+    height: 10px;
+  }
+
+  .faq-footer-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    gap: 1.25rem;
+  }
+
+  .contact-avatar-cluster {
+    justify-content: center;
+  }
+
+  .contact-btn {
+    width: 100%;
+  }
+}
