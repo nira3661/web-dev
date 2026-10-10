@@ -1,0 +1,516 @@
+/* =========================================================
+   🎨 THEME VARIABLES (CSS Custom Properties)
+   ========================================================= */
+:root {
+  /* Color palette - defined once, used everywhere for consistency */
+  --bg:           #e8f7f1;   /* Main page background - light sage green */
+  --bg-surface:   #f4fbf8;   /* Light surface highlight - slightly lighter than bg */
+  --bg-alt:       #d6efd7;   /* Card / section contrast background - subtle contrast */
+  --text:         #013d2b;   /* Main text - dark forest green for readability */
+  --muted:        #41584c;   /* Secondary text - meets WCAG AA contrast ratio */
+  --accent:       #8b2e33;   /* Primary accent color - deep red for links/buttons */
+  --accent-hover: #5e1d21;   /* Darker hover state for interactive elements */
+  --border:       #b8d9c9;   /* Border color - muted sage */
+
+  /* Typography scale - consistent font families across the site */
+  --font-heading: 'Playfair Display', Georgia, serif;  /* Elegant serif for headings */
+  --font-body:    'Lora', Georgia, 'Times New Roman', serif;  /* Readable serif for body */
+
+  /* Layout constants */
+  --max-width:    1100px;    /* Maximum content width - keeps lines readable */
+  --radius:       8px;       /* Standard border radius for cards/inputs */
+}
+
+/* =========================================================
+   Base & Accessibility Resets
+   ========================================================= */
+
+/* Box-sizing reset: makes padding/border included in element width/height */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;           /* Smooth anchor link scrolling */
+  accent-color: var(--accent);       /* Form control accent color (checkboxes, radios) */
+}
+
+body {
+  margin: 0;                         /* Remove default browser margin */
+  font-family: var(--font-body);     /* Base font for body text */
+  font-size: 1.0625rem;              /* 17px - slightly larger for readability */
+  line-height: 1.75;                 /* Generous line height for comfortable reading */
+  color: var(--text);                /* Primary text color */
+  background-color: var(--bg);       /* Page background color */
+  -webkit-font-smoothing: antialiased; /* Smoother font rendering on macOS/iOS */
+}
+
+/* Accessible focus styles - only visible on keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--accent);  /* Visible focus ring */
+  outline-offset: 3px;               /* Space between element and ring */
+}
+
+/* Link base styles */
+a {
+  color: var(--accent);              /* Link color matches brand accent */
+  text-decoration: none;             /* No underline by default */
+  transition: color 0.2s ease, border-color 0.2s ease; /* Smooth color transitions */
+}
+
+a:hover {
+  color: var(--accent-hover);        /* Darker on hover for feedback */
+}
+
+/* Heading defaults - consistent styling across h1-h4 */
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);  /* Elegant serif for headings */
+  font-weight: 700;                  /* Bold weight */
+  line-height: 1.25;                 /* Tighter line height for headings */
+  color: var(--text);                /* Dark text color */
+  margin: 0 0 0.6em;                 /* Bottom margin only, relative to font size */
+  text-wrap: balance;                /* Balances text across lines for prettier headings */
+}
+
+/* Responsive images - scale down but never up */
+img {
+  max-width: 100%;                   /* Never exceed container width */
+  height: auto;                      /* Maintain aspect ratio */
+  display: block;                    /* Removes bottom whitespace gap */
+  object-fit: cover;                 /* Crops image to fill container if needed */
+}
+
+/* Page content wrapper - centers content with max width and side padding */
+.container {
+  max-width: var(--max-width);       /* Constrains content to readable line length */
+  margin: 0 auto;                    /* Centers horizontally */
+  padding: 0 1.5rem;                 /* Side padding for mobile breathing room */
+}
+
+/* Screen-reader only utility - visually hidden but accessible to AT */
+.sr-only {
+  position: absolute;                /* Remove from visual flow */
+  width: 1px; height: 1px;           /* Tiny size */
+  padding: 0; margin: -1px;          /* Collapse space */
+  overflow: hidden;                  /* Clip overflow */
+  clip: rect(0, 0, 0, 0);            /* Old clip method */
+  white-space: nowrap;               /* Prevent wrapping */
+  border-width: 0;                   /* No border */
+}
+
+/* =========================================================
+   Navigation - Sticky header with glassmorphism effect
+   ========================================================= */
+.nav {
+  position: sticky;                  /* Sticks to top when scrolling */
+  top: 0;                            /* Sticks at viewport top */
+  /* Semi-transparent background with relative color syntax */
+  background-color: rgb(from var(--bg) r g b / 0.92);
+  backdrop-filter: blur(8px);        /* Frosted glass blur effect */
+  -webkit-backdrop-filter: blur(8px); /* Safari support for backdrop-filter */
+  border-bottom: 1px solid var(--border); /* Subtle separator line */
+  z-index: 100;                      /* Above content, below modals */
+}
+
+.nav-inner {
+  display: flex;                     /* Flexbox for logo + nav links layout */
+  align-items: center;               /* Vertically center items */
+  justify-content: space-between;    /* Logo left, links right */
+  padding: 1rem 1.5rem;              /* Internal spacing */
+  max-width: var(--max-width);       /* Align with content max-width */
+  margin: 0 auto;                    /* Center horizontally */
+}
+
+.nav-logo {
+  font-family: var(--font-heading);  /* Matches heading font */
+  font-size: 1.4rem;                 /* Slightly larger than body text */
+  font-weight: 700;                  /* Bold for brand presence */
+  color: var(--text);                /* Dark text color */
+}
+
+.nav-logo:hover {
+  color: var(--accent);              /* Accent color on hover for interactivity */
+}
+
+.nav-links {
+  display: flex;                     /* Horizontal link layout */
+  gap: 1.75rem;                      /* Space between navigation items */
+}
+
+.nav-links a {
+  color: var(--text);                /* Default text color (not accent) */
+  font-size: 0.95rem;                /* Slightly smaller than body */
+  font-weight: 600;                  /* Semi-bold for emphasis */
+  letter-spacing: 0.02em;            /* Slight tracking for refinement */
+}
+
+.nav-links a:hover {
+  color: var(--accent);              /* Accent color on hover */
+}
+
+/* =========================================================
+   Hero - Top banner with site title and tagline
+   ========================================================= */
+.hero {
+  padding: 6rem 1.5rem 5rem;         /* Generous vertical padding for prominence */
+  text-align: center;                /* Center all content */
+  border-bottom: 1px solid var(--border); /* Separator from content below */
+}
+
+.hero h1 {
+  /* Fluid typography: min 2.4rem, preferred 6vw, max 4rem */
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-style: italic;                /* Italic for editorial feel */
+  margin-bottom: 0.5rem;             /* Space below heading */
+}
+
+.hero .tagline {
+  font-size: 1.15rem;                /* Slightly larger than body */
+  color: var(--muted);               /* Muted color for secondary text */
+  max-width: 620px;                  /* Limit line length for readability */
+  margin: 0 auto;                    /* Center the tagline */
+  font-style: italic;                /* Matches heading style */
+}
+
+/* =========================================================
+   Section Titles - Reusable centered heading with accent underline
+   ========================================================= */
+.section-title {
+  text-align: center;                /* Center the heading text */
+  font-size: 2rem;                   /* Consistent section heading size */
+  margin: 4.5rem 0 2.5rem;           /* Top/bottom spacing between sections */
+  position: relative;                /* Needed for pseudo-element positioning */
+}
+
+/* Decorative accent line beneath section titles */
+.section-title::after {
+  content: "";                       /* Required for pseudo-element */
+  display: block;                    /* Block for width/height/margin */
+  width: 44px;                       /* Fixed width decorative line */
+  height: 2px;                       /* Thin line height */
+  background: var(--accent);         /* Brand accent color */
+  margin: 0.8rem auto 0;             /* Center horizontally, space from text */
+}
+
+/* =========================================================
+   Featured Post - Two-column layout for highlighted article
+   ========================================================= */
+.featured {
+  display: grid;                     /* CSS Grid for two-column layout */
+  grid-template-columns: 1fr 1fr;    /* Equal width columns */
+  gap: 3.5rem;                       /* Large gap between image and content */
+  align-items: center;               /* Vertically center content with image */
+  padding: 1rem 0 3rem;              /* Vertical spacing around section */
+}
+
+/* Image wrapper with fixed aspect ratio */
+.featured-img-wrap {
+  aspect-ratio: 4 / 3;               /* Maintains 4:3 ratio regardless of width */
+  border-radius: var(--radius);      /* Rounded corners matching site radius */
+  overflow: hidden;                  /* Clips image to rounded corners */
+  border: 1px solid var(--border);   /* Subtle border */
+  box-shadow: 0 4px 16px rgba(1, 61, 43, 0.04); /* Soft shadow for depth */
+}
+
+.featured-img {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s ease;   /* Smooth zoom on hover */
+}
+
+/* Subtle zoom effect on hover */
+.featured:hover .featured-img {
+  transform: scale(1.02);            /* 2% zoom - subtle but noticeable */
+}
+
+.featured-meta {
+  font-size: 0.85rem;                /* Small meta text */
+  color: var(--muted);               /* Muted color for category/date */
+  text-transform: uppercase;         /* Uppercase for label feel */
+  letter-spacing: 0.08em;            /* Wide tracking for uppercase */
+  margin-bottom: 0.75rem;            /* Space below meta */
+}
+
+.featured h2 {
+  /* Fluid heading size between 1.8rem and 2.3rem */
+  font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+  margin-bottom: 1rem;
+}
+
+.featured-title-link {
+  color: var(--text);                /* Default dark color (not accent) */
+}
+
+.featured-title-link:hover {
+  color: var(--accent);              /* Accent on hover */
+}
+
+.featured p {
+  color: var(--muted);               /* Muted for excerpt text */
+  max-width: 65ch;                   /* Optimal reading width (~65 chars) */
+  margin-bottom: 1.5rem;             /* Space before read more link */
+}
+
+/* Read more link styled as inline text with bottom border */
+.read-more {
+  display: inline-block;             /* Allows margin/padding, respects line-height */
+  font-family: var(--font-heading);  /* Heading font for emphasis */
+  font-style: italic;                /* Italic for call-to-action feel */
+  font-size: 1.05rem;                /* Slightly larger than body */
+  border-bottom: 1px solid var(--accent); /* Underline via border (better control) */
+}
+
+.read-more:hover {
+  border-bottom-color: var(--accent-hover); /* Darker underline on hover */
+}
+
+/* =========================================================
+   Post Grid - Responsive card grid for blog posts
+   ========================================================= */
+.posts {
+  display: grid;                     /* CSS Grid for responsive card layout */
+  /* Auto-fit: fills row with min 280px cards, expands to fill space */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;                       /* Space between cards */
+  padding-bottom: 4.5rem;            /* Bottom padding before next section */
+}
+
+.post-card {
+  display: flex;                     /* Flex column for image + content stacking */
+  flex-direction: column;
+  position: relative;                /* Needed for stretched link pseudo-element */
+  border-radius: var(--radius);      /* Rounded corners on card container */
+  transition: transform 0.25s ease;  /* Smooth lift on hover */
+}
+
+/* Lift card on hover for interactive feedback */
+.post-card:hover {
+  transform: translateY(-4px);       /* Move up 4px */
+}
+
+.post-card-img-wrap {
+  aspect-ratio: 3 / 2;               /* 3:2 ratio - standard photo aspect */
+  border-radius: var(--radius);      /* Rounded corners */
+  overflow: hidden;                  /* Clips image to corners */
+  border: 1px solid var(--border);   /* Subtle border */
+  margin-bottom: 1.25rem;            /* Space between image and text */
+  background-color: var(--bg-alt);   /* Placeholder color while image loads */
+}
+
+.post-card-img {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.35s ease;  /* Slightly slower zoom than featured */
+}
+
+/* Subtle zoom on card hover */
+.post-card:hover .post-card-img {
+  transform: scale(1.03);            /* 3% zoom */
+}
+
+.post-card .date {
+  font-size: 0.8rem;                 /* Small date label */
+  color: var(--muted);               /* Muted color */
+  text-transform: uppercase;         /* Uppercase for label style */
+  letter-spacing: 0.08em;            /* Wide tracking */
+  margin-bottom: 0.5rem;             /* Space below date */
+}
+
+.post-card h3 {
+  font-size: 1.35rem;                /* Card title size */
+  margin-bottom: 0.6rem;
+}
+
+/* Stretched link pattern - makes entire card clickable via h3 link */
+.post-card h3 a {
+  color: var(--text);                /* Dark text color */
+}
+
+/* Pseudo-element covers entire card for click area */
+.post-card h3 a::after {
+  content: "";
+  position: absolute;
+  inset: 0;                          /* Covers full card (top/right/bottom/left: 0) */
+  z-index: 1;                        /* Above content, below interactive elements */
+}
+
+.post-card h3 a:hover {
+  color: var(--accent);              /* Title color change on hover */
+}
+
+.post-card p {
+  color: var(--muted);               /* Muted excerpt text */
+  font-size: 0.95rem;                /* Slightly smaller than body */
+  line-height: 1.6;                  /* Comfortable reading line height */
+  margin: 0;                         /* Remove default paragraph margins */
+}
+
+/* =========================================================
+   About - Author bio section with photo and description
+   ========================================================= */
+.about {
+  background-color: var(--bg-alt);   /* Alternate background for visual separation */
+  border-top: 1px solid var(--border);   /* Top separator line */
+  border-bottom: 1px solid var(--border); /* Bottom separator line */
+  padding: 5rem 1.5rem;              /* Generous vertical padding */
+}
+
+.about-inner {
+  display: grid;                     /* Two-column grid: photo + text */
+  grid-template-columns: 240px 1fr;  /* Fixed photo width, flexible text column */
+  gap: 3.5rem;                       /* Space between photo and text */
+  align-items: center;               /* Vertically center photo with text */
+  max-width: var(--max-width);       /* Constrain to content width */
+  margin: 0 auto;                    /* Center horizontally */
+}
+
+/* Circular author photo */
+.about-photo {
+  width: 240px;                      /* Matches grid column width */
+  height: 240px;                     /* Square for perfect circle */
+  border-radius: 50%;                /* Makes image circular */
+  border: 4px solid var(--bg);       /* Thick border in page bg color */
+  box-shadow: 0 6px 20px rgba(1, 61, 43, 0.12); /* Soft shadow for depth */
+}
+
+.about h2 {
+  font-size: 2rem;                   /* Section heading size */
+}
+
+.about p {
+  color: var(--muted);               /* Muted text for bio */
+  max-width: 65ch;                   /* Optimal reading width */
+}
+
+/* =========================================================
+   Newsletter - Email signup form section
+   ========================================================= */
+.newsletter {
+  text-align: center;                /* Center all content */
+  padding: 5.5rem 1.5rem;            /* Generous vertical padding */
+}
+
+.newsletter h2 {
+  font-size: 1.85rem;                /* Slightly smaller than section-title */
+}
+
+.newsletter p {
+  color: var(--muted);               /* Muted description text */
+  max-width: 500px;                  /* Limit width for readability */
+  margin: 0 auto 2rem;               /* Center and space below */
+}
+
+/* Form layout - horizontal on desktop, stacks on mobile */
+.newsletter-form {
+  display: flex;                     /* Side-by-side input + button */
+  max-width: 460px;                  /* Limit form width */
+  margin: 0 auto;                    /* Center horizontally */
+  gap: 0.6rem;                       /* Space between input and button */
+}
+
+.newsletter-form input {
+  flex: 1;                           /* Input takes remaining space */
+  padding: 0.85rem 1.1rem;           /* Comfortable click/tap target */
+  font-family: var(--font-body);     /* Match body font */
+  font-size: 1rem;                   /* Base font size */
+  border: 1px solid var(--border);   /* Subtle border */
+  background-color: var(--bg-surface); /* Slightly lighter than page bg */
+  border-radius: var(--radius);      /* Rounded corners */
+  color: var(--text);                /* Text color */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Focus transition */
+}
+
+.newsletter-form input:focus {
+  outline: none;                     /* Remove default outline */
+  border-color: var(--accent);       /* Accent border on focus */
+  /* Custom focus ring using relative color syntax for transparency */
+  box-shadow: 0 0 0 3px rgb(from var(--accent) r g b / 0.15);
+}
+
+.newsletter-form button {
+  padding: 0.85rem 1.6rem;           /* Matches input height */
+  font-family: var(--font-heading);  /* Heading font for emphasis */
+  font-style: italic;                /* Italic for CTA feel */
+  font-weight: 700;                  /* Bold */
+  font-size: 1rem;
+  background-color: var(--accent);   /* Brand accent background */
+  color: #ffffff;                    /* White text */
+  border: none;                      /* No border */
+  border-radius: var(--radius);      /* Match input radius */
+  cursor: pointer;                   /* Pointer cursor for button */
+  transition: background-color 0.2s ease; /* Hover transition */
+}
+
+.newsletter-form button:hover {
+  background-color: var(--accent-hover); /* Darker on hover */
+}
+
+/* =========================================================
+   Footer - Site footer with copyright and social links
+   ========================================================= */
+footer {
+  background-color: var(--text);     /* Dark background (same as text color) */
+  color: var(--bg);                  /* Light text (same as page bg) */
+  text-align: center;                /* Center content */
+  padding: 3rem 1.5rem;              /* Vertical and horizontal padding */
+  font-size: 0.9rem;                 /* Smaller text for footer */
+}
+
+footer a {
+  color: var(--bg);                  /* Light link color */
+  opacity: 0.85;                     /* Slightly muted by default */
+}
+
+footer a:hover {
+  opacity: 1;                        /* Full opacity on hover */
+  color: #ffffff;                    /* Pure white on hover */
+}
+
+/* Social icon links */
+.social {
+  display: flex;                     /* Horizontal icon layout */
+  justify-content: center;           /* Center icons */
+  gap: 1.75rem;                      /* Space between icons */
+  margin-bottom: 1.25rem;            /* Space below social links */
+}
+
+/* =========================================================
+   Responsive Breakpoints - Mobile-first adjustments
+   ========================================================= */
+
+/* Tablet and below (≤820px) */
+@media (max-width: 820px) {
+  .featured {
+    grid-template-columns: 1fr;      /* Stack featured post columns */
+    gap: 2rem;                       /* Reduced gap when stacked */
+  }
+
+  .about-inner {
+    grid-template-columns: 1fr;      /* Stack about photo and text */
+    text-align: center;              /* Center text when stacked */
+  }
+
+  .about-photo {
+    margin: 0 auto;                  /* Center photo when stacked */
+  }
+
+  .hero {
+    padding: 4.5rem 1.5rem 3.5rem;   /* Reduced hero padding on tablet */
+  }
+}
+
+/* Mobile (≤540px) */
+@media (max-width: 540px) {
+  .nav-inner {
+    flex-direction: column;          /* Stack logo and nav links vertically */
+    gap: 0.75rem;                    /* Space between logo and links */
+  }
+
+  .nav-links {
+    gap: 1.2rem;                     /* Tighter link spacing on mobile */
+  }
+
+  .newsletter-form {
+    flex-direction: column;          /* Stack input and button vertically */
+  }
+}
