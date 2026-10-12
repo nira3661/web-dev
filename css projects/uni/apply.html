@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apply & Visit — Northmere University</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav">
+        <a class="brand" href="index.html"><span class="crest">N</span><span><b>Northmere University</b></span></a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="academics.html">Academics</a></li>
+          <li><a href="admissions.html">Admissions</a></li>
+          <li><a href="campus.html">Campus Life</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="news.html">News</a></li>
+        </ul>
+        <a class="btn btn-dark" href="apply.html" class="active">Apply Now</a>
+        <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Connect With Us</span>
+      <h1>Plan a Visit or Request Information</h1>
+      <p style="color: #c9d2e6;">We look forward to meeting you either on campus or virtually.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div>
+        <h2>Request Information</h2>
+        <p>Complete this form and an admissions counselor will reach out within two business days.</p>
+        <form class="box" onsubmit="event.preventDefault(); alert('Information request received!');">
+          <div class="field">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" required placeholder="Jane Doe">
+          </div>
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" required placeholder="jane@example.com">
+          </div>
+          <div class="field">
+            <label for="program">Program of Interest</label>
+            <select id="program">
+              <option>Undergraduate Studies</option>
+              <option>Graduate Studies</option>
+              <option>Online Degrees</option>
+            </select>
+          </div>
+          <button class="btn btn-dark" type="submit">Submit Request</button>
+        </form>
+      </div>
+
+      <div>
+        <h2>Campus Tours</h2>
+        <div class="card">
+          <h3>Daily Walking Tours</h3>
+          <p>Offered Monday through Friday at 10:00 AM and 2:00 PM. Includes student center, library, dining halls, and academic quads.</p>
+          <a class="btn btn-primary" href="#">Reserve Tour Seat</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="main.js"></script>
+</body>
+</html>

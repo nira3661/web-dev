@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ambient Soundboard · Hypnotic Visualizer</title>
+<style>
+  /* ---------- Base & Theme ---------- */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-1: #0a0e1a;
+    --bg-2: #141a2e;
+    --bg-3: #1e1b3a;
+    --text: #e6e9f5;
+    --text-dim: #9aa3c7;
+    --accent: #8ab4ff;
+    --glass-bg: rgba(20, 24, 46, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.08);
+  }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
+    color: var(--text);
+    background: radial-gradient(ellipse at center, var(--bg-3) 0%, var(--bg-2) 45%, var(--bg-1) 100%);
+  }
+
+  /* ---------- Canvas ---------- */
+  #visualizer {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 0;
+  }
+
+  /* ---------- Top Title ---------- */
+  .title {
+    position: fixed;
+    top: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    font-size: 13px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    opacity: 0.65;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+  }
+  .title span { color: var(--accent); }
+
+  /* ---------- Controls Panel ---------- */
+  .controls {
+    position: fixed;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 999px;
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: opacity 1.2s ease;
+  }
+
+  .controls.idle { opacity: 0.12; }
+  .controls:hover { opacity: 1 !important; }
+
+  .divider {
+    width: 1px;
+    height: 22px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0 4px;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    appearance: none;
+    border: none;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+  }
+  .btn:hover {
+    background: rgba(138, 180, 255, 0.15);
+    border-color: rgba(138, 180, 255, 0.3);
+    transform: translateY(-1px);
+  }
+  .btn:active { transform: translateY(0); }
+
+  .btn.primary {
+    background: linear-gradient(135deg, #6a8dff, #8ab4ff);
+    color: #0a0e1a;
+    box-shadow: 0 4px 16px rgba(106, 141, 255, 0.35);
+  }
+  .btn.primary:hover {
+    background: linear-gradient(135deg, #7c9bff, #9cc3ff);
+  }
+
+  .btn svg { width: 18px; height: 18px; }
+
+  /* ---------- Switcher ---------- */
+  .switcher {
+    display: flex;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .switcher button {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: var(--text-dim);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-weight: 500;
+  }
+  .switcher button:hover { color: var(--text); }
+  .switcher button.active {
+    background: rgba(138, 180, 255, 0.2);
+    color: var(--accent);
+    box-shadow: inset 0 0 0 1px rgba(138, 180, 255, 0.25);
+  }
+
+  /* ---------- Volume Slider ---------- */
+  .volume {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 6px;
+  }
+  .volume svg { width: 16px; height: 16px; color: var(--text-dim); flex-shrink: 0; }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 90px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--accent);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(138, 180, 255, 0.6);
+    transition: transform 0.2s;
+  }
+  input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+  input[type="range"]::-moz-range-thumb {
+    width: 14px; height: 14px;
+    background: var(--accent);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  /* Hidden file input */
+  #fileInput { display: none; }
+
+  /* ---------- Status ---------- */
+  .status {
+    position: fixed;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+    z-index: 5;
+  }
+  .status.show { opacity: 0.7; }
+
+  @media (max-width: 640px) {
+    .controls { gap: 6px; padding: 8px 10px; }
+    .switcher button { padding: 5px 8px; font-size: 10px; }
+    input[type="range"] { width: 60px; }
+    .btn { width: 36px; height: 36px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Hypnotic canvas visualizer -->
+  <canvas id="visualizer" aria-label="Hypnotic audio-reactive visualizer"></canvas>
+
+  <div class="title" id="title">Ambient · <span id="trackName">Deep Drone</span></div>
+  <div class="status" id="status"></div>
+
+  <!-- Glassmorphic floating controls -->
+  <nav class="controls" id="controls" aria-label="Audio controls">
+    <!-- Play/Pause -->
+    <button class="btn primary" id="playBtn" aria-label="Play or pause">
+      <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+
+    <!-- Upload -->
+    <button class="btn" id="uploadBtn" aria-label="Upload audio file" title="Upload MP3 / WAV">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="17 8 12 3 7 8"/>
+        <line x1="12" y1="3" x2="12" y2="15"/>
+      </svg>
+    </button>
+    <input type="file" id="fileInput" accept="audio/mpeg,audio/wav,audio/*" />
+
+    <div class="divider"></div>
+
+    <!-- Ambient switcher -->
+    <div class="switcher" role="tablist" aria-label="Ambient sound">
+      <button class="active" data-ambient="drone" role="tab">Drone</button>
+      <button data-ambient="rain" role="tab">Rain</button>
+      <button data-ambient="noise" role="tab">Noise</button>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Volume -->
+    <div class="volume">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+      </svg>
+      <input type="range" id="volume" min="0" max="1" step="0.01" value="0.55" aria-label="Master volume" />
+    </div>
+  </nav>
+
+<script>
+/* ==========================================================================
+   AMBIENT SOUNDBOARD & HYPNOTIC VISUALIZER
+   -------------------------------------------------------------------------
+   Architecture:
+   - AudioContext -> source (synth | file) -> gain (master) -> analyser -> destination
+   - AnalyserNode.getByteFrequencyData() populates a Uint8Array each frame.
+   - Frequency bins (0..N/2) map to:
+       * low bins (bass)    -> central orb breathing radius
+       * mid bins           -> length of radial "rays"
+       * high bins          -> sparkle / outer halo intensity
+   - Canvas renders at 60fps via requestAnimationFrame, resizing on window resize.
+   ========================================================================== */
+
+(() => {
+  'use strict';
+
+  // ---------- Canvas setup ----------
+  const canvas = document.getElementById('visualizer');
+  const ctx = canvas.getContext('2d');
+  let W = 0, H = 0, CX = 0, CY = 0, DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width  = W * DPR;
+    canvas.height = H * DPR;
+    canvas.style.width  = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    CX = W / 2;
+    CY = H / 2;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  // ---------- Audio graph ----------
+  let audioCtx = null;
+  let analyser = null;
+  let masterGain = null;
+  let currentSource = null;     // { type: 'synth'|'file', nodes: [...] }
+  let fileElement = null;       // <audio> for uploaded tracks
+  let mediaSourceNode = null;
+
+  const FFT_SIZE = 1024;
+  const freqData = new Uint8Array(FFT_SIZE / 2);
+
+  function initAudio() {
+    if (audioCtx) return;
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    // Master gain -> destination
+    masterGain = audioCtx.createGain();
+    masterGain.gain.value = parseFloat(volumeSlider.value);
+
+    // Analyser for visualization
+    analyser = audioCtx.createAnalyser();
+    analyser.fftSize = FFT_SIZE;
+    analyser.smoothingTimeConstant = 0.82; // smooth for hypnotic feel
+
+    masterGain.connect(analyser);
+    analyser.connect(audioCtx.destination);
+  }
+
+  // ---------- Synthetic ambient sources ----------
+
+  /**
+   * Deep Drone: layered detuned sine oscillators at sub-bass / bass frequencies.
+   * Creates a warm, meditative hum.
+   */
+  function createDrone() {
+    const nodes = [];
+    const freqs = [55, 82.5, 110, 165]; // A1, E2, A2, E3
+    const merger = audioCtx.createGain();
+    merger.gain.value = 0.35;
+
+    freqs.forEach((f, i) => {
+      const osc = audioCtx.createOscillator();
+      osc.type = i % 2 === 0 ? 'sine' : 'triangle';
+      osc.frequency.value = f;
+      // Slight detune for richness
+      osc.detune.value = (Math.random() - 0.5) * 8;
+
+      const g = audioCtx.createGain();
+      g.gain.value = 0.25 / (i + 1);
+
+      // Slow LFO modulating gain for breathing
+      const lfo = audioCtx.createOscillator();
+      lfo.frequency.value = 0.08 + i * 0.03;
+      const lfoGain = audioCtx.createGain();
+      lfoGain.gain.value = 0.15 / (i + 1);
+      lfo.connect(lfoGain).connect(g.gain);
+
+      osc.connect(g).connect(merger);
+      osc.start();
+      lfo.start();
+      nodes.push(osc, lfo);
+    });
+
+    merger.connect(masterGain);
+    return { type: 'synth', nodes, output: merger };
+  }
+
+  /**
+   * Rain: white noise passed through a bandpass filter with slow modulation,
+   * plus a subtle lowpass to soften the highs.
+   */
+  function createRain() {
+    const buffer = audioCtx.createBuffer(1, audioCtx.sampleRate * 4, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+
+    const src = audioCtx.createBufferSource();
+    src.buffer = buffer;
+    src.loop = true;
+
+    const bandpass = audioCtx.createBiquadFilter();
+    bandpass.type = 'bandpass';
+    bandpass.frequency.value = 1800;
+    bandpass.Q.value = 0.6;
+
+    const lowpass = audioCtx.createBiquadFilter();
+    lowpass.type = 'lowpass';
+    lowpass.frequency.value = 6000;
+
+    // LFO modulating bandpass frequency for "shimmer"
+    const lfo = audioCtx.createOscillator();
+    lfo.frequency.value = 0.15;
+    const lfoGain = audioCtx.createGain();
+    lfoGain.gain.value = 600;
+    lfo.connect(lfoGain).connect(bandpass.frequency);
+
+    const g = audioCtx.createGain();
+    g.gain.value = 0.55;
+
+    src.connect(bandpass).connect(lowpass).connect(g).connect(masterGain);
+    src.start();
+    lfo.start();
+
+    return { type: 'synth', nodes: [src, lfo], output: g };
+  }
+
+  /**
+   * White Noise: pure broadband noise, gently lowpassed for comfort.
+   */
+  function createNoise() {
+    const buffer = audioCtx.createBuffer(1, audioCtx.sampleRate * 2, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+
+    const src = audioCtx.createBufferSource();
+    src.buffer = buffer;
+    src.loop = true;
+
+    const lp = audioCtx.createBiquadFilter();
+    lp.type = 'lowpass';
+    lp.frequency.value = 8000;
+
+    const g = audioCtx.createGain();
+    g.gain.value = 0.35;
+
+    src.connect(lp).connect(g).connect(masterGain);
+    src.start();
+
+    return { type: 'synth', nodes: [src], output: g };
+  }
+
+  // ---------- Source management ----------
+
+  function stopCurrentSource() {
+    if (!currentSource) return;
+    if (currentSource.type === 'synth') {
+      currentSource.nodes.forEach(n => {
+        try { n.stop && n.stop(); } catch(e) {}
+        try { n.disconnect(); } catch(e) {}
+      });
+    } else if (currentSource.type === 'file' && fileElement) {
+      fileElement.pause();
+      if (mediaSourceNode) {
+        try { mediaSourceNode.disconnect(); } catch(e) {}
+        mediaSourceNode = null;
+      }
+    }
+    currentSource = null;
+  }
+
+  function startAmbient(kind) {
+    initAudio();
+    stopCurrentSource();
+    let src;
+    if (kind === 'drone') src = createDrone();
+    else if (kind === 'rain') src = createRain();
+    else if (kind === 'noise') src = createNoise();
+    currentSource = src;
+    currentAmbient = kind;
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    isPlaying = true;
+    updatePlayIcon();
+  }
+
+  function loadFile(file) {
+    initAudio();
+    stopCurrentSource();
+
+    // Clean up previous <audio> element
+    if (fileElement) {
+      fileElement.pause();
+      fileElement.removeAttribute('src');
+      fileElement.load();
+    }
+
+    fileElement = new Audio();
+    fileElement.src = URL.createObjectURL(file);
+    fileElement.crossOrigin = 'anonymous';
+    fileElement.loop = true;
+
+    mediaSourceNode = audioCtx.createMediaElementSource(fileElement);
+    mediaSourceNode.connect(masterGain);
+
+    currentSource = { type: 'file', nodes: [], output: mediaSourceNode };
+    currentAmbient = 'file';
+    trackNameEl.textContent = file.name.replace(/\.[^.]+$/, '');
+    // Deselect ambient buttons
+    document.querySelectorAll('.switcher button').forEach(b => b.classList.remove('active'));
+
+    fileElement.play().catch(err => showStatus('Playback blocked — tap Play'));
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    isPlaying = true;
+    updatePlayIcon();
+  }
+
+  // ---------- UI ----------
+  const playBtn = document.getElementById('playBtn');
+  const playIcon = document.getElementById('playIcon');
+  const uploadBtn = document.getElementById('uploadBtn');
+  const fileInput = document.getElementById('fileInput');
+  const volumeSlider = document.getElementById('volume');
+  const switcherBtns = document.querySelectorAll('.switcher button');
+  const trackNameEl = document.getElementById('trackName');
+  const statusEl = document.getElementById('status');
+  const controlsEl = document.getElementById('controls');
+  const titleEl = document.getElementById('title');
+
+  let isPlaying = false;
+  let currentAmbient = 'drone';
+
+  function updatePlayIcon() {
+    if (isPlaying) {
+      playIcon.innerHTML = '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>';
+    } else {
+      playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+    }
+  }
+
+  playBtn.addEventListener('click', () => {
+    initAudio();
+    if (!currentSource) {
+      // Start default ambient
+      startAmbient(currentAmbient);
+      return;
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    if (currentSource.type === 'file' && fileElement) {
+      if (fileElement.paused) { fileElement.play(); isPlaying = true; }
+      else { fileElement.pause(); isPlaying = false; }
+    } else {
+      // Synth sources can't be paused easily; toggle master gain to 0
+      if (masterGain.gain.value > 0) {
+        masterGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.15);
+        isPlaying = false;
+      } else {
+        masterGain.gain.setTargetAtTime(parseFloat(volumeSlider.value), audioCtx.currentTime, 0.15);
+        isPlaying = true;
+      }
+    }
+    updatePlayIcon();
+  });
+
+  uploadBtn.addEventListener('click', () => fileInput.click());
+  fileInput.addEventListener('change', (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (file) loadFile(file);
+  });
+
+  volumeSlider.addEventListener('input', () => {
+    if (!masterGain) return;
+    const v = parseFloat(volumeSlider.value);
+    masterGain.gain.setTargetAtTime(isPlaying ? v : 0, audioCtx.currentTime, 0.08);
+  });
+
+  switcherBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      switcherBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const kind = btn.dataset.ambient;
+      trackNameEl.textContent = btn.textContent;
+      startAmbient(kind);
+    });
+  });
+
+  function showStatus(msg) {
+    statusEl.textContent = msg;
+    statusEl.classList.add('show');
+    clearTimeout(showStatus._t);
+    showStatus._t = setTimeout(() => statusEl.classList.remove('show'), 2200);
+  }
+
+  // ---------- Idle fade ----------
+  let idleTimer = null;
+  function resetIdle() {
+    controlsEl.classList.remove('idle');
+    titleEl.style.opacity = '0.65';
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => {
+      controlsEl.classList.add('idle');
+      titleEl.style.opacity = '0.25';
+    }, 3500);
+  }
+  ['mousemove', 'mousedown', 'touchstart', 'keydown'].forEach(ev =>
+    window.addEventListener(ev, resetIdle, { passive: true })
+  );
+  resetIdle();
+
+  // ---------- Rendering ----------
+  // Smoothed values to avoid jitter
+  let smoothBass = 0, smoothMid = 0, smoothHigh = 0;
+
+  function draw(t) {
+    // Trail effect: semi-transparent overlay instead of full clear
+    ctx.fillStyle = 'rgba(10, 14, 26, 0.18)';
+    ctx.fillRect(0, 0, W, H);
+
+    // Read frequency data
+    let bass = 0, mid = 0, high = 0;
+    if (analyser && isPlaying) {
+      analyser.getByteFrequencyData(freqData);
+      const N = freqData.length;
+      // Bin ranges (approx): bass 0-8%, mid 8-40%, high 40-80%
+      const bassEnd = Math.floor(N * 0.08);
+      const midEnd  = Math.floor(N * 0.4);
+      const highEnd = Math.floor(N * 0.8);
+
+      for (let i = 0; i < bassEnd; i++) bass += freqData[i];
+      for (let i = bassEnd; i < midEnd; i++) mid += freqData[i];
+      for (let i = midEnd; i < highEnd; i++) high += freqData[i];
+
+      bass /= (bassEnd * 255);
+      mid  /= ((midEnd - bassEnd) * 255);
+      high /= ((highEnd - midEnd) * 255);
+    }
+
+    // Exponential smoothing for hypnotic motion
+    smoothBass = smoothBass * 0.85 + bass * 0.15;
+    smoothMid  = smoothMid  * 0.88 + mid  * 0.12;
+    smoothHigh = smoothHigh * 0.9  + high * 0.1;
+
+    // Base breathing (time-driven) + audio-driven pulse
+    const breath = Math.sin(t * 0.0008) * 0.5 + 0.5; // 0..1
+    const baseRadius = Math.min(W, H) * 0.14;
+    const radius = baseRadius * (0.85 + breath * 0.15 + smoothBass * 0.55);
+
+    // Slow hue cycling (bioluminescent palette)
+    const hueBase = (t * 0.015) % 360;
+
+    // ---------- Outer halo (high freq) ----------
+    const haloR = radius * (1.8 + smoothHigh * 1.4);
+    const haloGrad = ctx.createRadialGradient(CX, CY, radius * 0.8, CX, CY, haloR);
+    haloGrad.addColorStop(0, `hsla(${hueBase + 180}, 70%, 60%, ${0.08 + smoothHigh * 0.25})`);
+    haloGrad.addColorStop(1, `hsla(${hueBase + 220}, 70%, 50%, 0)`);
+    ctx.fillStyle = haloGrad;
+    ctx.beginPath();
+    ctx.arc(CX, CY, haloR, 0, Math.PI * 2);
+    ctx.fill();
+
+    // ---------- Radial rays (mid freq) ----------
+    const rayCount = 64;
+    const step = (Math.PI * 2) / rayCount;
+    ctx.save();
+    ctx.translate(CX, CY);
+    ctx.rotate(t * 0.00008); // slow rotation
+    ctx.lineCap = 'round';
+
+    for (let i = 0; i < rayCount; i++) {
+      // Sample frequency bin corresponding to this ray
+      const binIdx = Math.floor((i / rayCount) * (freqData.length * 0.6));
+      const amp = analyser && isPlaying ? freqData[binIdx] / 255 : 0;
+      const smoothAmp = amp * 0.7 + smoothMid * 0.3;
+
+      const innerR = radius * 0.95;
+      const outerR = radius * (1.1 + smoothAmp * 1.8);
+      const angle = i * step;
+      const x1 = Math.cos(angle) * innerR;
+      const y1 = Math.sin(angle) * innerR;
+      const x2 = Math.cos(angle) * outerR;
+      const y2 = Math.sin(angle) * outerR;
+
+      const hue = (hueBase + i * 3) % 360;
+      ctx.strokeStyle = `hsla(${hue}, 75%, 65%, ${0.25 + smoothAmp * 0.6})`;
+      ctx.lineWidth = 1.5 + smoothAmp * 2;
+      ctx.shadowColor = `hsla(${hue}, 85%, 65%, 0.8)`;
+      ctx.shadowBlur = 8 + smoothAmp * 14;
+
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    // ---------- Central orb (bass + breath) ----------
+    ctx.save();
+    const orbGrad = ctx.createRadialGradient(CX, CY, 0, CX, CY, radius);
+    orbGrad.addColorStop(0, `hsla(${hueBase + 60}, 85%, 75%, ${0.95})`);
+    orbGrad.addColorStop(0.4, `hsla(${hueBase + 120}, 80%, 60%, 0.75)`);
+    orbGrad.addColorStop(1, `hsla(${hueBase + 200}, 75%, 40%, 0)`);
+
+    ctx.shadowColor = `hsla(${hueBase + 90}, 90%, 65%, 0.9)`;
+    ctx.shadowBlur = 30 + smoothBass * 50;
+    ctx.fillStyle = orbGrad;
+    ctx.beginPath();
+    ctx.arc(CX, CY, radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Inner bright core
+    const coreGrad = ctx.createRadialGradient(CX, CY, 0, CX, CY, radius * 0.45);
+    coreGrad.addColorStop(0, `hsla(${hueBase + 60}, 100%, 90%, 0.95)`);
+    coreGrad.addColorStop(1, `hsla(${hueBase + 60}, 100%, 80%, 0)`);
+    ctx.fillStyle = coreGrad;
+    ctx.beginPath();
+    ctx.arc(CX, CY, radius * 0.45, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
+    // ---------- Mandala rings ----------
+    ctx.save();
+    ctx.translate(CX, CY);
+    const rings = 3;
+    for (let r = 0; r < rings; r++) {
+      const ringR = radius * (1.4 + r * 0.35 + smoothMid * 0.3);
+      const hue = (hueBase + 180 + r * 40) % 360;
+      ctx.strokeStyle = `hsla(${hue}, 70%, 65%, ${0.12 + smoothMid * 0.3})`;
+      ctx.lineWidth = 1;
+      ctx.shadowBlur = 0;
+      ctx.beginPath();
+      ctx.arc(0, 0, ringR, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Dots on ring
+      const dotCount = 12 + r * 6;
+      for (let d = 0; d < dotCount; d++) {
+        const a = (d / dotCount) * Math.PI * 2 + t * 0.0001 * (r % 2 === 0 ? 1 : -1);
+        const dx = Math.cos(a) * ringR;
+        const dy = Math.sin(a) * ringR;
+        const dotSize = 1 + smoothHigh * 2.5;
+        ctx.fillStyle = `hsla(${hue}, 85%, 75%, ${0.4 + smoothHigh * 0.5})`;
+        ctx.beginPath();
+        ctx.arc(dx, dy, dotSize, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    ctx.restore();
+
+    requestAnimationFrame(draw);
+  }
+
+  // Kick off render loop immediately (visual breathes even before audio starts)
+  requestAnimationFrame(draw);
+
+  // Auto-start the default ambient on first user interaction (browser autoplay policy)
+  function firstInteraction() {
+    if (!currentSource) startAmbient('drone');
+    window.removeEventListener('click', firstInteraction);
+    window.removeEventListener('keydown', firstInteraction);
+    window.removeEventListener('touchstart', firstInteraction);
+  }
+  // Don't auto-start silently; let user press Play or a switcher button.
+
+})();
+</script>
+</body>
+</html>

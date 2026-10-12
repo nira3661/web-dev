@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Academics — Northmere University</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .filter-chip {
+      border: 1px solid var(--line); background: var(--surface); border-radius: 999px;
+      padding: .5rem 1.2rem; font: 600 .85rem var(--sans); cursor: pointer; color: var(--muted);
+    }
+    .filter-chip.active { background: var(--navy); border-color: var(--navy); color: #fff; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav">
+        <a class="brand" href="index.html"><span class="crest">N</span><span><b>Northmere University</b></span></a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="academics.html" class="active">Academics</a></li>
+          <li><a href="admissions.html">Admissions</a></li>
+          <li><a href="campus.html">Campus Life</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="news.html">News</a></li>
+        </ul>
+        <a class="btn btn-dark" href="apply.html">Apply Now</a>
+        <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Academic Programs</span>
+      <h1>Over 200 Paths to Explore</h1>
+      <p style="color: #c9d2e6;">Choose your discipline across 12 degree-granting schools and colleges.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="display: flex; gap: .6rem; margin-bottom: 2rem; flex-wrap: wrap;">
+        <button class="filter-chip active" data-filter="all">All Programs</button>
+        <button class="filter-chip" data-filter="ug">Undergraduate</button>
+        <button class="filter-chip" data-filter="grad">Graduate & Professional</button>
+        <button class="filter-chip" data-filter="online">Online / Flexible</button>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card program-card" data-cat="ug">
+          <span class="tag">School of Engineering</span>
+          <h3>B.S. Computer Science</h3>
+          <p>Systems, robotics, and human-centered AI with guaranteed third-year co-ops.</p>
+        </div>
+        <div class="card program-card" data-cat="ug">
+          <span class="tag">College of Arts & Sciences</span>
+          <h3>B.A. Neuroscience</h3>
+          <p>Work directly in one of 38 laboratory benches from sophomore year forward.</p>
+        </div>
+        <div class="card program-card" data-cat="grad">
+          <span class="tag">School of Medicine</span>
+          <h3>Doctor of Medicine (M.D.)</h3>
+          <p>Pass/fail preclinical sequence paired with 14 clinical teaching hospitals.</p>
+        </div>
+        <div class="card program-card" data-cat="grad">
+          <span class="tag">School of Law</span>
+          <h3>Juris Doctor (J.D.)</h3>
+          <p>Extensive clinical placements, appellate clinics, and corporate externships.</p>
+        </div>
+        <div class="card program-card" data-cat="online">
+          <span class="tag">Northmere Online</span>
+          <h3>M.S. Data Science</h3>
+          <p>Eighteen-month part-time program designed for practicing software engineers.</p>
+        </div>
+        <div class="card program-card" data-cat="online">
+          <span class="tag">School of Business</span>
+          <h3>Professional M.B.A.</h3>
+          <p>Asynchronous evening coursework coupled with executive residency weekends.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="main.js"></script>
+</body>
+</html>
