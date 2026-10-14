@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2 id="out" style="font-family:system-ui;padding:16px"></h2>
+<script>
+  const age=18;
+  let label;
+  if (age>=18) label="Adult";
+  else if (age>=13) label="Teen";
+  else label="Child";
+  document.getElementById("out").textContent="Age " + age + " → " + label;
+</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="bn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QuickCalc - Simple Calculator</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Official LottieFiles Web Component Player -->
+    <script
+      src="https://unpkg.com/@lottiefiles/dotlottie-wc@latest/dist/index.js"
+      type="module"
+    ></script>
+  </head>
+  <body>
+    <!-- Header / Hero -->
+    <header class="hero">
+      <nav class="nav">
+        <div class="logo">
+          <!-- Animated Calculator Logo Icon -->
+          <dotlottie-wc
+            src="https://assets2.lottiefiles.com/packages/lf20_m6cu9z9a.json"
+            autoplay
+            loop
+            style="width: 32px; height: 32px;"
+          ></dotlottie-wc>
+          <b>QuickCalc</b>
+        </div>
+        <a href="#calc" class="nav-btn">Try it</a>
+      </nav>
+
+      <div class="hero-content">
+        <span class="pill-badge">সহজ ও দ্রুত</span>
+        <h1>দ্রুত হিসাব – যেকোনো সময়</h1>
+        <p>+ - × ÷ – সাথে সাথে result পাও</p>
+      </div>
+    </header>
+
+    <main>
+      <!-- Calculator Card -->
+      <section id="calc" class="card">
+        <div class="card-head">
+          <span class="card-title">হিসাব করুন</span>
+          <span class="card-hint">Press Enter to calculate</span>
+        </div>
+
+        <div class="calc-row">
+          <input id="a" type="number" placeholder="First number" />
+          <select id="op" aria-label="চিহ্ন নির্বাচন">
+            <option value="+">+</option>
+            <option value="-">−</option>
+            <option value="*">×</option>
+            <option value="/">÷</option>
+          </select>
+          <input id="b" type="number" placeholder="Second number" />
+        </div>
+
+        <button id="go">Calculate</button>
+
+        <div class="out-box">
+          <span class="out-label">Result</span>
+          <div id="out" class="out">0</div>
+        </div>
+      </section>
+
+      <!-- Feature Cards with LottieFiles Animations -->
+      <section class="features">
+        <div class="feat-card feat-fast">
+          <div class="lottie-wrap">
+            <!-- Lightning / Speed animation -->
+            <dotlottie-wc
+              src="https://assets10.lottiefiles.com/packages/lf20_sSF6EG.json"
+              autoplay
+              loop
+              style="width: 44px; height: 44px;"
+            ></dotlottie-wc>
+          </div>
+          <h3>Fast</h3>
+          <p>Instant result</p>
+        </div>
+
+        <div class="feat-card feat-simple">
+          <div class="lottie-wrap">
+            <!-- Target / Checkmark / Simplicity animation -->
+            <dotlottie-wc
+              src="https://assets9.lottiefiles.com/packages/lf20_rc5d0f61.json"
+              autoplay
+              loop
+              style="width: 44px; height: 44px;"
+            ></dotlottie-wc>
+          </div>
+          <h3>Simple</h3>
+          <p>No signup</p>
+        </div>
+
+        <div class="feat-card feat-free">
+          <div class="lottie-wrap">
+            <!-- Gift / Free badge animation -->
+            <dotlottie-wc
+              src="https://assets3.lottiefiles.com/packages/lf20_touohxv0.json"
+              autoplay
+              loop
+              style="width: 44px; height: 44px;"
+            ></dotlottie-wc>
+          </div>
+          <h3>Free</h3>
+          <p>Forever free</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© QuickCalc 2026</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
