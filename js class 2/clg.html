@@ -1,0 +1,1901 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOGURA GOVERNMENT COLLEGE | বগুড়া সরকারি কলেজ</title>
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Link external CSS here -->
+  <link rel="stylesheet" href="clg.css">
+</head>
+<body>
+
+  <!-- 1. TOP TICKER / MARQUEE -->
+  <div class="top-ticker">
+    <div class="ticker-title">
+      <i class="fa fa-bullhorn" style="margin-right:6px;"></i> Latest Notice
+    </div>
+    <div class="ticker-content">
+      <span class="ticker-text">
+        শ্রী শ্রী দুর্গা পূজা, বিজয়া দশমী,প্রবারণা পূর্ণিমা ও শ্রী শ্রী লক্ষ্মী পূজা উপলক্ষে আগামী ১৮-১০-২০২৬ থেকে ২৯-১০-২০২৬ পর্যন্ত কলেজ বন্ধ থাকবে। বি.দ্র. সরকারি ছুটি ব্যতীত অফিস কার্যক্রম চলবে। &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;
+        ২০২৬-২৭ শিক্ষাবর্ষের একাদশ শ্রেণির সকল বিভাগের শিক্ষার্থীদের উপবৃত্তির ফরম বিতরণ প্রসঙ্গে। &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;
+        বগুড়া সরকারি কলেজে আপনাকে স্বাগতম।
+      </span>
+    </div>
+  </div>
+
+  <!-- 2. MAIN HEADER -->
+<header class="site-header">
+    <div class="college-logo-wrap">
+      <!-- Image Logo (replace 'logo.png' with your file path or image URL) -->
+      <img src="https://pico-bucket.kkr.picopublic.cloud/aalo/boguragovernmentcollege/images/institute_img/logo.png?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=36a1a15bfca04977a7a35bad99b26b14%2F20261017%2FGazipur%2Fs3%2Faws4_request&X-Amz-Date=20261017T172314Z&X-Amz-SignedHeaders=host&X-Amz-Expires=900&X-Amz-Signature=0f4c5a2fbcf78a853fdd665baa6091894b5cd93cefed0d1f50d4db5f90bfada6" alt="Bogura Government College Logo" class="college-logo">
+    </div>
+    <div class="header-text">
+      <h1>BOGURA GOVERNMENT COLLEGE</h1>
+      <h3>Bogura</h3>
+      <p>School Code: 132124</p>
+    </div>
+  </header>
+
+  <!-- 3. TOP NAVIGATION MENU -->
+  <nav class="nav-bar">
+    <ul class="nav-links">
+      <li class="nav-item active"><a href="javascript:void(0)" onclick="navigatePage('home')" class="nav-link"><i class="fa fa-home"></i> Home</a></li>
+      <li class="nav-item">
+        <a href="javascript:void(0)" class="nav-link">About Us <i class="fa fa-angle-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="javascript:void(0)" onclick="navigatePage('about-institute')">About Institute</a></li>
+          <li><a href="javascript:void(0)" onclick="navigatePage('governing-body')">Governing Body Info</a></li>
+          <li><a href="javascript:void(0)" onclick="navigatePage('staff-info')">Staff's Information</a></li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="javascript:void(0)" class="nav-link">Academic <i class="fa fa-angle-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="javascript:void(0)" onclick="navigatePage('teachers-info')">Teacher's Information</a></li>
+          <li><a href="javascript:void(0)" onclick="navigatePage('empty-page', 'Student\'s Information')">Student's Information</a></li>
+          <li><a href="javascript:void(0)" onclick="navigatePage('empty-page', 'Class Routine')">Routine</a></li>
+          <li><a href="javascript:void(0)" onclick="navigatePage('empty-page', 'Syllabus')">Syllabus</a></li>
+          <li><a href="javascript:void(0)" onclick="navigatePage('empty-page', 'Rules and Regulation')">Rules and Regulation</a></li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="javascript:void(0)" class="nav-link">Departments <i class="fa fa-angle-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="javascript:void(0)" onclick="navigatePage('empty-page', 'Departments')">Departments</a></li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="javascript:void(0)" class="nav-link">Notices <i class="fa fa-angle-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="javascript:void(0)" onclick="navigatePage('general-notice')">General Notice</a></li>
+          <li><a href="javascript:void(0)" onclick="navigatePage('general-notice')">Departmental Notice</a></li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="javascript:void(0)" class="nav-link">Payment <i class="fa fa-angle-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="javascript:void(0)" onclick="alert('Admission Portal is Open')">Admission / Form fill-up / Session Charge</a></li>
+          <li><a href="javascript:void(0)">Open Payment Collection</a></li>
+          <li><a href="javascript:void(0)">Admit Card Download</a></li>
+          <li><a href="javascript:void(0)">Testimonial</a></li>
+          <li><a href="javascript:void(0)">Study Certificate</a></li>
+          <li><a href="javascript:void(0)">Recognition Letter</a></li>
+          <li><a href="javascript:void(0)">T.C</a></li>
+          <li><a href="javascript:void(0)">Prattayan Patra</a></li>
+          <li><a href="javascript:void(0)">Character Certificate</a></li>
+          <li><a href="javascript:void(0)">Service Application</a></li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="javascript:void(0)" class="nav-link">Results <i class="fa fa-angle-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="javascript:void(0)" onclick="navigatePage('grade-calculator')"><i class="fa fa-calculator" style="margin-right:6px;"></i> Grade & GPA Calculator</a></li>
+          <li><a href="javascript:void(0)" onclick="navigatePage('empty-page', 'Examination Results')">Internal Results</a></li>
+          <li><a href="javascript:void(0)" onclick="navigatePage('empty-page', 'Board Results')">Board Results</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="javascript:void(0)" onclick="navigatePage('grade-calculator')" class="nav-link"><i class="fa fa-calculator"></i> Grade Calculator</a></li>
+      <li class="nav-item"><a href="javascript:void(0)" onclick="navigatePage('gallery-page')" class="nav-link">Gallery</a></li>
+      <li class="nav-item"><a href="javascript:void(0)" onclick="navigatePage('contact-page')" class="nav-link">Contact</a></li>
+    </ul>
+
+    <div>
+      <button class="btn-login" onclick="openLogin()"><i class="fa fa-user-lock"></i> Login</button>
+    </div>
+  </nav>
+
+  <!-- DYNAMIC PAGES WRAPPER -->
+  <main id="app-content">
+
+    <!-- ==================== 1. HOME VIEW ==================== -->
+    <div id="page-home">
+      <!-- HERO BANNER -->
+      <section class="hero-banner">
+        <div class="hero-banner-bg"></div>
+        <div class="banner-content">
+          <span class="banner-tag"><i class="fa fa-calendar-alt"></i> আন্তর্জাতিক মাতৃভাষা দিবস</span>
+          <h2>বগুড়া সরকারি কলেজ, বগুড়া</h2>
+          <p>জ্ঞানের আলো ছড়িয়ে সমৃদ্ধ জাতি গঠনে একটি অগ্রগামী ঐতিহ্যবাহী শিক্ষা প্রতিষ্ঠান</p>
+        </div>
+      </section>
+
+      <div class="container">
+        <!-- FEATURED MODULES -->
+        <div class="section-header">
+          <h3>FEATURED</h3>
+          <p>Explore Our Featured Modules</p>
+        </div>
+
+        <div class="featured-grid">
+          <div class="feature-card" onclick="navigatePage('grade-calculator')">
+            <span class="feat-badge" style="background:#086972;">STUDENT UTILITY</span>
+            <div class="feat-icon" style="color: #086972;"><i class="fa fa-calculator"></i></div>
+            <h4>অনলাইন গ্রেড ক্যালকুলেটর</h4>
+            <span class="sub">HSC GPA (5.00) ও Honours CGPA (4.00) হিসাব করুন</span>
+          </div>
+          <div class="feature-card" onclick="alert('Opening Virtual Library')">
+            <div class="feat-icon"><i class="fa fa-book-open-reader"></i></div>
+            <h4>প্রিন্সিপাল ভার্চুয়াল লাইব্রেরি</h4>
+            <span class="sub">ডিজিটাল বুক কালেকশন ও ই-রিসোর্স</span>
+          </div>
+          <div class="feature-card" onclick="alert('Admission Portal')">
+            <span class="feat-badge">ONLINE ADMISSION OPEN</span>
+            <div class="feat-icon" style="color: #dc2626;"><i class="fa fa-graduation-cap"></i></div>
+            <h4>XI Admission (2026-2027)</h4>
+            <span class="sub">একাদশ শ্রেণির অনলাইন ভর্তি কার্যক্রম</span>
+          </div>
+        </div>
+
+        <!-- ABOUT OUR COLLEGE & STATS -->
+        <div class="about-stats-row">
+          <div class="about-card">
+            <h3>ABOUT OUR COLLEGE</h3>
+            <p>Welcome to Bogura Government College. An institution committed to academic excellence, leadership development, moral integrity, and social empowerment.</p>
+            <div class="about-actions">
+              <button class="btn-teal" onclick="navigatePage('about-institute')">Read more</button>
+              <button class="btn-outline" onclick="navigatePage('contact-page')">Contact Us</button>
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-box">
+              <div class="stat-info">
+                <h4>7777</h4>
+                <span>Enrolled Students</span>
+              </div>
+              <div class="stat-icon"><i class="fa fa-users"></i></div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-info">
+                <h4>16</h4>
+                <span>Certified Teachers</span>
+              </div>
+              <div class="stat-icon"><i class="fa fa-chalkboard-user"></i></div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-info">
+                <h4>N/A</h4>
+                <span>Academic Buildings</span>
+              </div>
+              <div class="stat-icon"><i class="fa fa-building-columns"></i></div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-info">
+                <h4>1968</h4>
+                <span>Founded Year</span>
+              </div>
+              <div class="stat-icon"><i class="fa fa-history"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRINCIPAL'S DESK -->
+        <div class="principal-banner">
+          <div class="principal-img-col">
+            <img src="https://pico-bucket.kkr.picopublic.cloud/aalo/boguragovernmentcollege/images/institute_img/principal.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=36a1a15bfca04977a7a35bad99b26b14%2F20261017%2FGazipur%2Fs3%2Faws4_request&X-Amz-Date=20261017T152636Z&X-Amz-SignedHeaders=host&X-Amz-Expires=900&X-Amz-Signature=5487ed5adf97eef27f90e313928c5d1e87a5728b43383a26e14e21c881c2f69c" alt="Principal">
+            <h5>PROFESSOR MOHAMMED MOTIUR RAHMAN</h5>
+            <span>PRINCIPAL</span>
+          </div>
+          <div class="principal-content">
+            <h4>Welcome to our College</h4>
+            <p>আমাদের মূল লক্ষ্য শিক্ষার্থীদের সঠিক জ্ঞান, শৃঙ্খলা এবং মানবিক মূল্যবোধের ভিত্তিতে আদর্শ ও দায়িত্বশীল নাগরিক হিসেবে গড়ে তোলা। তথ্যপ্রযুক্তির সুষম ব্যবহার ও সৃজনশীল পাঠদানের মাধ্যমে আমরা এগিয়ে চলেছি।</p>
+            <a href="javascript:void(0)" class="view-details" onclick="navigatePage('about-institute')">VIEW DETAILS &rarr;</a>
+          </div>
+        </div>
+
+        <!-- NOTICES & E-RESOURCES SPLIT -->
+        <div class="portal-split">
+          <!-- Left: Notice Board -->
+          <div class="box-container">
+            <div class="box-header">
+              <h4>NOTICE</h4>
+            </div>
+            <div class="notice-tabs">
+              <button class="tab-btn active" id="tab-gen" onclick="switchNoticeTab('general')">General Notice</button>
+              <button class="tab-btn" id="tab-dept" onclick="switchNoticeTab('dept')">Departmental Notice</button>
+            </div>
+            <div class="notice-list" id="notice-list-container">
+              <!-- Notice 1 -->
+              <div class="notice-item">
+                <div class="date-badge">
+                  <span class="day">15</span>
+                  <span class="month">OCT</span>
+                </div>
+                <div class="notice-info">
+                  <a href="javascript:void(0)" onclick="navigatePage('general-notice')">শ্রী শ্রী দুর্গা পূজা, বিজয়া দশমী, লক্ষ্মী পূজা উপলক্ষে কলেজ বন্ধের বিজ্ঞপ্তি...</a>
+                  <span class="read-more">READ MORE &rarr;</span>
+                </div>
+              </div>
+              <!-- Notice 2 -->
+              <div class="notice-item">
+                <div class="date-badge">
+                  <span class="day">13</span>
+                  <span class="month">OCT</span>
+                </div>
+                <div class="notice-info">
+                  <a href="javascript:void(0)" onclick="navigatePage('general-notice')">২০২৬-২৭ শিক্ষাবর্ষের একাদশ শ্রেণির সকল বিভাগের শিক্ষার্থীদের উপবৃত্তির ফরম বিতরণ প্রসঙ্গ</a>
+                  <span class="read-more">READ MORE &rarr;</span>
+                </div>
+              </div>
+              <!-- Notice 3 -->
+              <div class="notice-item">
+                <div class="date-badge">
+                  <span class="day">05</span>
+                  <span class="month">OCT</span>
+                </div>
+                <div class="notice-info">
+                  <a href="javascript:void(0)" onclick="navigatePage('general-notice')">২০২৬-২৭ শিক্ষাবর্ষে একাদশ শ্রেণিতে ভর্তিকৃত শিক্ষার্থীদের আইডি কার্ড বিতরণ কার্যক্রম</a>
+                  <span class="read-more">READ MORE &rarr;</span>
+                </div>
+              </div>
+              <!-- Notice 4 -->
+              <div class="notice-item">
+                <div class="date-badge">
+                  <span class="day">29</span>
+                  <span class="month">SEP</span>
+                </div>
+                <div class="notice-info">
+                  <a href="javascript:void(0)" onclick="navigatePage('general-notice')">২০২৬-২৭ শিক্ষাবর্ষের একাদশ শ্রেণীর শিক্ষার্থীদের বিষয়ভিত্তিক ব্যবহারিক ক্লাস সময়সূচী</a>
+                  <span class="read-more">READ MORE &rarr;</span>
+                </div>
+              </div>
+            </div>
+            <div class="see-all-wrap">
+              <button class="btn-see-all" onclick="navigatePage('general-notice')">See All</button>
+            </div>
+          </div>
+
+          <!-- Right: E-Resources & Interactive Calendar -->
+          <div class="box-container">
+            <div class="box-header">
+              <h4>E-RESOURCE</h4>
+            </div>
+            
+            <!-- Accordion 1: Calendar -->
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion('cal-acc')">
+                <span><i class="fa fa-calendar-day" style="margin-right:8px;"></i> Academic Calendar</span>
+                <i class="fa fa-chevron-down" id="cal-icon"></i>
+              </div>
+              <div class="accordion-content" id="cal-acc">
+                <div class="calendar-widget">
+                  <div class="cal-top">
+                    <span id="cal-month-year">OCTOBER 2026</span>
+                    <div class="cal-nav">
+                      <button onclick="calPrev()"><i class="fa fa-chevron-left"></i></button>
+                      <button onclick="calToday()">Today</button>
+                      <button onclick="calNext()"><i class="fa fa-chevron-right"></i></button>
+                    </div>
+                  </div>
+                  <div class="cal-grid">
+                    <div class="day-head">Sun</div>
+                    <div class="day-head">Mon</div>
+                    <div class="day-head">Tue</div>
+                    <div class="day-head">Wed</div>
+                    <div class="day-head">Thu</div>
+                    <div class="day-head">Fri</div>
+                    <div class="day-head">Sat</div>
+                    <!-- Sample Month Days -->
+                    <div class="day-cell faint">27</div>
+                    <div class="day-cell faint">28</div>
+                    <div class="day-cell faint">29</div>
+                    <div class="day-cell faint">30</div>
+                    <div class="day-cell">1</div>
+                    <div class="day-cell holiday">2</div>
+                    <div class="day-cell holiday">3</div>
+
+                    <div class="day-cell">4</div>
+                    <div class="day-cell">5</div>
+                    <div class="day-cell">6</div>
+                    <div class="day-cell">7</div>
+                    <div class="day-cell">8</div>
+                    <div class="day-cell holiday">9</div>
+                    <div class="day-cell holiday">10</div>
+
+                    <div class="day-cell">11</div>
+                    <div class="day-cell">12</div>
+                    <div class="day-cell">13</div>
+                    <div class="day-cell">14</div>
+                    <div class="day-cell">15</div>
+                    <div class="day-cell holiday">16</div>
+                    <div class="day-cell today">17</div>
+
+                    <div class="day-cell holiday">18</div>
+                    <div class="day-cell holiday">19</div>
+                    <div class="day-cell holiday">20</div>
+                    <div class="day-cell holiday">21</div>
+                    <div class="day-cell holiday">22</div>
+                    <div class="day-cell holiday">23</div>
+                    <div class="day-cell holiday">24</div>
+
+                    <div class="day-cell holiday">25</div>
+                    <div class="day-cell holiday">26</div>
+                    <div class="day-cell holiday">27</div>
+                    <div class="day-cell holiday">28</div>
+                    <div class="day-cell holiday">29</div>
+                    <div class="day-cell holiday">30</div>
+                    <div class="day-cell holiday">31</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Accordion 2: Routine -->
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion('routine-acc')">
+                <span><i class="fa fa-clock" style="margin-right:8px;"></i> Online Class Routine</span>
+                <i class="fa fa-plus" id="routine-icon"></i>
+              </div>
+              <div class="accordion-content" id="routine-acc" style="display:none;">
+                <p style="font-size:13px; color:#64748b;">Class routine details will be available here.</p>
+              </div>
+            </div>
+
+            <!-- Accordion 3: Zoom Class -->
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="toggleAccordion('zoom-acc')">
+                <span><i class="fa fa-video" style="margin-right:8px;"></i> Zoom Class ID</span>
+                <i class="fa fa-plus" id="zoom-icon"></i>
+              </div>
+              <div class="accordion-content" id="zoom-acc" style="display:none;">
+                <p style="font-size:13px; color:#64748b;">Zoom meeting IDs and passwords will be listed here.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- GALLERY PREVIEW -->
+        <div class="home-gallery-sec">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+            <h4 style="font-size: 18px; color: var(--primary-navy); font-weight:700;">GALLERY</h4>
+            <a href="javascript:void(0)" onclick="navigatePage('gallery-page')" style="font-size:12px; color:var(--accent-teal); font-weight:600;">SEE ALL &rarr;</a>
+          </div>
+          <div class="home-gallery-tabs">
+            <button class="g-tab-btn active">ALL</button>
+            <button class="g-tab-btn">PHOTOS</button>
+            <button class="g-tab-btn">VIDEOS</button>
+          </div>
+          <div class="gallery-empty-box">
+            There are currently no media items to display in the main stream.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== 2. GENERAL NOTICE PAGE ==================== -->
+    <div id="page-notice" style="display:none;">
+      <div class="page-hero-title">
+        <h2>General Notice</h2>
+        <div class="breadcrumb">Home &gt; General Notice</div>
+      </div>
+      <div class="container">
+        <div class="notice-table-container">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th style="width: 50px;">#</th>
+                <th style="width: 140px;">Date</th>
+                <th>Title</th>
+                <th style="width: 170px;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>15 Oct, 2026</td>
+                <td>শ্রী শ্রী দুর্গা পূজা, বিজয়া দশমী,প্রবারণা পূর্ণিমা ও শ্রী শ্রী লক্ষ্মী পূজা উপলক্ষে আগামী ১৮-১০-২০২৬ থেকে ২৯-১০-২০২৬ পর্যন্ত কলেজ বন্ধ থাকবে। বি.দ্র. সরকারি ছুটি ব্যতীত অফিস কার্যক্রম চলবে</td>
+                <td>
+                  <div class="action-btns">
+                    <button class="btn-action-view" onclick="alert('Viewing Notice')"><i class="fa fa-eye"></i> View</button>
+                    <button class="btn-action-download" onclick="alert('Downloading PDF')"><i class="fa fa-download"></i> Download</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>13 Oct, 2026</td>
+                <td>২০২৬-২৭ শিক্ষাবর্ষের একাদশ শ্রেণির সকল বিভাগের শিক্ষার্থীদের উপবৃত্তির ফরম বিতরণ প্রসঙ্গে</td>
+                <td>
+                  <div class="action-btns">
+                    <button class="btn-action-view" onclick="alert('Viewing Notice')"><i class="fa fa-eye"></i> View</button>
+                    <button class="btn-action-download" onclick="alert('Downloading PDF')"><i class="fa fa-download"></i> Download</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>05 Oct, 2026</td>
+                <td>২০২৬-২৭ শিক্ষাবর্ষে একাদশ শ্রেণিতে ভর্তি পদ্ধতি, ফি ও প্রয়োজনীয় কাগজপত্র জমা সংক্রান্ত সংশোধিত বিজ্ঞপ্তি</td>
+                <td>
+                  <div class="action-btns">
+                    <button class="btn-action-view"><i class="fa fa-eye"></i> View</button>
+                    <button class="btn-action-download"><i class="fa fa-download"></i> Download</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>29 Sep, 2026</td>
+                <td>২০২৬-২৭ শিক্ষাবর্ষের একাদশ শ্রেণীর বিষয়ভিত্তিক ব্যবহারিক ক্লাস সময়সূচী প্রকাশ প্রসঙ্গে</td>
+                <td>
+                  <div class="action-btns">
+                    <button class="btn-action-view"><i class="fa fa-eye"></i> View</button>
+                    <button class="btn-action-download"><i class="fa fa-download"></i> Download</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>28 Sep, 2026</td>
+                <td>পুনঃপরীক্ষা তারিক ফলাফল সংক্রান্ত বিজ্ঞপ্তি-১</td>
+                <td>
+                  <div class="action-btns">
+                    <button class="btn-action-view"><i class="fa fa-eye"></i> View</button>
+                    <button class="btn-action-download"><i class="fa fa-download"></i> Download</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>22 Sep, 2026</td>
+                <td>করোনাকালীন সময়ে অনলাইনে ক্লাস গ্রহণ এবং জুম আইডি তালিকা</td>
+                <td>
+                  <div class="action-btns">
+                    <button class="btn-action-view"><i class="fa fa-eye"></i> View</button>
+                    <button class="btn-action-download"><i class="fa fa-download"></i> Download</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>17 Sep, 2026</td>
+                <td>২০২৫-২০২৬ শিক্ষাবর্ষের একাদশ শ্রেণির শিক্ষার্থীদের আইডি কার্ড বিতরণ প্রসঙ্গে</td>
+                <td>
+                  <div class="action-btns">
+                    <button class="btn-action-view"><i class="fa fa-eye"></i> View</button>
+                    <button class="btn-action-download"><i class="fa fa-download"></i> Download</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>14 Sep, 2026</td>
+                <td>আহ্বায়ক পদে দায়িত্বপালন ও প্রশাসনিক দায়িত্ব অর্পণ আদেশ</td>
+                <td>
+                  <div class="action-btns">
+                    <button class="btn-action-view"><i class="fa fa-eye"></i> View</button>
+                    <button class="btn-action-download"><i class="fa fa-download"></i> Download</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 3. TEACHERS INFORMATION PAGE ==================== -->
+    <div id="page-teachers" style="display:none;">
+      <div class="page-hero-title">
+        <h2>Teacher Information</h2>
+        <div class="breadcrumb">Home &gt; Teacher Information</div>
+      </div>
+      <div class="container">
+        <div class="teachers-grid">
+
+          <div class="teacher-card">
+            <div class="teacher-avatar-wrap">
+              <img src="https://pico-bucket.kkr.picopublic.cloud/aalo/boguragovernmentcollege/images/teacher_img/E000003.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=36a1a15bfca04977a7a35bad99b26b14%2F20261017%2FGazipur%2Fs3%2Faws4_request&X-Amz-Date=20261017T153736Z&X-Amz-SignedHeaders=host&X-Amz-Expires=900&X-Amz-Signature=806f7697113d697e0527c7e2f470ee176f0e40f8c2db217c4e4f87873c418227" alt="Komol Krishna Chakraborty">
+            </div>
+            <div class="teacher-footer">
+              <h4>Komol Krishna Chakraborty</h4>
+              <span>Professor - Chemistry</span>
+            </div>
+          </div>
+
+          <div class="teacher-card">
+            <div class="teacher-avatar-wrap">
+              <img src="https://pico-bucket.kkr.picopublic.cloud/aalo/boguragovernmentcollege/images/teacher_img/E000004.JPG?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=36a1a15bfca04977a7a35bad99b26b14%2F20261017%2FGazipur%2Fs3%2Faws4_request&X-Amz-Date=20261017T153736Z&X-Amz-SignedHeaders=host&X-Amz-Expires=900&X-Amz-Signature=2ae434eb6c7af44acd0236d6540a20b529683849e46ff76d72b97e5578efa5cd" alt="Faruq Ahmed">
+            </div>
+            <div class="teacher-footer">
+              <h4>Faruq Ahmed</h4>
+              <span>Professor - Accounting</span>
+            </div>
+          </div>
+
+          <div class="teacher-card">
+            <div class="teacher-avatar-wrap">
+              <img src="https://pico-bucket.kkr.picopublic.cloud/aalo/boguragovernmentcollege/images/teacher_img/E000023.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=36a1a15bfca04977a7a35bad99b26b14%2F20261017%2FGazipur%2Fs3%2Faws4_request&X-Amz-Date=20261017T153736Z&X-Amz-SignedHeaders=host&X-Amz-Expires=900&X-Amz-Signature=da78e84f7ffa2e16e74d18fde6073ee19ef03bcd98ca312710830dbb1853d1f4" alt="Mohammad Abdul Hye Miah">
+            </div>
+            <div class="teacher-footer">
+              <h4>Mohammad Abdul Hye Miah</h4>
+              <span>Associate Professor</span>
+            </div>
+          </div>
+
+          <div class="teacher-card">
+            <div class="teacher-avatar-wrap">
+              <img src="https://pico-bucket.kkr.picopublic.cloud/aalo/boguragovernmentcollege/images/teacher_img/E000017.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=36a1a15bfca04977a7a35bad99b26b14%2F20261017%2FGazipur%2Fs3%2Faws4_request&X-Amz-Date=20261017T153736Z&X-Amz-SignedHeaders=host&X-Amz-Expires=900&X-Amz-Signature=e09491342a9e153ccebda6b809c64d53a7170cb5193c236710382792d2ae2f5c" alt="Md. Altafur Rahman">
+            </div>
+            <div class="teacher-footer">
+              <h4>Md. Altafur Rahman</h4>
+              <span>Associate Professor - Management</span>
+            </div>
+          </div>
+
+          <div class="teacher-card">
+            <div class="teacher-avatar-wrap">
+              <img src="https://pico-bucket.kkr.picopublic.cloud/aalo/boguragovernmentcollege/images/teacher_img/E000024.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=36a1a15bfca04977a7a35bad99b26b14%2F20261017%2FGazipur%2Fs3%2Faws4_request&X-Amz-Date=20261017T153736Z&X-Amz-SignedHeaders=host&X-Amz-Expires=900&X-Amz-Signature=95d4a6d9cbc4a3c40a8d1896c0e023d56a20f7cb45f0d61bcff60cbc5e59170e" alt="Dr. Md. Alamgir Kabir">
+            </div>
+            <div class="teacher-footer">
+              <h4>Dr. Md. Alamgir Kabir</h4>
+              <span>Associate Professor - Science Group</span>
+            </div>
+          </div>
+
+          <div class="teacher-card">
+            <div class="teacher-avatar-wrap">
+              <img src="https://pico-bucket.kkr.picopublic.cloud/aalo/boguragovernmentcollege/images/teacher_img/E000005.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=36a1a15bfca04977a7a35bad99b26b14%2F20261017%2FGazipur%2Fs3%2Faws4_request&X-Amz-Date=20261017T153736Z&X-Amz-SignedHeaders=host&X-Amz-Expires=900&X-Amz-Signature=26b471df667cc171bbf9ef3b426575531c7ea925a82e7c1decdc88084bcdb916" alt="Md. Mokhlesur Rahman">
+            </div>
+            <div class="teacher-footer">
+              <h4>Md. Mokhlesur Rahman</h4>
+              <span>Assistant Professor - Accounting</span>
+            </div>
+          </div>
+
+          <div class="teacher-card">
+            <div class="teacher-avatar-wrap">
+              <img src="https://pico-bucket.kkr.picopublic.cloud/aalo/boguragovernmentcollege/images/teacher_img/E000018.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=36a1a15bfca04977a7a35bad99b26b14%2F20261017%2FGazipur%2Fs3%2Faws4_request&X-Amz-Date=20261017T153736Z&X-Amz-SignedHeaders=host&X-Amz-Expires=900&X-Amz-Signature=ca6a8bddccd71eaa5112fba290190a13dafec5d5384ebc5854c6185c66045c4f" alt="Maliha Yasmin">
+            </div>
+            <div class="teacher-footer">
+              <h4>Maliha Yasmin</h4>
+              <span>Assistant Professor - Economics</span>
+            </div>
+          </div>
+
+          <div class="teacher-card">
+            <div class="teacher-avatar-wrap">
+              <img src="https://pico-bucket.kkr.picopublic.cloud/aalo/boguragovernmentcollege/images/teacher_img/E000012.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=36a1a15bfca04977a7a35bad99b26b14%2F20261017%2FGazipur%2Fs3%2Faws4_request&X-Amz-Date=20261017T153736Z&X-Amz-SignedHeaders=host&X-Amz-Expires=900&X-Amz-Signature=a64373c9eb87777862c74c4c861151530710660d7797fcc79274d8561ea1ed78" alt="A.S.M Mofidul Hannan">
+            </div>
+            <div class="teacher-footer">
+              <h4>A.S.M Mofidul Hannan</h4>
+              <span>Assistant Professor - Botany</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 4. PHOTO GALLERY PAGE ==================== -->
+    <div id="page-gallery" style="display:none;">
+      <div class="page-hero-title">
+        <h2>Photo Albums</h2>
+        <div class="breadcrumb">Home &gt; Photo Albums</div>
+      </div>
+      <div class="container">
+        <div class="empty-state-box" style="margin-top:60px;">
+          <h4>There are currently no photo albums to display.</h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 5. CONTACT US PAGE ==================== -->
+    <div id="page-contact" style="display:none;">
+      <div class="page-hero-title">
+        <h2>Contact Us</h2>
+        <div class="breadcrumb">Home &gt; Contact</div>
+      </div>
+      <div class="container">
+        <div class="contact-layout">
+          <!-- Left: Contact Form -->
+          <div class="contact-form-card">
+            <h3>Get in Touch</h3>
+            <p>Interested in discussing? Fill out the form below.</p>
+            <form onsubmit="handleContactSubmit(event)">
+              <div class="form-row">
+                <div class="form-group">
+                  <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                  <input type="email" placeholder="Your Email" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <input type="text" placeholder="Subject" required>
+                </div>
+                <div class="form-group">
+                  <input type="tel" placeholder="Phone (Optional)">
+                </div>
+              </div>
+              <div class="form-group">
+                <textarea rows="5" placeholder="Message" required></textarea>
+              </div>
+              <div class="captcha-row">
+                <div class="captcha-code" id="captcha-display">l x 5 o i 3</div>
+                <input type="text" placeholder="Enter Captcha" style="width:160px; padding:10px; border:1px solid #cbd5e1; border-radius:4px;" required>
+              </div>
+              <div style="display:flex; gap:10px;">
+                <button type="submit" class="btn-teal">Send Message</button>
+                <button type="reset" class="btn-outline">Reset</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Right: Contact Information -->
+          <div class="contact-info-card">
+            <h3>Contact Information</h3>
+
+            <div class="info-list-item">
+              <div class="info-icon"><i class="fa fa-map-marker-alt"></i></div>
+              <div class="info-text">
+                <h5>Our Office Location</h5>
+                <p>Bogura, Bangladesh</p>
+              </div>
+            </div>
+
+            <div class="info-list-item">
+              <div class="info-icon"><i class="fa fa-phone"></i></div>
+              <div class="info-text">
+                <h5>Contact Number</h5>
+                <p>02589905380, 01711112124</p>
+              </div>
+            </div>
+
+            <div class="info-list-item">
+              <div class="info-icon"><i class="fa fa-envelope"></i></div>
+              <div class="info-text">
+                <h5>Contact E-mail</h5>
+                <p>demo@gmail.com</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 6. GENERIC EMPTY / PLACEHOLDER PAGE ==================== -->
+    <div id="page-placeholder" style="display:none;">
+      <div class="page-hero-title">
+        <h2 id="placeholder-title">Information</h2>
+        <div class="breadcrumb" id="placeholder-breadcrumb">Home &gt; Info</div>
+      </div>
+      <div class="container">
+        <div class="empty-state-box" style="margin-top:60px;">
+          <h4>No Information Available</h4>
+          <p>We could not find any information at this time. Please check back later.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 7. GRADE & GPA / CGPA CALCULATOR PAGE ==================== -->
+    <div id="page-calculator" style="display:none;">
+      <div class="page-hero-title">
+        <h2>Online Grade & GPA / CGPA Calculator | গ্রেড ও জিপিএ ক্যালকুলেটর</h2>
+        <div class="breadcrumb">Home &gt; Academic &gt; Grade Calculator</div>
+      </div>
+
+      <div class="calc-wrapper">
+        <!-- CALCULATOR NAVIGATION TABS -->
+        <div class="calc-tabs">
+          <button type="button" class="calc-tab-btn active" id="tab-btn-hsc" onclick="switchCalcTab('hsc')">
+            <i class="fa fa-graduation-cap"></i> HSC GPA Calculator (Scale 5.00)
+          </button>
+          <button type="button" class="calc-tab-btn" id="tab-btn-honours" onclick="switchCalcTab('honours')">
+            <i class="fa fa-university"></i> Honours / Degree CGPA (Scale 4.00)
+          </button>
+          <button type="button" class="calc-tab-btn" id="tab-btn-scale" onclick="switchCalcTab('scale')">
+            <i class="fa fa-chart-bar"></i> Quick Converter & Grading System
+          </button>
+        </div>
+
+        <!-- ================= TAB 1: HSC GPA CALCULATOR ================= -->
+        <div id="calc-content-hsc" class="calc-tab-content">
+          <div class="calc-card">
+            <div class="calc-intro-bar">
+              <div>
+                <h3><i class="fa fa-calculator" style="color:var(--accent-teal);"></i> HSC / College GPA Calculator (Scale 5.00)</h3>
+                <p>Calculate Higher Secondary Certificate GPA with optional 4th subject bonus points as per Bangladesh Education Board standard.</p>
+              </div>
+              <div class="calc-mode-toggle">
+                <button type="button" class="calc-mode-btn active" id="mode-btn-marks" onclick="setHscMode('marks')">Marks (0-100)</button>
+                <button type="button" class="calc-mode-btn" id="mode-btn-grades" onclick="setHscMode('grades')">Direct Letter Grade</button>
+              </div>
+            </div>
+
+            <!-- GROUP / STREAM PRESETS -->
+            <div class="stream-selector-group">
+              <span class="stream-label"><i class="fa fa-layer-group"></i> Group / Stream:</span>
+              <button type="button" class="stream-pill active" id="pill-science" onclick="setHscStream('science')">বিজ্ঞান (Science)</button>
+              <button type="button" class="stream-pill" id="pill-humanities" onclick="setHscStream('humanities')">মানবিক (Humanities)</button>
+              <button type="button" class="stream-pill" id="pill-business" onclick="setHscStream('business')">ব্যবসায় শিক্ষা (Business Studies)</button>
+              <button type="button" class="stream-pill" id="pill-custom" onclick="setHscStream('custom')">কাস্টম (Custom Subjects)</button>
+            </div>
+
+            <!-- 4TH SUBJECT INFO CALLOUT -->
+            <div class="calc-callout">
+              <i class="fa fa-info-circle"></i>
+              <div>
+                <strong>Bangladesh Board 4th Subject Rule:</strong>
+                Points above 2.00 from your 4th (Optional) Subject will be added to your total main subject grade points (Bonus Points = GP - 2.00). Total is then divided by 6 main subjects, up to a maximum of 5.00 GPA. A grade of 'F' in any main subject results in overall 'F' (Fail).
+              </div>
+            </div>
+
+            <!-- SUBJECTS TABLE -->
+            <div class="calc-table-wrap">
+              <table class="calc-table" id="hsc-subjects-table">
+                <thead>
+                  <tr>
+                    <th style="width: 45px;">#</th>
+                    <th style="min-width: 220px;">Subject Name</th>
+                    <th style="width: 150px;">Subject Role</th>
+                    <th style="width: 170px;" id="hsc-table-input-header">Obtained Marks (0-100)</th>
+                    <th style="width: 110px;">Letter Grade</th>
+                    <th style="width: 100px;">Grade Point</th>
+                    <th style="width: 50px;">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="hsc-subject-tbody">
+                  <!-- Dynamic rows rendered by JavaScript -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div class="calc-btn-group">
+              <button type="button" class="btn-calc-primary" onclick="calculateHscGpa()">
+                <i class="fa fa-calculator"></i> Calculate GPA
+              </button>
+              <button type="button" class="btn-calc-secondary" onclick="addHscSubjectRow()">
+                <i class="fa fa-plus"></i> Add Subject
+              </button>
+              <button type="button" class="btn-calc-secondary" onclick="resetHscCalculator()">
+                <i class="fa fa-rotate-left"></i> Reset
+              </button>
+            </div>
+
+            <!-- HSC RESULT DASHBOARD -->
+            <div id="hsc-result-panel" class="calc-result-panel">
+              <div class="calc-result-grid">
+                <div class="gpa-score-box">
+                  <div class="gpa-max">CALCULATED GPA</div>
+                  <div class="gpa-val" id="hsc-res-gpa">0.00</div>
+                  <div class="gpa-max">OUT OF 5.00</div>
+                  <div id="hsc-res-badge" class="gpa-badge-status pass">Grade A+</div>
+                  <div id="hsc-res-remark" style="margin-top:10px; font-size:12.5px; font-weight:600; color:#475569;">Outstanding Performance</div>
+                </div>
+
+                <div>
+                  <div class="result-metrics-grid">
+                    <div class="metric-card">
+                      <div class="label">Main Subjects</div>
+                      <div class="val" id="hsc-res-main-count">6</div>
+                    </div>
+                    <div class="metric-card">
+                      <div class="label">Main GP Sum</div>
+                      <div class="val" id="hsc-res-main-points">0.00</div>
+                    </div>
+                    <div class="metric-card">
+                      <div class="label">4th Sub Bonus</div>
+                      <div class="val" id="hsc-res-bonus">+0.00</div>
+                    </div>
+                    <div class="metric-card">
+                      <div class="label">Total Marks</div>
+                      <div class="val" id="hsc-res-total-marks">0</div>
+                    </div>
+                  </div>
+
+                  <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
+                    <button type="button" class="btn-calc-primary" onclick="printMarksheet('hsc')">
+                      <i class="fa fa-print"></i> Print / Save Grade Sheet
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= TAB 2: HONOURS / DEGREE CGPA CALCULATOR ================= -->
+        <div id="calc-content-honours" class="calc-tab-content" style="display:none;">
+          <div class="calc-card">
+            <div class="calc-intro-bar">
+              <div>
+                <h3><i class="fa fa-university" style="color:var(--accent-teal);"></i> Honours / Degree CGPA Calculator (Scale 4.00)</h3>
+                <p>Based on the standard National University (NU) & UGC Unified Grading System.</p>
+              </div>
+              <div style="font-size:13px; color:#475569;">
+                <i class="fa fa-award" style="color:#eab308;"></i> Grading Scale: <strong>4.00 Max</strong>
+              </div>
+            </div>
+
+            <!-- HONOURS COURSES TABLE -->
+            <div class="calc-table-wrap">
+              <table class="calc-table" id="honours-courses-table">
+                <thead>
+                  <tr>
+                    <th style="width: 45px;">#</th>
+                    <th style="min-width: 140px;">Course Code</th>
+                    <th style="min-width: 220px;">Course Title</th>
+                    <th style="width: 130px;">Credit Hours</th>
+                    <th style="width: 170px;">Grade / Marks</th>
+                    <th style="width: 110px;">Grade Point</th>
+                    <th style="width: 120px;">Earned Points</th>
+                    <th style="width: 50px;">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="honours-courses-tbody">
+                  <!-- Dynamic rows rendered by JavaScript -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div class="calc-btn-group">
+              <button type="button" class="btn-calc-primary" onclick="calculateHonoursCgpa()">
+                <i class="fa fa-calculator"></i> Calculate CGPA
+              </button>
+              <button type="button" class="btn-calc-secondary" onclick="addHonoursCourseRow()">
+                <i class="fa fa-plus"></i> Add Course
+              </button>
+              <button type="button" class="btn-calc-secondary" onclick="resetHonoursCalculator()">
+                <i class="fa fa-rotate-left"></i> Reset
+              </button>
+            </div>
+
+            <!-- HONOURS RESULT DASHBOARD -->
+            <div id="honours-result-panel" class="calc-result-panel">
+              <div class="calc-result-grid">
+                <div class="gpa-score-box">
+                  <div class="gpa-max">CUMULATIVE GPA (CGPA)</div>
+                  <div class="gpa-val" id="hon-res-cgpa">0.00</div>
+                  <div class="gpa-max">OUT OF 4.00</div>
+                  <div id="hon-res-badge" class="gpa-badge-status pass">First Class</div>
+                  <div id="hon-res-remark" style="margin-top:10px; font-size:12.5px; font-weight:600; color:#475569;">Excellent Academic Standing</div>
+                </div>
+
+                <div>
+                  <div class="result-metrics-grid">
+                    <div class="metric-card">
+                      <div class="label">Total Courses</div>
+                      <div class="val" id="hon-res-courses">0</div>
+                    </div>
+                    <div class="metric-card">
+                      <div class="label">Total Credits</div>
+                      <div class="val" id="hon-res-credits">0</div>
+                    </div>
+                    <div class="metric-card">
+                      <div class="label">Total Points (Cr×GP)</div>
+                      <div class="val" id="hon-res-weighted-pts">0.00</div>
+                    </div>
+                    <div class="metric-card">
+                      <div class="label">Academic Class</div>
+                      <div class="val" id="hon-res-class" style="font-size:16px;">-</div>
+                    </div>
+                  </div>
+
+                  <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
+                    <button type="button" class="btn-calc-primary" onclick="printMarksheet('honours')">
+                      <i class="fa fa-print"></i> Print / Save CGPA Report
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= TAB 3: QUICK MARK CONVERTER & GRADING SYSTEM ================= -->
+        <div id="calc-content-scale" class="calc-tab-content" style="display:none;">
+          <!-- QUICK SINGLE MARK CONVERTER -->
+          <div class="quick-calc-box">
+            <h3 style="font-size:18px; color:var(--primary-navy); margin-bottom:8px;">
+              <i class="fa fa-bolt" style="color:#eab308;"></i> Instant Mark to Grade Converter
+            </h3>
+            <p style="font-size:13px; color:var(--text-muted);">Enter subject marks (0-100) to immediately inspect the corresponding Letter Grade & Points across both HSC and Honours grading systems.</p>
+
+            <div class="quick-calc-row">
+              <div class="quick-input-wrap">
+                <label style="font-size:12px; font-weight:600; color:#334155; display:block; margin-bottom:4px;">Obtained Marks (0 - 100):</label>
+                <input type="number" id="quick-mark-input" class="calc-input" min="0" max="100" placeholder="e.g. 78" oninput="runQuickConverter()" style="font-size:16px; font-weight:700;">
+              </div>
+              <div class="quick-output-card">
+                <div>
+                  <div style="font-size:11px; text-transform:uppercase; color:#64748b; font-weight:600;">HSC / Board (5.0)</div>
+                  <div id="quick-res-hsc" style="font-size:18px; font-weight:700; color:#0f172a; margin-top:2px;">-</div>
+                </div>
+                <div style="border-left:1px solid #cbd5e1; height:35px;"></div>
+                <div>
+                  <div style="font-size:11px; text-transform:uppercase; color:#64748b; font-weight:600;">Honours / NU (4.0)</div>
+                  <div id="quick-res-honours" style="font-size:18px; font-weight:700; color:#0f172a; margin-top:2px;">-</div>
+                </div>
+                <div style="border-left:1px solid #cbd5e1; height:35px;"></div>
+                <div>
+                  <div style="font-size:11px; text-transform:uppercase; color:#64748b; font-weight:600;">Remarks</div>
+                  <div id="quick-res-msg" style="font-size:14px; font-weight:600; color:#059669; margin-top:2px;">Enter marks above</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- REFERENCE TABLES -->
+          <div class="grading-reference-grid">
+            <div class="ref-card">
+              <h4><i class="fa fa-table"></i> HSC Board Grading System (Scale 5.00)</h4>
+              <table class="calc-table">
+                <thead>
+                  <tr>
+                    <th>Numerical Marks</th>
+                    <th>Letter Grade</th>
+                    <th>Grade Point</th>
+                    <th>Remarks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>80 - 100</td><td><span class="badge-grade aplus">A+</span></td><td>5.00</td><td>Outstanding</td></tr>
+                  <tr><td>70 - 79</td><td><span class="badge-grade a">A</span></td><td>4.00</td><td>Excellent</td></tr>
+                  <tr><td>60 - 69</td><td><span class="badge-grade aminus">A-</span></td><td>3.50</td><td>Very Good</td></tr>
+                  <tr><td>50 - 59</td><td><span class="badge-grade b">B</span></td><td>3.00</td><td>Good</td></tr>
+                  <tr><td>40 - 49</td><td><span class="badge-grade c">C</span></td><td>2.00</td><td>Satisfactory</td></tr>
+                  <tr><td>33 - 39</td><td><span class="badge-grade d">D</span></td><td>1.00</td><td>Pass</td></tr>
+                  <tr><td>00 - 32</td><td><span class="badge-grade f">F</span></td><td>0.00</td><td>Fail</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="ref-card">
+              <h4><i class="fa fa-graduation-cap"></i> Degree / Honours NU Grading (Scale 4.00)</h4>
+              <table class="calc-table">
+                <thead>
+                  <tr>
+                    <th>Numerical Marks</th>
+                    <th>Letter Grade</th>
+                    <th>Grade Point</th>
+                    <th>Academic Class</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>80% and above</td><td><span class="badge-grade aplus">A+</span></td><td>4.00</td><td rowspan="4" style="vertical-align:middle; background:#f0fdf4; color:#166534; font-weight:600; text-align:center;">First Class (3.00 - 4.00)</td></tr>
+                  <tr><td>75% to less than 80%</td><td><span class="badge-grade a">A</span></td><td>3.75</td></tr>
+                  <tr><td>70% to less than 75%</td><td><span class="badge-grade aminus">A-</span></td><td>3.50</td></tr>
+                  <tr><td>65% to less than 70%</td><td><span class="badge-grade bplus">B+</span></td><td>3.25</td></tr>
+                  <tr><td>60% to less than 65%</td><td><span class="badge-grade b">B</span></td><td>3.00</td><td rowspan="3" style="vertical-align:middle; background:#fefce8; color:#854d0e; font-weight:600; text-align:center;">Second Class (2.25 - 2.99)</td></tr>
+                  <tr><td>55% to less than 60%</td><td><span class="badge-grade bminus">B-</span></td><td>2.75</td></tr>
+                  <tr><td>50% to less than 55%</td><td><span class="badge-grade cplus">C+</span></td><td>2.50</td></tr>
+                  <tr><td>45% to less than 50%</td><td><span class="badge-grade c">C</span></td><td>2.25</td><td rowspan="2" style="vertical-align:middle; background:#faf5ff; color:#6b21a8; font-weight:600; text-align:center;">Third Class (2.00 - 2.24)</td></tr>
+                  <tr><td>40% to less than 45%</td><td><span class="badge-grade d">D</span></td><td>2.00</td></tr>
+                  <tr><td>Less than 40%</td><td><span class="badge-grade f">F</span></td><td>0.00</td><td style="background:#fef2f2; color:#991b1b; font-weight:600; text-align:center;">Failed</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- 4. FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h5>Powered by</h5>
+          <div style="font-size:18px; font-weight:bold; color:#38bdf8; margin-bottom:6px;">
+            <i class="fa fa-graduation-cap"></i> শিক্ষা
+          </div>
+          <p style="font-size:11px;">DIGITAL EDUCATION MANAGEMENT</p>
+          <p style="font-size:12px; margin-top:10px;">© 2026 SURBD Ltd. All Rights Reserved</p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Address</h5>
+          <p><i class="fa fa-map-pin" style="margin-right:6px;"></i> Bogura</p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Call Us Now</h5>
+          <p><i class="fa fa-phone-alt" style="margin-right:6px;"></i> 02589905380</p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Connect With Us</h5>
+          <div class="footer-social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>Bogura Government College Web Portal</div>
+        <div>
+          <a href="javascript:void(0)" onclick="alert('FAQ')">FAQ</a>
+          <a href="javascript:void(0)" onclick="alert('Help Desk')">Help Desk</a>
+          <a href="javascript:void(0)" onclick="alert('Support Portal')">Support</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCROLL TO TOP -->
+  <button class="btn-scroll-top" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="Back to top">
+    <i class="fa fa-chevron-up"></i>
+  </button>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // PAGE ROUTER
+    function navigatePage(pageName, customTitle) {
+      const pages = ['home', 'notice', 'teachers', 'gallery', 'contact', 'placeholder', 'calculator'];
+      pages.forEach(p => {
+        const el = document.getElementById('page-' + p);
+        if (el) el.style.display = 'none';
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (pageName === 'home') {
+        document.getElementById('page-home').style.display = 'block';
+      } else if (pageName === 'general-notice') {
+        document.getElementById('page-notice').style.display = 'block';
+      } else if (pageName === 'teachers-info') {
+        document.getElementById('page-teachers').style.display = 'block';
+      } else if (pageName === 'gallery-page') {
+        document.getElementById('page-gallery').style.display = 'block';
+      } else if (pageName === 'contact-page') {
+        document.getElementById('page-contact').style.display = 'block';
+      } else if (pageName === 'grade-calculator') {
+        document.getElementById('page-calculator').style.display = 'block';
+        if (!calcInitialized) initCalculators();
+      } else if (pageName === 'about-institute' || pageName === 'governing-body' || pageName === 'staff-info') {
+        const titleMap = {
+          'about-institute': 'About Institute',
+          'governing-body': 'Governing Body Information',
+          'staff-info': 'Staff Information'
+        };
+        document.getElementById('placeholder-title').innerText = titleMap[pageName];
+        document.getElementById('placeholder-breadcrumb').innerText = 'Home > ' + titleMap[pageName];
+        document.getElementById('page-placeholder').style.display = 'block';
+      } else {
+        document.getElementById('placeholder-title').innerText = customTitle || 'Information';
+        document.getElementById('placeholder-breadcrumb').innerText = 'Home > ' + (customTitle || 'Information');
+        document.getElementById('page-placeholder').style.display = 'block';
+      }
+    }
+
+    // ACCORDION TOGGLE
+    function toggleAccordion(id) {
+      const item = document.getElementById(id);
+      const isRoutine = id === 'routine-acc';
+      const isZoom = id === 'zoom-acc';
+      const isCal = id === 'cal-acc';
+
+      if (item.style.display === 'none' || item.style.display === '') {
+        item.style.display = 'block';
+        if (isRoutine) document.getElementById('routine-icon').className = 'fa fa-minus';
+        if (isZoom) document.getElementById('zoom-icon').className = 'fa fa-minus';
+        if (isCal) document.getElementById('cal-icon').className = 'fa fa-chevron-up';
+      } else {
+        item.style.display = 'none';
+        if (isRoutine) document.getElementById('routine-icon').className = 'fa fa-plus';
+        if (isZoom) document.getElementById('zoom-icon').className = 'fa fa-plus';
+        if (isCal) document.getElementById('cal-icon').className = 'fa fa-chevron-down';
+      }
+    }
+
+    // NOTICE TABS
+    function switchNoticeTab(type) {
+      const btnGen = document.getElementById('tab-gen');
+      const btnDept = document.getElementById('tab-dept');
+      const container = document.getElementById('notice-list-container');
+
+      if (type === 'dept') {
+        btnDept.classList.add('active');
+        btnGen.classList.remove('active');
+        container.innerHTML = `
+          <div class="notice-item">
+            <div class="date-badge"><span class="day">10</span><span class="month">OCT</span></div>
+            <div class="notice-info">
+              <a href="javascript:void(0)">রসায়ন বিভাগের অভ্যন্তরীণ ব্যবহারিক পরীক্ষা সময়সূচী প্রকাশ সংক্রান্ত</a>
+              <span class="read-more">READ MORE &rarr;</span>
+            </div>
+          </div>
+          <div class="notice-item">
+            <div class="date-badge"><span class="day">02</span><span class="month">OCT</span></div>
+            <div class="notice-info">
+              <a href="javascript:void(0)">হিসাববিজ্ঞান বিভাগের অনার্স ৩য় বর্ষের টিউটোরিয়াল পরীক্ষা বিজ্ঞপ্তি</a>
+              <span class="read-more">READ MORE &rarr;</span>
+            </div>
+          </div>
+        `;
+      } else {
+        btnGen.classList.add('active');
+        btnDept.classList.remove('active');
+        container.innerHTML = `
+          <div class="notice-item">
+            <div class="date-badge"><span class="day">15</span><span class="month">OCT</span></div>
+            <div class="notice-info">
+              <a href="javascript:void(0)">শ্রী শ্রী দুর্গা পূজা, বিজয়া দশমী, লক্ষ্মী পূজা উপলক্ষে কলেজ বন্ধের বিজ্ঞপ্তি...</a>
+              <span class="read-more">READ MORE &rarr;</span>
+            </div>
+          </div>
+          <div class="notice-item">
+            <div class="date-badge"><span class="day">13</span><span class="month">OCT</span></div>
+            <div class="notice-info">
+              <a href="javascript:void(0)">২০২৬-২৭ শিক্ষাবর্ষের একাদশ শ্রেণির সকল বিভাগের শিক্ষার্থীদের উপবৃত্তির ফরম বিতরণ প্রসঙ্গ</a>
+              <span class="read-more">READ MORE &rarr;</span>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // CALENDAR CONTROLS
+    let currentCalMonth = 9; // October (0-indexed)
+    let currentCalYear = 2026;
+    const months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
+
+    function updateCalHeader() {
+      document.getElementById('cal-month-year').innerText = months[currentCalMonth] + ' ' + currentCalYear;
+    }
+    function calNext() {
+      currentCalMonth++;
+      if (currentCalMonth > 11) { currentCalMonth = 0; currentCalYear++; }
+      updateCalHeader();
+    }
+    function calPrev() {
+      currentCalMonth--;
+      if (currentCalMonth < 0) { currentCalMonth = 11; currentCalYear--; }
+      updateCalHeader();
+    }
+    function calToday() {
+      currentCalMonth = 9;
+      currentCalYear = 2026;
+      updateCalHeader();
+    }
+
+    // CONTACT FORM
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      alert('Thank you! Your message has been sent successfully to Bogura Government College.');
+      e.target.reset();
+    }
+
+    // LOGIN POPUP
+    function openLogin() {
+      const user = prompt("Enter Student/Teacher ID or Username:");
+      if (user) {
+        alert("Authentication system demo: Welcome " + user);
+      }
+    }
+
+    // =========================================================================
+    // GRADE & GPA / CGPA CALCULATOR JAVASCRIPT LOGIC
+    // =========================================================================
+    let calcInitialized = false;
+    let hscMode = 'marks'; // 'marks' or 'grades'
+    let currentHscStream = 'science';
+
+    // HSC Subject stream presets
+    const streamPresets = {
+      science: [
+        { name: "বাংলা (Bangla)", isFourth: false, marks: 82, grade: "A+" },
+        { name: "ইংরেজি (English)", isFourth: false, marks: 76, grade: "A" },
+        { name: "তথ্য ও যোগাযোগ প্রযুক্তি (ICT)", isFourth: false, marks: 85, grade: "A+" },
+        { name: "পদার্থবিজ্ঞান (Physics)", isFourth: false, marks: 78, grade: "A" },
+        { name: "রসায়ন (Chemistry)", isFourth: false, marks: 80, grade: "A+" },
+        { name: "জীববিজ্ঞান (Biology)", isFourth: false, marks: 74, grade: "A" },
+        { name: "উচ্চতর গণিত (Higher Mathematics)", isFourth: true, marks: 88, grade: "A+" }
+      ],
+      humanities: [
+        { name: "বাংলা (Bangla)", isFourth: false, marks: 75, grade: "A" },
+        { name: "ইংরেজি (English)", isFourth: false, marks: 68, grade: "A-" },
+        { name: "তথ্য ও যোগাযোগ প্রযুক্তি (ICT)", isFourth: false, marks: 82, grade: "A+" },
+        { name: "পৌরনীতি ও সুশাসন (Civics)", isFourth: false, marks: 78, grade: "A" },
+        { name: "অর্থনীতি (Economics)", isFourth: false, marks: 72, grade: "A" },
+        { name: "ইসলামের ইতিহাস ও সংস্কৃতি (Islamic History)", isFourth: false, marks: 80, grade: "A+" },
+        { name: "সমাজকর্ম / যুক্তিবিদ্যা (Social Work / Logic)", isFourth: true, marks: 84, grade: "A+" }
+      ],
+      business: [
+        { name: "বাংলা (Bangla)", isFourth: false, marks: 76, grade: "A" },
+        { name: "ইংরেজি (English)", isFourth: false, marks: 70, grade: "A" },
+        { name: "তথ্য ও যোগাযোগ প্রযুক্তি (ICT)", isFourth: false, marks: 80, grade: "A+" },
+        { name: "হিসাববিজ্ঞান (Accounting)", isFourth: false, marks: 85, grade: "A+" },
+        { name: "ব্যবসায় সংগঠন ও ব্যবস্থাপনা (Business Org)", isFourth: false, marks: 75, grade: "A" },
+        { name: "ফিন্যান্স, ব্যাংকিং ও বিমা (Finance & Banking)", isFourth: false, marks: 78, grade: "A" },
+        { name: "অর্থনীতি / উৎপাদন ব্যবস্থাপনা (Economics / Production)", isFourth: true, marks: 82, grade: "A+" }
+      ],
+      custom: [
+        { name: "Subject 1", isFourth: false, marks: 80, grade: "A+" },
+        { name: "Subject 2", isFourth: false, marks: 75, grade: "A" },
+        { name: "Subject 3", isFourth: false, marks: 70, grade: "A" },
+        { name: "Subject 4", isFourth: false, marks: 65, grade: "A-" },
+        { name: "Subject 5", isFourth: false, marks: 60, grade: "A-" },
+        { name: "Subject 6", isFourth: false, marks: 55, grade: "B" },
+        { name: "Optional (4th Subject)", isFourth: true, marks: 80, grade: "A+" }
+      ]
+    };
+
+    let hscSubjects = JSON.parse(JSON.stringify(streamPresets.science));
+
+    // Honours Course presets
+    const honoursInitialCourses = [
+      { code: "ENG-2101", title: "Introduction to Literary Theory", credits: 4, marks: 78, grade: "A" },
+      { code: "ENG-2102", title: "16th & 17th Century Poetry", credits: 4, marks: 82, grade: "A+" },
+      { code: "ENG-2103", title: "Classical Drama & Theatre", credits: 4, marks: 72, grade: "A-" },
+      { code: "ENG-2104", title: "History of English Language", credits: 4, marks: 68, grade: "B+" },
+      { code: "GED-2105", title: "Bangladesh Studies & Heritage", credits: 4, marks: 76, grade: "A" }
+    ];
+
+    let honoursCourses = JSON.parse(JSON.stringify(honoursInitialCourses));
+
+    // Grading Helper Functions
+    function getHscGradeFromMarks(m) {
+      const val = parseFloat(m);
+      if (isNaN(val) || val < 0) return { grade: 'F', gp: 0.0, badgeClass: 'f' };
+      if (val >= 80) return { grade: 'A+', gp: 5.0, badgeClass: 'aplus' };
+      if (val >= 70) return { grade: 'A',  gp: 4.0, badgeClass: 'a' };
+      if (val >= 60) return { grade: 'A-', gp: 3.5, badgeClass: 'aminus' };
+      if (val >= 50) return { grade: 'B',  gp: 3.0, badgeClass: 'b' };
+      if (val >= 40) return { grade: 'C',  gp: 2.0, badgeClass: 'c' };
+      if (val >= 33) return { grade: 'D',  gp: 1.0, badgeClass: 'd' };
+      return { grade: 'F', gp: 0.0, badgeClass: 'f' };
+    }
+
+    function getHscGradeFromLetter(letter) {
+      switch(letter) {
+        case 'A+': return { grade: 'A+', gp: 5.0, badgeClass: 'aplus' };
+        case 'A':  return { grade: 'A',  gp: 4.0, badgeClass: 'a' };
+        case 'A-': return { grade: 'A-', gp: 3.5, badgeClass: 'aminus' };
+        case 'B':  return { grade: 'B',  gp: 3.0, badgeClass: 'b' };
+        case 'C':  return { grade: 'C',  gp: 2.0, badgeClass: 'c' };
+        case 'D':  return { grade: 'D',  gp: 1.0, badgeClass: 'd' };
+        default:   return { grade: 'F',  gp: 0.0, badgeClass: 'f' };
+      }
+    }
+
+    function getHonoursGradeFromMarks(m) {
+      const val = parseFloat(m);
+      if (isNaN(val) || val < 0) return { grade: 'F', gp: 0.00, badgeClass: 'f' };
+      if (val >= 80) return { grade: 'A+', gp: 4.00, badgeClass: 'aplus' };
+      if (val >= 75) return { grade: 'A',  gp: 3.75, badgeClass: 'a' };
+      if (val >= 70) return { grade: 'A-', gp: 3.50, badgeClass: 'aminus' };
+      if (val >= 65) return { grade: 'B+', gp: 3.25, badgeClass: 'bplus' };
+      if (val >= 60) return { grade: 'B',  gp: 3.00, badgeClass: 'b' };
+      if (val >= 55) return { grade: 'B-', gp: 2.75, badgeClass: 'bminus' };
+      if (val >= 50) return { grade: 'C+', gp: 2.50, badgeClass: 'cplus' };
+      if (val >= 45) return { grade: 'C',  gp: 2.25, badgeClass: 'c' };
+      if (val >= 40) return { grade: 'D',  gp: 2.00, badgeClass: 'd' };
+      return { grade: 'F', gp: 0.00, badgeClass: 'f' };
+    }
+
+    function getHonoursGradeFromLetter(letter) {
+      switch(letter) {
+        case 'A+': return { grade: 'A+', gp: 4.00, badgeClass: 'aplus' };
+        case 'A':  return { grade: 'A',  gp: 3.75, badgeClass: 'a' };
+        case 'A-': return { grade: 'A-', gp: 3.50, badgeClass: 'aminus' };
+        case 'B+': return { grade: 'B+', gp: 3.25, badgeClass: 'bplus' };
+        case 'B':  return { grade: 'B',  gp: 3.00, badgeClass: 'b' };
+        case 'B-': return { grade: 'B-', gp: 2.75, badgeClass: 'bminus' };
+        case 'C+': return { grade: 'C+', gp: 2.50, badgeClass: 'cplus' };
+        case 'C':  return { grade: 'C',  gp: 2.25, badgeClass: 'c' };
+        case 'D':  return { grade: 'D',  gp: 2.00, badgeClass: 'd' };
+        default:   return { grade: 'F',  gp: 0.00, badgeClass: 'f' };
+      }
+    }
+
+    // Tab Switching
+    function switchCalcTab(tab) {
+      document.querySelectorAll('.calc-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.calc-tab-content').forEach(c => c.style.display = 'none');
+
+      const btn = document.getElementById('tab-btn-' + tab);
+      const content = document.getElementById('calc-content-' + tab);
+      if (btn) btn.classList.add('active');
+      if (content) content.style.display = 'block';
+    }
+
+    // Mode Toggle (Marks vs Direct Grade)
+    function setHscMode(mode) {
+      hscMode = mode;
+      document.getElementById('mode-btn-marks').classList.toggle('active', mode === 'marks');
+      document.getElementById('mode-btn-grades').classList.toggle('active', mode === 'grades');
+      document.getElementById('hsc-table-input-header').innerText = mode === 'marks' ? 'Obtained Marks (0-100)' : 'Select Grade';
+      renderHscTable();
+      calculateHscGpa();
+    }
+
+    // Stream Selection
+    function setHscStream(stream) {
+      currentHscStream = stream;
+      ['science', 'humanities', 'business', 'custom'].forEach(s => {
+        const el = document.getElementById('pill-' + s);
+        if (el) el.classList.toggle('active', s === stream);
+      });
+      hscSubjects = JSON.parse(JSON.stringify(streamPresets[stream]));
+      renderHscTable();
+      calculateHscGpa();
+    }
+
+    // Render HSC Table Rows
+    function renderHscTable() {
+      const tbody = document.getElementById('hsc-subject-tbody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      hscSubjects.forEach((sub, idx) => {
+        const tr = document.createElement('tr');
+        if (sub.isFourth) tr.className = 'is-fourth-sub';
+
+        const gradeObj = hscMode === 'marks' ? getHscGradeFromMarks(sub.marks) : getHscGradeFromLetter(sub.grade);
+
+        let inputHtml = '';
+        if (hscMode === 'marks') {
+          inputHtml = `<input type="number" class="calc-input hsc-mark-input" min="0" max="100" value="${sub.marks !== undefined ? sub.marks : 80}" oninput="updateHscRow(${idx}, 'marks', this.value)">`;
+        } else {
+          inputHtml = `
+            <select class="calc-select" onchange="updateHscRow(${idx}, 'grade', this.value)">
+              <option value="A+" ${sub.grade === 'A+' ? 'selected' : ''}>A+ (5.00)</option>
+              <option value="A" ${sub.grade === 'A' ? 'selected' : ''}>A (4.00)</option>
+              <option value="A-" ${sub.grade === 'A-' ? 'selected' : ''}>A- (3.50)</option>
+              <option value="B" ${sub.grade === 'B' ? 'selected' : ''}>B (3.00)</option>
+              <option value="C" ${sub.grade === 'C' ? 'selected' : ''}>C (2.00)</option>
+              <option value="D" ${sub.grade === 'D' ? 'selected' : ''}>D (1.00)</option>
+              <option value="F" ${sub.grade === 'F' ? 'selected' : ''}>F (0.00)</option>
+            </select>
+          `;
+        }
+
+        tr.innerHTML = `
+          <td><strong>${idx + 1}</strong></td>
+          <td>
+            <input type="text" class="calc-input" value="${sub.name}" onchange="updateHscRow(${idx}, 'name', this.value)" style="font-weight:500;">
+          </td>
+          <td>
+            <select class="calc-select" onchange="updateHscRow(${idx}, 'role', this.value)">
+              <option value="main" ${!sub.isFourth ? 'selected' : ''}>Main Subject</option>
+              <option value="fourth" ${sub.isFourth ? 'selected' : ''}>4th Subject (Optional)</option>
+            </select>
+          </td>
+          <td>${inputHtml}</td>
+          <td><span class="badge-grade ${gradeObj.badgeClass}" id="hsc-grade-badge-${idx}">${gradeObj.grade}</span></td>
+          <td><strong id="hsc-gp-text-${idx}">${gradeObj.gp.toFixed(2)}</strong></td>
+          <td>
+            <button type="button" class="btn-delete-row" onclick="removeHscSubject(${idx})" title="Delete Subject">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateHscRow(idx, field, value) {
+      if (!hscSubjects[idx]) return;
+      if (field === 'marks') {
+        hscSubjects[idx].marks = parseFloat(value) || 0;
+      } else if (field === 'grade') {
+        hscSubjects[idx].grade = value;
+      } else if (field === 'name') {
+        hscSubjects[idx].name = value;
+      } else if (field === 'role') {
+        hscSubjects[idx].isFourth = (value === 'fourth');
+        renderHscTable();
+        calculateHscGpa();
+        return;
+      }
+
+      // Update badge directly for instant responsiveness
+      const gradeObj = hscMode === 'marks' ? getHscGradeFromMarks(hscSubjects[idx].marks) : getHscGradeFromLetter(hscSubjects[idx].grade);
+      const badge = document.getElementById('hsc-grade-badge-' + idx);
+      const gpText = document.getElementById('hsc-gp-text-' + idx);
+      if (badge) {
+        badge.className = 'badge-grade ' + gradeObj.badgeClass;
+        badge.innerText = gradeObj.grade;
+      }
+      if (gpText) {
+        gpText.innerText = gradeObj.gp.toFixed(2);
+      }
+      calculateHscGpa();
+    }
+
+    function addHscSubjectRow() {
+      hscSubjects.push({
+        name: "Additional Subject " + (hscSubjects.length + 1),
+        isFourth: false,
+        marks: 75,
+        grade: "A"
+      });
+      renderHscTable();
+      calculateHscGpa();
+    }
+
+    function removeHscSubject(idx) {
+      if (hscSubjects.length <= 1) {
+        alert("At least one subject must remain.");
+        return;
+      }
+      hscSubjects.splice(idx, 1);
+      renderHscTable();
+      calculateHscGpa();
+    }
+
+    function resetHscCalculator() {
+      setHscStream(currentHscStream);
+    }
+
+    // HSC GPA Calculation Core
+    function calculateHscGpa() {
+      if (!hscSubjects || hscSubjects.length === 0) return;
+
+      let mainCount = 0;
+      let mainGpSum = 0;
+      let totalMarks = 0;
+      let hasMainFail = false;
+      let fourthBonus = 0;
+      let allGolden = true;
+
+      hscSubjects.forEach(sub => {
+        const gradeObj = hscMode === 'marks' ? getHscGradeFromMarks(sub.marks) : getHscGradeFromLetter(sub.grade);
+        if (hscMode === 'marks') totalMarks += (sub.marks || 0);
+
+        if (gradeObj.gp < 5.0) allGolden = false;
+
+        if (sub.isFourth) {
+          // 4th Subject rule: GP points above 2.00 count as bonus
+          const bonus = Math.max(0, gradeObj.gp - 2.0);
+          fourthBonus += bonus;
+        } else {
+          mainCount++;
+          mainGpSum += gradeObj.gp;
+          if (gradeObj.gp === 0) {
+            hasMainFail = true;
+          }
+        }
+      });
+
+      let calculatedGpa = 0;
+      let statusBadge = 'pass';
+      let statusText = 'Grade A+';
+      let remark = 'Outstanding Performance';
+
+      if (mainCount === 0) {
+        calculatedGpa = 0;
+        statusText = 'No Main Subjects';
+        statusBadge = 'fail';
+        remark = 'Please set at least one subject as a Main Subject.';
+      } else if (hasMainFail) {
+        calculatedGpa = 0.00;
+        statusBadge = 'fail';
+        statusText = 'FAILED (F)';
+        remark = 'Failed in one or more compulsory/main subjects. Retake required.';
+      } else {
+        const totalPointsWithBonus = mainGpSum + fourthBonus;
+        calculatedGpa = Math.min(5.00, totalPointsWithBonus / mainCount);
+
+        if (calculatedGpa >= 5.00) {
+          if (allGolden) {
+            statusBadge = 'golden';
+            statusText = 'GOLDEN A+ (GPA 5.00)';
+            remark = 'Exceptional! A+ (5.00) in all subjects including 4th subject!';
+          } else {
+            statusBadge = 'pass';
+            statusText = 'GRADE A+ (GPA 5.00)';
+            remark = 'Brilliant Result! Perfect GPA 5.00 achieved!';
+          }
+        } else if (calculatedGpa >= 4.00) {
+          statusBadge = 'pass';
+          statusText = 'GRADE A';
+          remark = 'Excellent performance! Keep up the momentum.';
+        } else if (calculatedGpa >= 3.50) {
+          statusBadge = 'pass';
+          statusText = 'GRADE A-';
+          remark = 'Very Good achievement. Strong foundation!';
+        } else if (calculatedGpa >= 3.00) {
+          statusBadge = 'pass';
+          statusText = 'GRADE B';
+          remark = 'Good result. You can aim even higher!';
+        } else if (calculatedGpa >= 2.00) {
+          statusBadge = 'pass';
+          statusText = 'GRADE C';
+          remark = 'Passed successfully. Revision recommended for competitive exams.';
+        } else {
+          statusBadge = 'pass';
+          statusText = 'GRADE D';
+          remark = 'Passed near minimum passing threshold.';
+        }
+      }
+
+      // Update DOM
+      const gpaEl = document.getElementById('hsc-res-gpa');
+      if (gpaEl) gpaEl.innerText = calculatedGpa.toFixed(2);
+      const mainCountEl = document.getElementById('hsc-res-main-count');
+      if (mainCountEl) mainCountEl.innerText = mainCount;
+      const mainPtsEl = document.getElementById('hsc-res-main-points');
+      if (mainPtsEl) mainPtsEl.innerText = mainGpSum.toFixed(2);
+      const bonusEl = document.getElementById('hsc-res-bonus');
+      if (bonusEl) bonusEl.innerText = '+' + fourthBonus.toFixed(2);
+      const totalMarksEl = document.getElementById('hsc-res-total-marks');
+      if (totalMarksEl) totalMarksEl.innerText = hscMode === 'marks' ? totalMarks : 'N/A';
+
+      const badgeEl = document.getElementById('hsc-res-badge');
+      if (badgeEl) {
+        badgeEl.className = 'gpa-badge-status ' + statusBadge;
+        badgeEl.innerText = statusText;
+      }
+      const remarkEl = document.getElementById('hsc-res-remark');
+      if (remarkEl) remarkEl.innerText = remark;
+
+      const panel = document.getElementById('hsc-result-panel');
+      if (panel) panel.style.display = 'block';
+    }
+
+    // =========================================================================
+    // HONOURS / DEGREE CGPA CALCULATION LOGIC
+    // =========================================================================
+    function renderHonoursTable() {
+      const tbody = document.getElementById('honours-courses-tbody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      honoursCourses.forEach((c, idx) => {
+        const tr = document.createElement('tr');
+        const gradeObj = getHonoursGradeFromMarks(c.marks);
+        const earned = (c.credits * gradeObj.gp).toFixed(2);
+
+        tr.innerHTML = `
+          <td><strong>${idx + 1}</strong></td>
+          <td><input type="text" class="calc-input" value="${c.code}" onchange="updateHonoursCourse(${idx}, 'code', this.value)"></td>
+          <td><input type="text" class="calc-input" value="${c.title}" onchange="updateHonoursCourse(${idx}, 'title', this.value)"></td>
+          <td>
+            <select class="calc-select" onchange="updateHonoursCourse(${idx}, 'credits', this.value)">
+              <option value="4" ${c.credits == 4 ? 'selected' : ''}>4.0 Credits</option>
+              <option value="3" ${c.credits == 3 ? 'selected' : ''}>3.0 Credits</option>
+              <option value="2" ${c.credits == 2 ? 'selected' : ''}>2.0 Credits</option>
+              <option value="1.5" ${c.credits == 1.5 ? 'selected' : ''}>1.5 Credits</option>
+            </select>
+          </td>
+          <td>
+            <input type="number" class="calc-input" min="0" max="100" value="${c.marks}" oninput="updateHonoursCourse(${idx}, 'marks', this.value)" placeholder="Marks (0-100)">
+          </td>
+          <td><span class="badge-grade ${gradeObj.badgeClass}" id="hon-badge-${idx}">${gradeObj.grade} (${gradeObj.gp.toFixed(2)})</span></td>
+          <td><strong id="hon-pts-${idx}">${earned}</strong></td>
+          <td>
+            <button type="button" class="btn-delete-row" onclick="removeHonoursCourse(${idx})" title="Delete Course">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateHonoursCourse(idx, field, value) {
+      if (!honoursCourses[idx]) return;
+      if (field === 'code') honoursCourses[idx].code = value;
+      if (field === 'title') honoursCourses[idx].title = value;
+      if (field === 'credits') honoursCourses[idx].credits = parseFloat(value) || 4;
+      if (field === 'marks') honoursCourses[idx].marks = parseFloat(value) || 0;
+
+      const gradeObj = getHonoursGradeFromMarks(honoursCourses[idx].marks);
+      const earned = (honoursCourses[idx].credits * gradeObj.gp).toFixed(2);
+
+      const badge = document.getElementById('hon-badge-' + idx);
+      const pts = document.getElementById('hon-pts-' + idx);
+      if (badge) {
+        badge.className = 'badge-grade ' + gradeObj.badgeClass;
+        badge.innerText = `${gradeObj.grade} (${gradeObj.gp.toFixed(2)})`;
+      }
+      if (pts) pts.innerText = earned;
+
+      calculateHonoursCgpa();
+    }
+
+    function addHonoursCourseRow() {
+      honoursCourses.push({
+        code: "CRS-" + (honoursCourses.length + 101),
+        title: "Course Title " + (honoursCourses.length + 1),
+        credits: 4,
+        marks: 75
+      });
+      renderHonoursTable();
+      calculateHonoursCgpa();
+    }
+
+    function removeHonoursCourse(idx) {
+      if (honoursCourses.length <= 1) {
+        alert("At least one course must remain.");
+        return;
+      }
+      honoursCourses.splice(idx, 1);
+      renderHonoursTable();
+      calculateHonoursCgpa();
+    }
+
+    function resetHonoursCalculator() {
+      honoursCourses = JSON.parse(JSON.stringify(honoursInitialCourses));
+      renderHonoursTable();
+      calculateHonoursCgpa();
+    }
+
+    function calculateHonoursCgpa() {
+      if (!honoursCourses || honoursCourses.length === 0) return;
+
+      let totalCredits = 0;
+      let totalWeightedPoints = 0;
+      let hasFail = false;
+
+      honoursCourses.forEach(c => {
+        const gradeObj = getHonoursGradeFromMarks(c.marks);
+        const cr = c.credits || 4;
+        totalCredits += cr;
+        totalWeightedPoints += (cr * gradeObj.gp);
+        if (gradeObj.gp === 0) hasFail = true;
+      });
+
+      const cgpa = totalCredits > 0 ? (totalWeightedPoints / totalCredits) : 0;
+      let academicClass = '-';
+      let badgeClass = 'pass';
+      let remark = '';
+
+      if (hasFail) {
+        academicClass = 'Incomplete / Backlog';
+        badgeClass = 'fail';
+        remark = 'One or more courses has an F grade. Retake or improvement exam required.';
+      } else if (cgpa >= 3.00) {
+        academicClass = 'First Class (১ম শ্রেণী)';
+        badgeClass = 'pass';
+        remark = 'Outstanding academic excellence! First Class standing.';
+      } else if (cgpa >= 2.25) {
+        academicClass = 'Second Class (২য় শ্রেণী)';
+        badgeClass = 'pass';
+        remark = 'Very Good result! Meets graduate study standards.';
+      } else if (cgpa >= 2.00) {
+        academicClass = 'Third Class (৩য় শ্রেণী)';
+        badgeClass = 'pass';
+        remark = 'Degree requirements fulfilled.';
+      } else {
+        academicClass = 'Fail';
+        badgeClass = 'fail';
+        remark = 'CGPA below minimum requirement (2.00).';
+      }
+
+      const cgpaEl = document.getElementById('hon-res-cgpa');
+      if (cgpaEl) cgpaEl.innerText = cgpa.toFixed(2);
+      const coursesEl = document.getElementById('hon-res-courses');
+      if (coursesEl) coursesEl.innerText = honoursCourses.length;
+      const creditsEl = document.getElementById('hon-res-credits');
+      if (creditsEl) creditsEl.innerText = totalCredits;
+      const weightedEl = document.getElementById('hon-res-weighted-pts');
+      if (weightedEl) weightedEl.innerText = totalWeightedPoints.toFixed(2);
+      const classEl = document.getElementById('hon-res-class');
+      if (classEl) classEl.innerText = academicClass;
+
+      const badgeEl = document.getElementById('hon-res-badge');
+      if (badgeEl) {
+        badgeEl.className = 'gpa-badge-status ' + badgeClass;
+        badgeEl.innerText = academicClass;
+      }
+      const remarkEl = document.getElementById('hon-res-remark');
+      if (remarkEl) remarkEl.innerText = remark;
+
+      const panel = document.getElementById('honours-result-panel');
+      if (panel) panel.style.display = 'block';
+    }
+
+    // =========================================================================
+    // QUICK SINGLE MARK CONVERTER
+    // =========================================================================
+    function runQuickConverter() {
+      const input = document.getElementById('quick-mark-input');
+      if (!input) return;
+      const val = parseFloat(input.value);
+
+      const hscOut = document.getElementById('quick-res-hsc');
+      const honOut = document.getElementById('quick-res-honours');
+      const msgOut = document.getElementById('quick-res-msg');
+
+      if (isNaN(val) || input.value.trim() === '') {
+        hscOut.innerText = '-';
+        honOut.innerText = '-';
+        msgOut.innerText = 'Enter marks above';
+        msgOut.style.color = '#64748b';
+        return;
+      }
+
+      if (val < 0 || val > 100) {
+        hscOut.innerText = 'Invalid';
+        honOut.innerText = 'Invalid';
+        msgOut.innerText = 'Marks must be between 0 and 100';
+        msgOut.style.color = '#dc2626';
+        return;
+      }
+
+      const hsc = getHscGradeFromMarks(val);
+      const hon = getHonoursGradeFromMarks(val);
+
+      hscOut.innerHTML = `<span class="badge-grade ${hsc.badgeClass}">${hsc.grade}</span> (${hsc.gp.toFixed(2)})`;
+      honOut.innerHTML = `<span class="badge-grade ${hon.badgeClass}">${hon.grade}</span> (${hon.gp.toFixed(2)})`;
+
+      if (val >= 80) {
+        msgOut.innerText = 'চমৎকার! Outstanding Achievement!';
+        msgOut.style.color = '#15803d';
+      } else if (val >= 70) {
+        msgOut.innerText = 'খুব ভালো! Excellent performance.';
+        msgOut.style.color = '#0284c7';
+      } else if (val >= 60) {
+        msgOut.innerText = 'ভালো! Solid passing grade.';
+        msgOut.style.color = '#0d9488';
+      } else if (val >= 40) {
+        msgOut.innerText = 'পাস — তবে আরও উন্নতির সুযোগ আছে!';
+        msgOut.style.color = '#d97706';
+      } else if (val >= 33) {
+        msgOut.innerText = 'বোর্ড পরীক্ষায় কোনোরকম পাস, নিয়মিত অনুশীলন জরুরি।';
+        msgOut.style.color = '#ea580c';
+      } else {
+        msgOut.innerText = 'Fail — হতাশ না হয়ে পুনরায় চেষ্টা করুন!';
+        msgOut.style.color = '#dc2626';
+      }
+    }
+
+    // =========================================================================
+    // PRINT & EXPORT MARKSHEET
+    // =========================================================================
+    function printMarksheet(type) {
+      const printArea = document.getElementById('print-marksheet-area');
+      if (!printArea) return;
+
+      const dateStr = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+      let tableRowsHtml = '';
+      let summaryHtml = '';
+
+      if (type === 'hsc') {
+        const gpa = document.getElementById('hsc-res-gpa').innerText;
+        const badge = document.getElementById('hsc-res-badge').innerText;
+        const remarks = document.getElementById('hsc-res-remark').innerText;
+
+        hscSubjects.forEach((sub, i) => {
+          const g = hscMode === 'marks' ? getHscGradeFromMarks(sub.marks) : getHscGradeFromLetter(sub.grade);
+          tableRowsHtml += `
+            <tr>
+              <td style="padding:8px; border:1px solid #ddd; text-align:center;">${i + 1}</td>
+              <td style="padding:8px; border:1px solid #ddd;">${sub.name}</td>
+              <td style="padding:8px; border:1px solid #ddd; text-align:center;">${sub.isFourth ? '4th (Optional)' : 'Main / Compulsory'}</td>
+              <td style="padding:8px; border:1px solid #ddd; text-align:center;">${hscMode === 'marks' ? sub.marks : '-'}</td>
+              <td style="padding:8px; border:1px solid #ddd; text-align:center;"><strong>${g.grade}</strong></td>
+              <td style="padding:8px; border:1px solid #ddd; text-align:center;">${g.gp.toFixed(2)}</td>
+            </tr>
+          `;
+        });
+
+        summaryHtml = `
+          <div style="margin-top:20px; display:flex; justify-content:space-between; background:#f8fafc; padding:15px; border:1px solid #cbd5e1; border-radius:6px;">
+            <div><strong>Overall GPA:</strong> <span style="font-size:20px; color:#002147; font-weight:bold;">${gpa} / 5.00</span></div>
+            <div><strong>Result Status:</strong> <span style="font-weight:bold; color:#15803d;">${badge}</span></div>
+            <div><strong>Remarks:</strong> ${remarks}</div>
+          </div>
+        `;
+      } else {
+        const cgpa = document.getElementById('hon-res-cgpa').innerText;
+        const cls = document.getElementById('hon-res-class').innerText;
+        const credits = document.getElementById('hon-res-credits').innerText;
+
+        honoursCourses.forEach((c, i) => {
+          const g = getHonoursGradeFromMarks(c.marks);
+          tableRowsHtml += `
+            <tr>
+              <td style="padding:8px; border:1px solid #ddd; text-align:center;">${i + 1}</td>
+              <td style="padding:8px; border:1px solid #ddd;">${c.code} - ${c.title}</td>
+              <td style="padding:8px; border:1px solid #ddd; text-align:center;">${c.credits}</td>
+              <td style="padding:8px; border:1px solid #ddd; text-align:center;">${c.marks}</td>
+              <td style="padding:8px; border:1px solid #ddd; text-align:center;"><strong>${g.grade}</strong></td>
+              <td style="padding:8px; border:1px solid #ddd; text-align:center;">${g.gp.toFixed(2)}</td>
+              <td style="padding:8px; border:1px solid #ddd; text-align:center;">${(c.credits * g.gp).toFixed(2)}</td>
+            </tr>
+          `;
+        });
+
+        summaryHtml = `
+          <div style="margin-top:20px; display:flex; justify-content:space-between; background:#f8fafc; padding:15px; border:1px solid #cbd5e1; border-radius:6px;">
+            <div><strong>Cumulative CGPA:</strong> <span style="font-size:20px; color:#002147; font-weight:bold;">${cgpa} / 4.00</span></div>
+            <div><strong>Total Credits:</strong> ${credits}</div>
+            <div><strong>Academic Class:</strong> <span style="font-weight:bold; color:#0369a1;">${cls}</span></div>
+          </div>
+        `;
+      }
+
+      printArea.innerHTML = `
+        <div style="font-family:'Poppins', sans-serif; color:#1e293b; max-width:800px; margin:0 auto; padding:20px;">
+          <div style="text-align:center; border-bottom:2px solid #002147; padding-bottom:15px; margin-bottom:20px;">
+            <h2 style="margin:0; color:#002147; font-size:24px;">BOGURA GOVERNMENT COLLEGE</h2>
+            <p style="margin:4px 0; font-size:14px; color:#475569;">Bogura, Bangladesh | College Code: 132124</p>
+            <h4 style="margin:10px 0 0 0; color:#086972; text-transform:uppercase;">
+              ${type === 'hsc' ? 'Higher Secondary Certificate (HSC) Provisional Grade Sheet' : 'Honours / Degree Academic CGPA Report'}
+            </h4>
+            <div style="font-size:12px; color:#64748b; margin-top:4px;">Date of Calculation: ${dateStr}</div>
+          </div>
+
+          <table style="width:100%; border-collapse:collapse; font-size:13px;">
+            <thead>
+              <tr style="background:#072b54; color:#fff;">
+                <th style="padding:8px; border:1px solid #072b54; width:40px;">#</th>
+                <th style="padding:8px; border:1px solid #072b54; text-align:left;">Subject / Course</th>
+                <th style="padding:8px; border:1px solid #072b54;">${type === 'hsc' ? 'Role' : 'Credits'}</th>
+                <th style="padding:8px; border:1px solid #072b54;">Marks</th>
+                <th style="padding:8px; border:1px solid #072b54;">Grade</th>
+                <th style="padding:8px; border:1px solid #072b54;">Point</th>
+                ${type === 'honours' ? '<th style="padding:8px; border:1px solid #072b54;">Earned Pts</th>' : ''}
+              </tr>
+            </thead>
+            <tbody>
+              ${tableRowsHtml}
+            </tbody>
+          </table>
+
+          ${summaryHtml}
+
+          <div style="margin-top:35px; display:flex; justify-content:space-between; font-size:11px; color:#64748b;">
+            <div>Generated automatically via Bogura Government College Web Portal</div>
+            <div>Student Academic Records System</div>
+          </div>
+        </div>
+      `;
+
+      printArea.style.display = 'block';
+      window.print();
+      printArea.style.display = 'none';
+    }
+
+    // INITIALIZATION FUNCTION
+    function initCalculators() {
+      calcInitialized = true;
+      renderHscTable();
+      calculateHscGpa();
+      renderHonoursTable();
+      calculateHonoursCgpa();
+    }
+
+    // Initialize when DOM is ready
+    window.addEventListener('DOMContentLoaded', () => {
+      initCalculators();
+    });
+  </script>
+
+  <!-- PRINT CONTAINER FOR OFFICIAL-LOOKING GRADE SHEET -->
+  <div id="print-marksheet-area" style="display:none;"></div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html><body>
+<pre id="out" style="font:14px/1.5 monospace;padding: 16px;background:#f5f5f5">
+</pre>
+<script>
+const log = m => document.getElementById("out").textContent += m + "\n";
+const multiplier = n => x => x * n;
+const double = multiplier(2);
+const triple = multiplier(3);
+log("double (10) = " + double (10));
+log("triple (10) = " + triple (10));
+</script>
+</body></html>

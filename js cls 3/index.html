@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8" />
+<title>Dhaka Diner — Tip Calculator</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="hero">
+<div class="brand">Dhaka Diner</div>
+<h1>Bill Split সহজ করি</h1>
+<p>Bill amount বসাও, tip select করো সাথে সাথে total দেখো।</p>
+</header>
+<main class="calc">
+<label>Bill (৳)
+<input id="bill" type="number" min="0" placeholder="1200" />
+</label>
+<label>Tip
+<div class="pct-row">
+<button class="pct" data-p="5">5%</button>
+<button class="pct" data-p="10">10%</button>
+<button class="pct" data-p="15">15%</button>
+<button class="pct" data-p="20">20%</button>
+</div>
+</label>
+<label>People
+<input id="people" type="number" min="1" value="1" />
+</label>
+<div id="out" class="out">
+<div class="row"><span>Tip</span><b id="tip">৳0</b></div>
+<div class="row"><span>Total</span><b id="total">৳0</b></div>
+<div class="row big"><span>Per Person</span><b id="each">৳0</b></div>
+</div>
+</main>
+<footer>© Dhaka Diner 2026</footer>
+<script src="app.js"></script>
+</body>
+</html>

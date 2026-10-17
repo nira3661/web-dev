@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html><body>
+<h2>Count: <span id="n">0</span></h2>
+<button id="b">+1</button>
+<script>
+function counter() { let c = 0; return () => ++c; }
+const inc = counter();
+document.getElementById("b").addEventListener("click", () => {
+document.getElementById("n").textContent = inc();
+});
+</script>
+</body></html>
