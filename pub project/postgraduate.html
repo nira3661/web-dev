@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Postgraduate Programs | Pundra University of Science & Technology</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary-navy: #0e294b;
+      --accent-red: #c01825;
+      --bg-cream: #fbfbf6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    body { background: var(--bg-cream); color: #333; line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+
+    header {
+      background: #fff;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+    }
+    .brand-logo { display: flex; align-items: center; gap: 10px; }
+    .brand-logo h2 { font-size: 19px; color: var(--primary-navy); }
+
+    .banner {
+      background: linear-gradient(rgba(14, 41, 75, 0.9), rgba(14, 41, 75, 0.9)),
+                  url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200') center/cover;
+      color: #fff;
+      padding: 55px 5%;
+      text-align: center;
+    }
+    .banner h1 { font-size: 34px; margin-bottom: 8px; }
+
+    .content-wrap {
+      max-width: 1200px;
+      margin: 40px auto 80px;
+      padding: 0 20px;
+    }
+
+    .program-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 30px;
+    }
+    .program-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      transition: transform 0.25s;
+    }
+    .program-card:hover { transform: translateY(-5px); }
+    .program-thumb {
+      height: 170px;
+      position: relative;
+    }
+    .program-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .program-meta {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .meta-tag {
+      background: rgba(14, 41, 75, 0.9);
+      color: #fff;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+    .meta-tag.red { background: var(--accent-red); }
+    .program-body { padding: 22px; }
+    .program-body h3 { font-size: 18px; color: var(--primary-navy); margin-bottom: 10px; }
+    .program-body p { font-size: 13.5px; color: #666; margin-bottom: 15px; }
+    .program-body a {
+      color: var(--accent-red);
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand-logo">
+      <i class="fa-solid fa-graduation-cap" style="font-size: 32px; color: var(--primary-navy);"></i>
+      <h2>Pundra University (PUB)</h2>
+    </div>
+    <div>
+      <a href="index.html" style="font-weight: 600; color: var(--primary-navy);"><i class="fa-solid fa-home"></i> Home</a>
+      <a href="tuition-fees.html" style="margin-left: 20px; font-weight: 600; color: var(--accent-red);">Tuition Fees</a>
+    </div>
+  </header>
+
+  <div class="banner">
+    <h1>Postgraduate Programs</h1>
+    <p>Enhance your career with advanced specialized Master's degrees</p>
+  </div>
+
+  <div class="content-wrap">
+    <div class="program-grid">
+
+      <!-- MBA 2-Years -->
+      <div class="program-card">
+        <div class="program-thumb">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=500" alt="MBA">
+          <div class="program-meta">
+            <span class="meta-tag">60.00 Credit</span>
+            <span class="meta-tag red">4 Semesters</span>
+          </div>
+        </div>
+        <div class="program-body">
+          <h3>MBA (Master of Business Admin - Regular)</h3>
+          <p>Designed for graduates seeking comprehensive management proficiency.</p>
+          <a href="tuition-fees.html">View Tuition Fees &rarr;</a>
+        </div>
+      </div>
+
+      <!-- EMBA -->
+      <div class="program-card">
+        <div class="program-thumb">
+          <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=500" alt="EMBA">
+          <div class="program-meta">
+            <span class="meta-tag">48.00 Credit</span>
+            <span class="meta-tag red">3 Semesters</span>
+          </div>
+        </div>
+        <div class="program-body">
+          <h3>Executive MBA (EMBA)</h3>
+          <p>Curated for corporate professionals, executives, and managers.</p>
+          <a href="tuition-fees.html">View Tuition Fees &rarr;</a>
+        </div>
+      </div>
+
+      <!-- MPH -->
+      <div class="program-card">
+        <div class="program-thumb">
+          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=500" alt="MPH">
+          <div class="program-meta">
+            <span class="meta-tag">74.00 Credit</span>
+            <span class="meta-tag red">4 Semesters</span>
+          </div>
+        </div>
+        <div class="program-body">
+          <h3>Master of Public Health (MPH)</h3>
+          <p>Ideal for medical professionals, health officers, and NGO workers.</p>
+          <a href="tuition-fees.html">View Tuition Fees &rarr;</a>
+        </div>
+      </div>
+
+      <!-- MA Islamic Studies -->
+      <div class="program-card">
+        <div class="program-thumb">
+          <img src="https://images.unsplash.com/photo-1532012164546-f432f2e3777f?auto=format&fit=crop&w=500" alt="Islamic Studies">
+          <div class="program-meta">
+            <span class="meta-tag">63.00 Credit</span>
+            <span class="meta-tag red">4 Semesters</span>
+          </div>
+        </div>
+        <div class="program-body">
+          <h3>M.A. in Islamic Studies (2-Years)</h3>
+          <p>Advanced contextual theological, cultural, and moral scholarship.</p>
+          <a href="tuition-fees.html">View Tuition Fees &rarr;</a>
+        </div>
+      </div>
+
+      <!-- MA in English -->
+      <div class="program-card">
+        <div class="program-thumb">
+          <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=500" alt="English">
+          <div class="program-meta">
+            <span class="meta-tag">39.00 Credit</span>
+            <span class="meta-tag red">2 Semesters</span>
+          </div>
+        </div>
+        <div class="program-body">
+          <h3>M.A. in English (1-Year)</h3>
+          <p>Focuses on advanced literature, linguistics, and communicative pedagogy.</p>
+          <a href="tuition-fees.html">View Tuition Fees &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

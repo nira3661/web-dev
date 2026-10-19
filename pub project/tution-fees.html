@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tuition Fees | Pundra University of Science & Technology</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary-navy: #0e294b;
+      --accent-red: #c01825;
+      --table-header: #0e294b;
+      --table-stripe: #f7fafc;
+      --table-category: #dcf1e7;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    body { background: #fdfdfd; color: #333; }
+    a { text-decoration: none; color: inherit; }
+
+    /* Header & Nav Banner */
+    .subpage-banner {
+      background: linear-gradient(rgba(14, 41, 75, 0.88), rgba(14, 41, 75, 0.88)),
+                  url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200') center/cover;
+      color: #fff;
+      padding: 60px 5%;
+      text-align: center;
+    }
+    .subpage-banner h1 { font-size: 36px; font-weight: 700; margin-bottom: 8px; }
+    .breadcrumbs { font-size: 14px; color: #ccd9e8; }
+    .breadcrumbs a { color: #f4a213; }
+
+    .nav-strip {
+      background: #fff;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .back-btn {
+      color: var(--primary-navy);
+      font-weight: 600;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .back-btn:hover { color: var(--accent-red); }
+
+    /* Fee Table Container */
+    .table-container {
+      width: 92%;
+      max-width: 1200px;
+      margin: 40px auto 80px;
+      overflow-x: auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border: 1px solid #e1e7ee;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      text-align: right;
+    }
+    th, td {
+      padding: 12px 14px;
+      border: 1px solid #dee4ec;
+    }
+    th {
+      background: var(--table-header);
+      color: #ffffff;
+      font-weight: 600;
+      text-align: center;
+      vertical-align: middle;
+    }
+    td.text-left { text-align: left; font-weight: 500; }
+    td.text-center { text-align: center; }
+    
+    .category-row {
+      background: var(--table-category) !important;
+      font-weight: 700;
+      color: #175438;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+    tbody tr:nth-child(even) { background-color: var(--table-stripe); }
+    tbody tr:hover { background-color: #f1f5fa; }
+  </style>
+</head>
+<body>
+
+  <div class="nav-strip">
+    <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Homepage</a>
+    <div><strong>Call Admission:</strong> +88 01713 377 033</div>
+  </div>
+
+  <div class="subpage-banner">
+    <h1>Tuition Fees Structure</h1>
+    <div class="breadcrumbs"><a href="index.html">Home</a> / Admission / Tuition Fees</div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th style="min-width: 180px;">Programs</th>
+          <th>Total Credit</th>
+          <th>Total Semester</th>
+          <th>Admission Fee (BDT)</th>
+          <th>Registration Fee (BDT)</th>
+          <th>Tuition Fee (BDT)</th>
+          <th>Other Fee (BDT)</th>
+          <th>Total Fee (BDT)</th>
+          <th>Monthly Fee (BDT)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Undergraduate -->
+        <tr class="category-row">
+          <td colspan="9" class="text-left">Undergraduate Programs</td>
+        </tr>
+        <tr>
+          <td class="text-left">BBA</td>
+          <td class="text-center">140.00</td>
+          <td class="text-center">8</td>
+          <td>15,000</td>
+          <td>8,000</td>
+          <td>133,000</td>
+          <td>159,000</td>
+          <td>315,000</td>
+          <td>6,250</td>
+        </tr>
+        <tr>
+          <td class="text-left">B.Sc. in CSE</td>
+          <td class="text-center">161.00</td>
+          <td class="text-center">8</td>
+          <td>15,000</td>
+          <td>8,000</td>
+          <td>189,580</td>
+          <td>214,020</td>
+          <td>427,000</td>
+          <td>8,583</td>
+        </tr>
+        <tr>
+          <td class="text-left">B.Sc. in EEE</td>
+          <td class="text-center">160.00</td>
+          <td class="text-center">8</td>
+          <td>15,000</td>
+          <td>8,000</td>
+          <td>189,000</td>
+          <td>215,020</td>
+          <td>420,000</td>
+          <td>8,438</td>
+        </tr>
+        <tr>
+          <td class="text-left">B.Sc. in Civil Engineering</td>
+          <td class="text-center">164.00</td>
+          <td class="text-center">8</td>
+          <td>15,000</td>
+          <td>8,000</td>
+          <td>191,995</td>
+          <td>210,020</td>
+          <td>435,000</td>
+          <td>8,646</td>
+        </tr>
+        <tr>
+          <td class="text-left">B.Sc. in CSE (For Diploma)</td>
+          <td class="text-center">161.00</td>
+          <td class="text-center">8</td>
+          <td>15,000</td>
+          <td>8,000</td>
+          <td>125,600</td>
+          <td>146,200</td>
+          <td>294,800</td>
+          <td>5,829</td>
+        </tr>
+        <tr>
+          <td class="text-left">B.A. (Hons.) in English</td>
+          <td class="text-center">144.00</td>
+          <td class="text-center">8</td>
+          <td>15,000</td>
+          <td>8,000</td>
+          <td>142,000</td>
+          <td>165,000</td>
+          <td>330,000</td>
+          <td>6,563</td>
+        </tr>
+
+        <!-- Postgraduate -->
+        <tr class="category-row">
+          <td colspan="9" class="text-left">Postgraduate Programs</td>
+        </tr>
+        <tr>
+          <td class="text-left">Master of Business Administration (2-Years)</td>
+          <td class="text-center">60.00</td>
+          <td class="text-center">4</td>
+          <td>15,000</td>
+          <td>4,000</td>
+          <td>40,000</td>
+          <td>41,000</td>
+          <td>100,000</td>
+          <td>3,542</td>
+        </tr>
+        <tr>
+          <td class="text-left">Executive MBA (EMBA)</td>
+          <td class="text-center">48.00</td>
+          <td class="text-center">3</td>
+          <td>15,000</td>
+          <td>3,000</td>
+          <td>39,000</td>
+          <td>43,000</td>
+          <td>100,000</td>
+          <td>7,083</td>
+        </tr>
+        <tr>
+          <td class="text-left">Master of Public Health (MPH)</td>
+          <td class="text-center">74.00</td>
+          <td class="text-center">4</td>
+          <td>15,000</td>
+          <td>4,000</td>
+          <td>40,000</td>
+          <td>41,000</td>
+          <td>100,000</td>
+          <td>3,542</td>
+        </tr>
+        <tr>
+          <td class="text-left">M.A. in Islamic Studies (2-Years)</td>
+          <td class="text-center">63.00</td>
+          <td class="text-center">4</td>
+          <td>15,000</td>
+          <td>4,000</td>
+          <td>30,000</td>
+          <td>36,000</td>
+          <td>85,000</td>
+          <td>2,917</td>
+        </tr>
+        <tr>
+          <td class="text-left">M.A. in English (1-Year)</td>
+          <td class="text-center">39.00</td>
+          <td class="text-center">2</td>
+          <td>15,000</td>
+          <td>2,000</td>
+          <td>25,000</td>
+          <td>28,000</td>
+          <td>70,000</td>
+          <td>4,583</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>

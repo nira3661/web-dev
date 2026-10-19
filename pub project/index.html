@@ -1,0 +1,2422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pundra University of Science & Technology (PUB)</title>
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary-navy: #0e294b;
+      --secondary-blue: #164070;
+      --accent-red: #c01825;
+      --accent-gold: #f4a213;
+      --bg-cream: #fbfbf6;
+      --text-dark: #232d38;
+      --text-muted: #5e6d7d;
+      --border-color: #e5e9f0;
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Top Utility Bar */
+    .top-bar {
+      background-color: var(--primary-navy);
+      color: #fff;
+      font-size: 13px;
+      padding: 7px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .top-bar .contact-info span {
+      margin-right: 20px;
+    }
+    .top-bar .contact-info i {
+      color: var(--accent-gold);
+      margin-right: 6px;
+    }
+    .top-bar .quick-links a {
+      margin-left: 15px;
+      color: #e0e8f5;
+      transition: color 0.2s;
+    }
+    .top-bar .quick-links a:hover {
+      color: var(--accent-gold);
+    }
+
+/* =========================================================
+       RESEARCH & PUBLICATIONS CSS
+       ========================================================= */
+    .research-section {
+      background-color: #f7faf5; /* Pale mint background */
+      padding: 60px 6%;
+    }
+    .research-container {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 40px;
+      text-align: center;
+    }
+    .research-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .research-icon {
+      font-size: 44px;
+      color: #c01825; /* Red outline icon */
+      margin-bottom: 12px;
+    }
+    .research-number {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 38px;
+      font-weight: 800;
+      color: #0b2545;
+      line-height: 1.1;
+    }
+    .research-number span {
+      font-size: 16px;
+      font-weight: 600;
+      color: #64748b;
+    }
+    .research-label {
+      font-size: 16px;
+      color: #475569;
+      font-weight: 600;
+      margin-top: 6px;
+    }
+
+    /* =========================================================
+       CAMPUS KEY STATS OVERLAY STRIP CSS
+       ========================================================= */
+    .campus-stats-strip {
+      background: linear-gradient(rgba(4, 25, 23, 0.92), rgba(4, 25, 23, 0.92)), 
+                  url('https://www.pundrauniversity.ac.bd/_next/image?url=%2Fassets%2Fimages%2Fcampus.jpg&w=1920&q=75') center/cover fixed;
+      padding: 60px 6%;
+    }
+    .campus-stats-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .stats-box {
+      border: 1px solid rgba(244, 162, 19, 0.75); /* Gold outline */
+      padding: 30px 20px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .stats-box:hover {
+      border-color: #c01825; /* Red outline on hover */
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+    .stats-icon {
+      font-size: 34px;
+      color: #ffffff;
+      margin-bottom: 14px;
+      display: inline-block;
+    }
+    .stats-count {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 38px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+    .stats-text {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #cbd5e1;
+      letter-spacing: 1px;
+      margin-top: 8px;
+    }
+
+    /* =========================================================
+       OUR PROUD ALUMNI CSS
+       ========================================================= */
+    .alumni-section {
+      background-color: #f7faf5;
+      padding: 60px 6%;
+    }
+    .alumni-container {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+    .alumni-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 30px;
+    }
+    .alumni-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .alumni-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    .alumni-photo-wrap {
+      height: 240px;
+      position: relative;
+      overflow: hidden;
+    }
+    .alumni-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .dept-badge {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: #c01825;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+    .alumni-header {
+      background: #0e294b; /* Dark navy banner */
+      color: #ffffff;
+      padding: 10px 14px;
+      text-align: center;
+    }
+    .alumni-header h4 {
+      font-size: 14.5px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .alumni-body {
+      padding: 15px 14px;
+      text-align: center;
+      background: #ffffff;
+    }
+    .alumni-role {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #0e294b;
+      margin-bottom: 2px;
+    }
+    .alumni-company {
+      font-size: 12.5px;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+
+    /* Level 2 Submenu Flyouts (Faculty & Departments) */
+    .dropdown-submenu {
+      position: relative;
+    }
+    .submenu-flyout {
+      position: absolute;
+      left: 100%;
+      top: 0;
+      background: #ffffff;
+      min-width: 250px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+      border-radius: 4px;
+      padding: 6px 0;
+      display: none;
+      z-index: 1002;
+      border-top: 3px solid #c01825;
+    }
+    .dropdown-submenu:hover > .submenu-flyout {
+      display: block;
+    }
+    .submenu-flyout a {
+      padding: 9px 18px;
+      font-size: 13px;
+      display: block;
+      color: #232d38;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .submenu-flyout a:hover {
+      background: #f7f9fc;
+      color: #c01825;
+      padding-left: 24px;
+    }
+
+    /* =========================================================
+       MEMBERSHIPS & PARTNERS CSS
+       ========================================================= */
+    .partners-section {
+      background: #ffffff;
+      padding: 60px 6%;
+      border-bottom: 1px solid #eef2f6;
+    }
+    .partners-container {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+    .partners-carousel {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+      margin-top: 35px;
+      flex-wrap: wrap;
+    }
+    .partner-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 200px;
+    }
+    .partner-item img {
+      max-height: 48px;
+      max-width: 100%;
+      object-fit: contain;
+      filter: grayscale(15%);
+      transition: filter 0.2s, transform 0.2s;
+    }
+    .partner-item img:hover {
+      filter: grayscale(0%);
+      transform: scale(1.05);
+    }
+    .partner-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: #0b2545;
+      line-height: 1.2;
+    }
+    .partner-name small {
+      font-size: 9.5px;
+      font-weight: 500;
+      color: #64748b;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .campus-stats-container { grid-template-columns: repeat(2, 1fr); }
+      .alumni-grid { grid-template-columns: repeat(2, 1fr); }
+      .research-grid { grid-template-columns: 1fr; gap: 20px; }
+      .partners-carousel { justify-content: center; }
+    }
+    @media (max-width: 600px) {
+      .campus-stats-container { grid-template-columns: 1fr; }
+      .alumni-grid { grid-template-columns: 1fr; }
+    }
+
+    /* =========================================================
+       WHY CHOOSE US STYLES
+       ========================================================= */
+    .why-choose-section {
+      background: #ffffff;
+      padding: 60px 6%;
+    }
+
+    .why-choose-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .why-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: #0b2545;
+      margin-bottom: 12px;
+    }
+
+    .why-subtitle {
+      font-size: 14.5px;
+      color: #556575;
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      margin-bottom: 22px;
+    }
+
+    /* Pink round badge icons from the video */
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      background: #fdebed;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #e61e2b;
+      font-size: 18px;
+      margin-top: 3px;
+    }
+
+    .feature-content h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0b2545;
+      margin-bottom: 6px;
+    }
+
+    .feature-content ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+
+    .feature-content li {
+      font-size: 13.5px;
+      color: #4a5968;
+      line-height: 1.6;
+      margin-bottom: 4px;
+    }
+
+    /* Right Column Card & Admission Badge */
+    .building-card {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .tall-building-img {
+      width: 100%;
+      height: 540px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Floating Yellow "For Admission" Badge */
+    .admission-badge {
+      position: absolute;
+      top: 25px;
+      left: -1px;
+      background: #f4b400; /* Yellow / Gold from the recording */
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 0 6px 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      z-index: 2;
+    }
+
+    .admission-badge .badge-icon {
+      font-size: 20px;
+    }
+
+    .admission-badge .badge-text span {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .admission-badge .badge-text strong {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .building-logo {
+      position: absolute;
+      bottom: 25px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: #fff;
+      border-radius: 50%;
+      padding: 4px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+    }
+
+    .building-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    @media (max-width: 900px) {
+      .why-choose-container {
+        grid-template-columns: 1fr;
+      }
+      .tall-building-img {
+        height: 380px;
+      }
+    }
+
+    /* Main Navigation Bar */
+    header {
+      background: #ffffff;
+      padding: 12px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-logo img {
+      height: 52px;
+    }
+    .brand-logo .brand-text h1 {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--primary-navy);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .brand-logo .brand-text span {
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 1.2px;
+      font-weight: 500;
+      display: block;
+    }
+
+    /* Main Navigation Bar Links */
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      align-items: center;
+      gap: 5px;
+    }
+    .nav-item {
+      position: relative;
+    }
+    .nav-link {
+      padding: 10px 14px;
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s ease;
+      cursor: pointer;
+    }
+    .nav-link:hover, 
+    .nav-item.active .nav-link {
+      color: var(--accent-red);
+    }
+
+    /* Main Dropdown (Level 1) */
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #ffffff;
+      min-width: 230px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+      border-radius: 4px;
+      padding: 6px 0;
+      display: none;
+      z-index: 1000;
+      border-top: 3px solid var(--accent-red);
+    }
+    .dropdown a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 18px;
+      font-size: 13.5px;
+      color: var(--text-dark);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .dropdown a:hover {
+      background: #f7f9fc;
+      color: var(--accent-red);
+      padding-left: 22px;
+    }
+    .nav-item:hover > .dropdown {
+      display: block;
+    }
+
+    /* Messages Flyout Submenu (Level 2) */
+    .dropdown-submenu {
+      position: relative;
+    }
+    .submenu-flyout {
+      position: absolute;
+      left: 100%;
+      top: 0;
+      background: #ffffff;
+      min-width: 230px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+      border-radius: 4px;
+      padding: 6px 0;
+      display: none;
+      z-index: 1001;
+      border-top: 3px solid var(--accent-red);
+    }
+    .dropdown-submenu:hover > .submenu-flyout {
+      display: block;
+    }
+
+    /* =========================================================
+       HERO CAROUSEL / SLIDER STYLES
+       ========================================================= */
+    .hero-slider-container {
+      position: relative;
+      width: 100%;
+      height: 520px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+      transform: scale(1.02);
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .slide-caption {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.75);
+      color: #ffffff;
+      padding: 10px 28px;
+      border-radius: 4px;
+      font-size: 15.5px;
+      font-weight: 600;
+      text-align: center;
+      max-width: 85%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      z-index: 5;
+      letter-spacing: 0.3px;
+    }
+
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      background: rgba(0, 0, 0, 0.45);
+      color: #ffffff;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: background 0.3s ease, transform 0.2s;
+      z-index: 10;
+    }
+    .slider-arrow:hover {
+      background: rgba(192, 24, 37, 0.9);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .slider-arrow.prev { left: 20px; }
+    .slider-arrow.next { right: 20px; }
+
+    .slider-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+    .dot {
+      width: 25px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.45);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.3s, width 0.3s;
+    }
+    .dot.active {
+      background: var(--accent-red);
+      width: 42px;
+    }
+
+
+    /* =========================================================
+       NOTICES, EVENTS & SEMINAR STYLES
+       ========================================================= */
+    .notice-event-section {
+      background-color: #f7faf5; /* Signature pale mint background */
+      padding: 60px 6%;
+    }
+    .notice-event-wrapper {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+    }
+    .section-heading-serif {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 34px;
+      font-weight: 800;
+      color: #0b2545;
+      margin-bottom: 25px;
+    }
+    .cards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    /* Notice Card with Red Date Badge */
+    .pub-notice-card {
+      background: #ffffff;
+      border: 1px solid #e7ece5;
+      border-radius: 4px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .pub-notice-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    }
+    .pub-date-badge {
+      background: #fdf2f2;
+      border: 1px solid #fbd2d4;
+      border-radius: 4px;
+      color: #c01825;
+      min-width: 58px;
+      padding: 6px 4px;
+      text-align: center;
+      line-height: 1.1;
+      flex-shrink: 0;
+    }
+    .pub-date-badge .p-day {
+      display: block;
+      font-size: 19px;
+      font-weight: 800;
+    }
+    .pub-date-badge .p-month {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .pub-date-badge .p-year {
+      display: block;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .pub-notice-text a {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #1e293b;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      transition: color 0.2s;
+    }
+    .pub-notice-text a:hover {
+      color: #c01825;
+    }
+
+    /* Event Card with Thumbnail */
+    .pub-event-card {
+      background: #ffffff;
+      border: 1px solid #e7ece5;
+      border-radius: 4px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      transition: transform 0.2s;
+    }
+    .pub-event-card:hover {
+      transform: translateY(-2px);
+    }
+    .event-thumb {
+      width: 78px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .pub-event-info h4 a {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #1e293b;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+    .pub-event-info h4 a:hover {
+      color: #c01825;
+    }
+    .event-date {
+      font-size: 11.5px;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .view-all-row {
+      text-align: right;
+      margin-top: 20px;
+    }
+    .view-all-link {
+      color: #e61e2b;
+      font-size: 14.5px;
+      font-weight: 600;
+      transition: gap 0.2s;
+    }
+    .view-all-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Seminar & Workshops Grid */
+    .seminar-section {
+      background: #ffffff;
+      padding: 70px 6%;
+    }
+    .seminar-container {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+    .seminar-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 25px;
+    }
+    .seminar-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .seminar-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+    .seminar-thumb {
+      height: 160px;
+      position: relative;
+      overflow: hidden;
+    }
+    .seminar-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .pub-tag {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: #c01825;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+    .seminar-body {
+      padding: 14px 16px;
+    }
+    .seminar-date {
+      font-size: 11.5px;
+      color: #64748b;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .seminar-title a {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #0b2545;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .seminar-title a:hover {
+      color: #c01825;
+    }
+    .seminar-btn-wrap {
+      text-align: right;
+      margin-top: 35px;
+    }
+    .pub-btn-red {
+      background: #c01825;
+      color: #fff;
+      padding: 10px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+    .pub-btn-red:hover {
+      background: #9a101b;
+    }
+
+    @media (max-width: 1024px) {
+      .seminar-grid { grid-template-columns: repeat(2, 1fr); }
+      .notice-event-wrapper { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .seminar-grid { grid-template-columns: 1fr; }
+    }
+
+    /* =========================================================
+       ABOUT THE UNIVERSITY SECTION (PIXEL-PERFECT MATCH)
+       ========================================================= */
+    .about-section {
+      background-color: #f2f7f2; /* signature pale mint-cream tint */
+      padding: 70px 6%;
+    }
+
+    .about-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.08fr;
+      gap: 55px;
+      align-items: flex-start;
+    }
+
+    /* Left Column */
+    .about-left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .about-student-img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      border-radius: 4px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .about-stats-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 25px;
+      padding: 0 5px;
+    }
+
+    .stat-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .stat-badge i {
+      font-size: 40px;
+      color: #c01825; /* Red outline book icon */
+    }
+
+    .stat-badge .stat-number {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 52px;
+      font-weight: 800;
+      color: #0b2545;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 15px;
+      color: #3b5a6f;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    .all-programs-link {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0b2545;
+      text-decoration: underline;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.2s;
+    }
+
+    .all-programs-link:hover {
+      color: #c01825;
+    }
+
+    /* Right Column */
+    .about-right {
+      display: flex;
+      flex-direction: column;
+      padding-top: 5px;
+    }
+
+    .about-heading {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 38px;
+      font-weight: 800;
+      color: #0b2545;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .about-heading i {
+      color: #0b2545;
+      font-size: 34px;
+    }
+
+    .about-desc {
+      font-size: 15px;
+      color: #415364;
+      line-height: 1.8;
+      text-align: justify;
+      margin-bottom: 20px;
+    }
+
+    .read-more-link {
+      color: #e61e2b;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: underline;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 35px;
+      transition: gap 0.2s;
+    }
+
+    .read-more-link:hover {
+      gap: 12px;
+    }
+
+    /* Campus Building Image & Floating Logo */
+    .building-img-wrapper {
+      position: relative;
+      width: 100%;
+      margin-top: 5px;
+    }
+
+    .campus-building-img {
+      width: 100%;
+      height: 330px;
+      object-fit: cover;
+      border-radius: 4px;
+      display: block;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .university-crest {
+      position: absolute;
+      top: -28px;
+      right: -20px;
+      width: 80px;
+      height: 80px;
+      background: #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .university-crest img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* Program Tabs & Cards */
+    .section {
+      padding: 70px 5%;
+    }
+    .section-title-wrap {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+    .section-title {
+      font-size: 32px;
+      color: var(--primary-navy);
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--accent-red);
+      margin: 10px auto 0;
+    }
+    .section-subtitle {
+      color: var(--text-muted);
+      margin-top: 8px;
+      font-size: 15px;
+    }
+
+    .programs-section {
+      background: var(--bg-cream);
+    }
+    .program-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 35px;
+    }
+    .tab-btn {
+      padding: 9px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 30px;
+      border: 1px solid #d0d7de;
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .tab-btn.active {
+      background: var(--accent-red);
+      color: #fff;
+      border-color: var(--accent-red);
+    }
+
+    .program-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 25px;
+    }
+    .program-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-color);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .program-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+    }
+    .program-thumb {
+      height: 180px;
+      background: #1c3653;
+      position: relative;
+      overflow: hidden;
+    }
+    .program-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+    }
+    .program-meta {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .meta-tag {
+      background: rgba(14, 41, 75, 0.88);
+      color: #fff;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    .meta-tag.red {
+      background: var(--accent-red);
+    }
+    .program-body {
+      padding: 20px;
+      text-align: center;
+    }
+    .program-body h3 {
+      font-size: 18px;
+      color: var(--primary-navy);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .program-body a {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--accent-red);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Facilities Section */
+    .facilities-section {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .quote-box {
+      background: #112d4e;
+      color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      margin-top: -40px;
+      margin-left: 20px;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    .quote-box blockquote {
+      font-size: 15px;
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .quote-box cite {
+      display: block;
+      margin-top: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent-gold);
+      text-align: right;
+    }
+    .facility-list {
+      list-style: none;
+    }
+    .facility-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 14px;
+      font-size: 14.5px;
+      color: var(--text-dark);
+    }
+    .facility-number {
+      font-weight: 700;
+      color: var(--accent-red);
+      font-size: 15px;
+      margin-right: 14px;
+      min-width: 25px;
+    }
+
+    /* Stats Banner */
+    .stats-strip {
+      background: linear-gradient(rgba(14, 41, 75, 0.95), rgba(14, 41, 75, 0.95)), 
+                  url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200') center/cover;
+      color: #fff;
+      padding: 50px 5%;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      text-align: center;
+    }
+    .stat-card i {
+      font-size: 36px;
+      color: var(--accent-gold);
+      margin-bottom: 12px;
+    }
+    .stat-card h3 {
+      font-size: 34px;
+      font-weight: 700;
+    }
+    .stat-card p {
+      font-size: 14px;
+      color: #c9d6e4;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Notices & Events Preview */
+    .notice-event-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .box-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 10px;
+    }
+    .box-header h3 {
+      font-size: 22px;
+      color: var(--primary-navy);
+    }
+    .box-header a {
+      font-size: 13.5px;
+      color: var(--accent-red);
+      font-weight: 600;
+    }
+    .notice-item {
+      display: flex;
+      gap: 15px;
+      padding: 14px 0;
+      border-bottom: 1px dashed var(--border-color);
+    }
+    .date-badge {
+      background: #fdf2f2;
+      border: 1px solid #f9d2d4;
+      color: var(--accent-red);
+      border-radius: 6px;
+      padding: 8px 12px;
+      text-align: center;
+      min-width: 65px;
+      height: fit-content;
+    }
+    .date-badge .day {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .date-badge .month {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .notice-info h4 {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--text-dark);
+      transition: color 0.2s;
+    }
+    .notice-info h4:hover {
+      color: var(--accent-red);
+    }
+
+    /* Footer */
+    footer {
+      background: #081a30;
+      color: #abb9c9;
+      font-size: 14px;
+      padding-top: 60px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr 1.3fr;
+      gap: 30px;
+      padding: 0 5% 50px;
+    }
+    .footer-col h4 {
+      color: #fff;
+      font-size: 17px;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    .footer-col h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 35px;
+      height: 2px;
+      background: var(--accent-red);
+    }
+    .footer-col ul {
+      list-style: none;
+    }
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+    .footer-col ul li a {
+      transition: color 0.2s, padding-left 0.2s;
+      display: inline-block;
+    }
+    .footer-col ul li a:hover {
+      color: #fff;
+      padding-left: 5px;
+    }
+    .footer-contact li {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .footer-contact i {
+      color: var(--accent-red);
+      font-size: 16px;
+    }
+    .copyright-bar {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 18px 5%;
+      text-align: center;
+      font-size: 13px;
+      color: #798b9e;
+    }
+
+    /* Responsive Queries */
+    @media (max-width: 992px) {
+      .about-container { grid-template-columns: 1fr; gap: 40px; }
+      .about-student-img { height: 380px; }
+      .university-crest { right: 10px; }
+      .facilities-section, .notice-event-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .top-bar { display: none; }
+      .nav-menu { display: none; }
+      .hero-slider-container { height: 320px; }
+      .slide-caption { font-size: 12px; padding: 6px 14px; bottom: 18px; }
+      .slider-arrow { width: 34px; height: 34px; font-size: 14px; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Utility Bar -->
+  <div class="top-bar">
+    <div class="contact-info">
+      <span><i class="fa-solid fa-phone"></i> +88 01713 377 033</span>
+      <span><i class="fa-solid fa-envelope"></i> admission@pundrauniversity.ac.bd</span>
+    </div>
+    <div class="quick-links">
+      <a href="#">Students</a>
+      <a href="#">UMS</a>
+      <a href="#">Library</a>
+      <a href="#">Journals</a>
+      <a href="#">IQAC</a>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header>
+    <div class="brand-logo">
+      <img src="https://www.pundrauniversity.ac.bd/_next/image?url=%2Fassets%2Fimages%2Flogo%2Flogo.png&w=128&q=75" alt="PUB Logo" style="height: 52px; width: auto;">
+      <div class="brand-text">
+        <h1>Pundra University</h1>
+        <span>OF SCIENCE &amp; TECHNOLOGY</span>
+      </div>
+    </div>
+
+    <ul class="nav-menu">
+      <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+      <li class="nav-item">
+        <a href="about-the-university.html" class="nav-link">About Us <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+        <div class="dropdown">
+          <a href="about-the-university.html">About the University</a>
+          <a href="vision-mission.html">Vision &amp; Mission</a>
+          <a href="university-approval.html">University Approval</a>
+          
+          <!-- Nested Messages Flyout -->
+          <div class="dropdown-submenu">
+            <a href="chairman-bot.html">Messages <i class="fa-solid fa-chevron-right" style="font-size: 10px; color: #c01825;"></i></a>
+            <div class="submenu-flyout">
+              <a href="chairman-bot.html">Chairman's Message</a>
+              <a href="vice-chancellor.html">Vice-Chancellor's Message</a>
+              <a href="treasurer.html">Treasurer's Message</a>
+            </div>
+          </div>
+
+          <a href="photo-gallery.html">Photo Gallery</a>
+        </div>
+      </li>
+     
+     <!-- Administrations Dropdown with real HTML subpage links -->
+      <li class="nav-item">
+        <a href="#" class="nav-link">Administrations <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+        <div class="dropdown">
+          <a href="chairman-bot.html">Chairman, BoT</a>
+          <a href="advisor-bot.html">Advisor, BoT</a>
+          <a href="offices.html">Offices</a>
+          <a href="complaint-committees.html">Complaint Committees</a>
+          
+          <!-- Management Submenu Flyout -->
+          <div class="dropdown-submenu">
+            <a href="bot.html" class="submenu-trigger">
+              Management <i class="fa-solid fa-chevron-right" style="font-size: 10px; color: #c01825;"></i>
+            </a>
+            <div class="submenu-flyout">
+              <a href="bot.html">Board of Trustees</a>
+              <a href="syndicate.html">Syndicate</a>
+              <a href="academic-council.html">Academic Council</a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <!-- Academics with Nested Flyouts -->
+      <li class="nav-item">
+        <a href="#" class="nav-link">Academics <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+        <div class="dropdown">
+          
+          <!-- Faculty Flyout -->
+          <div class="dropdown-submenu">
+            <a href="#">Faculty <i class="fa-solid fa-chevron-right" style="font-size: 10px; color: #c01825;"></i></a>
+            <div class="submenu-flyout">
+              <a href="#">Business Studies</a>
+              <a href="faculty-se.html">Science &amp; Engineering</a>
+              <a href="#">Humanities &amp; Social Sciences</a>
+              <a href="#">Law</a>
+            </div>
+          </div>
+
+          <!-- Departments Flyout -->
+          <div class="dropdown-submenu">
+            <a href="#">Departments <i class="fa-solid fa-chevron-right" style="font-size: 10px; color: #c01825;"></i></a>
+            <div class="submenu-flyout">
+              <a href="#">Business Administration</a>
+              <a href="dept-cse.html">Computer Science &amp; Engineering</a>
+              <a href="dept-eee.html">Electrical &amp; Electronic Engineering</a>
+              <a href="#">Civil Engineering</a>
+              <a href="#">Public Health</a>
+              <a href="#">Islamic Studies</a>
+              <a href="#">English</a>
+              <a href="#">Education</a>
+              <a href="#">Law</a>
+              <a href="#">Journalism &amp; Media Studies</a>
+            </div>
+          </div>
+
+          <a href="#programs-sec">Programs</a>
+          <a href="#">Academic Calendar</a>
+          <a href="#">OBE Curriculum</a>
+          <a href="#">Semester Result</a>
+          <a href="#">Result Verification</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="notice.html" class="nav-link">Notice <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+        <div class="dropdown">
+          <a href="notice.html">General Notices</a>
+          <a href="notice.html">Events &amp; News</a>
+          <a href="notice.html">Seminar &amp; Workshops</a>
+        </div>
+      </li>
+    </ul>
+  </header>
+
+  <!-- =========================================================
+       HERO CAROUSEL / SLIDER (ANIMATED)
+       ========================================================= -->
+  <section class="hero-slider-container">
+    
+    <!-- Slide 1: Workshop on Accreditation -->
+    <div class="slide active">
+      <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fslider%2F20260908110959_WhatsApp_Image_2026-09-08_at_11.43.23_AM.jpeg&w=1920&q=75" alt="Workshop">
+      <div class="slide-caption">Workshop on "Preparation for Accreditation: Documentation and Evidence"</div>
+    </div>
+
+    <!-- Slide 2: Admission Open Banner -->
+    <div class="slide">
+      <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fslider%2F20260306160343_11_(1).jpg&w=1920&q=75" alt="Admission Open">
+      <div class="slide-caption">Admission Going On: Spring-2027 Semester</div>
+    </div>
+
+    <!-- Slide 3: HSC Student Merit Reception -->
+    <div class="slide">
+      <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fslider%2F20260306160312_08.jpg&w=1920&q=75" alt="Award Ceremony">
+      <div class="slide-caption">এইচএসসি পরীক্ষায় উত্তীর্ণ মেধা শিক্ষার্থীদের সংবর্ধনা অনুষ্ঠান</div>
+    </div>
+
+    <!-- Slide 4: Mother Language Day Ceremony -->
+    <div class="slide">
+      <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fslider%2F20260306160324_06.jpg&w=1920&q=75" alt="Language Day Tribute">
+      <div class="slide-caption">মহান শহীদ দিবস ও আন্তর্জাতিক মাতৃভাষা দিবস উপলক্ষে প্রভাত ফেরী ও পুষ্পস্তবক অর্পণ</div>
+    </div>
+
+    <!-- Slide 5: Cultural Fest Ribbon Cutting -->
+    <div class="slide">
+      <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fslider%2F20260306160323_01.jpg&w=1920&q=75" alt="Cultural Fest">
+      <div class="slide-caption">পূন্ড্র ইউনিভার্সিটি পিঠা উৎসব ও বসন্তবরণ অনুষ্ঠান</div>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <button class="slider-arrow prev" onclick="changeSlide(-1)" aria-label="Previous Slide"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="slider-arrow next" onclick="changeSlide(1)" aria-label="Next Slide"><i class="fa-solid fa-chevron-right"></i></button>
+
+    <!-- Indicators -->
+    <div class="slider-dots">
+      <span class="dot active" onclick="goToSlide(0)"></span>
+      <span class="dot" onclick="goToSlide(1)"></span>
+      <span class="dot" onclick="goToSlide(2)"></span>
+      <span class="dot" onclick="goToSlide(3)"></span>
+      <span class="dot" onclick="goToSlide(4)"></span>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       ABOUT THE UNIVERSITY SECTION (EXACT REPLICA)
+       ========================================================= -->
+  <section class="about-section" id="about-sec">
+    <div class="about-container">
+      
+      <!-- Left Column: Student Photo + 12+ Programs Count -->
+      <div class="about-left">
+        <img 
+          src="https://www.pundrauniversity.ac.bd/_next/image?url=%2Fassets%2Fimages%2Fabout-title-shape.jpg&w=1920&q=75" 
+          alt="Student holding project report" 
+          class="about-student-img"
+        >
+        
+        <div class="about-stats-row">
+          <div>
+            <div class="stat-badge">
+              <i class="fa-regular fa-bookmark"></i>
+              <span class="stat-number">12+</span>
+            </div>
+            <div class="stat-label">Programs</div>
+          </div>
+
+          <a href="#programs-sec" class="all-programs-link">
+            All Programs &nbsp; &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Heading, Description, Read More & Building Photo with Crest -->
+      <div class="about-right">
+        <h2 class="about-heading">
+          <i class="fa-solid fa-graduation-cap"></i>
+          About The University
+        </h2>
+
+        <p class="about-desc">
+          The Pundra University of Science &amp; Technology is proud to be the first Private University in North Bengal aiming to provide high quality higher education at affordable cost at the door step of the young, matured and marginalized people. It was established under the Private University Act with the approval of the Ministry of Education.
+        </p>
+
+        <div>
+          <a href="about-the-university.html" class="read-more-link">
+            Read More &nbsp; &rarr;
+          </a>
+        </div>
+
+        <div class="building-img-wrapper">
+          <!-- Floating Crest Logo -->
+          <div class="university-crest">
+            <img src="https://www.pundrauniversity.ac.bd/_next/image?url=%2Fassets%2Fimages%2Flogo%2Flogo.png&w=128&q=75" alt="PUB Logo">
+          </div>
+
+          <!-- Building Photo -->
+          <img 
+            src="https://www.pundrauniversity.ac.bd/_next/image?url=%2Fassets%2Fimages%2Fcampus.jpg&w=1920&q=75" 
+            alt="Pundra University Campus Building" 
+            class="campus-building-img"
+          >
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- All Programs Section -->
+  <section class="section programs-section" id="programs-sec">
+    <div class="section-title-wrap">
+      <h2 class="section-title">All Programs</h2>
+      <p class="section-subtitle">Choose from career-oriented undergraduate and postgraduate degrees</p>
+    </div>
+
+    <div class="program-tabs">
+      <button class="tab-btn active">Undergraduate</button>
+      <a href="postgraduate.html" class="tab-btn" style="color: inherit;">Postgraduate &rarr;</a>
+    </div>
+
+    <div class="program-grid">
+      <!-- Program Card 1 -->
+      <div class="program-card">
+        <div class="program-thumb">
+          <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fprograms%2Fbba.jpg&w=640&q=75" alt="BBA">
+          <div class="program-meta">
+            <span class="meta-tag"><i class="fa-regular fa-bookmark"></i> 140.00 Credit</span>
+            <span class="meta-tag red">8 Semesters</span>
+          </div>
+        </div>
+        <div class="program-body">
+          <h3>BBA (Bachelor of Business Admin)</h3>
+          <a href="tuition-fees.html">View Fee Structure <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Program Card 2 -->
+      <div class="program-card">
+        <div class="program-thumb">
+          <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fprograms%2Fcse.jpg&w=640&q=75" alt="CSE">
+          <div class="program-meta">
+            <span class="meta-tag"><i class="fa-regular fa-bookmark"></i> 161.00 Credit</span>
+            <span class="meta-tag red">8 Semesters</span>
+          </div>
+        </div>
+        <div class="program-body">
+          <h3>B.Sc. in Computer Science &amp; Engg (CSE)</h3>
+          <a href="tuition-fees.html">View Fee Structure <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Program Card 3 -->
+      <div class="program-card">
+        <div class="program-thumb">
+          <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fprograms%2Feee.jpg&w=640&q=75" alt="EEE">
+          <div class="program-meta">
+            <span class="meta-tag"><i class="fa-regular fa-bookmark"></i> 160.00 Credit</span>
+            <span class="meta-tag red">8 Semesters</span>
+          </div>
+        </div>
+        
+        <div class="program-body">
+          <h3>B.Sc. in Electrical &amp; Electronic Engg</h3>
+          <a href="tuition-fees.html">View Fee Structure <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Facilities Section with Quote -->
+  <section class="section">
+    <div class="facilities-section">
+      <div>
+        <img src="https://www.pundrauniversity.ac.bd/_next/image?url=%2Fassets%2Fimages%2Ffacilities%2Fpub-facilities.jpg&w=1920&q=75" style="width: 100%; border-radius: 10px;" alt="Campus Life">
+        <div class="quote-box">
+          <blockquote>"Try not to become a man of success. Rather become a man of value."</blockquote>
+          <cite>— Albert Einstein</cite>
+        </div>
+      </div>
+
+      <div>
+        <h2 style="font-size: 28px; color: var(--primary-navy); margin-bottom: 25px;">Our Campus Has Best Facilities For Our Students</h2>
+        <ul class="facility-list">
+          <li class="facility-item"><span class="facility-number">01.</span> Highly qualified full-time faculty members from top institutions.</li>
+          <li class="facility-item"><span class="facility-number">02.</span> Adjunct faculties from reputed public universities.</li>
+          <li class="facility-item"><span class="facility-number">03.</span> English proficiency &amp; communication enhancement programs.</li>
+          <li class="facility-item"><span class="facility-number">04.</span> Advanced computing labs &amp; high-speed fiber-optic network.</li>
+          <li class="facility-item"><span class="facility-number">05.</span> Rich library collections with e-books &amp; online research journals.</li>
+          <li class="facility-item"><span class="facility-number">06.</span> Tutorial support &amp; consultation hours for special learning care.</li>
+          <li class="facility-item"><span class="facility-number">07.</span> Active student counselling, clubs, and career placement services.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+<!-- =========================================================
+       WHY CHOOSE US SECTION (EXACT MATCH FROM VIDEO)
+       ========================================================= -->
+  <section class="section why-choose-section">
+    <div class="why-choose-container">
+
+      <!-- Left Column: Highlights & List -->
+      <div class="why-choose-left">
+        <h2 class="why-title">Why Choose Us?</h2>
+        <p class="why-subtitle">
+          Choosing Pundra University of Science and Technology (PUB) might be influenced by several unique factors and benefits that the university offers. Here are some reasons why one might choose PUB:
+        </p>
+
+        <!-- Feature 1 -->
+        <div class="feature-item">
+          <div class="feature-icon">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <div class="feature-content">
+            <h4>Academic Programs:</h4>
+            <ul>
+              <li>Offers a wide range of programs in science, technology, engineering, and related fields.</li>
+              <li>Industry-aligned curriculum with a focus on practical skills and emerging technologies.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-item">
+          <div class="feature-icon">
+            <i class="fa-solid fa-flask"></i>
+          </div>
+          <div class="feature-content">
+            <h4>Research Opportunities:</h4>
+            <ul>
+              <li>Strong emphasis on research and innovation with well-funded projects.</li>
+              <li>Opportunities for undergraduate and graduate students to work in research labs.</li>
+              <li>Collaborations with national and international research institutions.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-item">
+          <div class="feature-icon">
+            <i class="fa-solid fa-chalkboard-user"></i>
+          </div>
+          <div class="feature-content">
+            <h4>Faculty Expertise:</h4>
+            <ul>
+              <li>Highly qualified professors with PhDs from reputed universities.</li>
+              <li>Many faculty members have industry experience and research publications.</li>
+              <li>Accessible mentors who support student projects and career growth.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 25px;">
+          <a href="why-choose-us.html" class="read-more-link">
+            Read More &nbsp; &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Tall Building Image + Yellow Admission Badge + Crest -->
+      <div class="why-choose-right">
+        <div class="building-card">
+          <!-- Floating Yellow Admission Badge -->
+          <div class="admission-badge">
+            <div class="badge-icon"><i class="fa-solid fa-phone"></i></div>
+            <div class="badge-text">
+              <span>For Admission</span>
+              <strong>+88 01715 577 055</strong>
+            </div>
+          </div>
+
+          <!-- Building Image -->
+          <img 
+            src="https://www.pundrauniversity.ac.bd/_next/image?url=%2Fassets%2Fimages%2Fwhy-choose-us.jpg&w=1920&q=75" 
+            alt="PUB Campus Building"
+            class="tall-building-img"
+          >
+
+          <!-- University Crest Logo on bottom right of the photo -->
+          <div class="building-logo">
+            <img src="https://www.pundrauniversity.ac.bd/_next/image?url=%2Fassets%2Fimages%2Flogo%2Flogo.png&w=128&q=75" alt="Logo">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+
+  <!-- Notices & Events Preview Section -->
+<!-- =========================================================
+       1. NOTICES & EVENTS SECTION (EXACT MATCH FROM VIDEO)
+       ========================================================= -->
+  <section class="section notice-event-section">
+    <div class="notice-event-wrapper">
+
+      <!-- Left Column: Notices -->
+      <div class="notice-column">
+        <h2 class="section-heading-serif">Notices</h2>
+        <div class="cards-list">
+
+          <!-- Notice 1 -->
+          <div class="pub-notice-card">
+            <div class="pub-date-badge">
+              <span class="p-day">17</span>
+              <span class="p-month">Oct</span>
+              <span class="p-year">26</span>
+            </div>
+            <div class="pub-notice-text">
+              <a href="notice.html">১৮-১০-২০২৬ থেকে ২৯-১০-২০২৬ তারিখ পর্যন্ত (রবিবার থেকে বৃহস্পতিবার পর্যন্ত) ০৯ (নয়) দিন দুর্গাপূজা উপলক্ষে বিশ্ববিদ্যালয় বন্ধ সংক্রান্ত বিজ্ঞপ্তি।</a>
+            </div>
+          </div>
+
+          <!-- Notice 2 -->
+          <div class="pub-notice-card">
+            <div class="pub-date-badge">
+              <span class="p-day">17</span>
+              <span class="p-month">Oct</span>
+              <span class="p-year">26</span>
+            </div>
+            <div class="pub-notice-text">
+              <a href="notice.html">"দুর্গাপূজা" উপলক্ষে বিশ্ববিদ্যালয়ের ক্লাস কার্যক্রম বন্ধের নোটিশ...</a>
+            </div>
+          </div>
+
+          <!-- Notice 3 -->
+          <div class="pub-notice-card">
+            <div class="pub-date-badge">
+              <span class="p-day">17</span>
+              <span class="p-month">Oct</span>
+              <span class="p-year">26</span>
+            </div>
+            <div class="pub-notice-text">
+              <a href="notice.html">"দুর্গাপূজা" উপলক্ষে বিশ্ববিদ্যালয় বন্ধের নোটিশ...</a>
+            </div>
+          </div>
+
+          <!-- Notice 4 -->
+          <div class="pub-notice-card">
+            <div class="pub-date-badge">
+              <span class="p-day">08</span>
+              <span class="p-month">Oct</span>
+              <span class="p-year">26</span>
+            </div>
+            <div class="pub-notice-text">
+              <a href="notice.html">গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের বিজ্ঞান ও প্রযুক্তি মন্ত্রণালয়ের অধীনে বিজ্ঞান ও প্রযুক্তি বিষয়ক গবেষণা...</a>
+            </div>
+          </div>
+
+          <!-- Notice 5 -->
+          <div class="pub-notice-card">
+            <div class="pub-date-badge">
+              <span class="p-day">04</span>
+              <span class="p-month">Oct</span>
+              <span class="p-year">26</span>
+            </div>
+            <div class="pub-notice-text">
+              <a href="notice.html">পুন্ড্র ইউনিভার্সিটি অব সাইন্স অ্যান্ড টেকনোলজি-তে "Stress Management for Teachers" বিষয়ক সেমিনার...</a>
+            </div>
+          </div>
+
+        </div>
+        <div class="view-all-row">
+          <a href="notice.html" class="view-all-link">View All &nbsp; &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Right Column: Events -->
+      <div class="event-column">
+        <h2 class="section-heading-serif">Events</h2>
+        <div class="cards-list">
+
+          <!-- Event 1 -->
+          <div class="pub-event-card">
+            <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fnotice%2F20261005161038_IMG_3110.jpeg&w=96&q=75" class="event-thumb" alt="Event">
+            <div class="pub-event-info">
+              <h4><a href="events.html">বিশ্ব শিক্ষক দিবস-২০২৬ উপলক্ষ্যে পুন্ড্র বিশ্ববিদ্যালয়ে আলোচনা সভা অনুষ্ঠিত</a></h4>
+              <div class="event-date"><i class="fa-regular fa-calendar"></i> October 05, 2026</div>
+            </div>
+          </div>
+
+          <!-- Event 2 -->
+          <div class="pub-event-card">
+            <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fnotice%2F20260927150941_809062859_122218558802556940_6645292925395153545_n.jpg&w=96&q=75" class="event-thumb" alt="Event">
+            <div class="pub-event-info">
+              <h4><a href="events.html">Pundra University of Science &amp; Technology at Bangladesh Innovation Fair 2026</a></h4>
+              <div class="event-date"><i class="fa-regular fa-calendar"></i> September 14, 2026</div>
+            </div>
+          </div>
+
+          <!-- Event 3 -->
+          <div class="pub-event-card">
+            <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fnotice%2F20260831110844_783589722_1571533587682463_5420170204608099029_n.jpg&w=96&q=75" class="event-thumb" alt="Event">
+            <div class="pub-event-info">
+              <h4><a href="events.html">পুন্ড্র বিশ্ববিদ্যালয়ে জাতীয় শোক দিবস উপলক্ষে আলোচনা সভা ও দোয়া মাহফিল অনুষ্ঠিত</a></h4>
+              <div class="event-date"><i class="fa-regular fa-calendar"></i> August 30, 2026</div>
+            </div>
+          </div>
+
+          <!-- Event 4 -->
+          <div class="pub-event-card">
+            <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fnotice%2F20260830170858_790541667_1732805101313771_5360490698156764235_n.jpg&w=96&q=75" class="event-thumb" alt="Event">
+            <div class="pub-event-info">
+              <h4><a href="events.html">পুন্ড্র বিশ্ববিদ্যালয়ে সামার-২০২৬ সেমিস্টারের ওরিয়েন্টেশন প্রোগ্রাম অনুষ্ঠিত</a></h4>
+              <div class="event-date"><i class="fa-regular fa-calendar"></i> August 29, 2026</div>
+            </div>
+          </div>
+
+          <!-- Event 5 -->
+          <div class="pub-event-card">
+            <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fnotice%2F20260830170805_790226017_1725973678524508_7767569844162592855_n.jpg&w=96&q=75" class="event-thumb" alt="Event">
+            <div class="pub-event-info">
+              <h4><a href="events.html">পুন্ড্র ইউনিভার্সিটি অব সাইন্স অ্যান্ড টেকনোলজি (পিইউবি) এর ফল মেগা ক্যাম্পাসের ভিত্তিপ্রস্তর স্থাপন</a></h4>
+              <div class="event-date"><i class="fa-regular fa-calendar"></i> August 24, 2026</div>
+            </div>
+          </div>
+
+        </div>
+        <div class="view-all-row">
+          <a href="events.html" class="view-all-link">View All &nbsp; &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================
+       2. SEMINAR & WORKSHOPS SECTION (4-COLUMN GRID)
+       ========================================================= -->
+  <section class="section seminar-section">
+    <div class="seminar-container">
+      <h2 class="section-heading-serif">Seminar &amp; Workshops</h2>
+
+      <div class="seminar-grid">
+
+        <!-- Card 1 -->
+        <div class="seminar-card">
+          <div class="seminar-thumb">
+            <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fseminar%2F20261006171026_IMG_3118.jpeg&w=1080&q=75" alt="Seminar">
+            <span class="pub-tag">PUB</span>
+          </div>
+          <div class="seminar-body">
+            <div class="seminar-date"><i class="fa-regular fa-calendar"></i> 06-Oct-2026</div>
+            <h4 class="seminar-title"><a href="seminar.html">পুন্ড্র বিশ্ববিদ্যালয়ে শিক্ষকদের "স্ট্রেস ম্যানেজমেন্ট" বিষয়ক সেমিনার অনুষ্ঠিত</a></h4>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="seminar-card">
+          <div class="seminar-thumb">
+            <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fseminar%2F20260819000801_IMG_2771.jpeg&w=1080&q=75" alt="Seminar">
+            <span class="pub-tag">PUB</span>
+          </div>
+          <div class="seminar-body">
+            <div class="seminar-date"><i class="fa-regular fa-calendar"></i> 16-Aug-2026</div>
+            <h4 class="seminar-title"><a href="seminar.html">পুন্ড্র ইউনিভার্সিটিতে আইকিউএসি এর সেমিনার অনুষ্ঠিত</a></h4>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="seminar-card">
+          <div class="seminar-thumb">
+            <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fseminar%2F20260803110837_IMG_2695.JPG.jpeg&w=1080&q=75" alt="Seminar">
+            <span class="pub-tag">PUB</span>
+          </div>
+          <div class="seminar-body">
+            <div class="seminar-date"><i class="fa-regular fa-calendar"></i> 28-Jul-2026</div>
+            <h4 class="seminar-title"><a href="seminar.html">পুন্ড্র ইউনিভার্সিটিতে রোবোটিক্স ও ন্যানোটেক বিষয়ক গবেষণাধর্মী সেমিনার অনুষ্ঠিত</a></h4>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="seminar-card">
+          <div class="seminar-thumb">
+            <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fseminar%2F20260620150624_IMG_2458.jpg&w=1080&q=75" alt="Seminar">
+            <span class="pub-tag">PUB</span>
+          </div>
+          <div class="seminar-body">
+            <div class="seminar-date"><i class="fa-regular fa-calendar"></i> 14-Jul-2026</div>
+            <h4 class="seminar-title"><a href="seminar.html">পুন্ড্র ইউনিভার্সিটিতে ক্যারিয়ার ডেভেলপমেন্ট সেমিনার অনুষ্ঠিত</a></h4>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="seminar-card">
+          <div class="seminar-thumb">
+            <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fseminar%2F20260724100751_747333939_27561639400124340_2290115417363610437_n.jpg&w=1080&q=75" alt="Seminar">
+            <span class="pub-tag">PUB</span>
+          </div>
+          <div class="seminar-body">
+            <div class="seminar-date"><i class="fa-regular fa-calendar"></i> 16-Jun-2026</div>
+            <h4 class="seminar-title"><a href="seminar.html">পুন্ড্র ইউনিভার্সিটিতে "অ্যান এফ এম আই: এ টাইম ফর..." বিষয়ক সেমিনার অনুষ্ঠিত</a></h4>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="seminar-card">
+          <div class="seminar-thumb">
+            <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fseminar%2F20260523200535_10d4c60b-9e79-4529-9535-b12baf368549.jpeg&w=1080&q=75" alt="Seminar">
+            <span class="pub-tag">PUB</span>
+          </div>
+          <div class="seminar-body">
+            <div class="seminar-date"><i class="fa-regular fa-calendar"></i> 23-May-2026</div>
+            <h4 class="seminar-title"><a href="seminar.html">পুন্ড্র ইউনিভার্সিটির ব্যবসায়িক ক্লাবের আয়োজনে কর্মশালা অনুষ্ঠিত</a></h4>
+          </div>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="seminar-card">
+          <div class="seminar-thumb">
+            <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fseminar%2F20260421200453_IMG_2104.jpeg&w=1080&q=75" alt="Seminar">
+            <span class="pub-tag">PUB</span>
+          </div>
+          <div class="seminar-body">
+            <div class="seminar-date"><i class="fa-regular fa-calendar"></i> 25-Apr-2026</div>
+            <h4 class="seminar-title"><a href="seminar.html">পুন্ড্র ইউনিভার্সিটিতে "এআই ফর ফিউচার লিডারস: ক্যাম্পাস টু কর্পোরেট" বিষয়ক কর্মশালা অনুষ্ঠিত</a></h4>
+          </div>
+        </div>
+
+        <!-- Card 8 -->
+        <div class="seminar-card">
+          <div class="seminar-thumb">
+            <img src="https://www.pundrauniversity.ac.bd/_next/image?url=https%3A%2F%2Fadmin.pundrauniversity.ac.bd%2Fpublic%2Fassets%2Fimages%2Fseminar%2F20260203160231_66.jpg&w=1080&q=75" alt="Seminar">
+            <span class="pub-tag">PUB</span>
+          </div>
+          <div class="seminar-body">
+            <div class="seminar-date"><i class="fa-regular fa-calendar"></i> 21-Apr-2026</div>
+            <h4 class="seminar-title"><a href="seminar.html">পুন্ড্র বিশ্ববিদ্যালয়ে "ক্যারিয়ার প্ল্যানিং" শীর্ষক সেমিনার অনুষ্ঠিত</a></h4>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Red View All Button -->
+      <div class="seminar-btn-wrap">
+        <a href="seminar.html" class="pub-btn-red">View All &nbsp; &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       1. RESEARCH & PUBLICATIONS SECTION
+       ========================================================= -->
+  <section class="section research-section">
+    <div class="research-container">
+      <h2 class="section-heading-serif">Research &amp; Publications</h2>
+
+      <div class="research-grid">
+        <!-- Metric 1 -->
+        <div class="research-item">
+          <div class="research-icon">
+            <i class="fa-solid fa-book-bookmark"></i>
+          </div>
+          <div class="research-number">250 +</div>
+          <div class="research-label">Journal Papers</div>
+        </div>
+
+        <!-- Metric 2 -->
+        <div class="research-item">
+          <div class="research-icon">
+            <i class="fa-solid fa-book-open"></i>
+          </div>
+          <div class="research-number">100 +</div>
+          <div class="research-label">Conference Papers</div>
+        </div>
+
+        <!-- Metric 3 -->
+        <div class="research-item">
+          <div class="research-icon">
+            <i class="fa-solid fa-circle-dollar-to-slot"></i>
+          </div>
+          <div class="research-number">2 Core+ <span>(BDT)</span></div>
+          <div class="research-label">Research Budget</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       2. UNIVERSITY KEY STATS STRIP (CAMPUS OVERLAY)
+       ========================================================= -->
+  <section class="campus-stats-strip">
+    <div class="campus-stats-container">
+      
+      <!-- Stat 1 -->
+      <div class="stats-box">
+        <i class="fa-regular fa-user stats-icon"></i>
+        <div class="stats-count">6,360+</div>
+        <div class="stats-text">ENROLLED STUDENTS</div>
+      </div>
+
+      <!-- Stat 2 -->
+      <div class="stats-box">
+        <i class="fa-solid fa-graduation-cap stats-icon"></i>
+        <div class="stats-count">2,535+</div>
+        <div class="stats-text">GRADUATED STUDENTS</div>
+      </div>
+
+      <!-- Stat 3 -->
+      <div class="stats-box">
+        <i class="fa-solid fa-book-open-reader stats-icon"></i>
+        <div class="stats-count">12</div>
+        <div class="stats-text">ONGOING PROGRAMS</div>
+      </div>
+
+      <!-- Stat 4 -->
+      <div class="stats-box">
+        <i class="fa-solid fa-user-graduate stats-icon"></i>
+        <div class="stats-count">82+</div>
+        <div class="stats-text">FACULTY MEMBERS</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================
+       3. OUR PROUD ALUMNI SECTION
+       ========================================================= -->
+  <section class="section alumni-section">
+    <div class="alumni-container">
+      <h2 class="section-heading-serif">Our Proud Alumni</h2>
+
+      <div class="alumni-grid">
+        
+        <!-- Alumni 1 -->
+        <div class="alumni-card">
+          <div class="alumni-photo-wrap">
+            <img src="https://www.pundrauniversity.ac.bd/_next/image?url=%2Fassets%2Fimages%2Falumni%2F01018152024.jpg&w=384&q=75" alt="Sayed Sabbir Ahmed">
+            <span class="dept-badge">DBA</span>
+          </div>
+          <div class="alumni-header">
+            <h4>Sayed Sabbir Ahmed</h4>
+          </div>
+          <div class="alumni-body">
+            <p class="alumni-role">Manager</p>
+            <p class="alumni-company">Agrani Bank PLC</p>
+          </div>
+        </div>
+
+        <!-- Alumni 2 -->
+        <div class="alumni-card">
+          <div class="alumni-photo-wrap">
+            <img src="https://www.pundrauniversity.ac.bd/_next/image?url=%2Fassets%2Fimages%2Falumni%2F01018152020.jpg&w=384&q=75" alt="Md. Abdul Mazed">
+            <span class="dept-badge">DBA</span>
+          </div>
+          <div class="alumni-header">
+            <h4>Md. Abdul Mazed</h4>
+          </div>
+          <div class="alumni-body">
+            <p class="alumni-role">AVP &amp; MANAGER</p>
+            <p class="alumni-company">Islami Bank PLC</p>
+          </div>
+        </div>
+
+        <!-- Alumni 3 -->
+        <div class="alumni-card">
+          <div class="alumni-photo-wrap">
+            <img src="https://www.pundrauniversity.ac.bd/_next/image?url=%2Fassets%2Fimages%2Falumni%2F00517307037.jpg&w=384&q=75" alt="Md. Shahab Uddin">
+            <span class="dept-badge">EEE</span>
+          </div>
+          <div class="alumni-header">
+            <h4>Md. Shahab Uddin</h4>
+          </div>
+          <div class="alumni-body">
+            <p class="alumni-role">Sr Service Engineer</p>
+            <p class="alumni-company">Buhler (Bangladesh) Private Ltd.</p>
+          </div>
+        </div>
+
+        <!-- Alumni 4 -->
+        <div class="alumni-card">
+          <div class="alumni-photo-wrap">
+            <img src="https://www.pundrauniversity.ac.bd/_next/image?url=%2Fassets%2Fimages%2Falumni%2F00317311002.jpg&w=384&q=75" alt="Md. Kamal Pasha">
+            <span class="dept-badge">Civil</span>
+          </div>
+          <div class="alumni-header">
+            <h4>Md. Kamal Pasha</h4>
+          </div>
+          <div class="alumni-body">
+            <p class="alumni-role">Assistant Engineer</p>
+            <p class="alumni-company">Roads &amp; Highways Department (RHD)</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       4. MEMBERSHIPS & PARTNERS SECTION
+       ========================================================= -->
+  <section class="section partners-section">
+    <div class="partners-container">
+      <h2 class="section-heading-serif">Memberships &amp; Partners</h2>
+
+      <div class="partners-carousel">
+        <div class="partner-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Government_Seal_of_Bangladesh.svg" alt="Ministry of Education">
+          <div class="partner-name">Ministry of Education<br><small>People's Republic of Bangladesh</small></div>
+        </div>
+
+        <div class="partner-item">
+          <img src="https://www.theaims.ac.in/images/aims-logo.png" alt="AIMS Institutes">
+        </div>
+
+        <div class="partner-item">
+          <img src="https://asemlllhub.org/wp-content/uploads/2021/04/ASEM_Logo.png" alt="ASEM Lifelong Learning">
+        </div>
+
+        <div class="partner-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/City_Bank_Logo.png" alt="City Bank">
+        </div>
+
+        <div class="partner-item">
+          <img src="https://tmss-bd.org/wp-content/uploads/2020/07/TMSS-Logo.png" alt="TMSS">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>About Us</h4>
+        <p style="font-size: 13.5px; line-height: 1.7; margin-bottom: 15px;">The Pundra University of Science &amp; Technology is proud to be the first Private University in North Bengal, leading educational modernization.</p>
+        <div style="font-size: 18px; display: flex; gap: 15px; color: #fff;">
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Online Admission</a></li>
+          <li><a href="tuition-fees.html">Tuition Fees</a></li>
+          <li><a href="postgraduate.html">Postgraduate</a></li>
+          <li><a href="#">Semester Results</a></li>
+          <li><a href="#">Result Verification</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Campus Links</h4>
+        <ul>
+          <li><a href="#">Faculty Members</a></li>
+          <li><a href="#">Alumni Association</a></li>
+          <li><a href="#">Career Opportunities</a></li>
+          <li><a href="photo-gallery.html">Photo Gallery</a></li>
+          <li><a href="notice.html">Notice Board</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Useful Links</h4>
+        <ul>
+          <li><a href="https://ugc.gov.bd" target="_blank">UGC Bangladesh</a></li>
+          <li><a href="#">Ministry of Education</a></li>
+          <li><a href="#">Banbeis</a></li>
+          <li><a href="#">TMSS Foundation</a></li>
+          <li><a href="#">Webmail Access</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <ul class="footer-contact">
+          <li><i class="fa-solid fa-phone"></i> +88 01713 377 033</li>
+          <li><i class="fa-solid fa-envelope"></i> info@pundrauniversity.edu.bd</li>
+          <li><i class="fa-solid fa-location-dot"></i> Rangpur Road, Baghopara, Gokul, Bogura, Bangladesh</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div style="text-align: center; padding: 20px 0 10px; color: #abb9c9; font-size: 14px; font-weight: 600;">
+    <span style="font-size: 16px; color: #fff; display: block; margin-bottom: 4px;">Visitor Counter:</span>
+    Today: <span style="color: #f4a213;">2564</span> | Total Visitor: <span style="color: #f4a213;">5705850</span>
+  </div>
+
+    <div class="copyright-bar">
+      &copy; 2026 All Rights Reserved | Pundra University of Science &amp; Technology
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       HERO SLIDER JAVASCRIPT
+       ========================================================= -->
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slider-container .slide');
+    const dots = document.querySelectorAll('.slider-dots .dot');
+    let slideInterval = null;
+
+    function showSlide(index) {
+      if (slides.length === 0) return;
+      if (index >= slides.length) currentSlide = 0;
+      else if (index < 0) currentSlide = slides.length - 1;
+      else currentSlide = index;
+
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === currentSlide);
+      });
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+      });
+    }
+
+    function changeSlide(direction) {
+      showSlide(currentSlide + direction);
+      resetTimer();
+    }
+
+    function goToSlide(index) {
+      showSlide(index);
+      resetTimer();
+    }
+
+    function startAutoPlay() {
+      slideInterval = setInterval(() => {
+        showSlide(currentSlide + 1);
+      }, 4500);
+    }
+
+    function resetTimer() {
+      clearInterval(slideInterval);
+      startAutoPlay();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      startAutoPlay();
+    });
+  </script>
+</body>
+</html>

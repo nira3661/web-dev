@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About the University | Pundra University of Science & Technology</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    body { background: #fdfdfd; color: #232d38; line-height: 1.7; }
+    a { text-decoration: none; color: inherit; }
+
+    /* Top Strip & Nav */
+    .nav-bar { background: #0e294b; color: #fff; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; }
+    .nav-bar a { color: #f4a213; font-weight: 500; font-size: 14px; }
+    
+    /* Hero Banner */
+    .page-banner {
+      background: linear-gradient(rgba(14, 41, 75, 0.92), rgba(14, 41, 75, 0.92)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200') center/cover;
+      color: #fff; padding: 50px 5%; text-align: left;
+    }
+    .page-banner h1 { font-size: 34px; font-weight: 700; margin-bottom: 5px; }
+    .page-banner .breadcrumb { font-size: 14px; color: #cbd7e5; }
+    .page-banner .breadcrumb a { color: #f4a213; }
+
+    /* 2-Column Content Layout */
+    .layout-grid {
+      max-width: 1200px; margin: 40px auto 80px; padding: 0 20px;
+      display: grid; grid-template-columns: 2.2fr 1fr; gap: 40px;
+    }
+
+    /* Left Content */
+    .section-box {
+      border: 1px solid #e1e7ef; border-radius: 6px; background: #fff; padding: 25px 30px; margin-bottom: 30px;
+    }
+    .section-header {
+      background: #0e294b; color: #fff; padding: 10px 18px; margin: -25px -30px 22px -30px;
+      border-radius: 5px 5px 0 0; font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .section-box p { font-size: 14.5px; color: #444; margin-bottom: 15px; text-align: justify; }
+    .section-box ul { padding-left: 20px; margin-bottom: 15px; }
+    .section-box li { font-size: 14px; color: #444; margin-bottom: 10px; }
+
+    /* Right Sidebar (Quick Links) */
+    .sidebar-box {
+      border: 1px solid #bce1f5; border-radius: 6px; background: #eaf6fc; overflow: hidden;
+      position: sticky; top: 20px;
+    }
+    .sidebar-header {
+      background: #0e294b; color: #fff; padding: 12px 18px; font-size: 15px; font-weight: 700; letter-spacing: 0.5px;
+    }
+    .sidebar-list { list-style: none; }
+    .sidebar-list li { border-bottom: 1px solid #d4ebf7; }
+    .sidebar-list a {
+      display: block; padding: 11px 18px; font-size: 14px; color: #17426b; font-weight: 500; transition: all 0.2s;
+    }
+    .sidebar-list a:hover { background: #d7eef9; padding-left: 23px; color: #c01825; }
+
+    @media (max-width: 860px) {
+      .layout-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav-bar">
+    <div style="font-weight: 700; font-size: 18px;">Pundra University (PUB)</div>
+    <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+  </div>
+
+  <div class="page-banner">
+    <h1>About the University</h1>
+    <div class="breadcrumb"><a href="index.html">Home</a> &bull; About the University</div>
+  </div>
+
+  <div class="layout-grid">
+    <!-- Left Main Content -->
+    <div>
+      <div class="section-box">
+        <div class="section-header">About the University</div>
+        <p>The Pundra University of Science &amp; Technology is proud to be the first Private University in North Bengal aiming to provide high quality higher education at affordable cost at the door step of the young, matured and marginalized people. It was established under the Private University Act with the approval of the Ministry of Education.</p>
+        <p>The Honorable President of the People's Republic of Bangladesh is the Chancellor of the Pundra University of Science &amp; Technology. The University provides a congenial learning environment along with available modern facilities, applies student-centered creative and interactive learning methods, pursues applied research, fosters collaborations to produce world standard graduates to meet national and global challenges.</p>
+        <p>The Pundra University of Science &amp; Technology is a non-profit private higher educational institution contributed to build a knowledge-based society of empowering people for quality of life.</p>
+      </div>
+
+      <div class="section-box">
+        <div class="section-header">The University is Committed to</div>
+        <ul>
+          <li>Provide best quality learning experiences with comprehensive knowledge and skill based education and emphasize on their professional development that empowers students to cultivate, innovate and navigate their career disciplines.</li>
+          <li>Encourage faculty members to conduct applied research to address important scientific, business, socio-political and cultural questions of the new century.</li>
+          <li>Nurture human excellence, integrated moral and cultural values in order to promote goodness and dignity of every individual.</li>
+        </ul>
+      </div>
+
+      <div class="section-box">
+        <div class="section-header">Institutional Identity</div>
+        <p>Academic freedom for excellence will require the University to attract best faculty and efficient management through forging relationships with national and international community of sister organizations.</p>
+      </div>
+    </div>
+
+    <!-- Right Quick Links Sidebar -->
+    <div>
+      <div class="sidebar-box">
+        <div class="sidebar-header">QUICK LINKS</div>
+        <ul class="sidebar-list">
+          <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+          <li><a href="university-approval.html">University Approval</a></li>
+          <li><a href="index.html#why-choose-us">Why Choose Us</a></li>
+          <li><a href="photo-gallery.html">Photo Gallery</a></li>
+          <li><a href="chairman-bot.html">Message from the Chairman, BoT</a></li>
+          <li><a href="vice-chancellor.html">Message from the Vice-Chancellor</a></li>
+          <li><a href="treasurer.html">Message from the Treasurer</a></li>
+          <li><a href="#">Journals</a></li>
+          <li><a href="#">Career</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

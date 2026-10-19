@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Choose Us | Pundra University of Science & Technology</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    body { background: #fdfdfd; color: #232d38; line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+
+    .nav-bar { background: #0e294b; color: #fff; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; }
+    .nav-bar a { color: #f4a213; font-weight: 500; font-size: 14px; }
+
+    .page-banner {
+      background: linear-gradient(rgba(14, 41, 75, 0.92), rgba(14, 41, 75, 0.92)), url('https://www.pundrauniversity.ac.bd/_next/image?url=%2Fassets%2Fimages%2Fcampus.jpg&w=1920&q=75') center/cover;
+      color: #fff; padding: 50px 5%;
+    }
+    .page-banner h1 { font-size: 34px; font-weight: 700; margin-bottom: 5px; }
+    .page-banner .breadcrumb { font-size: 14px; color: #cbd7e5; }
+    .page-banner .breadcrumb a { color: #f4a213; }
+
+    .layout-grid {
+      max-width: 1200px; margin: 40px auto 80px; padding: 0 20px;
+      display: grid; grid-template-columns: 2.2fr 1fr; gap: 40px;
+    }
+
+    .main-title-box {
+      border: 1px solid #e1e7ef; border-radius: 6px; background: #fff; padding: 25px; margin-bottom: 25px;
+    }
+    .main-title-box h3 {
+      background: #0e294b; color: #fff; padding: 10px 18px; margin: -25px -25px 18px -25px;
+      border-radius: 5px 5px 0 0; font-size: 16px; font-weight: 700; text-transform: uppercase;
+    }
+    .main-title-box p { font-size: 14px; color: #555; }
+
+    /* Accordion styles from video */
+    .accordion-item {
+      border: 1px solid #fae8c8;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      background: #fdfaf3;
+    }
+    .accordion-header {
+      padding: 14px 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 14.5px;
+      color: #4b3e2a;
+      transition: background 0.2s;
+    }
+    .accordion-header:hover {
+      background: #f7eedb;
+    }
+    .accordion-header i {
+      font-size: 12px;
+      transition: transform 0.3s;
+    }
+    .accordion-header.active i {
+      transform: rotate(180deg);
+    }
+    .accordion-content {
+      display: none;
+      padding: 15px 22px 18px;
+      background: #ffffff;
+      border-top: 1px solid #fae8c8;
+      font-size: 13.5px;
+      color: #444;
+    }
+    .accordion-content ul {
+      padding-left: 20px;
+    }
+    .accordion-content li {
+      margin-bottom: 6px;
+    }
+
+    /* Sidebar Quick Links */
+    .sidebar-box {
+      border: 1px solid #bce1f5; border-radius: 6px; background: #eaf6fc; position: sticky; top: 20px;
+    }
+    .sidebar-header { background: #0e294b; color: #fff; padding: 12px 18px; font-size: 15px; font-weight: 700; }
+    .sidebar-list { list-style: none; }
+    .sidebar-list li { border-bottom: 1px solid #d4ebf7; }
+    .sidebar-list a { display: block; padding: 11px 18px; font-size: 14px; color: #17426b; font-weight: 500; }
+    .sidebar-list a:hover { background: #d7eef9; color: #c01825; padding-left: 23px; }
+  </style>
+</head>
+<body>
+
+  <div class="nav-bar">
+    <div style="font-weight: 700; font-size: 18px;">Pundra University (PUB)</div>
+    <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+  </div>
+
+  <div class="page-banner">
+    <h1>Why Choose Us</h1>
+    <div class="breadcrumb"><a href="index.html">Home</a> &bull; Why Choose Us</div>
+  </div>
+
+  <div class="layout-grid">
+    <div>
+      <div class="main-title-box">
+        <h3>WHY CHOOSE US</h3>
+        <p>Choosing Pundra University of Science and Technology (PUB) might be influenced by several unique factors and benefits that the university offers. Here are some reasons why one might choose PUB:</p>
+      </div>
+
+      <!-- Accordion 1 -->
+      <div class="accordion-item">
+        <div class="accordion-header active" onclick="toggleAccordion(this)">
+          1. Academic Programs <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="accordion-content" style="display: block;">
+          <ul>
+            <li>Offers a wide range of programs in science, technology, engineering, and related fields.</li>
+            <li>Industry-aligned curriculum with a focus on practical skills and emerging technologies.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Accordion 2 -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          2. Research Opportunities <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="accordion-content">
+          <ul>
+            <li>Strong emphasis on research and innovation with well-funded projects.</li>
+            <li>Opportunities for undergraduate and graduate students to work in research labs.</li>
+            <li>Collaborations with national and international research institutions.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Accordion 3 -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          3. Faculty Expertise <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="accordion-content">
+          <ul>
+            <li>Highly qualified professors with PhDs from reputed universities.</li>
+            <li>Mentors who support student projects and career growth.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Accordion 4 -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          4. Modern Facilities <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="accordion-content">
+          <ul>
+            <li>State-of-the-art labs and high-speed campus-wide WiFi network.</li>
+            <li>Smart classrooms with digital learning tools.</li>
+            <li>Rich physical and e-library resources.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Accordion 5 -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          5. Industry Connections <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="accordion-content">
+          <ul>
+            <li>Strong ties with top industries for internships and placements.</li>
+            <li>Frequent seminars and industry guest lectures.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Accordion 6 to 11 -->
+      <div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">6. Campus Environment <i class="fa-solid fa-chevron-down"></i></div><div class="accordion-content"><p>A serene, green, and secure campus located in Gokul, Bogura.</p></div></div>
+      <div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">7. Location <i class="fa-solid fa-chevron-down"></i></div><div class="accordion-content"><p>Easily accessible on Rangpur Road in North Bengal.</p></div></div>
+      <div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">8. Affordability <i class="fa-solid fa-chevron-down"></i></div><div class="accordion-content"><p>Affordable tuition fees with up to 90% scholarships and financial waivers.</p></div></div>
+      <div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">9. Accreditation & Recognition <i class="fa-solid fa-chevron-down"></i></div><div class="accordion-content"><p>Fully approved by the Ministry of Education and UGC Bangladesh.</p></div></div>
+      <div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">10. Alumni Success <i class="fa-solid fa-chevron-down"></i></div><div class="accordion-content"><p>Graduates placed in top MNCs, government organizations, and higher studies abroad.</p></div></div>
+      <div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">11. International Exposure <i class="fa-solid fa-chevron-down"></i></div><div class="accordion-content"><p>Collaborations with international universities for faculty and student exchange.</p></div></div>
+    </div>
+
+    <!-- Quick Links Sidebar -->
+    <div>
+      <div class="sidebar-box">
+        <div class="sidebar-header">QUICK LINKS</div>
+        <ul class="sidebar-list">
+          <li><a href="about-the-university.html">About the University</a></li>
+          <li><a href="vision-mission.html">Vision &amp; Mission</a></li>
+          <li><a href="university-approval.html">University Approval</a></li>
+          <li><a href="photo-gallery.html">Photo Gallery</a></li>
+          <li><a href="chairman-bot.html">Message from the Chairman, BoT</a></li>
+          <li><a href="vice-chancellor.html">Message from the Vice-Chancellor</a></li>
+          <li><a href="treasurer.html">Message from the Treasurer</a></li>
+          <li><a href="#">Journals</a></li>
+          <li><a href="#">Jobs</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleAccordion(header) {
+      const content = header.nextElementSibling;
+      const isOpen = content.style.display === "block";
+
+      // Toggle current
+      if (isOpen) {
+        content.style.display = "none";
+        header.classList.remove("active");
+      } else {
+        content.style.display = "block";
+        header.classList.add("active");
+      }
+    }
+  </script>
+</body>
+</html>

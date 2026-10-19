@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notice Board | Pundra University of Science & Technology</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary-navy: #0e294b;
+      --accent-red: #c01825;
+      --border: #e4e9ef;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    body { background: #fdfdfd; color: #333; line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+
+    .nav-bar {
+      background: #fff;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .back-btn { font-size: 14px; font-weight: 600; color: var(--primary-navy); }
+
+    .banner {
+      background: #0e294b;
+      color: #fff;
+      padding: 50px 5%;
+      text-align: center;
+    }
+    .banner h1 { font-size: 32px; font-weight: 700; }
+
+    .notice-container {
+      max-width: 1050px;
+      margin: 40px auto 80px;
+      padding: 0 20px;
+    }
+
+    .notice-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      transition: box-shadow 0.2s;
+    }
+    .notice-card:hover {
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+    .date-box {
+      background: #fdf2f2;
+      border: 1px solid #ffd4d7;
+      color: var(--accent-red);
+      padding: 10px 18px;
+      border-radius: 6px;
+      text-align: center;
+      min-width: 80px;
+    }
+    .date-box .day { font-size: 24px; font-weight: 700; line-height: 1; }
+    .date-box .month { font-size: 12px; font-weight: 600; text-transform: uppercase; }
+
+    .notice-details { flex-grow: 1; }
+    .notice-tag {
+      font-size: 11px;
+      background: #eef2f7;
+      color: var(--primary-navy);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+    .notice-details h3 {
+      font-size: 16.5px;
+      font-weight: 600;
+      color: var(--primary-navy);
+      margin-bottom: 6px;
+    }
+    .download-btn {
+      background: #fff;
+      border: 1px solid #c01825;
+      color: var(--accent-red);
+      padding: 8px 16px;
+      border-radius: 5px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .download-btn:hover {
+      background: var(--accent-red);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav-bar">
+    <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Home</a>
+    <span style="font-size: 14px; font-weight: 600;">Office of the Registrar</span>
+  </div>
+
+  <div class="banner">
+    <h1>University Notice Board</h1>
+    <p>Official circulars, schedules, holiday notifications &amp; academic memos</p>
+  </div>
+
+  <div class="notice-container">
+    
+    <!-- Notice 1 -->
+    <div class="notice-card">
+      <div class="date-box">
+        <div class="day">17</div>
+        <div class="month">Oct 2026</div>
+      </div>
+      <div class="notice-details">
+        <span class="notice-tag">Holidays</span>
+        <h3>ছুটি সংক্রান্ত: শুভ দুর্গাপূজা ও ফাতেহা-ই-ইয়াজদাহম উপলক্ষে বিশ্ববিদ্যালয়ের অ্যাকাডেমিক ও প্রশাসনিক কার্যক্রম বন্ধ সংক্রান্ত।</h3>
+        <p style="font-size: 13px; color: #777;">Published by: Deputy Registrar, PUB</p>
+      </div>
+      <a href="#" class="download-btn"><i class="fa-solid fa-file-pdf"></i> Download Notice</a>
+    </div>
+
+    <!-- Notice 2 -->
+    <div class="notice-card">
+      <div class="date-box">
+        <div class="day">10</div>
+        <div class="month">Oct 2026</div>
+      </div>
+      <div class="notice-details">
+        <span class="notice-tag">Exam Routine</span>
+        <h3>Schedule for Semester Final Examination (Fall 2026) for Department of CSE &amp; EEE.</h3>
+        <p style="font-size: 13px; color: #777;">Published by: Controller of Examinations</p>
+      </div>
+      <a href="#" class="download-btn"><i class="fa-solid fa-file-pdf"></i> Download PDF</a>
+    </div>
+
+    <!-- Notice 3 -->
+    <div class="notice-card">
+      <div class="date-box">
+        <div class="day">04</div>
+        <div class="month">Oct 2026</div>
+      </div>
+      <div class="notice-details">
+        <span class="notice-tag">Workshop</span>
+        <h3>Workshop for Faculty Members on "Stress Management for Teachers: Enhancing Performance &amp; Mental Wellbeing".</h3>
+        <p style="font-size: 13px; color: #777;">Published by: IQAC, PUB</p>
+      </div>
+      <a href="#" class="download-btn"><i class="fa-solid fa-file-pdf"></i> Download Details</a>
+    </div>
+
+    <!-- Notice 4 -->
+    <div class="notice-card">
+      <div class="date-box">
+        <div class="day">25</div>
+        <div class="month">Sep 2026</div>
+      </div>
+      <div class="notice-details">
+        <span class="notice-tag">Admission</span>
+        <h3>Admission Going On: Spring 2027 Semester with Up to 50% Special Tuition Waiver.</h3>
+        <p style="font-size: 13px; color: #777;">Published by: Admission Directorate</p>
+      </div>
+      <a href="tuition-fees.html" class="download-btn"><i class="fa-solid fa-arrow-right"></i> View Fees</a>
+    </div>
+
+  </div>
+
+</body>
+</html>
