@@ -17,4 +17,8 @@ body{ background:#f5f7fb; color:#1a1a2e; }
 .tips { max-width:480px;margin:0 auto 40px;padding: 0 20px;}
 .tips ul { list-style:none; display:grid; grid-template-columns: repeat(2,1fr); gap:8px;}
 .tips li{background:#fff; padding: 10px 14px;border-radius: 8px; border:1px solid #e6eaf1;}
+<<<<<<< HEAD
 footer { text-align:center; padding: 20px; color: #666; font-size:13px;}
+=======
+footer { text-align:center; padding: 20px; color: #666; font-size:13px;}
+>>>>>>> a9d6d3854e75da5401b18467c58e0376697f7d19
