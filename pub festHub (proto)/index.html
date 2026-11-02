@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PUB FestHub - Campus Event & Contest Platform</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca' },
+            dark: { 900: '#0b0f17', 800: '#111827', 700: '#1f2937', 600: '#374151' }
+          },
+          fontFamily: {
+            mono: ['"JetBrains Mono"', 'monospace', 'ui-monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts & Lucide Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Canvas Confetti for AC verdicts -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- QRCode.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #111827; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
+    .badge-ac { background-color: #064e3b; color: #34d399; border: 1px solid #059669; }
+    .badge-wa { background-color: #4c0519; color: #fb7185; border: 1px solid #e11d48; }
+    .badge-freeze { background-color: #451a03; color: #fbbf24; border: 1px dashed #d97706; }
+  </style>
+</head>
+
+<body class="bg-dark-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- ================= TOP NAVIGATION BAR ================= -->
+  <header class="border-b border-dark-700 bg-dark-800/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      
+      <!-- Brand & Fest Title -->
+      <div class="flex items-center gap-3">
+        <div class="bg-brand-600 text-white p-2 rounded-xl flex items-center justify-center shadow-lg shadow-brand-500/20">
+          <i data-lucide="cpu" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <span class="font-bold text-lg tracking-tight bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">PUB FestHub</span>
+          <span class="text-xs ml-2 px-2 py-0.5 rounded bg-brand-500/20 text-brand-400 border border-brand-500/30">CSE Fest '26</span>
+        </div>
+      </div>
+
+      <!-- Main Navigation Tabs -->
+      <nav class="hidden md:flex items-center gap-1 bg-dark-900/60 p-1 rounded-xl border border-dark-700 text-sm">
+        <button onclick="switchView('events')" id="nav-events" class="nav-tab px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition active-tab">Events & Registration</button>
+        <button onclick="switchView('contest')" id="nav-contest" class="nav-tab px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition">Contest Arena</button>
+        <button onclick="switchView('scoreboard')" id="nav-scoreboard" class="nav-tab px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition">Scoreboard</button>
+        <button onclick="switchView('ops')" id="nav-ops" class="nav-tab px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition flex items-center gap-1.5">
+          <span>Coordinator Ops</span>
+          <span id="clash-badge" class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+        </button>
+        <button onclick="switchView('volunteer')" id="nav-volunteer" class="nav-tab px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition">Volunteer Portal</button>
+        <button onclick="switchView('judge')" id="nav-judge" class="nav-tab px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition">Judging Sheet</button>
+      </nav>
+
+      <!-- Role Switcher & Live Timer -->
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-2 bg-dark-900 border border-dark-700 px-3 py-1.5 rounded-lg text-xs font-mono">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+          <span>CONTEST:</span>
+          <span id="countdown" class="text-cyan-400 font-semibold">01:45:22</span>
+        </div>
+
+        <!-- Role Select dropdown to test different persona workflows -->
+        <div class="relative">
+          <select id="role-selector" onchange="onRoleChange(this.value)" class="bg-dark-700 border border-dark-600 rounded-lg text-xs px-2.5 py-1.5 text-slate-200 outline-none focus:border-brand-500 cursor-pointer">
+            <option value="participant">Role: Participant</option>
+            <option value="organiser">Role: Organiser</option>
+            <option value="volunteer">Role: Volunteer</option>
+            <option value="judge">Role: Problem Setter/Judge</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= ANNOUNCEMENT BANNER ================= -->
+  <div id="announcement-bar" class="bg-gradient-to-r from-brand-900/60 via-dark-800 to-brand-900/60 border-b border-dark-700 py-1.5 px-4 text-xs flex items-center justify-between text-indigo-300">
+    <div class="max-w-7xl mx-auto w-full flex items-center gap-2">
+      <i data-lucide="megaphone" class="w-4 h-4 text-brand-400 shrink-0"></i>
+      <span class="font-medium truncate"><strong class="text-white">Announcement:</strong> Programming Contest Scoreboard will freeze at 16:00! Lunch coupons available at Booth 2 via Volunteer QR pass.</span>
+    </div>
+  </div>
+
+  <!-- ================= MAIN CONTENT VIEWS ================= -->
+  <main class="max-w-7xl w-full mx-auto p-4 md:p-6 flex-1">
+
+    <!-- ================= VIEW 1: EVENTS & REGISTRATION ================= -->
+    <section id="view-events" class="view-panel space-y-6">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h1 class="text-2xl font-bold text-white tracking-tight">Campus Activities & Competitions</h1>
+          <p class="text-sm text-slate-400">Discover events, sign up individually or build a team, and check entry passes.</p>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="openModal('modal-reg')" class="bg-brand-600 hover:bg-brand-500 text-white px-4 py-2 rounded-xl text-sm font-medium flex items-center gap-2 shadow-lg shadow-brand-500/20 transition">
+            <i data-lucide="user-plus" class="w-4 h-4"></i> Team / Individual Registration
+          </button>
+          <button onclick="openTicketModal()" class="bg-dark-800 hover:bg-dark-700 border border-dark-600 px-4 py-2 rounded-xl text-sm font-medium flex items-center gap-2">
+            <i data-lucide="qr-code" class="w-4 h-4 text-cyan-400"></i> My Pass
+          </button>
+        </div>
+      </div>
+
+      <!-- Events Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Event Card 1 -->
+        <div class="bg-dark-800 border border-dark-700 rounded-2xl p-5 flex flex-col justify-between hover:border-brand-500/50 transition group">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-semibold uppercase px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">ICPC Format</span>
+              <span class="text-xs text-slate-400"><i data-lucide="users" class="w-3.5 h-3.5 inline mr-1"></i>3 per team</span>
+            </div>
+            <h3 class="text-lg font-bold text-white group-hover:text-brand-400 transition">Inter-University Code Clash</h3>
+            <p class="text-xs text-slate-400 mt-1">Live competitive programming challenge in isolated sandbox with ICPC penalty rules.</p>
+            
+            <div class="mt-4 space-y-2 text-xs text-slate-300">
+              <div class="flex items-center gap-2"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-500"></i> CSE Lab 3 & 4</div>
+              <div class="flex items-center gap-2"><i data-lucide="calendar" class="w-3.5 h-3.5 text-slate-500"></i> Today, 02:00 PM - 05:00 PM</div>
+              <div class="flex items-center gap-2"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i> Registered: Team ByteBenders</div>
+            </div>
+          </div>
+          <div class="mt-5 pt-4 border-t border-dark-700 flex items-center justify-between">
+            <span class="text-xs font-mono text-emerald-400">Confirmed (Waitlist: 0)</span>
+            <button onclick="switchView('contest')" class="text-xs bg-brand-600/20 text-brand-400 hover:bg-brand-600 hover:text-white px-3 py-1.5 rounded-lg border border-brand-500/30 transition">Enter Arena &rarr;</button>
+          </div>
+        </div>
+
+        <!-- Event Card 2 -->
+        <div class="bg-dark-800 border border-dark-700 rounded-2xl p-5 flex flex-col justify-between hover:border-brand-500/50 transition group">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-semibold uppercase px-2.5 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/30">Competition</span>
+              <span class="text-xs text-slate-400"><i data-lucide="user" class="w-3.5 h-3.5 inline mr-1"></i>1-4 members</span>
+            </div>
+            <h3 class="text-lg font-bold text-white group-hover:text-brand-400 transition">Campus AI Innovation Showcase</h3>
+            <p class="text-xs text-slate-400 mt-1">Project exhibition evaluated by jury on innovation, UX, code quality, and pitch.</p>
+            
+            <div class="mt-4 space-y-2 text-xs text-slate-300">
+              <div class="flex items-center gap-2"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-500"></i> Central Auditorium</div>
+              <div class="flex items-center gap-2"><i data-lucide="calendar" class="w-3.5 h-3.5 text-slate-500"></i> Today, 11:00 AM - 01:30 PM</div>
+              <div class="flex items-center gap-2"><i data-lucide="clock" class="w-3.5 h-3.5 text-amber-400"></i> Registration Closed</div>
+            </div>
+          </div>
+          <div class="mt-5 pt-4 border-t border-dark-700 flex items-center justify-between">
+            <span class="text-xs font-mono text-slate-400">Slots: 45 / 45 (Full)</span>
+            <button onclick="switchView('judge')" class="text-xs bg-dark-700 hover:bg-dark-600 px-3 py-1.5 rounded-lg text-slate-300">View Rubric</button>
+          </div>
+        </div>
+
+        <!-- Event Card 3 -->
+        <div class="bg-dark-800 border border-dark-700 rounded-2xl p-5 flex flex-col justify-between hover:border-brand-500/50 transition group">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-semibold uppercase px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">Seminar</span>
+              <span class="text-xs text-slate-400"><i data-lucide="users" class="w-3.5 h-3.5 inline mr-1"></i>Individual</span>
+            </div>
+            <h3 class="text-lg font-bold text-white group-hover:text-brand-400 transition">Keynote: Future of Edge Systems</h3>
+            <p class="text-xs text-slate-400 mt-1">Technical seminar by industry veterans on distributed systems architecture.</p>
+            
+            <div class="mt-4 space-y-2 text-xs text-slate-300">
+              <div class="flex items-center gap-2"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-500"></i> Seminar Room 102</div>
+              <div class="flex items-center gap-2"><i data-lucide="calendar" class="w-3.5 h-3.5 text-slate-500"></i> Today, 03:30 PM - 04:30 PM</div>
+              <div class="flex items-center gap-2"><i data-lucide="alert-circle" class="w-3.5 h-3.5 text-brand-400"></i> Open for all students</div>
+            </div>
+          </div>
+          <div class="mt-5 pt-4 border-t border-dark-700 flex items-center justify-between">
+            <span class="text-xs font-mono text-cyan-400">Seats: 112 / 150</span>
+            <button onclick="alert('Seat successfully reserved! Your QR pass has been updated.')" class="text-xs bg-brand-600 text-white px-3 py-1.5 rounded-lg hover:bg-brand-500 transition">Instant RSVR</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 2: CODING CONTEST ARENA ================= -->
+    <section id="view-contest" class="view-panel hidden space-y-4">
+      <!-- Arena Toolbar -->
+      <div class="bg-dark-800 border border-dark-700 p-3 rounded-2xl flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-sm text-slate-200">Problem Set:</span>
+          <div class="flex gap-1" id="problem-pills">
+            <button onclick="loadProblem('A')" class="px-3 py-1 rounded-lg text-xs font-mono font-bold bg-brand-600 text-white">A. Bitwise Vault</button>
+            <button onclick="loadProblem('B')" class="px-3 py-1 rounded-lg text-xs font-mono font-bold bg-dark-700 text-slate-300 hover:bg-dark-600">B. Campus Pathways</button>
+            <button onclick="loadProblem('C')" class="px-3 py-1 rounded-lg text-xs font-mono font-bold bg-dark-700 text-slate-300 hover:bg-dark-600">C. Subsequence Clash</button>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <!-- Practice mode toggle -->
+          <label class="flex items-center gap-2 text-xs text-slate-400 cursor-pointer">
+            <input type="checkbox" id="practice-toggle" class="rounded bg-dark-900 border-dark-700 text-brand-600 focus:ring-0">
+            <span>Practice Mode (Show Editorial)</span>
+          </label>
+          <button onclick="switchView('scoreboard')" class="bg-dark-700 hover:bg-dark-600 border border-dark-600 px-3 py-1 rounded-lg text-xs font-medium flex items-center gap-1.5 text-cyan-400">
+            <i data-lucide="trophy" class="w-3.5 h-3.5"></i> Standings
+          </button>
+        </div>
+      </div>
+
+      <!-- Problem & Code Editor Split Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 h-[720px]">
+        
+        <!-- Left Column: Problem Details & Constraints (5 Cols) -->
+        <div class="lg:col-span-5 bg-dark-800 border border-dark-700 rounded-2xl flex flex-col overflow-hidden">
+          <div class="border-b border-dark-700 px-4 py-3 flex justify-between items-center bg-dark-800">
+            <h2 id="prob-title" class="font-bold text-white text-base">Problem A: Bitwise Vault</h2>
+            <span class="text-xs font-mono text-cyan-400 px-2 py-0.5 rounded bg-cyan-950/60 border border-cyan-800">Time: 1.0s | Mem: 256MB</span>
+          </div>
+
+          <div class="p-4 overflow-y-auto space-y-4 text-xs text-slate-300 custom-scrollbar flex-1">
+            <div>
+              <h4 class="font-semibold text-slate-100 uppercase tracking-wider text-[11px] mb-1">Description</h4>
+              <p id="prob-desc" class="leading-relaxed text-slate-300">
+                You are given an array of $N$ integers. A vault opens if you can partition the array into two non-empty subsets such that the bitwise XOR sum of elements in both subsets are equal. Determine if it is possible.
+              </p>
+            </div>
+
+            <div>
+              <h4 class="font-semibold text-slate-100 uppercase tracking-wider text-[11px] mb-1">Input Format</h4>
+              <p class="leading-relaxed">The first line contains $T$ (test cases). Each test case consists of integer $N$, followed by $N$ space-separated integers $A_1, A_2, \dots, A_N$.</p>
+            </div>
+
+            <div>
+              <h4 class="font-semibold text-slate-100 uppercase tracking-wider text-[11px] mb-1">Output Format</h4>
+              <p class="leading-relaxed">Print <code class="text-emerald-400 font-mono">YES</code> if a valid partition exists, otherwise print <code class="text-rose-400 font-mono">NO</code>.</p>
+            </div>
+
+            <!-- Sample Testcase Box -->
+            <div class="bg-dark-900 rounded-xl p-3 border border-dark-700">
+              <div class="flex justify-between items-center mb-1.5">
+                <span class="font-mono text-[11px] text-slate-400 font-bold">Sample Input 1</span>
+                <button onclick="copySample()" class="text-[10px] text-indigo-400 hover:underline">Copy</button>
+              </div>
+              <pre id="sample-input" class="font-mono text-xs text-slate-200">2
+4
+1 2 4 7
+3
+3 3 0</pre>
+              
+              <div class="mt-3 pt-2 border-t border-dark-800">
+                <span class="font-mono text-[11px] text-slate-400 font-bold">Sample Output 1</span>
+                <pre id="sample-output" class="font-mono text-xs text-emerald-400 mt-1">YES
+YES</pre>
+              </div>
+            </div>
+
+            <!-- Editorial Section (Shown when unlocked) -->
+            <div id="editorial-box" class="hidden bg-brand-950/30 border border-brand-500/30 rounded-xl p-3">
+              <span class="text-xs font-bold text-brand-400 flex items-center gap-1.5"><i data-lucide="book-open" class="w-3.5 h-3.5"></i> Editorial / Solution Approach</span>
+              <p class="mt-1 text-slate-300 text-xs">Note that if the overall XOR sum of all elements is 0, we can always partition it into two sets of equal XOR sum. Check if $XOR(A_1 \oplus \dots \oplus A_n) == 0$.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive Code Runner & IDE (7 Cols) -->
+        <div class="lg:col-span-7 bg-dark-800 border border-dark-700 rounded-2xl flex flex-col overflow-hidden">
+          
+          <!-- IDE Header -->
+          <div class="border-b border-dark-700 px-4 py-2 flex items-center justify-between bg-dark-800">
+            <div class="flex items-center gap-2">
+              <i data-lucide="code-2" class="w-4 h-4 text-brand-400"></i>
+              <select id="code-lang" class="bg-dark-900 border border-dark-700 text-xs rounded-lg px-2 py-1 text-slate-200 outline-none">
+                <option value="cpp">C++ 20 (GCC 13)</option>
+                <option value="python">Python 3.11 (PyPy)</option>
+                <option value="java">Java 17 (OpenJDK)</option>
+              </select>
+            </div>
+            <span class="text-[11px] font-mono text-slate-500">Judge Sandbox: Isolated Container</span>
+          </div>
+
+          <!-- Code Input Area -->
+          <div class="flex-1 relative bg-dark-900 font-mono text-xs p-3">
+            <textarea id="code-editor" class="w-full h-full bg-transparent text-emerald-400 outline-none resize-none font-mono text-xs custom-scrollbar leading-relaxed" spellcheck="false">#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void solve() {
+    int n;
+    cin >> n;
+    int total_xor = 0;
+    for(int i = 0; i < n; i++) {
+        int val;
+        cin >> val;
+        total_xor ^= val;
+    }
+    if(total_xor == 0) cout << "YES\n";
+    else cout << "NO\n";
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int t;
+    cin >> t;
+    while(t--) solve();
+    return 0;
+}</textarea>
+          </div>
+
+          <!-- Bottom Console & Action Bar -->
+          <div class="border-t border-dark-700 bg-dark-800 p-3 space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <span id="judge-status" class="text-xs font-mono text-slate-400">Ready to test</span>
+              </div>
+              
+              <div class="flex items-center gap-2">
+                <button onclick="runCode(false)" class="bg-dark-700 hover:bg-dark-600 text-slate-200 px-4 py-1.5 rounded-xl text-xs font-medium transition flex items-center gap-1.5">
+                  <i data-lucide="play" class="w-3.5 h-3.5 text-cyan-400"></i> Run Sample
+                </button>
+                <button onclick="runCode(true)" class="bg-brand-600 hover:bg-brand-500 text-white px-5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-lg shadow-brand-500/20">
+                  <i data-lucide="send" class="w-3.5 h-3.5"></i> Submit Solution
+                </button>
+              </div>
+            </div>
+
+            <!-- Terminal Output Window -->
+            <div id="judge-console" class="bg-dark-900 border border-dark-700 rounded-xl p-2.5 font-mono text-xs max-h-28 overflow-y-auto hidden">
+              <div class="flex justify-between text-[11px] text-slate-500 border-b border-dark-800 pb-1 mb-1">
+                <span>EXECUTION LOG</span>
+                <span id="verdict-pill"></span>
+              </div>
+              <pre id="console-output" class="text-slate-300 text-[11px]"></pre>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= VIEW 3: ICPC SCOREBOARD WITH FREEZE ================= -->
+    <section id="view-scoreboard" class="view-panel hidden space-y-4">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-dark-800 p-4 rounded-2xl border border-dark-700">
+        <div>
+          <div class="flex items-center gap-2">
+            <h2 class="text-xl font-bold text-white">Live Contest Standings</h2>
+            <span id="freeze-indicator" class="hidden text-[11px] px-2 py-0.5 rounded-full badge-freeze font-mono font-bold animate-pulse">
+              SCOREBOARD FROZEN (FINAL HOUR)
+            </span>
+          </div>
+          <p class="text-xs text-slate-400">ICPC-style penalty ranking: Total solved desc, total penalty time asc.</p>
+        </div>
+        
+        <!-- Freeze Toggle for testing presentation -->
+        <div class="flex items-center gap-3">
+          <label class="text-xs text-slate-400 flex items-center gap-2 cursor-pointer bg-dark-900 px-3 py-1.5 rounded-lg border border-dark-700">
+            <input type="checkbox" id="freeze-toggle" onchange="toggleScoreboardFreeze()" class="rounded bg-dark-800 border-dark-600 text-brand-600">
+            <span class="font-medium text-slate-200">Simulate Scoreboard Freeze</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Scoreboard Table -->
+      <div class="bg-dark-800 border border-dark-700 rounded-2xl overflow-hidden shadow-xl">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="border-b border-dark-700 bg-dark-900/50 font-mono text-slate-400">
+                <th class="p-3 w-16 text-center">Rank</th>
+                <th class="p-3">Team / Handle</th>
+                <th class="p-3 text-center">Solved</th>
+                <th class="p-3 text-center">Penalty</th>
+                <th class="p-3 text-center w-24">A (Bitwise)</th>
+                <th class="p-3 text-center w-24">B (Pathways)</th>
+                <th class="p-3 text-center w-24">C (Subseq)</th>
+                <th class="p-3 text-center w-24">D (Graph Tree)</th>
+              </tr>
+            </thead>
+            <tbody id="scoreboard-body" class="divide-y divide-dark-700 font-mono">
+              <!-- Dynamically populated or statically rendered below -->
+              <tr class="hover:bg-dark-700/40">
+                <td class="p-3 text-center font-bold text-amber-400">1</td>
+                <td class="p-3 font-sans">
+                  <span class="font-bold text-white">ByteBenders</span>
+                  <span class="text-[10px] block text-slate-500 font-mono">PUB CSE • Team #104</span>
+                </td>
+                <td class="p-3 text-center font-bold text-emerald-400 text-sm">3</td>
+                <td class="p-3 text-center text-slate-300">184</td>
+                <td class="p-3 text-center"><div class="badge-ac rounded py-1 px-1.5 font-bold">+1 (18)</div></td>
+                <td class="p-3 text-center"><div class="badge-ac rounded py-1 px-1.5 font-bold">+2 (42)</div></td>
+                <td class="p-3 text-center"><div class="badge-ac rounded py-1 px-1.5 font-bold">+1 (84)</div></td>
+                <td class="p-3 text-center"><div class="text-slate-600">-</div></td>
+              </tr>
+
+              <tr class="hover:bg-dark-700/40">
+                <td class="p-3 text-center font-bold text-slate-300">2</td>
+                <td class="p-3 font-sans">
+                  <span class="font-bold text-white">Recursive Knights</span>
+                  <span class="text-[10px] block text-slate-500 font-mono">PUB CSE • Team #112</span>
+                </td>
+                <td class="p-3 text-center font-bold text-emerald-400 text-sm">2</td>
+                <td class="p-3 text-center text-slate-300">95</td>
+                <td class="p-3 text-center"><div class="badge-ac rounded py-1 px-1.5 font-bold">+1 (22)</div></td>
+                <td class="p-3 text-center"><div class="badge-ac rounded py-1 px-1.5 font-bold">+1 (73)</div></td>
+                <td class="p-3 text-center"><div class="badge-wa rounded py-1 px-1.5">-3</div></td>
+                <td class="p-3 text-center"><div class="text-slate-600">-</div></td>
+              </tr>
+
+              <tr class="hover:bg-dark-700/40" id="frozen-sample-row">
+                <td class="p-3 text-center font-bold text-amber-600">3</td>
+                <td class="p-3 font-sans">
+                  <span class="font-bold text-white">NullPointers</span>
+                  <span class="text-[10px] block text-slate-500 font-mono">PUB CSE • Team #121</span>
+                </td>
+                <td class="p-3 text-center font-bold text-emerald-400 text-sm" id="null-solved">2</td>
+                <td class="p-3 text-center text-slate-300" id="null-penalty">110</td>
+                <td class="p-3 text-center"><div class="badge-ac rounded py-1 px-1.5 font-bold">+1 (15)</div></td>
+                <td class="p-3 text-center"><div class="badge-ac rounded py-1 px-1.5 font-bold">+1 (95)</div></td>
+                <td class="p-3 text-center" id="null-problem-c"><div class="badge-wa rounded py-1 px-1.5">-1</div></td>
+                <td class="p-3 text-center"><div class="text-slate-600">-</div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 4: COORDINATOR & OPS DASHBOARD ================= -->
+    <section id="view-ops" class="view-panel hidden space-y-6">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h2 class="text-2xl font-bold text-white tracking-tight">Coordinator Operations & Readiness</h2>
+          <p class="text-sm text-slate-400">Detect scheduling & venue clashes, monitor volunteer duties, and issue resolution.</p>
+        </div>
+        <button onclick="resolveClashDemo()" class="bg-rose-600 hover:bg-rose-500 text-white px-3 py-1.5 rounded-xl text-xs font-medium flex items-center gap-1.5 transition">
+          <i data-lucide="wrench" class="w-4 h-4"></i> Auto-Resolve Clashes
+        </button>
+      </div>
+
+      <!-- Readiness Gauges Matrix -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-dark-800 border border-dark-700 p-4 rounded-2xl">
+          <span class="text-xs text-slate-400 uppercase font-semibold">Fest Readiness Gauge</span>
+          <div class="flex items-end justify-between mt-2">
+            <span class="text-2xl font-bold text-emerald-400" id="readiness-pct">82%</span>
+            <span class="text-xs text-slate-400 mb-1">Target: 100%</span>
+          </div>
+          <div class="w-full bg-dark-900 h-2 rounded-full mt-2 overflow-hidden">
+            <div id="readiness-bar" class="bg-emerald-500 h-full rounded-full transition-all duration-500" style="width: 82%"></div>
+          </div>
+        </div>
+
+        <div class="bg-dark-800 border border-dark-700 p-4 rounded-2xl">
+          <span class="text-xs text-slate-400 uppercase font-semibold">Venue & Shift Clashes</span>
+          <div class="flex items-end justify-between mt-2">
+            <span class="text-2xl font-bold text-rose-400" id="clash-count">2 Clashes</span>
+            <i data-lucide="alert-triangle" class="w-5 h-5 text-rose-500"></i>
+          </div>
+          <p class="text-[11px] text-rose-400 mt-2">Lab 3 booked by 2 events at 02:00 PM</p>
+        </div>
+
+        <div class="bg-dark-800 border border-dark-700 p-4 rounded-2xl">
+          <span class="text-xs text-slate-400 uppercase font-semibold">Uncovered Volunteer Shifts</span>
+          <div class="flex items-end justify-between mt-2">
+            <span class="text-2xl font-bold text-amber-400">3 Slots</span>
+            <i data-lucide="user-x" class="w-5 h-5 text-amber-500"></i>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-2">Central Audi stage control missing 1 lead</p>
+        </div>
+
+        <div class="bg-dark-800 border border-dark-700 p-4 rounded-2xl">
+          <span class="text-xs text-slate-400 uppercase font-semibold">Pending Judge Approvals</span>
+          <div class="flex items-end justify-between mt-2">
+            <span class="text-2xl font-bold text-cyan-400">1 Event</span>
+            <i data-lucide="award" class="w-5 h-5 text-cyan-500"></i>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-2">AI Showcase rubric awaits final sign-off</p>
+        </div>
+      </div>
+
+      <!-- Schedule Clash Matrix & Timeline -->
+      <div class="bg-dark-800 border border-dark-700 rounded-2xl p-5 space-y-4">
+        <div class="flex justify-between items-center">
+          <h3 class="font-bold text-white text-base flex items-center gap-2">
+            <i data-lucide="calendar-clock" class="w-4 h-4 text-brand-400"></i> Schedule Timeline & Clash Detector
+          </h3>
+          <span class="text-xs text-slate-400">Live Clash Detection Engine Active</span>
+        </div>
+
+        <div class="space-y-3" id="timeline-list">
+          <!-- Item with Clash -->
+          <div id="clash-item" class="p-3.5 rounded-xl bg-rose-950/20 border border-rose-500/40 flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div class="flex items-start gap-3">
+              <div class="bg-rose-500/20 text-rose-400 p-2 rounded-lg mt-0.5">
+                <i data-lucide="alert-octagon" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-white text-xs">VENUE CONFLICT: CSE Lab 3</span>
+                  <span class="text-[10px] bg-rose-500 text-white font-bold px-1.5 py-0.2 rounded uppercase">Critical</span>
+                </div>
+                <p class="text-xs text-slate-300 mt-0.5">"Inter-University Code Clash" and "Robotics Simulation" both assigned to <span class="font-mono text-rose-300">CSE Lab 3</span> at 02:00 PM.</p>
+              </div>
+            </div>
+            <button onclick="reassignVenue()" class="shrink-0 bg-dark-800 hover:bg-dark-700 border border-rose-400/50 text-rose-300 px-3 py-1.5 rounded-lg text-xs font-medium">Reassign to Lab 5</button>
+          </div>
+
+          <!-- Normal Item -->
+          <div class="p-3.5 rounded-xl bg-dark-900/60 border border-dark-700 flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div class="flex items-start gap-3">
+              <div class="bg-emerald-500/10 text-emerald-400 p-2 rounded-lg mt-0.5">
+                <i data-lucide="check" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <span class="font-bold text-white text-xs">Central Auditorium: AI Innovation Showcase</span>
+                <p class="text-xs text-slate-400 mt-0.5">11:00 AM - 01:30 PM • 4 Volunteers on duty • 3 Judges assigned.</p>
+              </div>
+            </div>
+            <span class="text-xs font-mono text-emerald-400 bg-emerald-950/40 px-2 py-1 rounded border border-emerald-800">Clear</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 5: VOLUNTEER SCANNER & TASKS ================= -->
+    <section id="view-volunteer" class="view-panel hidden space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        
+        <!-- Left Column: Camera QR Scanner Mock / Controller (6 Cols) -->
+        <div class="md:col-span-6 bg-dark-800 border border-dark-700 rounded-2xl p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="font-bold text-white text-base flex items-center gap-2">
+                <i data-lucide="scan" class="w-4 h-4 text-cyan-400"></i> Participant QR Check-In
+              </h3>
+              <span class="text-xs font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-800 px-2 py-0.5 rounded">Scanner Ready</span>
+            </div>
+
+            <!-- Simulated Viewfinder Box -->
+            <div class="relative bg-dark-900 border-2 border-dashed border-dark-600 rounded-xl aspect-video flex flex-col items-center justify-center overflow-hidden group">
+              <div class="absolute inset-8 border-2 border-cyan-400/50 rounded-lg pointer-events-none animate-pulse"></div>
+              <i data-lucide="qr-code" class="w-16 h-16 text-slate-600 group-hover:scale-110 transition"></i>
+              <p class="text-xs text-slate-400 mt-2">Point webcam at participant dynamic ticket</p>
+              <div class="absolute bottom-2 left-2 right-2 text-center">
+                <span class="text-[10px] text-slate-500 font-mono">Camera ID: Front Cam HD • Optical Auto-Detect</span>
+              </div>
+            </div>
+
+            <!-- Fast Input alternative for testing without physical camera -->
+            <div class="mt-4 flex gap-2">
+              <input type="text" id="manual-ticket-id" placeholder="Or enter Ticket ID: e.g. TICKET-9921" class="flex-1 bg-dark-900 border border-dark-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-brand-500 font-mono">
+              <button onclick="scanTicketSimulation()" class="bg-brand-600 hover:bg-brand-500 text-white px-4 py-2 rounded-xl text-xs font-bold transition">Verify</button>
+            </div>
+          </div>
+
+          <!-- Scan Result Notification Area -->
+          <div id="scan-result-card" class="mt-4 p-3 rounded-xl bg-dark-900 border border-dark-700 hidden">
+            <div class="flex items-center gap-3">
+              <div class="p-2 bg-emerald-500/20 text-emerald-400 rounded-lg">
+                <i data-lucide="badge-check" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h5 class="text-xs font-bold text-white" id="scan-name">Tanvir Ahmed (ByteBenders)</h5>
+                <p class="text-[11px] text-slate-400" id="scan-meta">Event: Code Clash • Lunch Kit: Issued</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Shift Management & Issue Ticketing (6 Cols) -->
+        <div class="md:col-span-6 space-y-6">
+          
+          <!-- Shift Assignment Card -->
+          <div class="bg-dark-800 border border-dark-700 rounded-2xl p-5">
+            <div class="flex justify-between items-center mb-3">
+              <h3 class="font-bold text-white text-base flex items-center gap-2">
+                <i data-lucide="calendar" class="w-4 h-4 text-brand-400"></i> My Assigned Duty
+              </h3>
+              <span class="text-xs px-2 py-0.5 rounded bg-brand-500/20 text-brand-400 font-mono">ACTIVE SHIFT</span>
+            </div>
+            
+            <div class="bg-dark-900 p-3 rounded-xl border border-dark-700 space-y-2 text-xs">
+              <div class="flex justify-between"><span class="text-slate-400">Assigned Venue:</span> <span class="font-semibold text-white">CSE Lab 4 (North Wing)</span></div>
+              <div class="flex justify-between"><span class="text-slate-400">Shift Window:</span> <span class="font-mono text-cyan-400">01:30 PM - 04:30 PM</span></div>
+              <div class="flex justify-between"><span class="text-slate-400">Responsibilities:</span> <span class="text-slate-300">PC Environment Check, ID Verification</span></div>
+            </div>
+
+            <div class="mt-4 flex gap-2">
+              <button onclick="requestSwapModal()" class="w-full bg-dark-700 hover:bg-dark-600 text-slate-300 py-2 rounded-xl text-xs font-medium border border-dark-600 transition flex items-center justify-center gap-2">
+                <i data-lucide="arrow-left-right" class="w-3.5 h-3.5"></i> Request Shift Replacement
+              </button>
+            </div>
+          </div>
+
+          <!-- Incident & Issue Ticketing -->
+          <div class="bg-dark-800 border border-dark-700 rounded-2xl p-5">
+            <h3 class="font-bold text-white text-base mb-3 flex items-center gap-2">
+              <i data-lucide="life-buoy" class="w-4 h-4 text-rose-400"></i> Report On-Ground Issue
+            </h3>
+            
+            <div class="space-y-3">
+              <div>
+                <label class="text-[11px] text-slate-400 block mb-1">Issue Category</label>
+                <select id="issue-category" class="w-full bg-dark-900 border border-dark-700 rounded-xl px-3 py-2 text-xs text-slate-200 outline-none">
+                  <option>Power / Surge Protector Failure</option>
+                  <option>Network / LAN Cable Unreachable</option>
+                  <option>Participant Badging Discrepancy</option>
+                  <option>Missing Judge / Refreshment Shortage</option>
+                </select>
+              </div>
+
+              <div>
+                <input type="text" id="issue-desc" placeholder="Location & concise description (e.g. PC #14 Lab 3 no internet)" class="w-full bg-dark-900 border border-dark-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-brand-500">
+              </div>
+
+              <button onclick="submitIssue()" class="w-full bg-rose-600 hover:bg-rose-500 text-white py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2">
+                <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Dispatch Urgent Ticket
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= VIEW 6: JUDGE / PROBLEM SETTER RUBRIC ================= -->
+    <section id="view-judge" class="view-panel hidden space-y-6">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h2 class="text-2xl font-bold text-white tracking-tight">Judge Evaluation & Rubrics</h2>
+          <p class="text-sm text-slate-400">Score project submissions, inspect versioned artifacts, and compute standardized scores.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-mono text-slate-400">Assigned Team:</span>
+          <select id="eval-team-selector" onchange="loadTeamSubmission(this.value)" class="bg-dark-800 border border-dark-700 rounded-xl text-xs px-3 py-1.5 text-slate-200 font-semibold outline-none">
+            <option value="neuro">Team #102: NeuroPulse (AI Showcase)</option>
+            <option value="smart">Team #108: SmartGrid IoT</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Judging Split: Artifact Viewer vs Rubric Matrix -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left: Submission Version & Preview (6 Cols) -->
+        <div class="lg:col-span-6 bg-dark-800 border border-dark-700 rounded-2xl p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <h3 class="font-bold text-white text-base">Submission Artifacts</h3>
+              <span class="text-xs font-mono bg-dark-900 px-2 py-0.5 rounded text-indigo-400 border border-dark-700">Version 1.2 (Final)</span>
+            </div>
+            
+            <p class="text-xs text-slate-400 mb-4" id="team-abstract">
+              "NeuroPulse is an on-device lightweight edge model for predictive maintenance in electrical labs using sound vibrations."
+            </p>
+
+            <div class="space-y-2">
+              <a href="#github" class="flex items-center justify-between p-3 rounded-xl bg-dark-900 border border-dark-700 text-xs text-slate-300 hover:border-brand-500 transition">
+                <span class="flex items-center gap-2"><i data-lucide="github" class="w-4 h-4"></i> github.com/pub-fest/neuropulse-core</span>
+                <i data-lucide="external-link" class="w-3.5 h-3.5 text-slate-500"></i>
+              </a>
+              <a href="#slides" class="flex items-center justify-between p-3 rounded-xl bg-dark-900 border border-dark-700 text-xs text-slate-300 hover:border-brand-500 transition">
+                <span class="flex items-center gap-2"><i data-lucide="file-text" class="w-4 h-4 text-rose-400"></i> Project_Presentation_Deck.pdf</span>
+                <span class="font-mono text-[10px] text-slate-500">4.2 MB</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-dark-700 flex justify-between items-center">
+            <span class="text-xs text-slate-500">Status: Awaiting Judge Marks</span>
+            <span class="text-xs font-mono text-cyan-400 font-bold">2/3 Judges Evaluated</span>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Rubric Sheet (6 Cols) -->
+        <div class="lg:col-span-6 bg-dark-800 border border-dark-700 rounded-2xl p-5 space-y-4">
+          <div class="flex justify-between items-center">
+            <h3 class="font-bold text-white text-base">Scoring Rubric</h3>
+            <div class="text-xs font-mono text-slate-300">
+              Total Score: <span id="total-rubric-score" class="font-bold text-emerald-400 text-base">25</span> / 30
+            </div>
+          </div>
+
+          <div class="space-y-4 text-xs">
+            <!-- Rubric Item 1 -->
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-slate-300 font-medium">1. Technical Innovation & Complexity</span>
+                <span id="score-val-1" class="font-mono text-brand-400 font-bold">8 / 10</span>
+              </div>
+              <input type="range" min="0" max="10" value="8" oninput="updateRubric()" id="slider-1" class="w-full accent-brand-500 cursor-pointer">
+              <span class="text-[10px] text-slate-500">Depth of engineering, edge-case handling, and algorithmic uniqueness.</span>
+            </div>
+
+            <!-- Rubric Item 2 -->
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-slate-300 font-medium">2. Execution, Architecture & UI/UX</span>
+                <span id="score-val-2" class="font-mono text-brand-400 font-bold">9 / 10</span>
+              </div>
+              <input type="range" min="0" max="10" value="9" oninput="updateRubric()" id="slider-2" class="w-full accent-brand-500 cursor-pointer">
+              <span class="text-[10px] text-slate-500">Stability, cleanliness of code, usability, and architecture design.</span>
+            </div>
+
+            <!-- Rubric Item 3 -->
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-slate-300 font-medium">3. Presentation & Live Q&A Defense</span>
+                <span id="score-val-3" class="font-mono text-brand-400 font-bold">8 / 10</span>
+              </div>
+              <input type="range" min="0" max="10" value="8" oninput="updateRubric()" id="slider-3" class="w-full accent-brand-500 cursor-pointer">
+              <span class="text-[10px] text-slate-500">Team ability to articulate technical tradeoffs and defend design choices.</span>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <textarea id="judge-remarks" placeholder="Optional comments for the team and organizer audit log..." class="w-full bg-dark-900 border border-dark-700 rounded-xl p-2.5 text-xs text-slate-200 outline-none focus:border-brand-500 resize-none h-16"></textarea>
+          </div>
+
+          <button onclick="submitScores()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20">
+            <i data-lucide="check-circle-2" class="w-4 h-4"></i> Lock & Transmit Final Scores
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= MODALS ================= -->
+
+  <!-- 1. Participant Pass QR Modal -->
+  <div id="modal-ticket" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-dark-800 border border-dark-700 rounded-3xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center">
+        <span class="text-xs font-mono uppercase tracking-wider text-slate-400">Digital Event Badge</span>
+        <button onclick="closeModal('modal-ticket')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <div class="p-4 bg-white rounded-2xl inline-block shadow-inner mx-auto" id="qrcode-container">
+        <!-- QR Code rendered via QRCode.js -->
+      </div>
+
+      <div>
+        <h4 class="font-bold text-white text-lg">Tanvir Ahmed</h4>
+        <p class="text-xs text-brand-400 font-mono">PUB CSE • ID: 2202051</p>
+        <div class="mt-2 text-xs text-slate-400 bg-dark-900 py-1.5 px-3 rounded-lg border border-dark-700 inline-block font-mono">
+          PASS: TICKET-9921
+        </div>
+      </div>
+
+      <p class="text-[11px] text-slate-500 leading-tight">Flash this QR code at Lab 3 & Central Auditorium entrance for verified fast-pass check-in.</p>
+    </div>
+  </div>
+
+  <!-- 2. Team Registration Modal -->
+  <div id="modal-reg" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-dark-800 border border-dark-700 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center">
+        <h3 class="font-bold text-white text-base">Team / Member Registration</h3>
+        <button onclick="closeModal('modal-reg')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="text-slate-300 block mb-1">Target Event</label>
+          <select class="w-full bg-dark-900 border border-dark-700 rounded-xl p-2.5 text-slate-200 outline-none">
+            <option>Inter-University Code Clash</option>
+            <option>Campus AI Innovation Showcase</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="text-slate-300 block mb-1">Team Name</label>
+          <input type="text" placeholder="e.g. ByteBenders" class="w-full bg-dark-900 border border-dark-700 rounded-xl p-2.5 text-white outline-none focus:border-brand-500 font-medium">
+        </div>
+
+        <div>
+          <label class="text-slate-300 block mb-1">Invite Members via Email / Roll</label>
+          <input type="text" placeholder="member1@pub.ac.bd, member2@pub.ac.bd" class="w-full bg-dark-900 border border-dark-700 rounded-xl p-2.5 text-white outline-none focus:border-brand-500">
+        </div>
+
+        <div class="bg-brand-950/40 p-3 rounded-xl border border-brand-500/30 text-[11px] text-indigo-300">
+          <i data-lucide="info" class="w-3.5 h-3.5 inline mr-1 text-brand-400"></i> Automatic waitlist placement will occur if maximum team limit is exceeded.
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="closeModal('modal-reg')" class="px-4 py-2 rounded-xl text-xs text-slate-400 hover:text-white">Cancel</button>
+        <button onclick="submitRegistration()" class="bg-brand-600 hover:bg-brand-500 text-white px-5 py-2 rounded-xl text-xs font-bold transition">Complete Signup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // 1. Navigation View Switcher
+    function switchView(viewId) {
+      document.querySelectorAll('.view-panel').forEach(panel => panel.classList.add('hidden'));
+      document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('bg-brand-600', 'text-white'));
+      
+      const targetPanel = document.getElementById(`view-${viewId}`);
+      const targetNav = document.getElementById(`nav-${viewId}`);
+
+      if (targetPanel) targetPanel.classList.remove('hidden');
+      if (targetNav) targetNav.classList.add('bg-brand-600', 'text-white');
+
+      lucide.createIcons();
+    }
+
+    // Default to events view
+    switchView('events');
+
+    // 2. Role Switcher Simulation
+    function onRoleChange(role) {
+      if (role === 'participant') switchView('events');
+      else if (role === 'organiser') switchView('ops');
+      else if (role === 'volunteer') switchView('volunteer');
+      else if (role === 'judge') switchView('judge');
+    }
+
+    // 3. Contest Arena Problem Loader
+    const problems = {
+      'A': {
+        title: "Problem A: Bitwise Vault",
+        timeMem: "Time: 1.0s | Mem: 256MB",
+        desc: "You are given an array of N integers. A vault opens if you can partition the array into two non-empty subsets such that the bitwise XOR sum of elements in both subsets are equal. Determine if it is possible.",
+        input: "2\n4\n1 2 4 7\n3\n3 3 0",
+        output: "YES\nYES"
+      },
+      'B': {
+        title: "Problem B: Campus Pathways",
+        timeMem: "Time: 2.0s | Mem: 512MB",
+        desc: "The campus has V seminar halls and E bidirectional pathways. Find the minimum total distance to visit every building at least once starting from Auditorium (Hall 1).",
+        input: "4 4\n1 2 3\n2 3 1\n3 4 2\n4 1 5",
+        output: "6"
+      },
+      'C': {
+        title: "Problem C: Subsequence Clash",
+        timeMem: "Time: 0.5s | Mem: 128MB",
+        desc: "Given two strings S and T, determine the lexicographically smallest common subsequence of maximum possible length.",
+        input: "abacaba\naabc",
+        output: "aac"
+      }
+    };
+
+    function loadProblem(key) {
+      const p = problems[key];
+      document.getElementById('prob-title').innerText = p.title;
+      document.getElementById('prob-desc').innerText = p.desc;
+      document.getElementById('sample-input').innerText = p.input;
+      document.getElementById('sample-output').innerText = p.output;
+
+      // Update active pill styling
+      const pills = document.querySelectorAll('#problem-pills button');
+      pills.forEach((btn, idx) => {
+        if ((key === 'A' && idx === 0) || (key === 'B' && idx === 1) || (key === 'C' && idx === 2)) {
+          btn.className = "px-3 py-1 rounded-lg text-xs font-mono font-bold bg-brand-600 text-white";
+        } else {
+          btn.className = "px-3 py-1 rounded-lg text-xs font-mono font-bold bg-dark-700 text-slate-300 hover:bg-dark-600";
+        }
+      });
+    }
+
+    // 4. Copy Sample to Clipboard
+    function copySample() {
+      const text = document.getElementById('sample-input').innerText;
+      navigator.clipboard.writeText(text);
+      alert('Sample input copied to clipboard!');
+    }
+
+    // Practice mode editorial toggle
+    document.getElementById('practice-toggle').addEventListener('change', function(e) {
+      const box = document.getElementById('editorial-box');
+      if (e.target.checked) box.classList.remove('hidden');
+      else box.classList.add('hidden');
+    });
+
+    // 5. Simulated Code Execution Engine & Verdicts
+    function runCode(isSubmit) {
+      const consoleBox = document.getElementById('judge-console');
+      const status = document.getElementById('judge-status');
+      const pill = document.getElementById('verdict-pill');
+      const output = document.getElementById('console-output');
+
+      consoleBox.classList.remove('hidden');
+      status.innerText = "Running tests in isolated container...";
+      pill.innerHTML = `<span class="text-amber-400 font-mono">Running...</span>`;
+      output.innerText = "Compiling source with g++ -O3 -std=c++20...\nExecuting Sandbox Testcases (1/15)...";
+
+      setTimeout(() => {
+        if (!isSubmit) {
+          // Sample Run
+          status.innerText = "Sample tests passed";
+          pill.innerHTML = `<span class="badge-ac px-2 py-0.5 rounded text-[10px] font-bold">SAMPLE AC</span>`;
+          output.innerText = "Compilation successful (0.02s)\nRunning Sample 1: PASSED\nExecution time: 0.003s\nMemory: 3.2MB\nOutput matches expected.";
+        } else {
+          // Full Submission Simulation: Accepted
+          status.innerText = "Verdict Received";
+          pill.innerHTML = `<span class="badge-ac px-2 py-0.5 rounded text-[10px] font-bold">ACCEPTED (AC)</span>`;
+          output.innerText = "Test 1: AC (0.01s)\nTest 2: AC (0.02s)\nTest 3: AC (0.04s)\nAll 15 hidden test cases passed successfully!\n\nJudged by Isolated Worker #2.";
+          
+          // Trigger Celebration Confetti!
+          confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 }
+          });
+        }
+      }, 900);
+    }
+
+    // 6. Scoreboard Freeze Simulator
+    function toggleScoreboardFreeze() {
+      const isFrozen = document.getElementById('freeze-toggle').checked;
+      const indicator = document.getElementById('freeze-indicator');
+      const cell = document.getElementById('null-problem-c');
+
+      if (isFrozen) {
+        indicator.classList.remove('hidden');
+        cell.innerHTML = `<div class="badge-freeze rounded py-1 px-1.5 font-bold animate-pulse">? (2)</div>`;
+      } else {
+        indicator.classList.add('hidden');
+        cell.innerHTML = `<div class="badge-wa rounded py-1 px-1.5">-1</div>`;
+      }
+    }
+
+    // 7. Operations Clash Resolution Demo
+    function reassignVenue() {
+      const clashItem = document.getElementById('clash-item');
+      clashItem.className = "p-3.5 rounded-xl bg-dark-900/60 border border-dark-700 flex flex-col md:flex-row md:items-center justify-between gap-3";
+      clashItem.innerHTML = `
+        <div class="flex items-start gap-3">
+          <div class="bg-emerald-500/10 text-emerald-400 p-2 rounded-lg mt-0.5">
+            <i data-lucide="check" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <span class="font-bold text-white text-xs">RESOLVED: Robotics Simulation shifted to CSE Lab 5</span>
+            <p class="text-xs text-slate-400 mt-0.5">No overlap. Both events now verified for 02:00 PM slot.</p>
+          </div>
+        </div>
+        <span class="text-xs font-mono text-emerald-400 bg-emerald-950/40 px-2 py-1 rounded border border-emerald-800">Clash Resolved</span>
+      `;
+      document.getElementById('clash-count').innerText = "1 Clash";
+      document.getElementById('clash-badge').classList.add('hidden');
+      document.getElementById('readiness-pct').innerText = "94%";
+      document.getElementById('readiness-bar').style.width = "94%";
+      lucide.createIcons();
+    }
+
+    function resolveClashDemo() {
+      reassignVenue();
+      alert('Automatic schedule optimizer executed: Conflicting venues shifted to available reserve laboratories.');
+    }
+
+    // 8. Volunteer QR Code Scanner Simulation
+    function scanTicketSimulation() {
+      const val = document.getElementById('manual-ticket-id').value || "TICKET-9921";
+      const card = document.getElementById('scan-result-card');
+      card.classList.remove('hidden');
+
+      if (val.includes('9921')) {
+        document.getElementById('scan-name').innerText = "Tanvir Ahmed (Team ByteBenders)";
+        document.getElementById('scan-meta').innerText = "Event: Code Clash • Lab 3 Check-In Verified";
+      } else {
+        document.getElementById('scan-name').innerText = "Verified Participant: ID #" + val;
+        document.getElementById('scan-meta').innerText = "Event Access Granted • General Admission";
+      }
+
+      // Haptic/audio feedback simulation
+      if (navigator.vibrate) navigator.vibrate(100);
+    }
+
+    function requestSwapModal() {
+      const reason = prompt("Enter reason for shift swap request (will route to Organiser Approval Hub):", "Have to deliver team presentation at 2 PM");
+      if (reason) alert("Replacement request submitted to Coordinator Queue. You will receive notification upon approval.");
+    }
+
+    function submitIssue() {
+      const desc = document.getElementById('issue-desc').value;
+      if (!desc) {
+        alert("Please provide issue details.");
+        return;
+      }
+      alert("Ticket dispatched to Operations Command with High Priority! Assigned to floor coordinator.");
+      document.getElementById('issue-desc').value = '';
+    }
+
+    // 9. Rubric Scoring Logic
+    function updateRubric() {
+      const s1 = parseInt(document.getElementById('slider-1').value);
+      const s2 = parseInt(document.getElementById('slider-2').value);
+      const s3 = parseInt(document.getElementById('slider-3').value);
+
+      document.getElementById('score-val-1').innerText = `${s1} / 10`;
+      document.getElementById('score-val-2').innerText = `${s2} / 10`;
+      document.getElementById('score-val-3').innerText = `${s3} / 10`;
+
+      document.getElementById('total-rubric-score').innerText = (s1 + s2 + s3);
+    }
+
+    function submitScores() {
+      const total = document.getElementById('total-rubric-score').innerText;
+      alert(`Score of ${total}/30 locked and transmitted to Central Scoring Registry. Results pending coordinator sign-off.`);
+    }
+
+    function loadTeamSubmission(teamKey) {
+      if(teamKey === 'smart') {
+        document.getElementById('team-abstract').innerText = '"SmartGrid IoT enables self-healing energy distribution using microcontroller meshing."';
+      } else {
+        document.getElementById('team-abstract').innerText = '"NeuroPulse is an on-device lightweight edge model for predictive maintenance in electrical labs using sound vibrations."';
+      }
+    }
+
+    // 10. Modals & QR Pass Generator
+    let qrGenerated = false;
+    function openTicketModal() {
+      openModal('modal-ticket');
+      if (!qrGenerated) {
+        new QRCode(document.getElementById("qrcode-container"), {
+          text: "PUB-FEST26-TICKET-9921-TANVIR",
+          width: 140,
+          height: 140,
+          colorDark : "#0f172a",
+          colorLight : "#ffffff",
+          correctLevel : QRCode.CorrectLevel.H
+        });
+        qrGenerated = true;
+      }
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.remove('hidden');
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+    }
+
+    function submitRegistration() {
+      alert("Team registered successfully! Added to ICPC contest roster and tickets generated.");
+      closeModal('modal-reg');
+    }
+  </script>
+</body>
+</html>

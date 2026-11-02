@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PUB FestHub 🌸 — cozy campus fest & code studio</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: { 50: '#FFFEFC', 100: '#FFF9F2', 200: '#FFF3E4', 300: '#FDE8D3' },
+            sakura: {
+              50: '#FFF5F7', 100: '#FFE8EE', 200: '#FFD1DC', 300: '#FFAFC0',
+              400: '#FF859F', 500: '#FF5C81', 600: '#E03860'
+            },
+            matcha: { 50: '#F4F8F4', 100: '#E3EDE2', 200: '#C7DEC5', 500: '#7FA87B', 600: '#5F875B' },
+            honey: { 100: '#FEF9E7', 200: '#FCF0BD', 500: '#EAB308' },
+            cocoa: { 300: '#A89993', 400: '#7E6D66', 700: '#4A3B35', 900: '#2E221D' }
+          },
+          fontFamily: {
+            soft: ['"Nunito"', 'sans-serif'],
+            hand: ['"Caveat"', 'cursive'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          },
+          borderRadius: {
+            '4xl': '2rem',
+            '5xl': '2.5rem'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Nunito (Chubby & Soft), Caveat (Handwritten Notes) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons, Confetti & QRCode.js -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: radial-gradient(circle at 10% 20%, #FFF5F7 0%, #FFF9F2 50%, #FAF6F0 100%);
+      color: #4A3B35;
+    }
+
+    /* Soft Girl Scrapbook & Washi Tape Accents */
+    .washi-tape {
+      background: rgba(255, 182, 193, 0.45);
+      backdrop-filter: blur(2px);
+      transform: rotate(-1.5deg);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+
+    .soft-card {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1.5px solid #FFE4EA;
+      box-shadow: 0 10px 25px -5px rgba(255, 182, 193, 0.25), 0 8px 10px -6px rgba(255, 182, 193, 0.15);
+      backdrop-filter: blur(8px);
+    }
+
+    .soft-card:hover {
+      box-shadow: 0 15px 30px -5px rgba(255, 149, 169, 0.35);
+    }
+
+    .badge-ac-soft {
+      background-color: #EBF7EB;
+      color: #3B7237;
+      border: 1px solid #C4E4C2;
+    }
+    
+    .badge-wa-soft {
+      background-color: #FFF0F3;
+      color: #D13B62;
+      border: 1px solid #FFCCD7;
+    }
+
+    .badge-tle-soft {
+      background-color: #FEF9E7;
+      color: #B45309;
+      border: 1px solid #FDE68A;
+    }
+
+    .badge-freeze-soft {
+      background-color: #FFFBEB;
+      color: #B45309;
+      border: 1.5px dashed #FCD34D;
+    }
+
+    /* Cute Custom Scrollbar */
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #FFF5F7; border-radius: 99px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #FFC0CB; border-radius: 99px; }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col selection:bg-sakura-200 selection:text-sakura-600">
+  
+  <!-- ================= ETHEREAL FLORAL BACKGROUND LAYER ================= -->
+  <div class="fixed top-0 right-0 w-[420px] md:w-[620px] h-[450px] md:h-[620px] pointer-events-none z-0 opacity-25 mix-blend-multiply transition-all duration-700" 
+       style="background: url('https://images.unsplash.com/photo-1522383225653-ed111181a951?auto=format&fit=crop&w=1000&q=80') no-repeat top right / contain; mask-image: radial-gradient(circle at top right, black 35%, transparent 75%); -webkit-mask-image: radial-gradient(circle at top right, black 35%, transparent 75%);">
+  </div>
+
+  <!-- ================= DREAMY TOP NAVIGATION BAR ================= -->
+  <header class="sticky top-0 z-50 bg-white/70 backdrop-blur-md border-b border-sakura-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <!-- Brand & Mascot -->
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-3xl bg-gradient-to-tr from-sakura-300 via-sakura-200 to-cream-100 border border-white shadow-md shadow-sakura-200 flex items-center justify-center text-xl transform hover:rotate-12 transition">
+          🌸
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-xl tracking-tight text-cocoa-900">FestHub</span>
+            <span class="text-xs font-hand text-sakura-500 font-bold text-lg -rotate-3">cse fest '26 ✨</span>
+          </div>
+          <span class="text-[11px] text-cocoa-300 font-medium block">cozy event & coding corner</span>
+        </div>
+      </div>
+
+      <!-- Pill Nav Tabs -->
+      <nav class="hidden lg:flex items-center gap-1.5 bg-sakura-50/80 p-1.5 rounded-full border border-sakura-100 text-xs font-bold text-cocoa-400">
+        <button onclick="switchView('events')" id="nav-events" class="nav-tab px-4 py-2 rounded-full transition hover:text-sakura-600 active-tab">🌸 events & passes</button>
+        <button onclick="switchView('contest')" id="nav-contest" class="nav-tab px-4 py-2 rounded-full transition hover:text-sakura-600">💻 cozy arena</button>
+        <button onclick="switchView('scoreboard')" id="nav-scoreboard" class="nav-tab px-4 py-2 rounded-full transition hover:text-sakura-600">✨ standings</button>
+        <button onclick="switchView('ops')" id="nav-ops" class="nav-tab px-4 py-2 rounded-full transition hover:text-sakura-600 flex items-center gap-1.5">
+          <span>🕊️ floor ops</span>
+          <span id="clash-badge" class="w-2 h-2 rounded-full bg-sakura-500 animate-ping"></span>
+        </button>
+        <button onclick="switchView('volunteer')" id="nav-volunteer" class="nav-tab px-4 py-2 rounded-full transition hover:text-sakura-600">🎀 volunteer desk</button>
+        <button onclick="switchView('judge')" id="nav-judge" class="nav-tab px-4 py-2 rounded-full transition hover:text-sakura-600">🧁 juror sheet</button>
+      </nav>
+
+      <!-- Role Selector & Countdown -->
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-2 bg-cream-100 border border-sakura-200 px-3 py-1.5 rounded-full text-xs font-mono text-cocoa-700">
+          <span>🍵</span>
+          <span class="font-bold text-sakura-600" id="countdown">01:45:22</span>
+        </div>
+
+        <select id="role-selector" onchange="onRoleChange(this.value)" class="bg-white border-1.5 border-sakura-200 text-cocoa-700 text-xs font-bold px-3 py-2 rounded-full outline-none cursor-pointer shadow-sm hover:border-sakura-400 transition">
+          <option value="participant">Role: Participant 🌷</option>
+          <option value="organiser">Role: Coordinator 🕊️</option>
+          <option value="volunteer">Role: Volunteer 🎀</option>
+          <option value="judge">Role: Juror 🧁</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= PASTEL ANNOUNCEMENT TICKER ================= -->
+  <div class="bg-gradient-to-r from-sakura-100/60 via-cream-100 to-sakura-100/60 border-b border-sakura-100 py-1.5 px-4 text-xs flex items-center justify-between text-cocoa-400 font-medium">
+    <div class="max-w-7xl mx-auto w-full flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-sm">💌</span>
+        <span><strong class="text-sakura-600 font-bold">sweet reminder:</strong> ICPC Scoreboard will take a cozy freeze nap at 16:00! Free peach tea & lunch boxes at Booth #02 ✨</span>
+      </div>
+      <span class="hidden md:inline font-hand text-base text-sakura-500 font-bold">take a deep breath, you're doing great! 🌸</span>
+    </div>
+  </div>
+
+  <!-- ================= MAIN CONTENT VIEWS ================= -->
+  <main class="max-w-7xl w-full mx-auto p-4 sm:p-8 flex-1">
+
+    <!-- ================= VIEW 1: EVENTS & PASSES ================= -->
+    <section id="view-events" class="view-panel space-y-8">
+      
+      <!-- Gentle Hero Banner -->
+      <div class="soft-card rounded-5xl p-6 sm:p-10 relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div class="washi-tape px-4 py-1 text-xs font-bold text-sakura-700 rounded-sm inline-block absolute -top-1 left-10">
+          spring campus fest edition 🌸
+        </div>
+        
+        <div class="space-y-2 mt-2">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-sakura-500 bg-sakura-100 px-3 py-1 rounded-full">welcome, sweet soul ✨</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-cocoa-900 tracking-tight">find your creative stage 🌷</h1>
+          <p class="text-sm text-cocoa-400 max-w-lg leading-relaxed">Join friendly hackathons, coding contests with zero pressure, and design showcases with your favorite people.</p>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <button onclick="openModal('modal-create-event')" class="bg-cream-100 hover:bg-cream-200 border border-sakura-200 text-cocoa-700 font-bold px-5 py-3 rounded-full text-xs shadow-sm transition flex items-center gap-2">
+            <span>✨</span> Create Activity
+          </button>
+          <button onclick="openModal('modal-reg')" class="bg-gradient-to-r from-sakura-400 to-sakura-500 hover:from-sakura-500 hover:to-sakura-600 text-white font-bold px-6 py-3 rounded-full text-xs shadow-md shadow-sakura-300 transition transform hover:-translate-y-0.5 flex items-center gap-2">
+            <span>💌</span> Sign Up Team
+          </button>
+          <button onclick="openTicketModal()" class="bg-white hover:bg-cream-100 border border-sakura-200 text-cocoa-700 font-bold px-5 py-3 rounded-full text-xs shadow-sm transition flex items-center gap-2">
+            <span>🎟️</span> My Cozy Pass
+          </button>
+        </div>
+      </div>
+
+      <!-- Events Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Card 1 -->
+        <div class="soft-card rounded-4xl p-6 flex flex-col justify-between hover:-translate-y-1 transition duration-300 relative group">
+          <div class="absolute -top-3 right-6 bg-sakura-200/80 text-sakura-700 font-hand text-lg px-3 py-0.5 rounded-full shadow-sm">
+            friendly battle 🕊️
+          </div>
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-sakura-100 flex items-center justify-center text-2xl mb-4 shadow-inner overflow-hidden border border-sakura-200">
+              <img src="./leaf.jfif" alt="Cute Bear" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=200&q=80'" />
+            </div>
+            <div class="text-[11px] font-bold text-sakura-500 uppercase tracking-wider">ICPC Format • Teams of 3</div>
+            <h3 class="text-xl font-bold text-cocoa-900 mt-1">Inter-University Code Clash</h3>
+            <p class="text-xs text-cocoa-400 mt-2 leading-relaxed">A gentle yet thrilling algorithmic puzzle challenge. Solved in cozy isolation sandboxes with live cute verdicts!</p>
+
+            <div class="mt-6 pt-4 border-t border-sakura-100 space-y-2 text-xs text-cocoa-400 font-medium">
+              <div class="flex items-center gap-2"><span>📍</span> <span>CSE Lab 03 & 04 (Air conditioned)</span></div>
+              <div class="flex items-center gap-2"><span>⏰</span> <span>Today • 02:00 PM - 05:00 PM</span></div>
+              <div class="flex items-center gap-2 text-matcha-600 font-bold"><span>🌱</span> <span>Eligibility: Undergraduate CSE / SWE</span></div>
+              <div class="flex items-center gap-2 text-matcha-600 font-bold"><span>🌸</span> <span>Your spot is confirmed! (ByteBenders)</span></div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-sakura-100 flex items-center justify-between">
+            <span class="text-xs font-mono text-sakura-500 font-bold">Slots: 85/100 🌸</span>
+            <button onclick="switchView('contest')" class="bg-sakura-50 hover:bg-sakura-100 text-sakura-600 font-bold px-4 py-2 rounded-full text-xs transition border border-sakura-200">
+              Enter Arena ✨
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="soft-card rounded-4xl p-6 flex flex-col justify-between hover:-translate-y-1 transition duration-300 relative group">
+          <div class="absolute -top-3 right-6 bg-matcha-100 text-matcha-600 font-hand text-lg px-3 py-0.5 rounded-full shadow-sm">
+            art & tech 🍃
+          </div>
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-matcha-100 flex items-center justify-center text-2xl mb-4 shadow-inner overflow-hidden border border-matcha-200">
+              <img src="./pinkCrane.jfif" alt="Cute Bear" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=200&q=80'" />
+            </div>
+            <div class="text-[11px] font-bold text-matcha-600 uppercase tracking-wider">Project Showcase • 1-4 members</div>
+            <h3 class="text-xl font-bold text-cocoa-900 mt-1">Campus AI Innovation Showcase</h3>
+            <p class="text-xs text-cocoa-400 mt-2 leading-relaxed">Present cute models, empathetic UX design, and clever software solutions to our supportive panel of professors.</p>
+
+            <div class="mt-6 pt-4 border-t border-sakura-100 space-y-2 text-xs text-cocoa-400 font-medium">
+              <div class="flex items-center gap-2"><span>📍</span> <span>Central Auditorium (East Hall)</span></div>
+              <div class="flex items-center gap-2"><span>⏰</span> <span>Today • 11:00 AM - 01:30 PM</span></div>
+              <div class="flex items-center gap-2"><span>🌱</span> <span>Eligibility: All Departments</span></div>
+              <div class="flex items-center gap-2 text-honey-500 font-bold"><span>🧁</span> <span>Judging in progress</span></div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-sakura-100 flex items-center justify-between">
+            <span class="text-xs font-mono text-cocoa-300">Full house (45/45)</span>
+            <button onclick="switchView('judge')" class="bg-cream-100 hover:bg-cream-200 text-cocoa-700 font-bold px-4 py-2 rounded-full text-xs transition border border-sakura-200">
+              View Rubric 🎀
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="soft-card rounded-4xl p-6 flex flex-col justify-between hover:-translate-y-1 transition duration-300 relative group">
+          <div class="absolute -top-3 right-6 bg-cream-200 text-cocoa-700 font-hand text-lg px-3 py-0.5 rounded-full shadow-sm">
+            mindful talk 🍵
+          </div>
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-cream-200 flex items-center justify-center text-2xl mb-4 shadow-inner overflow-hidden border border-sakura-200">
+              <img src="./flowers.jpg" alt="Cute Bear" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=200&q=80'" />
+            </div>
+            <div class="text-[11px] font-bold text-cocoa-400 uppercase tracking-wider">Seminar • Open to all</div>
+            <h3 class="text-xl font-bold text-cocoa-900 mt-1">Keynote: Future of Edge Systems</h3>
+            <p class="text-xs text-cocoa-400 mt-2 leading-relaxed">Sip a warm drink and listen to cozy architectural discussions on low-power devices and tiny distributed computing.</p>
+
+            <div class="mt-6 pt-4 border-t border-sakura-100 space-y-2 text-xs text-cocoa-400 font-medium">
+              <div class="flex items-center gap-2"><span>📍</span> <span>Seminar Room 102</span></div>
+              <div class="flex items-center gap-2"><span>⏰</span> <span>Today • 03:30 PM - 04:30 PM</span></div>
+              <div class="flex items-center gap-2"><span>🌱</span> <span>Eligibility: Open Campus</span></div>
+              <div class="flex items-center gap-2 text-sakura-500 font-bold"><span>🍓</span> <span>Complimentary strawberry mochi</span></div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-sakura-100 flex items-center justify-between">
+            <span class="text-xs font-mono text-sakura-500">112/150 seats taken</span>
+            <button onclick="alert('Seat reserved with love! Your digital pass has been updated 🌸')" class="bg-sakura-100 hover:bg-sakura-200 text-sakura-600 font-bold px-4 py-2 rounded-full text-xs transition">
+              Save a Spot 💌
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- NEW SECTION: My Registrations, Team Invitations & Waitlist Status -->
+      <div class="soft-card rounded-4xl p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-sakura-100 pb-3">
+          <div>
+            <h3 class="font-extrabold text-cocoa-900 text-base flex items-center gap-2">
+              <span>💌</span> My Registrations & Team Invitations
+            </h3>
+            <p class="text-xs text-cocoa-400">Manage member approvals, pending team invitations, and waitlist tracking.</p>
+          </div>
+          <span class="text-xs font-hand text-sakura-500 font-bold text-base">keep your team aligned! ✨</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <!-- Active Team Card -->
+          <div class="bg-cream-50 p-4 rounded-3xl border border-sakura-100 space-y-3">
+            <div class="flex justify-between items-start">
+              <div>
+                <span class="font-bold text-cocoa-900 text-sm">Team ByteBenders (ICPC Clash)</span>
+                <span class="text-[10px] text-cocoa-400 block">Created by you • 3/3 confirmed members</span>
+              </div>
+              <span class="badge-ac-soft px-3 py-0.5 rounded-full text-[10px] font-bold">Approved & Ready 🌸</span>
+            </div>
+            
+            <div class="space-y-1 text-cocoa-700">
+              <div class="flex justify-between"><span>Tanvir Ahmed (Leader)</span> <span class="text-matcha-600 font-bold">Verified ✓</span></div>
+              <div class="flex justify-between"><span>Sumaiya Rahman (Member 2)</span> <span class="text-matcha-600 font-bold">Verified ✓</span></div>
+              <div class="flex justify-between"><span>Farhan Kabir (Member 3)</span> <span class="text-matcha-600 font-bold">Verified ✓</span></div>
+            </div>
+
+            <div class="flex justify-between items-center pt-2 border-t border-sakura-200">
+              <span class="text-[11px] text-cocoa-400">Venue: CSE Lab 03</span>
+              <button onclick="cancelRegistration('ByteBenders')" class="text-sakura-600 hover:underline text-[11px] font-bold">Cancel Registration</button>
+            </div>
+          </div>
+
+          <!-- Pending Invite & Waitlist Card -->
+          <div class="bg-cream-50 p-4 rounded-3xl border border-sakura-100 space-y-3">
+            <div class="flex justify-between items-start">
+              <div>
+                <span class="font-bold text-cocoa-900 text-sm">Pending Invite: Team AlgoDolls</span>
+                <span class="text-[10px] text-cocoa-400 block">Invited by: ayesha@pub.ac.bd</span>
+              </div>
+              <span class="badge-freeze-soft px-3 py-0.5 rounded-full text-[10px] font-bold">Waitlist #3 ⏳</span>
+            </div>
+            
+            <p class="text-cocoa-400 text-xs">Ayesha invited you to join for AI Innovation Showcase. Current slot is in waitlist pool #3.</p>
+
+            <div class="flex gap-2 pt-2 border-t border-sakura-200">
+              <button onclick="alert('Invitation accepted! If waitlist clears, badge will be issued.')" class="bg-sakura-400 hover:bg-sakura-500 text-white font-bold px-4 py-1.5 rounded-full text-xs transition">Accept Invite 🌸</button>
+              <button onclick="alert('Invitation declined gently.')" class="bg-white hover:bg-sakura-50 text-cocoa-700 font-bold px-4 py-1.5 rounded-full text-xs border border-sakura-200 transition">Decline</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sponsors & Equipment Allocation Tracker -->
+      <div class="soft-card rounded-4xl p-6 flex flex-wrap items-center justify-between gap-4 text-xs text-cocoa-400">
+        <div class="flex items-center gap-3">
+          <span class="text-xl">🧸</span>
+          <div>
+            <strong class="text-cocoa-900 font-bold block">Fest Equipment & Lab Allocation Status:</strong>
+            <span>All 40 Workstations in Lab 3 verified • 12 Projectors calibrated • 100 Raspberry Pi kits ready.</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-[11px] font-bold text-sakura-500">Supported by Campus Cloud Hub & GreenLab</span>
+          <button onclick="openModal('modal-cert')" class="bg-cream-100 hover:bg-cream-200 border border-sakura-200 text-cocoa-700 font-bold px-4 py-1.5 rounded-full text-xs transition">
+            Preview Certificates 🎓
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================= VIEW 2: COZY CODING ARENA ================= -->
+    <section id="view-contest" class="view-panel hidden space-y-6">
+      
+      <!-- Top Arena Toolbar -->
+      <div class="soft-card rounded-3xl p-4 flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <span class="text-xs font-bold text-cocoa-400 font-hand text-base">choose problem:</span>
+          <div class="flex gap-2" id="problem-pills">
+            <button onclick="loadProblem('A')" class="px-4 py-1.5 rounded-full text-xs font-bold bg-sakura-400 text-white shadow-sm">🌸 A. Bitwise Vault</button>
+            <button onclick="loadProblem('B')" class="px-4 py-1.5 rounded-full text-xs font-bold bg-white text-cocoa-400 border border-sakura-100 hover:bg-sakura-50">🍃 B. Campus Pathways</button>
+            <button onclick="loadProblem('C')" class="px-4 py-1.5 rounded-full text-xs font-bold bg-white text-cocoa-400 border border-sakura-100 hover:bg-sakura-50">✨ C. Subsequence Clash</button>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <label class="flex items-center gap-2 text-xs font-bold text-cocoa-400 cursor-pointer">
+            <input type="checkbox" id="practice-toggle" class="accent-sakura-400 rounded">
+            <span>Cozy Practice Mode (Show Editorial)</span>
+          </label>
+          <button onclick="switchView('scoreboard')" class="bg-cream-100 hover:bg-cream-200 text-cocoa-700 px-4 py-2 rounded-full text-xs font-bold border border-sakura-200 flex items-center gap-1.5 transition">
+            <span>🏆</span> Standings
+          </button>
+        </div>
+      </div>
+
+      <!-- Split Code Studio -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[740px]">
+        
+        <!-- Left: Cute Problem Viewer (5 Cols) -->
+        <div class="lg:col-span-5 soft-card rounded-4xl flex flex-col overflow-hidden">
+          
+          <!-- Inner Sub-Tabs: Statement vs Submissions vs Progress -->
+          <div class="p-3 border-b border-sakura-100 bg-sakura-50/50 flex justify-between items-center text-xs">
+            <div class="flex gap-1.5">
+              <button onclick="switchProblemTab('desc')" id="ptab-desc" class="px-3 py-1 rounded-full font-bold bg-sakura-400 text-white text-[11px]">Problem</button>
+              <button onclick="switchProblemTab('subs')" id="ptab-subs" class="px-3 py-1 rounded-full font-bold text-cocoa-400 hover:bg-sakura-100 text-[11px]">Submissions (3)</button>
+              <button onclick="switchProblemTab('progress')" id="ptab-progress" class="px-3 py-1 rounded-full font-bold text-cocoa-400 hover:bg-sakura-100 text-[11px]">My Topics 🌱</button>
+            </div>
+            <span class="text-xs font-mono text-sakura-600 bg-white border border-sakura-200 px-2.5 py-0.5 rounded-full font-bold">1.0s • 256MB</span>
+          </div>
+
+          <!-- Problem Description Tab -->
+          <div id="pcontent-desc" class="p-6 overflow-y-auto space-y-6 text-xs text-cocoa-700 custom-scrollbar flex-1 leading-relaxed">
+            <div>
+              <h2 id="prob-title" class="font-extrabold text-lg text-cocoa-900 mb-1">🌸 A. Bitwise Vault</h2>
+              <span class="text-[10px] text-sakura-500 font-bold bg-sakura-50 px-2 py-0.5 rounded-full border border-sakura-200">Topic: Bitwise Operations & Math</span>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-sakura-600 uppercase text-[11px] tracking-wider mb-1 flex items-center gap-1.5">
+                <span>🌷</span> Story & Description
+              </h4>
+              <p id="prob-desc">You are given an array of N integers. A vault opens if you can partition the array into two non-empty subsets such that the bitwise XOR sum of elements in both subsets are equal. Determine if it is possible.</p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-sakura-600 uppercase text-[11px] tracking-wider mb-1 flex items-center gap-1.5">
+                <span>🌱</span> Input Format
+              </h4>
+              <p>The first line contains T (number of test cases). Each test case consists of integer N, followed by N space-separated integers A₁, A₂, ..., Aₙ.</p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-sakura-600 uppercase text-[11px] tracking-wider mb-1 flex items-center gap-1.5">
+                <span>🎀</span> Output Format & Verdicts
+              </h4>
+              <p>Print <code class="bg-matcha-100 text-matcha-600 font-bold px-2 py-0.5 rounded-full font-mono">YES</code> if valid partition exists, otherwise <code class="bg-sakura-100 text-sakura-600 font-bold px-2 py-0.5 rounded-full font-mono">NO</code>. Evaluated on 15 isolated hidden test cases (AC, WA, TLE, RE, CE).</p>
+            </div>
+
+            <!-- Sample Testcase Box -->
+            <div class="bg-cream-100/70 border border-sakura-200 rounded-3xl p-4 space-y-3 font-mono text-xs">
+              <div class="flex justify-between items-center text-[11px] text-cocoa-400 font-bold">
+                <span>Sample Input 🕊️</span>
+                <button onclick="copySample()" class="text-sakura-500 hover:underline font-bold">Copy</button>
+              </div>
+              <pre id="sample-input" class="text-cocoa-900 bg-white/70 p-3 rounded-2xl">2
+4
+1 2 4 7
+3
+3 3 0</pre>
+
+              <div class="pt-2 border-t border-sakura-200">
+                <span class="text-[11px] text-cocoa-400 font-bold block mb-1">Expected Output ✨</span>
+                <pre id="sample-output" class="text-matcha-600 font-bold bg-white/70 p-3 rounded-2xl">YES
+YES</pre>
+              </div>
+            </div>
+
+            <!-- Practice Editorial Drawer -->
+            <div id="editorial-box" class="hidden p-4 bg-sakura-50 border border-sakura-200 rounded-3xl text-xs space-y-1">
+              <span class="font-bold text-sakura-600 flex items-center gap-1.5"><span>🧁</span> Solution Whisper:</span>
+              <p class="text-cocoa-400">If the XOR sum of all numbers equals 0, you can always split them evenly into two sets of equal XOR sums!</p>
+            </div>
+          </div>
+
+          <!-- Submissions History Tab -->
+          <div id="pcontent-subs" class="p-6 overflow-y-auto space-y-3 text-xs custom-scrollbar flex-1 hidden">
+            <h4 class="font-bold text-cocoa-900">Your Recent Submissions</h4>
+            <div class="space-y-2 font-mono text-[11px]">
+              <div class="p-3 bg-cream-50 rounded-2xl border border-sakura-100 flex justify-between items-center">
+                <div>
+                  <span class="font-bold text-matcha-600 block">Accepted (AC) 🌸</span>
+                  <span class="text-cocoa-400 text-[10px]">C++ 20 • 0.04s • 12MB • 14:18</span>
+                </div>
+                <span class="text-matcha-600 font-bold text-xs">+18m</span>
+              </div>
+              <div class="p-3 bg-cream-50 rounded-2xl border border-sakura-100 flex justify-between items-center">
+                <div>
+                  <span class="font-bold text-sakura-600 block">Time Limit Exceeded (TLE)</span>
+                  <span class="text-cocoa-400 text-[10px]">Python 3.11 • > 1.00s • 14:12</span>
+                </div>
+                <span class="text-sakura-500 font-bold text-xs">-1</span>
+              </div>
+              <div class="p-3 bg-cream-50 rounded-2xl border border-sakura-100 flex justify-between items-center">
+                <div>
+                  <span class="font-bold text-sakura-600 block">Wrong Answer (WA)</span>
+                  <span class="text-cocoa-400 text-[10px]">C++ 20 • Testcase 4 • 14:08</span>
+                </div>
+                <span class="text-sakura-500 font-bold text-xs">-1</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Topic-wise Student Progress Tab -->
+          <div id="pcontent-progress" class="p-6 overflow-y-auto space-y-4 text-xs custom-scrollbar flex-1 hidden">
+            <h4 class="font-bold text-cocoa-900">Student Topic Mastery Progress 🌱</h4>
+            
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between font-bold mb-1"><span>Bitwise & Mathematics</span> <span class="text-matcha-600">80% (Mastered)</span></div>
+                <div class="w-full bg-sakura-100 h-2 rounded-full overflow-hidden">
+                  <div class="bg-matcha-500 h-full rounded-full" style="width: 80%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between font-bold mb-1"><span>Graph Theory & Shortest Path</span> <span class="text-sakura-500">45% (Practicing)</span></div>
+                <div class="w-full bg-sakura-100 h-2 rounded-full overflow-hidden">
+                  <div class="bg-sakura-400 h-full rounded-full" style="width: 45%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between font-bold mb-1"><span>Dynamic Programming & Subsequences</span> <span class="text-honey-500">30% (Learning)</span></div>
+                <div class="w-full bg-sakura-100 h-2 rounded-full overflow-hidden">
+                  <div class="bg-honey-500 h-full rounded-full" style="width: 30%"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-3 bg-cream-50 rounded-2xl border border-sakura-100 text-cocoa-400 text-[11px]">
+              AI Tutor Feedback: "Great job on bitwise parity! To solve Problem B faster, review Dijkstra's priority queue implementation."
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Cozy Code Editor (7 Cols) -->
+        <div class="lg:col-span-7 soft-card rounded-4xl flex flex-col overflow-hidden">
+          
+          <div class="p-3.5 border-b border-sakura-100 bg-sakura-50/50 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-bold text-cocoa-400">Language:</span>
+              <select id="code-lang" class="bg-white border border-sakura-200 text-xs font-bold rounded-full px-3 py-1 text-cocoa-700 outline-none">
+                <option value="cpp">C++ 20 (GCC 13)</option>
+                <option value="python">Python 3.11 (PyPy)</option>
+                <option value="java">Java 17 (OpenJDK)</option>
+              </select>
+            </div>
+            
+            <!-- Verdict Simulation Selector to show AC/WA/TLE/RE/CE demo -->
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-mono text-cocoa-400">Sandbox Verdict:</span>
+              <select id="simulated-verdict" class="bg-white border border-sakura-200 text-[10px] font-bold rounded-full px-2 py-0.5 text-cocoa-700 outline-none">
+                <option value="AC">Expected: AC (Accepted)</option>
+                <option value="WA">Simulate: WA (Wrong Answer)</option>
+                <option value="TLE">Simulate: TLE (Time Limit Exceeded)</option>
+                <option value="RE">Simulate: RE (Runtime Error)</option>
+                <option value="CE">Simulate: CE (Compile Error)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Code Textarea -->
+          <div class="flex-1 p-5 bg-[#FAF7F2] font-mono text-xs relative">
+            <textarea id="code-editor" class="w-full h-full outline-none resize-none font-mono text-xs text-cocoa-900 leading-relaxed custom-scrollbar bg-transparent" spellcheck="false">#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void solve() {
+    int n;
+    cin >> n;
+    int total_xor = 0;
+    for(int i = 0; i < n; i++) {
+        int val;
+        cin >> val;
+        total_xor ^= val;
+    }
+    if(total_xor == 0) cout << "YES\n";
+    else cout << "NO\n";
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int t;
+    cin >> t;
+    while(t--) solve();
+    return 0;
+}</textarea>
+          </div>
+
+          <!-- Custom Input Toggle Box -->
+          <div id="custom-input-box" class="hidden p-3 border-t border-sakura-100 bg-white">
+            <label class="text-[10px] font-bold text-cocoa-400 uppercase tracking-wider block mb-1">Custom Testcase Input (stdin):</label>
+            <textarea id="custom-stdin" class="w-full h-14 bg-cream-50 border border-sakura-200 rounded-2xl p-2 font-mono text-xs outline-none resize-none" placeholder="Enter custom inputs here..."></textarea>
+          </div>
+
+          <!-- Console & Controls -->
+          <div class="border-t border-sakura-100 bg-white p-4 space-y-3">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-3">
+                <span id="judge-status" class="text-xs font-mono text-cocoa-400">ready to test your code ✨</span>
+                <button onclick="toggleCustomInput()" class="text-[11px] text-sakura-500 font-bold hover:underline">
+                  [Toggle Custom Stdin]
+                </button>
+              </div>
+              
+              <div class="flex gap-2">
+                <button onclick="runCode(false)" class="bg-cream-100 hover:bg-cream-200 text-cocoa-700 px-4 py-2 rounded-full text-xs font-bold border border-sakura-200 transition">
+                  Run Sample 🍃
+                </button>
+                <button onclick="runCode(true)" class="bg-gradient-to-r from-sakura-400 to-sakura-500 hover:from-sakura-500 hover:to-sakura-600 text-white font-bold px-6 py-2 rounded-full text-xs shadow-md shadow-sakura-200 transition">
+                  Submit with Love 🌸
+                </button>
+              </div>
+            </div>
+
+            <!-- Terminal output -->
+            <div id="judge-console" class="bg-cream-50 border border-sakura-200 rounded-3xl p-4 font-mono text-xs hidden">
+              <div class="flex justify-between items-center border-b border-sakura-100 pb-2 mb-2 text-[10px] text-cocoa-400 font-bold uppercase">
+                <span>Output Window ☕</span>
+                <span id="verdict-pill"></span>
+              </div>
+              <pre id="console-output" class="text-cocoa-700 text-[11px]"></pre>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= VIEW 3: SWEET ICPC SCOREBOARD WITH FREEZE ================= -->
+    <section id="view-scoreboard" class="view-panel hidden space-y-6">
+      
+      <div class="soft-card rounded-4xl p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <div class="flex items-center gap-3">
+            <h2 class="text-2xl font-extrabold text-cocoa-900">Live Fest Standings ✨</h2>
+            <span id="freeze-indicator" class="hidden text-xs px-3 py-1 rounded-full badge-freeze-soft font-bold animate-pulse">
+              Scoreboard is taking a nap 💤
+            </span>
+          </div>
+          <p class="text-xs text-cocoa-400 mt-1">Start: 14:00 • Freeze: 16:00 • End: 17:00 • Penalty: +20 mins per rejected run.</p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <label class="flex items-center gap-3 text-xs font-bold text-cocoa-700 cursor-pointer bg-cream-100 border border-sakura-200 px-4 py-2 rounded-full">
+            <input type="checkbox" id="freeze-toggle" onchange="toggleScoreboardFreeze()" class="accent-sakura-400 rounded">
+            <span>Toggle Nap Mode (Scoreboard Freeze)</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Summary -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="soft-card rounded-3xl p-4 text-center">
+          <span class="text-[11px] text-cocoa-400 font-bold uppercase">Total Submissions</span>
+          <div class="text-2xl font-black text-cocoa-900 mt-1">142</div>
+        </div>
+        <div class="soft-card rounded-3xl p-4 text-center">
+          <span class="text-[11px] text-cocoa-400 font-bold uppercase">Acceptance Rate</span>
+          <div class="text-2xl font-black text-matcha-600 mt-1">42.8%</div>
+        </div>
+        <div class="soft-card rounded-3xl p-4 text-center">
+          <span class="text-[11px] text-cocoa-400 font-bold uppercase">First to Solve A</span>
+          <div class="text-sm font-bold text-sakura-600 mt-1 font-mono">NullPointers (15m) ⭐</div>
+        </div>
+        <div class="soft-card rounded-3xl p-4 text-center">
+          <span class="text-[11px] text-cocoa-400 font-bold uppercase">Plagiarism Scan</span>
+          <div class="text-sm font-bold text-matcha-600 mt-1 font-mono">100% Clean ✓</div>
+        </div>
+      </div>
+
+      <!-- Standings Table -->
+      <div class="soft-card rounded-4xl overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs font-mono">
+            <thead>
+              <tr class="border-b border-sakura-100 bg-sakura-50/70 text-cocoa-400 text-[11px] uppercase tracking-wider">
+                <th class="p-4 w-16 text-center">Rank</th>
+                <th class="p-4">Team</th>
+                <th class="p-4 text-center">Solved</th>
+                <th class="p-4 text-center">Penalty</th>
+                <th class="p-4 text-center w-28">🌸 A (Vault)</th>
+                <th class="p-4 text-center w-28">🍃 B (Paths)</th>
+                <th class="p-4 text-center w-28">✨ C (Subseq)</th>
+                <th class="p-4 text-center w-28">🧁 D (Trees)</th>
+              </tr>
+            </thead>
+            <tbody id="scoreboard-body" class="divide-y divide-sakura-100/70">
+              
+              <tr class="hover:bg-sakura-50/50">
+                <td class="p-4 text-center font-bold text-sakura-600 text-sm">#1</td>
+                <td class="p-4">
+                  <span class="font-bold text-cocoa-900 block font-soft">ByteBenders 🦢</span>
+                  <span class="text-[10px] text-cocoa-300">PUB CSE • Team #104</span>
+                </td>
+                <td class="p-4 text-center font-bold text-matcha-600 text-sm">3</td>
+                <td class="p-4 text-center text-cocoa-400">184</td>
+                <td class="p-4 text-center"><span class="badge-ac-soft px-3 py-1 rounded-full font-bold">+1 (18)</span></td>
+                <td class="p-4 text-center"><span class="badge-ac-soft px-3 py-1 rounded-full font-bold">+2 (42)</span></td>
+                <td class="p-4 text-center"><span class="badge-ac-soft px-3 py-1 rounded-full font-bold">+1 (84)</span></td>
+                <td class="p-4 text-center text-cocoa-300">—</td>
+              </tr>
+
+              <tr class="hover:bg-sakura-50/50">
+                <td class="p-4 text-center font-bold text-cocoa-400 text-sm">#2</td>
+                <td class="p-4">
+                  <span class="font-bold text-cocoa-900 block font-soft">Recursive Knights 🌸</span>
+                  <span class="text-[10px] text-cocoa-300">PUB CSE • Team #112</span>
+                </td>
+                <td class="p-4 text-center font-bold text-matcha-600 text-sm">2</td>
+                <td class="p-4 text-center text-cocoa-400">95</td>
+                <td class="p-4 text-center"><span class="badge-ac-soft px-3 py-1 rounded-full font-bold">+1 (22)</span></td>
+                <td class="p-4 text-center"><span class="badge-ac-soft px-3 py-1 rounded-full font-bold">+1 (73)</span></td>
+                <td class="p-4 text-center"><span class="badge-wa-soft px-3 py-1 rounded-full font-bold">-3</span></td>
+                <td class="p-4 text-center text-cocoa-300">—</td>
+              </tr>
+
+              <tr class="hover:bg-sakura-50/50">
+                <td class="p-4 text-center font-bold text-cocoa-400 text-sm">#3</td>
+                <td class="p-4">
+                  <span class="font-bold text-cocoa-900 block font-soft">NullPointers 🎀</span>
+                  <span class="text-[10px] text-cocoa-300">PUB CSE • Team #121</span>
+                </td>
+                <td class="p-4 text-center font-bold text-matcha-600 text-sm">2</td>
+                <td class="p-4 text-center text-cocoa-400">110</td>
+                <td class="p-4 text-center"><span class="badge-ac-soft px-3 py-1 rounded-full font-bold">+1 (15) ⭐</span></td>
+                <td class="p-4 text-center"><span class="badge-ac-soft px-3 py-1 rounded-full font-bold">+1 (95)</span></td>
+                <td class="p-4 text-center" id="null-problem-c"><span class="badge-wa-soft px-3 py-1 rounded-full font-bold">-1</span></td>
+                <td class="p-4 text-center text-cocoa-300">—</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 4: COORDINATOR & OPS (CLASH DETECTOR) ================= -->
+    <section id="view-ops" class="view-panel hidden space-y-8">
+      
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h2 class="text-2xl font-extrabold text-cocoa-900">Coordinator Ops & Peacekeeper 🕊️</h2>
+          <p class="text-xs text-cocoa-400 mt-1">Keep schedule clashes, volunteer duties, and room allocations harmonized.</p>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="approveResultsAndCertificates()" class="bg-sakura-100 hover:bg-sakura-200 text-sakura-600 font-bold px-4 py-2 rounded-full text-xs transition border border-sakura-200">
+            Publish Results & Certs 🎓
+          </button>
+          <button onclick="resolveClashDemo()" class="bg-gradient-to-r from-matcha-500 to-matcha-600 hover:from-matcha-600 hover:to-matcha-600 text-white font-bold px-5 py-2.5 rounded-full text-xs shadow-md shadow-matcha-200 transition flex items-center gap-2">
+            <span>✨</span> Auto-Harmonize Clashes
+          </button>
+        </div>
+      </div>
+
+      <!-- Readiness Stat Panels -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="soft-card rounded-4xl p-5">
+          <span class="text-xs font-bold text-cocoa-400 block mb-1">Fest Readiness Gauge 🌸</span>
+          <div class="text-3xl font-extrabold text-sakura-600" id="readiness-pct">82%</div>
+          <div class="w-full bg-sakura-100 h-2.5 rounded-full mt-3 overflow-hidden">
+            <div id="readiness-bar" class="bg-gradient-to-r from-sakura-300 to-sakura-500 h-full rounded-full transition-all duration-500" style="width: 82%"></div>
+          </div>
+        </div>
+
+        <div class="soft-card rounded-4xl p-5">
+          <span class="text-xs font-bold text-cocoa-400 block mb-1">Venue Clashes 💔</span>
+          <div class="text-3xl font-extrabold text-sakura-600" id="clash-count">2 Clashes</div>
+          <p class="text-xs text-sakura-500 font-bold mt-2">Double booked at Lab 03 [2 PM]</p>
+        </div>
+
+        <div class="soft-card rounded-4xl p-5">
+          <span class="text-xs font-bold text-cocoa-400 block mb-1">Uncovered Shifts 🎀</span>
+          <div class="text-3xl font-extrabold text-honey-500" id="uncovered-shifts-count">3 Slots</div>
+          <p class="text-xs text-cocoa-400 mt-2">Auditorium needs 1 welcoming lead</p>
+        </div>
+
+        <div class="soft-card rounded-4xl p-5">
+          <span class="text-xs font-bold text-cocoa-400 block mb-1">Pending Juror Marks 🧁</span>
+          <div class="text-3xl font-extrabold text-matcha-600">1 Event</div>
+          <p class="text-xs text-cocoa-400 mt-2">AI Showcase score verification</p>
+        </div>
+      </div>
+
+      <!-- Schedule Clash Matrix -->
+      <div class="soft-card rounded-4xl p-6 space-y-4">
+        <h3 class="font-bold text-cocoa-900 text-sm">Gentle Timeline & Conflict Resolver</h3>
+
+        <div class="space-y-3" id="timeline-list">
+          <div id="clash-item" class="p-4 bg-sakura-50 border border-sakura-200 rounded-3xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="flex items-start gap-3">
+              <span class="text-2xl">⚠️</span>
+              <div>
+                <span class="font-bold text-sakura-600 text-xs">Oopsie! Conflict at CSE Lab 03</span>
+                <p class="text-xs text-cocoa-700 mt-0.5">"Inter-University Code Clash" and "Robotics Simulation" both assigned to <strong class="text-cocoa-900">Lab 3</strong> at 02:00 PM.</p>
+              </div>
+            </div>
+            <button onclick="reassignVenue()" class="bg-white hover:bg-sakura-100 text-sakura-600 border border-sakura-200 font-bold px-4 py-2 rounded-full text-xs transition shrink-0">
+              Move Robotics to Lab 05 🌸
+            </button>
+          </div>
+
+          <div class="p-4 bg-cream-50 border border-sakura-100 rounded-3xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="flex items-start gap-3">
+              <span class="text-2xl">🌱</span>
+              <div>
+                <span class="font-bold text-cocoa-900 text-xs">Central Auditorium: AI Showcase</span>
+                <p class="text-xs text-cocoa-400 mt-0.5">11:00 AM — 01:30 PM • 4 friendly volunteers on duty • 3 jurors assigned.</p>
+              </div>
+            </div>
+            <span class="text-xs font-bold text-matcha-600 bg-matcha-100 px-3 py-1 rounded-full">All Harmonious ✨</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- NEW SECTION: Shift Replacement Approval Queue & Issue Tracking Table -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Shift Swaps Approval Queue (5 Cols) -->
+        <div class="lg:col-span-5 soft-card rounded-4xl p-6 space-y-4">
+          <h3 class="font-bold text-cocoa-900 text-sm flex items-center gap-2">
+            <span>💌</span> Shift Swap Requests (Coordinator Queue)
+          </h3>
+          
+          <div class="space-y-3 text-xs" id="swap-requests-list">
+            <div class="p-3.5 bg-cream-50 rounded-2xl border border-sakura-100 space-y-2">
+              <div class="flex justify-between items-start">
+                <div>
+                  <strong class="text-cocoa-900">Volunteer: Nusrat Jahan</strong>
+                  <span class="text-[10px] text-cocoa-400 block">Duty: Lab 3 Registration (13:30 - 16:30)</span>
+                </div>
+                <span class="badge-freeze-soft px-2 py-0.5 rounded-full text-[10px] font-bold">Pending</span>
+              </div>
+              <p class="text-cocoa-700 italic">"Have academic defense at 2 PM. Replacement volunteer: Rifat Hossain confirmed."</p>
+              <div class="flex gap-2 pt-1">
+                <button onclick="approveSwap(this)" class="bg-matcha-500 hover:bg-matcha-600 text-white font-bold px-3 py-1 rounded-full text-[11px]">Approve Swap 🌸</button>
+                <button onclick="this.parentElement.parentElement.remove()" class="bg-white hover:bg-sakura-50 text-cocoa-400 px-3 py-1 rounded-full text-[11px] border border-sakura-200">Decline</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Issue Resolution & Owner Tracking (7 Cols) -->
+        <div class="lg:col-span-7 soft-card rounded-4xl p-6 space-y-4">
+          <div class="flex justify-between items-center">
+            <h3 class="font-bold text-cocoa-900 text-sm flex items-center gap-2">
+              <span>🛠️</span> On-Ground Issues & Resolution Tracker
+            </h3>
+            <span class="text-xs font-mono text-sakura-500 font-bold">Active Tickets: 2</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs font-mono">
+              <thead>
+                <tr class="border-b border-sakura-100 text-cocoa-400 text-[10px] uppercase">
+                  <th class="pb-2">Issue / Location</th>
+                  <th class="pb-2">Assigned Owner</th>
+                  <th class="pb-2">Status</th>
+                  <th class="pb-2 text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-sakura-100 text-[11px]" id="issue-table-body">
+                <tr>
+                  <td class="py-2.5">
+                    <span class="font-bold text-cocoa-900 font-soft block">PC #14 Lab 3 no LAN</span>
+                    <span class="text-[10px] text-cocoa-400">Network / Hardware</span>
+                  </td>
+                  <td class="py-2.5 font-soft">Kazi Anis (IT Lead)</td>
+                  <td class="py-2.5"><span class="badge-wa-soft px-2 py-0.5 rounded-full text-[10px] font-bold">In Progress</span></td>
+                  <td class="py-2.5 text-right"><button onclick="resolveIssue(this)" class="text-matcha-600 font-bold hover:underline">Mark Resolved ✓</button></td>
+                </tr>
+                <tr>
+                  <td class="py-2.5">
+                    <span class="font-bold text-cocoa-900 font-soft block">Auditorium mic battery</span>
+                    <span class="text-[10px] text-cocoa-400">AV Setup</span>
+                  </td>
+                  <td class="py-2.5 font-soft">Sabbir Rahman (Stage)</td>
+                  <td class="py-2.5"><span class="badge-ac-soft px-2 py-0.5 rounded-full text-[10px] font-bold">Resolved ✓</span></td>
+                  <td class="py-2.5 text-right"><span class="text-cocoa-300">Closed</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================= VIEW 5: VOLUNTEER & FIELD DESK ================= -->
+    <section id="view-volunteer" class="view-panel hidden space-y-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+        
+        <!-- Left: Cute QR Camera Scanner Simulation (6 Cols) -->
+        <div class="md:col-span-6 soft-card rounded-4xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-6">
+              <div>
+                <span class="text-[10px] font-bold text-sakura-500 uppercase tracking-widest block">reception station</span>
+                <h3 class="text-lg font-bold text-cocoa-900">Sweet QR Pass Scanner 🌸</h3>
+              </div>
+              <span class="text-xs font-bold bg-matcha-100 text-matcha-600 px-3 py-1 rounded-full">Camera Ready ✨</span>
+            </div>
+
+            <!-- Soft Viewfinder Box -->
+            <div class="bg-cream-100 border-2 border-dashed border-sakura-300 rounded-3xl p-8 aspect-video flex flex-col items-center justify-center relative">
+              <div class="w-32 h-32 rounded-3xl border-2 border-sakura-400 bg-white/50 flex items-center justify-center shadow-inner">
+                <span class="text-4xl animate-bounce">🦢</span>
+              </div>
+              <span class="text-xs text-cocoa-400 mt-4 font-bold">Hold up participant's digital pass ticket</span>
+            </div>
+
+            <div class="mt-4 flex gap-2">
+              <input type="text" id="manual-ticket-id" placeholder="Ticket ID: e.g. TICKET-9921" class="flex-1 bg-cream-50 border border-sakura-200 px-4 py-2.5 rounded-full text-xs font-mono text-cocoa-900 outline-none focus:border-sakura-400">
+              <button onclick="scanTicketSimulation()" class="bg-sakura-400 hover:bg-sakura-500 text-white font-bold px-5 py-2.5 rounded-full text-xs shadow-md shadow-sakura-200 transition">
+                Verify Pass 🎀
+              </button>
+            </div>
+          </div>
+
+          <div id="scan-result-card" class="mt-6 p-4 bg-matcha-50 border border-matcha-200 rounded-3xl hidden">
+            <h5 class="text-xs font-bold text-cocoa-900" id="scan-name">Tanvir Ahmed (ByteBenders) 🌸</h5>
+            <p class="text-[11px] text-cocoa-400 mt-1" id="scan-meta">Entry checked into Lab 3 • Strawberry Snack Box Claimed 🍓</p>
+          </div>
+        </div>
+
+        <!-- Right: Volunteer Roster, Task Checklist & Issue Dispatch (6 Cols) -->
+        <div class="md:col-span-6 space-y-6">
+          
+          <div class="soft-card rounded-4xl p-6">
+            <div class="flex justify-between items-center mb-2">
+              <h3 class="text-lg font-bold text-cocoa-900">Your Cozy Shift Assignment 🧸</h3>
+              <button onclick="clockInVolunteer(this)" class="bg-matcha-100 text-matcha-600 hover:bg-matcha-200 px-3 py-1 rounded-full text-xs font-bold transition">
+                Clock-in (Present) ✓
+              </button>
+            </div>
+            
+            <div class="bg-cream-100 p-4 rounded-3xl border border-sakura-100 space-y-2 text-xs">
+              <div class="flex justify-between"><span class="text-cocoa-400">Assigned Hall:</span> <span class="font-bold text-cocoa-900">CSE Lab 04 (North Wing)</span></div>
+              <div class="flex justify-between"><span class="text-cocoa-400">Shift Window:</span> <span class="font-bold text-sakura-600">01:30 PM - 04:30 PM</span></div>
+              <div class="flex justify-between"><span class="text-cocoa-400">Tasks:</span> <span class="text-cocoa-700">Check PCs, share positive energy, scan badges</span></div>
+            </div>
+
+            <!-- Task Checklist -->
+            <div class="mt-4 space-y-2 text-xs">
+              <span class="font-bold text-cocoa-900 block">Duty Completion Records:</span>
+              <label class="flex items-center gap-2 text-cocoa-700 cursor-pointer">
+                <input type="checkbox" checked onchange="updateReadinessProgress()" class="accent-sakura-400 rounded">
+                <span>[x] Inspect 20 PCs in Lab 4 for GCC compiler installation</span>
+              </label>
+              <label class="flex items-center gap-2 text-cocoa-700 cursor-pointer">
+                <input type="checkbox" checked onchange="updateReadinessProgress()" class="accent-sakura-400 rounded">
+                <span>[x] Place water bottles and welcome stationery on desks</span>
+              </label>
+              <label class="flex items-center gap-2 text-cocoa-700 cursor-pointer">
+                <input type="checkbox" onchange="updateReadinessProgress()" class="accent-sakura-400 rounded">
+                <span>[ ] Distribute snack boxes during 16:00 contest freeze</span>
+              </label>
+            </div>
+
+            <button onclick="requestSwapModal()" class="mt-4 w-full bg-white hover:bg-cream-100 text-cocoa-700 border border-sakura-200 py-2.5 rounded-full text-xs font-bold transition">
+              Request a Friendly Shift Swap 🕊️
+            </button>
+          </div>
+
+          <!-- Sweet Incident Box -->
+          <div class="soft-card rounded-4xl p-6 space-y-3">
+            <h3 class="text-lg font-bold text-cocoa-900">Report an On-Ground Oopsie 💌</h3>
+            
+            <select id="issue-category" class="w-full bg-cream-50 border border-sakura-200 px-4 py-2.5 rounded-full text-xs font-bold text-cocoa-700 outline-none">
+              <option>Power extension or multi-plug needed</option>
+              <option>LAN cable or Wi-Fi needs attention</option>
+              <option>Participant needs assistance / badging issue</option>
+              <option>Water or snack restock request</option>
+            </select>
+
+            <input type="text" id="issue-desc" placeholder="Location & gentle details..." class="w-full bg-cream-50 border border-sakura-200 px-4 py-2.5 rounded-full text-xs text-cocoa-900 outline-none focus:border-sakura-400">
+
+            <button onclick="submitIssue()" class="w-full bg-sakura-400 hover:bg-sakura-500 text-white font-bold py-2.5 rounded-full text-xs shadow-md shadow-sakura-200 transition">
+              Dispatch Request to Coordinators 🌸
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= VIEW 6: JUROR EVALUATION SHEET ================= -->
+    <section id="view-judge" class="view-panel hidden space-y-8">
+      
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h2 class="text-2xl font-extrabold text-cocoa-900">Juror Evaluation & Rubric 🧁</h2>
+          <p class="text-xs text-cocoa-400 mt-1">Review student projects with kindness, constructive guidance, and standardized rubrics.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-xs font-bold text-cocoa-400">Team:</span>
+          <select id="eval-team-selector" onchange="loadTeamSubmission(this.value)" class="bg-white border border-sakura-200 px-4 py-2 rounded-full text-xs font-bold text-cocoa-700 outline-none">
+            <option value="neuro">Team #102: NeuroPulse (AI Showcase)</option>
+            <option value="smart">Team #108: SmartGrid IoT</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Artifacts -->
+        <div class="lg:col-span-6 soft-card rounded-4xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-xs font-bold text-sakura-500 uppercase tracking-wider">Project Submission</span>
+              
+              <!-- Versioned Entries Dropdown -->
+              <select id="version-selector" onchange="changeVersion(this.value)" class="text-xs bg-cream-100 border border-sakura-200 px-3 py-1 rounded-full font-bold text-cocoa-700 outline-none">
+                <option value="1.2">Version 1.2 (Final - 11:15 AM) 🌸</option>
+                <option value="1.1">Version 1.1 (Draft 2 - 10:40 AM)</option>
+                <option value="1.0">Version 1.0 (Initial - 09:30 AM)</option>
+              </select>
+            </div>
+
+            <p class="text-xs text-cocoa-700 leading-relaxed mb-6 italic" id="team-abstract">
+              "NeuroPulse is an on-device lightweight edge model for predictive maintenance in electrical labs using sound vibrations."
+            </p>
+
+            <div class="space-y-3 text-xs">
+              <a href="#codebase" class="flex justify-between items-center p-3.5 rounded-2xl bg-cream-50 border border-sakura-100 hover:border-sakura-300 transition text-cocoa-900 font-bold">
+                <span class="flex items-center gap-2"><span>📂</span> github.com/pub-fest/neuropulse</span>
+                <span class="text-sakura-500 font-normal">View Code &rarr;</span>
+              </a>
+              <a href="#deck" class="flex justify-between items-center p-3.5 rounded-2xl bg-cream-50 border border-sakura-100 hover:border-sakura-300 transition text-cocoa-900 font-bold">
+                <span class="flex items-center gap-2"><span>📄</span> pitch_presentation_deck.pdf</span>
+                <span class="text-cocoa-300 font-normal">4.2MB</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="pt-4 mt-8 border-t border-sakura-100 flex justify-between items-center text-xs text-cocoa-400 font-bold">
+            <span>Deliberation Phase</span>
+            <span class="text-matcha-600">2/3 Jurors Completed ✨</span>
+          </div>
+        </div>
+
+        <!-- Rubric Sliders -->
+        <div class="lg:col-span-6 soft-card rounded-4xl p-6 space-y-6">
+          <div class="flex justify-between items-center border-b border-sakura-100 pb-3">
+            <h3 class="text-xs font-bold uppercase text-cocoa-400 tracking-wider">Evaluation Dimensions</h3>
+            <span class="text-xs font-bold text-cocoa-700">Total Score: <strong id="total-rubric-score" class="text-sakura-600 text-base">25</strong> / 30 🌸</span>
+          </div>
+
+          <div class="space-y-5 text-xs">
+            <div>
+              <div class="flex justify-between mb-1.5 font-bold">
+                <span class="text-cocoa-900">1. Creative Innovation & Technical Depth</span>
+                <span id="score-val-1" class="text-sakura-600">8 / 10</span>
+              </div>
+              <input type="range" min="0" max="10" value="8" oninput="updateRubric()" id="slider-1" class="w-full accent-sakura-400 cursor-pointer">
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1.5 font-bold">
+                <span class="text-cocoa-900">2. Empathy, UX & System Stability</span>
+                <span id="score-val-2" class="text-sakura-600">9 / 10</span>
+              </div>
+              <input type="range" min="0" max="10" value="9" oninput="updateRubric()" id="slider-2" class="w-full accent-sakura-400 cursor-pointer">
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1.5 font-bold">
+                <span class="text-cocoa-900">3. Live Presentation & Defense</span>
+                <span id="score-val-3" class="text-sakura-600">8 / 10</span>
+              </div>
+              <input type="range" min="0" max="10" value="8" oninput="updateRubric()" id="slider-3" class="w-full accent-sakura-400 cursor-pointer">
+            </div>
+          </div>
+
+          <textarea id="judge-remarks" placeholder="Warm words of encouragement and feedback for the team..." class="w-full bg-cream-50 border border-sakura-200 rounded-3xl p-3 text-xs outline-none focus:border-sakura-400 resize-none h-20 text-cocoa-700"></textarea>
+
+          <button onclick="submitScores()" class="w-full bg-gradient-to-r from-sakura-400 to-sakura-500 hover:from-sakura-500 hover:to-sakura-600 text-white font-bold py-3 rounded-full text-xs shadow-md shadow-sakura-200 transition">
+            Submit Warm Ratings 🌸
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= COZY FOOTER ================= -->
+  <footer class="bg-white/60 border-t border-sakura-100 mt-auto py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-cocoa-400 font-medium">
+      <div class="flex items-center gap-2">
+        <span>🌸</span>
+        <span class="font-bold text-cocoa-700">PUB FestHub • CSE Fest '26</span>
+        <span>— handcrafted with care and gentle algorithms</span>
+      </div>
+      <div class="font-hand text-base text-sakura-500 font-bold">
+        folded like an origami crane 🕊️
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= SCRAPBOOK MODALS ================= -->
+
+  <!-- Modal 1: Soft Girl Digital Pass -->
+  <div id="modal-ticket" class="fixed inset-0 bg-cocoa-900/30 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="soft-card rounded-5xl max-w-sm w-full p-8 text-center space-y-4 shadow-2xl relative border-2 border-sakura-200">
+      <div class="washi-tape px-4 py-1 text-xs font-bold text-sakura-700 rounded-sm inline-block mx-auto">
+        verified participant pass 🎟️
+      </div>
+      
+      <div class="p-4 bg-white rounded-3xl border border-sakura-100 inline-block shadow-inner mx-auto mt-2" id="qrcode-container"></div>
+
+      <div>
+        <h4 class="font-black text-xl text-cocoa-900">Tanvir Ahmed 🦢</h4>
+        <p class="text-xs text-sakura-500 font-bold">PUB CSE • ID: 2202051</p>
+        <span class="inline-block mt-2 text-[11px] font-mono bg-cream-100 border border-sakura-200 text-cocoa-700 px-3 py-1 rounded-full font-bold">TICKET-9921-SAKURA</span>
+      </div>
+
+      <p class="text-xs text-cocoa-400 leading-relaxed">Flash this sweet badge to receive your welcome kit & entrance to contest laboratories.</p>
+
+      <button onclick="closeModal('modal-ticket')" class="mt-2 text-xs font-bold text-cocoa-400 hover:text-sakura-600 transition">
+        Close [x]
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal 2: Sweet Team Registration -->
+  <div id="modal-reg" class="fixed inset-0 bg-cocoa-900/30 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="soft-card rounded-5xl max-w-md w-full p-8 space-y-5 shadow-2xl border-2 border-sakura-200">
+      <div class="flex justify-between items-center">
+        <h3 class="font-extrabold text-base text-cocoa-900">Sign Up Your Team 🌸</h3>
+        <button onclick="closeModal('modal-reg')" class="text-cocoa-300 hover:text-cocoa-700 text-xs font-bold">[Close]</button>
+      </div>
+
+      <div class="space-y-4 text-xs">
+        <div>
+          <label class="text-cocoa-400 font-bold block mb-1">Select Activity</label>
+          <select class="w-full bg-cream-50 border border-sakura-200 rounded-2xl p-3 outline-none font-bold text-cocoa-700">
+            <option>Inter-University Code Clash 🦢</option>
+            <option>Campus AI Innovation Showcase 🎨</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="text-cocoa-400 font-bold block mb-1">Your Team Name</label>
+          <input type="text" id="reg-team-name" placeholder="e.g. ByteBenders" class="w-full bg-cream-50 border border-sakura-200 rounded-2xl p-3 outline-none text-cocoa-900 font-bold">
+        </div>
+
+        <div>
+          <label class="text-cocoa-400 font-bold block mb-1">Invite Sweet Friends (Emails)</label>
+          <input type="text" id="reg-team-emails" placeholder="bestie1@pub.ac.bd, bestie2@pub.ac.bd" class="w-full bg-cream-50 border border-sakura-200 rounded-2xl p-3 outline-none text-cocoa-900">
+          <span class="text-[10px] text-cocoa-400 mt-1 block">Invitations will be dispatched to their FestHub inbox!</span>
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="closeModal('modal-reg')" class="px-4 py-2 text-xs font-bold text-cocoa-400">Cancel</button>
+        <button onclick="submitRegistration()" class="bg-gradient-to-r from-sakura-400 to-sakura-500 hover:from-sakura-500 hover:to-sakura-600 text-white font-bold px-6 py-2.5 rounded-full text-xs shadow-md shadow-sakura-200 transition">Confirm Team ✨</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: NEW Organiser Event / Activity Creation Form -->
+  <div id="modal-create-event" class="fixed inset-0 bg-cocoa-900/30 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="soft-card rounded-5xl max-w-lg w-full p-8 space-y-4 shadow-2xl border-2 border-sakura-200 max-h-[90vh] overflow-y-auto custom-scrollbar">
+      <div class="flex justify-between items-center">
+        <div>
+          <h3 class="font-extrabold text-base text-cocoa-900">Create Campus Activity / Contest 🌸</h3>
+          <span class="text-[10px] text-cocoa-400">Organiser & Coordinator Control</span>
+        </div>
+        <button onclick="closeModal('modal-create-event')" class="text-cocoa-300 hover:text-cocoa-700 text-xs font-bold">[Close]</button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="text-cocoa-400 font-bold block mb-1">Activity Type</label>
+          <select class="w-full bg-cream-50 border border-sakura-200 rounded-2xl p-2.5 text-cocoa-900 font-bold outline-none">
+            <option>Programming Contest (ICPC Rules)</option>
+            <option>General Competition / Project Showcase</option>
+            <option>Workshop / Seminar</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="text-cocoa-400 font-bold block mb-1">Activity Title</label>
+          <input type="text" placeholder="e.g. Robotics Maze Solver '26" class="w-full bg-cream-50 border border-sakura-200 rounded-2xl p-2.5 text-cocoa-900 font-bold outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="text-cocoa-400 font-bold block mb-1">Assigned Venue</label>
+            <input type="text" placeholder="e.g. CSE Lab 05" class="w-full bg-cream-50 border border-sakura-200 rounded-2xl p-2.5 text-cocoa-900 outline-none">
+          </div>
+          <div>
+            <label class="text-cocoa-400 font-bold block mb-1">Participant Limit</label>
+            <input type="number" placeholder="e.g. 60" class="w-full bg-cream-50 border border-sakura-200 rounded-2xl p-2.5 text-cocoa-900 outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="text-cocoa-400 font-bold block mb-1">Registration Deadline</label>
+            <input type="datetime-local" class="w-full bg-cream-50 border border-sakura-200 rounded-2xl p-2 text-cocoa-900 outline-none">
+          </div>
+          <div>
+            <label class="text-cocoa-400 font-bold block mb-1">Eligibility Criteria</label>
+            <input type="text" placeholder="e.g. CSE 2nd & 3rd Year" class="w-full bg-cream-50 border border-sakura-200 rounded-2xl p-2.5 text-cocoa-900 outline-none">
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="closeModal('modal-create-event')" class="px-4 py-2 text-xs font-bold text-cocoa-400">Cancel</button>
+        <button onclick="saveNewEvent()" class="bg-gradient-to-r from-sakura-400 to-sakura-500 hover:from-sakura-500 hover:to-sakura-600 text-white font-bold px-6 py-2 rounded-full text-xs shadow-md transition">Publish Activity ✨</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: NEW Certificate Preview Modal -->
+  <div id="modal-cert" class="fixed inset-0 bg-cocoa-900/30 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="soft-card rounded-5xl max-w-md w-full p-8 text-center space-y-4 shadow-2xl relative border-2 border-sakura-200">
+      <div class="washi-tape px-4 py-1 text-xs font-bold text-sakura-700 rounded-sm inline-block mx-auto">
+        verified credential 🎓
+      </div>
+
+      <div class="border-2 border-dashed border-sakura-200 p-6 rounded-3xl bg-cream-50/50 space-y-2">
+        <span class="text-3xl">🌸</span>
+        <h4 class="font-extrabold text-lg text-cocoa-900">Certificate of Achievement</h4>
+        <p class="text-xs text-cocoa-400 italic">This is proudly awarded to</p>
+        <div class="text-lg font-bold text-sakura-600 font-hand">Tanvir Ahmed (ByteBenders)</div>
+        <p class="text-[11px] text-cocoa-700">For outstanding participation in the Inter-University Code Clash during PUB CSE Fest-26.</p>
+        <div class="text-[9px] font-mono text-cocoa-300 pt-2 border-t border-sakura-100">Digitally Verified via FestHub Cryptographic Hash #9921-AC</div>
+      </div>
+
+      <div class="flex justify-center gap-2">
+        <button onclick="alert('Downloading high-res PDF certificate with digital signature... 🌸')" class="bg-sakura-400 hover:bg-sakura-500 text-white font-bold px-5 py-2 rounded-full text-xs shadow-md">Download PDF 📥</button>
+        <button onclick="closeModal('modal-cert')" class="bg-white border border-sakura-200 text-cocoa-700 px-4 py-2 rounded-full text-xs">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <script>
+    lucide.createIcons();
+
+    // 1. Soft View Switcher
+    function switchView(viewId) {
+      document.querySelectorAll('.view-panel').forEach(p => p.classList.add('hidden'));
+      document.querySelectorAll('.nav-tab').forEach(t => {
+        t.classList.remove('bg-sakura-400', 'text-white', 'shadow-sm');
+        t.classList.add('text-cocoa-400');
+      });
+      
+      const targetPanel = document.getElementById(`view-${viewId}`);
+      const targetNav = document.getElementById(`nav-${viewId}`);
+
+      if (targetPanel) targetPanel.classList.remove('hidden');
+      if (targetNav) {
+        targetNav.classList.remove('text-cocoa-400');
+        targetNav.classList.add('bg-sakura-400', 'text-white', 'shadow-sm');
+      }
+
+      lucide.createIcons();
+    }
+    switchView('events');
+
+    // 2. Persona Role Controller
+    function onRoleChange(role) {
+      if (role === 'participant') switchView('events');
+      else if (role === 'organiser') switchView('ops');
+      else if (role === 'volunteer') switchView('volunteer');
+      else if (role === 'judge') switchView('judge');
+    }
+
+    // 3. Problem Set Loader & Problem Tabs
+    const problems = {
+      'A': {
+        title: "🌸 A. Bitwise Vault",
+        desc: "You are given an array of N integers. A vault opens if you can partition the array into two non-empty subsets such that the bitwise XOR sum of elements in both subsets are equal. Determine if it is possible.",
+        input: "2\n4\n1 2 4 7\n3\n3 3 0",
+        output: "YES\nYES"
+      },
+      'B': {
+        title: "🍃 B. Campus Pathways",
+        desc: "The campus has V seminar halls and E bidirectional pathways. Find the minimum total distance to visit every building at least once starting from Auditorium (Hall 1).",
+        input: "4 4\n1 2 3\n2 3 1\n3 4 2\n4 1 5",
+        output: "6"
+      },
+      'C': {
+        title: "✨ C. Subsequence Clash",
+        desc: "Given two strings S and T, determine the lexicographically smallest common subsequence of maximum possible length.",
+        input: "abacaba\naabc",
+        output: "aac"
+      }
+    };
+
+    function loadProblem(key) {
+      const p = problems[key];
+      document.getElementById('prob-title').innerText = p.title;
+      document.getElementById('prob-desc').innerText = p.desc;
+      document.getElementById('sample-input').innerText = p.input;
+      document.getElementById('sample-output').innerText = p.output;
+
+      const pills = document.querySelectorAll('#problem-pills button');
+      pills.forEach((btn, idx) => {
+        if ((key === 'A' && idx === 0) || (key === 'B' && idx === 1) || (key === 'C' && idx === 2)) {
+          btn.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-sakura-400 text-white shadow-sm";
+        } else {
+          btn.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-white text-cocoa-400 border border-sakura-100 hover:bg-sakura-50";
+        }
+      });
+    }
+
+    function switchProblemTab(tab) {
+      document.getElementById('pcontent-desc').classList.add('hidden');
+      document.getElementById('pcontent-subs').classList.add('hidden');
+      document.getElementById('pcontent-progress').classList.add('hidden');
+      
+      document.getElementById('ptab-desc').className = "px-3 py-1 rounded-full font-bold text-cocoa-400 hover:bg-sakura-100 text-[11px]";
+      document.getElementById('ptab-subs').className = "px-3 py-1 rounded-full font-bold text-cocoa-400 hover:bg-sakura-100 text-[11px]";
+      document.getElementById('ptab-progress').className = "px-3 py-1 rounded-full font-bold text-cocoa-400 hover:bg-sakura-100 text-[11px]";
+
+      document.getElementById(`pcontent-${tab}`).classList.remove('hidden');
+      document.getElementById(`ptab-${tab}`).className = "px-3 py-1 rounded-full font-bold bg-sakura-400 text-white text-[11px]";
+    }
+
+    function copySample() {
+      navigator.clipboard.writeText(document.getElementById('sample-input').innerText);
+      alert('Sample copied gently to clipboard! 🌸');
+    }
+
+    function toggleCustomInput() {
+      const box = document.getElementById('custom-input-box');
+      box.classList.toggle('hidden');
+    }
+
+    document.getElementById('practice-toggle').addEventListener('change', function(e) {
+      const box = document.getElementById('editorial-box');
+      if (e.target.checked) box.classList.remove('hidden');
+      else box.classList.add('hidden');
+    });
+
+    // 4. Code Execution with simulated verdicts (AC, WA, TLE, RE, CE)
+    function runCode(isSubmit) {
+      const consoleBox = document.getElementById('judge-console');
+      const status = document.getElementById('judge-status');
+      const pill = document.getElementById('verdict-pill');
+      const output = document.getElementById('console-output');
+      const verdict = document.getElementById('simulated-verdict').value;
+
+      consoleBox.classList.remove('hidden');
+      status.innerText = "evaluating gently on sandbox...";
+      pill.innerHTML = `<span class="text-sakura-500 font-bold">testing... 🍵</span>`;
+      output.innerText = "compiling source with love via g++...\nrunning isolated test cases...";
+
+      setTimeout(() => {
+        if (!isSubmit) {
+          status.innerText = "Sample tests passed! ✨";
+          pill.innerHTML = `<span class="badge-ac-soft px-3 py-1 rounded-full text-[10px] font-bold">SAMPLE MATCH 🌸</span>`;
+          output.innerText = "Compilation successful (0.02s)\nRunning Sample 1: PASSED ✨\nExecution Time: 0.003s\nAll good to submit!";
+        } else {
+          if (verdict === 'AC') {
+            status.innerText = "Yay! Solution Accepted ✨";
+            pill.innerHTML = `<span class="badge-ac-soft px-3 py-1 rounded-full text-[10px] font-bold">ACCEPTED (AC) 🌸</span>`;
+            output.innerText = "Test 1: AC (0.01s)\nTest 2: AC (0.02s)\nTest 3: AC (0.04s)\nAll 15 test cases passed with flying colors!\nVerdict judged by Cozy Container #02.";
+            confetti({
+              particleCount: 80,
+              spread: 70,
+              origin: { y: 0.7 },
+              colors: ['#FFB6C1', '#FFC0CB', '#FFAFC0', '#FFD1DC', '#FFF9F2', '#E3EDE2']
+            });
+          } else if (verdict === 'TLE') {
+            status.innerText = "Time Limit Exceeded ⏳";
+            pill.innerHTML = `<span class="badge-tle-soft px-3 py-1 rounded-full text-[10px] font-bold">TIME LIMIT EXCEEDED (TLE)</span>`;
+            output.innerText = "Test 1: AC (0.02s)\nTest 2: AC (0.03s)\nTest 3: TLE (> 1.00s)\nOptimization advice: Check for O(N^2) inner loops.";
+          } else if (verdict === 'WA') {
+            status.innerText = "Wrong Answer on Test 4 💔";
+            pill.innerHTML = `<span class="badge-wa-soft px-3 py-1 rounded-full text-[10px] font-bold">WRONG ANSWER (WA)</span>`;
+            output.innerText = "Test 1: AC\nTest 2: AC\nTest 3: AC\nTest 4: WA\nOutput: NO\nExpected: YES";
+          } else if (verdict === 'RE') {
+            status.innerText = "Runtime Error (SIGSEGV) ⚠️";
+            pill.innerHTML = `<span class="badge-wa-soft px-3 py-1 rounded-full text-[10px] font-bold">RUNTIME ERROR (RE)</span>`;
+            output.innerText = "Exit code 139 (Segmentation fault)\nCheck vector boundary index access.";
+          } else if (verdict === 'CE') {
+            status.innerText = "Compilation Error 📜";
+            pill.innerHTML = `<span class="badge-wa-soft px-3 py-1 rounded-full text-[10px] font-bold">COMPILATION ERROR (CE)</span>`;
+            output.innerText = "error: expected ';' before '}' token in line 16.";
+          }
+        }
+      }, 700);
+    }
+
+    // 5. Toggle Freeze Scoreboard
+    function toggleScoreboardFreeze() {
+      const isFrozen = document.getElementById('freeze-toggle').checked;
+      const indicator = document.getElementById('freeze-indicator');
+      const cell = document.getElementById('null-problem-c');
+
+      if (isFrozen) {
+        indicator.classList.remove('hidden');
+        cell.innerHTML = `<span class="badge-freeze-soft px-3 py-1 rounded-full font-bold animate-pulse">? (2) 💤</span>`;
+      } else {
+        indicator.classList.add('hidden');
+        cell.innerHTML = `<span class="badge-wa-soft px-3 py-1 rounded-full font-bold">-1</span>`;
+      }
+    }
+
+    // 6. Ops Conflict & Resolution Functions
+    function reassignVenue() {
+      const clashItem = document.getElementById('clash-item');
+      clashItem.className = "p-4 bg-cream-50 border border-sakura-100 rounded-3xl flex flex-col md:flex-row md:items-center justify-between gap-4";
+      clashItem.innerHTML = `
+        <div class="flex items-start gap-3">
+          <span class="text-2xl">🌸</span>
+          <div>
+            <span class="font-bold text-cocoa-900 text-xs">RESOLVED: Robotics Moved to Lab 05</span>
+            <p class="text-xs text-cocoa-400 mt-0.5">Both events now enjoy their own peaceful space at 02:00 PM slot.</p>
+          </div>
+        </div>
+        <span class="text-xs font-bold text-matcha-600 bg-matcha-100 px-3 py-1 rounded-full">Peace Restored ✨</span>
+      `;
+      document.getElementById('clash-count').innerText = "1 Clash";
+      document.getElementById('clash-badge').classList.add('hidden');
+      document.getElementById('readiness-pct').innerText = "94%";
+      document.getElementById('readiness-bar').style.width = "94%";
+      lucide.createIcons();
+    }
+
+    function resolveClashDemo() {
+      reassignVenue();
+      alert('Harmonization complete! Clashes automatically shifted to open reserve labs 🌸');
+    }
+
+    function approveSwap(btn) {
+      btn.parentElement.innerHTML = `<span class="text-matcha-600 font-bold text-xs">✓ Swap Approved & Roster Updated!</span>`;
+      document.getElementById('uncovered-shifts-count').innerText = "2 Slots";
+      alert("Shift replacement approved! Volunteer schedules harmonized.");
+    }
+
+    function resolveIssue(btn) {
+      const row = btn.closest('tr');
+      row.children[2].innerHTML = `<span class="badge-ac-soft px-2 py-0.5 rounded-full text-[10px] font-bold">Resolved ✓</span>`;
+      btn.outerHTML = `<span class="text-cocoa-300">Closed</span>`;
+      alert("Ticket updated to Resolved! Audio & Floor teams notified.");
+    }
+
+    function approveResultsAndCertificates() {
+      alert("Organiser Approval Complete! Standings sealed and verified PDF certificates dispatched to all participant portals 🎓✨");
+    }
+
+    function updateReadinessProgress() {
+      document.getElementById('readiness-pct').innerText = "98%";
+      document.getElementById('readiness-bar').style.width = "98%";
+    }
+
+    function clockInVolunteer(btn) {
+      btn.className = "bg-matcha-500 text-white px-3 py-1 rounded-full text-xs font-bold";
+      btn.innerText = "Attended (Clocked-in) ✓";
+      alert("Your attendance has been recorded for the shift! 🌸");
+    }
+
+    // 7. QR Scanner Simulation
+    function scanTicketSimulation() {
+      const val = document.getElementById('manual-ticket-id').value || "TICKET-9921";
+      const card = document.getElementById('scan-result-card');
+      card.classList.remove('hidden');
+
+      if (val.includes('9921')) {
+        document.getElementById('scan-name').innerText = "Tanvir Ahmed (Team ByteBenders) 🌸";
+        document.getElementById('scan-meta').innerText = "Clearance: CSE Lab 3 Seat Confirmed • Strawberry Mochi Snack Claimed 🍓";
+      } else {
+        document.getElementById('scan-name').innerText = "Visitor ID #" + val + " ✨";
+        document.getElementById('scan-meta').innerText = "General Entry Authorized with Warm Welcome";
+      }
+    }
+
+    function requestSwapModal() {
+      const reason = prompt("Enter your gentle reason for shift swap request:", "Need to prepare project slides at 2 PM");
+      if (reason) alert("Swap request sent with love to the coordinator queue! 🕊️");
+    }
+
+    function submitIssue() {
+      const desc = document.getElementById('issue-desc').value;
+      if (!desc) return alert("Please share what needs a helping hand 🌸");
+      
+      const tbody = document.getElementById('issue-table-body');
+      const cat = document.getElementById('issue-category').value;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="py-2.5">
+          <span class="font-bold text-cocoa-900 font-soft block">${desc}</span>
+          <span class="text-[10px] text-cocoa-400">${cat}</span>
+        </td>
+        <td class="py-2.5 font-soft">Floor Lead (You)</td>
+        <td class="py-2.5"><span class="badge-wa-soft px-2 py-0.5 rounded-full text-[10px] font-bold">New Ticket</span></td>
+        <td class="py-2.5 text-right"><button onclick="resolveIssue(this)" class="text-matcha-600 font-bold hover:underline">Mark Resolved ✓</button></td>
+      `;
+      tbody.prepend(tr);
+      
+      alert("Ticket dispatched softly to our floor coordinators and added to the tracking log!");
+      document.getElementById('issue-desc').value = '';
+    }
+
+    // 8. Juror Rubric Updates & Versioning
+    function updateRubric() {
+      const s1 = parseInt(document.getElementById('slider-1').value);
+      const s2 = parseInt(document.getElementById('slider-2').value);
+      const s3 = parseInt(document.getElementById('slider-3').value);
+
+      document.getElementById('score-val-1').innerText = `${s1} / 10`;
+      document.getElementById('score-val-2').innerText = `${s2} / 10`;
+      document.getElementById('score-val-3').innerText = `${s3} / 10`;
+      document.getElementById('total-rubric-score').innerText = (s1 + s2 + s3);
+    }
+
+    function submitScores() {
+      const total = document.getElementById('total-rubric-score').innerText;
+      alert(`Score rating of ${total}/30 recorded and saved with kindness! 🌸`);
+    }
+
+    function loadTeamSubmission(teamKey) {
+      if(teamKey === 'smart') {
+        document.getElementById('team-abstract').innerText = '"SmartGrid IoT enables self-healing energy distribution using microcontroller meshing."';
+      } else {
+        document.getElementById('team-abstract').innerText = '"NeuroPulse is an on-device lightweight edge model for predictive maintenance in electrical labs using sound vibrations."';
+      }
+    }
+
+    function changeVersion(ver) {
+      alert(`Loaded submission version ${ver}. Differences highlighted in juror audit log.`);
+    }
+
+    // 9. Modals & Helpers
+    let qrGenerated = false;
+    function openTicketModal() {
+      openModal('modal-ticket');
+      if (!qrGenerated) {
+        new QRCode(document.getElementById("qrcode-container"), {
+          text: "PUB-FEST26-SAKURA-PASS-9921",
+          width: 140,
+          height: 140,
+          colorDark: "#4A3B35",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.H
+        });
+        qrGenerated = true;
+      }
+    }
+
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+    
+    function submitRegistration() {
+      const team = document.getElementById('reg-team-name').value || "ByteBenders";
+      alert(`Team "${team}" registered! Invitations dispatched and badge pass generated 🌸`);
+      closeModal('modal-reg');
+    }
+
+    function cancelRegistration(team) {
+      if(confirm(`Are you sure you want to cancel registration for ${team}? Slot will open for waitlisted students.`)) {
+        alert("Registration cancelled softly. Slot returned to the open pool.");
+      }
+    }
+
+    function saveNewEvent() {
+      alert("New campus event published! Shift assignments and venue checks logged in Coordinator Ops ✨");
+      closeModal('modal-create-event');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PUB FestHub — uniform experiment cse'26</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gallery: { 50: '#FBFBFA', 100: '#F4F4F2', 200: '#EBEBE8', 300: '#DCDCD8', 900: '#121212' },
+            petal: {
+              100: '#FDE7F0', 200: '#FBCFE0', 300: '#F690B8', 400: '#EE468A',
+              500: '#E61E6E', 600: '#CF115C', 700: '#A40C46', 900: '#520320'
+            },
+            leaf: {
+              100: '#EBF4EA', 200: '#D5E9D3', 300: '#A8D2A5', 400: '#6FA86A',
+              500: '#488443', 600: '#346530', 700: '#234420', 900: '#0E1D0D'
+            }
+          },
+          fontFamily: {
+            sans: ['"Inter"', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts & Lucide Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    body {
+      background-color: #F8F8F6;
+      color: #141414;
+      letter-spacing: -0.015em;
+    }
+    
+    /* Editorial Line & Border Stylings */
+    .hairline-b { border-bottom: 1px solid #E5E5E0; }
+    .hairline-r { border-right: 1px solid #E5E5E0; }
+    .hairline { border: 1px solid #E5E5E0; }
+
+    /* The Pixel Mosaic Graphic System */
+    .pixel-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 10px);
+      grid-template-rows: repeat(4, 10px);
+      gap: 1.5px;
+    }
+    .px-sq { width: 10px; height: 10px; }
+
+    /* Contest Verdicts in Exhibition Style */
+    .badge-ac-petal {
+      background-color: #EBF4EA;
+      color: #234420;
+      border: 1px solid #A8D2A5;
+    }
+    .badge-wa-petal {
+      background-color: #FDE7F0;
+      color: #A40C46;
+      border: 1px solid #F690B8;
+    }
+    .badge-freeze-petal {
+      background-color: #FFFBEB;
+      color: #92400E;
+      border: 1px dashed #F59E0B;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #F4F4F2; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #DCDCD8; }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col selection:bg-petal-500 selection:text-white">
+
+  <!-- ================= EDITORIAL TOP MASTHEAD ================= -->
+  <header class="hairline-b bg-white/90 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between gap-6">
+      
+      <!-- Brand & Artwork Monogram -->
+      <div class="flex items-center gap-4">
+        <!-- Minimalist lightning circle emblem (poster homage) -->
+        <div class="w-9 h-9 rounded-full border border-black flex items-center justify-center text-black shrink-0 hover:rotate-12 transition">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M13 2L3 14h8l-2 8 10-12h-8l2-8z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-black text-lg tracking-tighter uppercase text-black">pub festhub</span>
+            <span class="text-[10px] font-mono tracking-widest text-slate-400 uppercase">/ no. 26</span>
+          </div>
+          <span class="text-[11px] block font-mono text-neutral-400 tracking-wider">uniform experiment • cse operations</span>
+        </div>
+      </div>
+
+      <!-- Swiss Navigation Tabs -->
+      <nav class="hidden md:flex items-center space-x-1 border-x hairline px-4 h-full text-xs font-mono uppercase tracking-wider">
+        <button onclick="switchView('events')" id="nav-events" class="nav-tab px-3 py-2 text-neutral-400 hover:text-black transition">01. Events</button>
+        <button onclick="switchView('contest')" id="nav-contest" class="nav-tab px-3 py-2 text-neutral-400 hover:text-black transition">02. Arena</button>
+        <button onclick="switchView('scoreboard')" id="nav-scoreboard" class="nav-tab px-3 py-2 text-neutral-400 hover:text-black transition">03. Standings</button>
+        <button onclick="switchView('ops')" id="nav-ops" class="nav-tab px-3 py-2 text-neutral-400 hover:text-black transition flex items-center gap-1.5">
+          <span>04. Matrix</span>
+          <span id="clash-badge" class="w-1.5 h-1.5 bg-petal-500"></span>
+        </button>
+        <button onclick="switchView('volunteer')" id="nav-volunteer" class="nav-tab px-3 py-2 text-neutral-400 hover:text-black transition">05. Field Ops</button>
+        <button onclick="switchView('judge')" id="nav-judge" class="nav-tab px-3 py-2 text-neutral-400 hover:text-black transition">06. Rubric</button>
+      </nav>
+
+      <!-- Chrono Metric & Role Selector -->
+      <div class="flex items-center gap-4">
+        <div class="hidden sm:flex flex-col text-right font-mono">
+          <span class="text-[9px] uppercase tracking-widest text-neutral-400">Contest Window</span>
+          <span id="countdown" class="text-xs font-bold text-black">01:45:22.08</span>
+        </div>
+
+        <select id="role-selector" onchange="onRoleChange(this.value)" class="bg-gallery-100 hairline text-neutral-800 text-xs font-mono uppercase px-3 py-2 outline-none cursor-pointer focus:border-black">
+          <option value="participant">Persona: Participant</option>
+          <option value="organiser">Persona: Curator / Organiser</option>
+          <option value="volunteer">Persona: Ground Crew</option>
+          <option value="judge">Persona: Juror</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= EDITORIAL MARQUEE TICKER ================= -->
+  <div class="hairline-b bg-gallery-100 py-1.5 px-4 text-[11px] font-mono tracking-wider flex items-center justify-between text-neutral-600">
+    <div class="max-w-7xl mx-auto w-full flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="flex gap-0.5">
+          <span class="w-1.5 h-1.5 bg-petal-400"></span>
+          <span class="w-1.5 h-1.5 bg-petal-600"></span>
+          <span class="w-1.5 h-1.5 bg-leaf-500"></span>
+        </div>
+        <span><strong>DISPATCH:</strong> Programming arena live. Scoreboard freeze scheduled at T-60m. Dynamic badge verification active at Lab 3.</span>
+      </div>
+      <span class="hidden md:inline font-bold uppercase text-neutral-400 text-[10px]">Exhibition Plate // CSE-FEST-PUB</span>
+    </div>
+  </div>
+
+  <!-- ================= MAIN VIEW CONTAINER ================= -->
+  <main class="max-w-7xl w-full mx-auto p-4 md:p-8 flex-1">
+
+    <!-- ================= VIEW 1: EVENTS CATALOGUE ================= -->
+    <section id="view-events" class="view-panel space-y-8">
+      
+      <!-- Conceptual Header with Artistic Pixel Petal Fragment -->
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 pb-6 hairline-b relative">
+        <div class="space-y-2">
+          <div class="inline-block text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-400">Section I — Catalogue of Operations</div>
+          <h1 class="text-4xl md:text-5xl font-black tracking-tight text-black lowercase">exhibitions & contests.</h1>
+          <p class="text-sm text-neutral-500 font-normal max-w-lg">Disciplined engineering encounters organic competition. Select an entry stream or generate an exhibition badge.</p>
+        </div>
+
+        <!-- Decorative Floral Pixel Fragment (Homage to Yuni Yoshida's pink petal & green leaf) -->
+        <div class="flex items-center gap-6">
+          <div class="hidden sm:flex items-center gap-2">
+            <!-- Leaf pixel mosaic -->
+            <div class="pixel-grid">
+              <div class="px-sq bg-leaf-200"></div><div class="px-sq bg-leaf-300"></div><div class="px-sq bg-leaf-400"></div><div class="px-sq bg-transparent"></div>
+              <div class="px-sq bg-leaf-300"></div><div class="px-sq bg-leaf-500"></div><div class="px-sq bg-leaf-600"></div><div class="px-sq bg-leaf-400"></div>
+              <div class="px-sq bg-transparent"></div><div class="px-sq bg-leaf-600"></div><div class="px-sq bg-leaf-700"></div><div class="px-sq bg-leaf-500"></div>
+              <div class="px-sq bg-transparent"></div><div class="px-sq bg-transparent"></div><div class="px-sq bg-leaf-600"></div><div class="px-sq bg-leaf-300"></div>
+            </div>
+            <!-- Petal pixel mosaic -->
+            <div class="pixel-grid">
+              <div class="px-sq bg-petal-200"></div><div class="px-sq bg-petal-300"></div><div class="px-sq bg-petal-400"></div><div class="px-sq bg-petal-200"></div>
+              <div class="px-sq bg-petal-300"></div><div class="px-sq bg-petal-500"></div><div class="px-sq bg-petal-600"></div><div class="px-sq bg-petal-400"></div>
+              <div class="px-sq bg-petal-400"></div><div class="px-sq bg-petal-600"></div><div class="px-sq bg-petal-700"></div><div class="px-sq bg-petal-500"></div>
+              <div class="px-sq bg-petal-200"></div><div class="px-sq bg-petal-400"></div><div class="px-sq bg-petal-500"></div><div class="px-sq bg-transparent"></div>
+            </div>
+          </div>
+
+          <div class="flex gap-2">
+            <button onclick="openModal('modal-reg')" class="bg-black text-white hover:bg-neutral-800 text-xs font-mono uppercase tracking-wider px-5 py-3 transition">
+              + Team Register
+            </button>
+            <button onclick="openTicketModal()" class="bg-white hairline hover:bg-gallery-100 text-black text-xs font-mono uppercase tracking-wider px-5 py-3 transition">
+              Show Pass
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Events Exhibition Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Card 1 -->
+        <div class="bg-white hairline p-6 flex flex-col justify-between hover:border-black transition relative group">
+          <div class="absolute top-0 right-0 w-3 h-3 bg-petal-500"></div>
+          <div>
+            <div class="flex justify-between items-start text-[11px] font-mono text-neutral-400 mb-4">
+              <span>SERIES 01 // ICPC</span>
+              <span class="text-black font-semibold">MAX 3 MEM</span>
+            </div>
+            <h3 class="text-xl font-bold text-black tracking-tight group-hover:text-petal-600 transition">Inter-University Code Clash</h3>
+            <p class="text-xs text-neutral-500 mt-2 font-normal leading-relaxed">Algorithmic problem sets hosted in sandboxed memory spaces. Scored on strict execution time and submission penalty.</p>
+            
+            <div class="mt-6 pt-4 hairline-t space-y-2 text-xs font-mono text-neutral-600">
+              <div class="flex justify-between"><span>LOCATION</span> <span class="text-black font-medium">CSE Lab 03 & 04</span></div>
+              <div class="flex justify-between"><span>TIME WINDOW</span> <span class="text-black font-medium">14:00 — 17:00</span></div>
+              <div class="flex justify-between"><span>STATUS</span> <span class="text-leaf-600 font-medium">Confirmed / Team ByteBenders</span></div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-4 hairline-t flex items-center justify-between">
+            <span class="text-[10px] font-mono tracking-wider text-neutral-400">SLOTS: 85/100</span>
+            <button onclick="switchView('contest')" class="text-xs font-mono uppercase tracking-wider text-black hover:text-petal-600 flex items-center gap-1 font-bold">
+              Enter Arena &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white hairline p-6 flex flex-col justify-between hover:border-black transition relative group">
+          <div class="absolute top-0 right-0 w-3 h-3 bg-leaf-500"></div>
+          <div>
+            <div class="flex justify-between items-start text-[11px] font-mono text-neutral-400 mb-4">
+              <span>SERIES 02 // JURY EXHIBIT</span>
+              <span class="text-black font-semibold">1-4 MEMBERS</span>
+            </div>
+            <h3 class="text-xl font-bold text-black tracking-tight group-hover:text-leaf-600 transition">Campus AI Innovation Showcase</h3>
+            <p class="text-xs text-neutral-500 mt-2 font-normal leading-relaxed">System architecture exhibition evaluated by jury panels on technical complexity, product coherence, and live defense.</p>
+            
+            <div class="mt-6 pt-4 hairline-t space-y-2 text-xs font-mono text-neutral-600">
+              <div class="flex justify-between"><span>LOCATION</span> <span class="text-black font-medium">Auditorium East</span></div>
+              <div class="flex justify-between"><span>TIME WINDOW</span> <span class="text-black font-medium">11:00 — 13:30</span></div>
+              <div class="flex justify-between"><span>STATUS</span> <span class="text-neutral-400 font-medium">Entries Closed</span></div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-4 hairline-t flex items-center justify-between">
+            <span class="text-[10px] font-mono tracking-wider text-neutral-400">CAPACITY REACHED</span>
+            <button onclick="switchView('judge')" class="text-xs font-mono uppercase tracking-wider text-black hover:text-leaf-600 flex items-center gap-1 font-bold">
+              Review Rubric &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white hairline p-6 flex flex-col justify-between hover:border-black transition relative group">
+          <div class="absolute top-0 right-0 w-3 h-3 bg-neutral-300"></div>
+          <div>
+            <div class="flex justify-between items-start text-[11px] font-mono text-neutral-400 mb-4">
+              <span>SERIES 03 // DISCOURSE</span>
+              <span class="text-black font-semibold">OPEN ACCESS</span>
+            </div>
+            <h3 class="text-xl font-bold text-black tracking-tight group-hover:text-black transition">Keynote: Edge Distributed Systems</h3>
+            <p class="text-xs text-neutral-500 mt-2 font-normal leading-relaxed">Lecture on resource-constrained embedded intelligence by guest researchers. Individual badge reservations required.</p>
+            
+            <div class="mt-6 pt-4 hairline-t space-y-2 text-xs font-mono text-neutral-600">
+              <div class="flex justify-between"><span>LOCATION</span> <span class="text-black font-medium">Seminar Hall 102</span></div>
+              <div class="flex justify-between"><span>TIME WINDOW</span> <span class="text-black font-medium">15:30 — 16:30</span></div>
+              <div class="flex justify-between"><span>STATUS</span> <span class="text-leaf-600 font-medium">Seats Available</span></div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-4 hairline-t flex items-center justify-between">
+            <span class="text-[10px] font-mono tracking-wider text-neutral-400">112 / 150 CLAIMED</span>
+            <button onclick="alert('Seat successfully reserved. Ticket badge synchronization complete.')" class="text-xs font-mono uppercase tracking-wider text-black hover:underline font-bold">
+              Reserve Seat
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= VIEW 2: CONTEST ARENA (LABORATORY MINIMAL) ================= -->
+    <section id="view-contest" class="view-panel hidden space-y-6">
+      
+      <!-- Arena Control Strip -->
+      <div class="bg-white hairline p-4 flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+          <span class="text-xs font-mono uppercase tracking-wider text-neutral-400">Problem Set:</span>
+          <div class="flex gap-1" id="problem-pills">
+            <button onclick="loadProblem('A')" class="px-3 py-1.5 text-xs font-mono uppercase bg-black text-white font-bold">A. Bitwise Vault</button>
+            <button onclick="loadProblem('B')" class="px-3 py-1.5 text-xs font-mono uppercase hairline bg-white text-neutral-600 hover:text-black">B. Campus Pathways</button>
+            <button onclick="loadProblem('C')" class="px-3 py-1.5 text-xs font-mono uppercase hairline bg-white text-neutral-600 hover:text-black">C. Subsequence Clash</button>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <label class="flex items-center gap-2 text-xs font-mono text-neutral-500 cursor-pointer">
+            <input type="checkbox" id="practice-toggle" class="accent-black">
+            <span>Practice Mode (Editorial)</span>
+          </label>
+          <button onclick="switchView('scoreboard')" class="hairline px-3 py-1.5 text-xs font-mono uppercase hover:bg-gallery-100 flex items-center gap-1.5">
+            <i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i> Standings
+          </button>
+        </div>
+      </div>
+
+      <!-- Split Workbench -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[720px]">
+        
+        <!-- Left: Formulation Spec (5 Cols) -->
+        <div class="lg:col-span-5 bg-white hairline flex flex-col overflow-hidden">
+          <div class="p-5 hairline-b flex justify-between items-center bg-gallery-50">
+            <div>
+              <span class="text-[10px] font-mono text-neutral-400 uppercase tracking-widest block">Problem Spec</span>
+              <h2 id="prob-title" class="font-bold text-lg text-black">A. Bitwise Vault</h2>
+            </div>
+            <span class="text-[11px] font-mono text-neutral-600 border hairline bg-white px-2.5 py-1">1.0s / 256MB</span>
+          </div>
+
+          <div class="p-6 overflow-y-auto space-y-6 text-xs text-neutral-700 custom-scrollbar flex-1 leading-relaxed">
+            <div>
+              <h4 class="font-mono text-[10px] uppercase tracking-widest text-neutral-400 mb-2 font-bold">01 // Statement</h4>
+              <p id="prob-desc">You are given an array of N integers. A vault opens if you can partition the array into two non-empty subsets such that the bitwise XOR sum of elements in both subsets are equal. Determine if it is possible.</p>
+            </div>
+
+            <div>
+              <h4 class="font-mono text-[10px] uppercase tracking-widest text-neutral-400 mb-2 font-bold">02 // Input Form</h4>
+              <p>The first line contains T (test cases). Each test case consists of integer N, followed by N space-separated integers A₁, A₂, ..., Aₙ.</p>
+            </div>
+
+            <div>
+              <h4 class="font-mono text-[10px] uppercase tracking-widest text-neutral-400 mb-2 font-bold">03 // Output Form</h4>
+              <p>Print <code class="font-mono font-bold text-leaf-600 bg-leaf-100 px-1 py-0.5">YES</code> if valid partition exists, otherwise <code class="font-mono font-bold text-petal-600 bg-petal-100 px-1 py-0.5">NO</code>.</p>
+            </div>
+
+            <!-- Sample Data -->
+            <div class="bg-gallery-50 hairline p-4 space-y-3 font-mono text-xs">
+              <div class="flex justify-between items-center text-[10px] text-neutral-400 font-bold uppercase tracking-wider">
+                <span>Sample Input</span>
+                <button onclick="copySample()" class="text-black hover:text-petal-600">Copy</button>
+              </div>
+              <pre id="sample-input" class="text-neutral-900">2
+4
+1 2 4 7
+3
+3 3 0</pre>
+
+              <div class="hairline-t pt-2">
+                <span class="text-[10px] text-neutral-400 font-bold uppercase tracking-wider block mb-1">Expected Output</span>
+                <pre id="sample-output" class="text-leaf-700 font-bold">YES
+YES</pre>
+              </div>
+            </div>
+
+            <!-- Editorial Drawer -->
+            <div id="editorial-box" class="hidden p-4 bg-gallery-100 hairline border-l-2 border-l-petal-500 font-mono text-xs text-neutral-700">
+              <span class="font-bold text-black uppercase tracking-wider block mb-1">Theoretical Approach:</span>
+              If XOR sum of all elements equals 0, the set can inherently be partitioned into two identical XOR components.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Code Studio & Execution (7 Cols) -->
+        <div class="lg:col-span-7 bg-white hairline flex flex-col overflow-hidden">
+          
+          <div class="hairline-b p-3 flex justify-between items-center bg-gallery-50">
+            <div class="flex items-center gap-3">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-neutral-400">Environment:</span>
+              <select id="code-lang" class="bg-white hairline text-xs font-mono uppercase px-2 py-1 outline-none text-black">
+                <option value="cpp">C++ 20 (GCC 13)</option>
+                <option value="python">Python 3.11 (PyPy)</option>
+                <option value="java">Java 17 (OpenJDK)</option>
+              </select>
+            </div>
+            <span class="text-[10px] font-mono uppercase tracking-widest text-neutral-400">Sandbox #08 Isolation</span>
+          </div>
+
+          <!-- Code Textarea -->
+          <div class="flex-1 p-4 bg-white font-mono text-xs relative">
+            <textarea id="code-editor" class="w-full h-full outline-none resize-none font-mono text-xs text-neutral-900 leading-relaxed custom-scrollbar bg-transparent" spellcheck="false">#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void solve() {
+    int n;
+    cin >> n;
+    int total_xor = 0;
+    for(int i = 0; i < n; i++) {
+        int val;
+        cin >> val;
+        total_xor ^= val;
+    }
+    if(total_xor == 0) cout << "YES\n";
+    else cout << "NO\n";
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int t;
+    cin >> t;
+    while(t--) solve();
+    return 0;
+}</textarea>
+          </div>
+
+          <!-- Dock Console -->
+          <div class="hairline-t bg-gallery-50 p-4 space-y-3">
+            <div class="flex justify-between items-center">
+              <span id="judge-status" class="text-xs font-mono uppercase tracking-wider text-neutral-500">System Ready</span>
+              
+              <div class="flex gap-2">
+                <button onclick="runCode(false)" class="hairline bg-white hover:bg-gallery-100 text-black px-4 py-2 text-xs font-mono uppercase tracking-wider">
+                  Run Sample
+                </button>
+                <button onclick="runCode(true)" class="bg-black hover:bg-neutral-800 text-white px-5 py-2 text-xs font-mono uppercase tracking-wider font-bold">
+                  Submit Source
+                </button>
+              </div>
+            </div>
+
+            <!-- Terminal output -->
+            <div id="judge-console" class="bg-white hairline p-3 font-mono text-xs hidden">
+              <div class="flex justify-between items-center hairline-b pb-1.5 mb-2 text-[10px] font-mono text-neutral-400 uppercase">
+                <span>Execution Log</span>
+                <span id="verdict-pill"></span>
+              </div>
+              <pre id="console-output" class="text-neutral-800 text-[11px]"></pre>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= VIEW 3: ICPC SCOREBOARD WITH FREEZE ================= -->
+    <section id="view-scoreboard" class="view-panel hidden space-y-6">
+      <div class="bg-white hairline p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <div class="flex items-center gap-3">
+            <h2 class="text-2xl font-black lowercase tracking-tight">standings.</h2>
+            <span id="freeze-indicator" class="hidden text-[10px] font-mono uppercase tracking-widest px-2.5 py-1 badge-freeze-petal font-bold animate-pulse">
+              [Freeze Mode Engaged]
+            </span>
+          </div>
+          <p class="text-xs text-neutral-500 font-mono mt-1">ICPC ranking algorithm: solved problems desc, accumulated minutes asc.</p>
+        </div>
+
+        <label class="flex items-center gap-3 text-xs font-mono uppercase tracking-wider cursor-pointer bg-gallery-100 hairline px-4 py-2.5">
+          <input type="checkbox" id="freeze-toggle" onchange="toggleScoreboardFreeze()" class="accent-black">
+          <span>Engage Scoreboard Freeze</span>
+        </label>
+      </div>
+
+      <!-- Swiss Data Grid -->
+      <div class="bg-white hairline overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs font-mono">
+            <thead>
+              <tr class="hairline-b bg-gallery-50 text-neutral-400 text-[10px] uppercase tracking-widest">
+                <th class="p-4 w-16 text-center">Rank</th>
+                <th class="p-4">Team</th>
+                <th class="p-4 text-center">Solved</th>
+                <th class="p-4 text-center">Penalty</th>
+                <th class="p-4 text-center w-28">Prob A</th>
+                <th class="p-4 text-center w-28">Prob B</th>
+                <th class="p-4 text-center w-28">Prob C</th>
+                <th class="p-4 text-center w-28">Prob D</th>
+              </tr>
+            </thead>
+            <tbody id="scoreboard-body" class="divide-y divide-neutral-200">
+              
+              <tr class="hover:bg-gallery-50">
+                <td class="p-4 text-center font-bold text-black">01</td>
+                <td class="p-4">
+                  <span class="font-bold text-black block">ByteBenders</span>
+                  <span class="text-[10px] text-neutral-400">PUB CSE • Team #104</span>
+                </td>
+                <td class="p-4 text-center font-bold text-leaf-600 text-sm">3</td>
+                <td class="p-4 text-center text-neutral-600">184</td>
+                <td class="p-4 text-center"><span class="badge-ac-petal px-2 py-1 font-bold">+1 (18)</span></td>
+                <td class="p-4 text-center"><span class="badge-ac-petal px-2 py-1 font-bold">+2 (42)</span></td>
+                <td class="p-4 text-center"><span class="badge-ac-petal px-2 py-1 font-bold">+1 (84)</span></td>
+                <td class="p-4 text-center text-neutral-300">—</td>
+              </tr>
+
+              <tr class="hover:bg-gallery-50">
+                <td class="p-4 text-center font-bold text-black">02</td>
+                <td class="p-4">
+                  <span class="font-bold text-black block">Recursive Knights</span>
+                  <span class="text-[10px] text-neutral-400">PUB CSE • Team #112</span>
+                </td>
+                <td class="p-4 text-center font-bold text-leaf-600 text-sm">2</td>
+                <td class="p-4 text-center text-neutral-600">95</td>
+                <td class="p-4 text-center"><span class="badge-ac-petal px-2 py-1 font-bold">+1 (22)</span></td>
+                <td class="p-4 text-center"><span class="badge-ac-petal px-2 py-1 font-bold">+1 (73)</span></td>
+                <td class="p-4 text-center"><span class="badge-wa-petal px-2 py-1 font-bold">-3</span></td>
+                <td class="p-4 text-center text-neutral-300">—</td>
+              </tr>
+
+              <tr class="hover:bg-gallery-50">
+                <td class="p-4 text-center font-bold text-black">03</td>
+                <td class="p-4">
+                  <span class="font-bold text-black block">NullPointers</span>
+                  <span class="text-[10px] text-neutral-400">PUB CSE • Team #121</span>
+                </td>
+                <td class="p-4 text-center font-bold text-leaf-600 text-sm">2</td>
+                <td class="p-4 text-center text-neutral-600">110</td>
+                <td class="p-4 text-center"><span class="badge-ac-petal px-2 py-1 font-bold">+1 (15)</span></td>
+                <td class="p-4 text-center"><span class="badge-ac-petal px-2 py-1 font-bold">+1 (95)</span></td>
+                <td class="p-4 text-center" id="null-problem-c"><span class="badge-wa-petal px-2 py-1 font-bold">-1</span></td>
+                <td class="p-4 text-center text-neutral-300">—</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 4: COORDINATOR & CLASH MATRIX ================= -->
+    <section id="view-ops" class="view-panel hidden space-y-8">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 pb-4 hairline-b">
+        <div>
+          <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400">Section IV — Systems Oversight</span>
+          <h2 class="text-3xl font-black lowercase tracking-tight">operations & conflict matrix.</h2>
+        </div>
+        <button onclick="resolveClashDemo()" class="bg-black hover:bg-neutral-800 text-white px-5 py-2.5 text-xs font-mono uppercase tracking-wider font-bold">
+          Auto-Resolve Conflicts
+        </button>
+      </div>
+
+      <!-- Readiness Stat Panels -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white hairline p-5">
+          <span class="text-[10px] font-mono uppercase tracking-widest text-neutral-400 block mb-1">Index of Readiness</span>
+          <div class="text-3xl font-black text-black" id="readiness-pct">82%</div>
+          <div class="w-full bg-gallery-200 h-1.5 mt-3 overflow-hidden">
+            <div id="readiness-bar" class="bg-black h-full transition-all duration-500" style="width: 82%"></div>
+          </div>
+        </div>
+
+        <div class="bg-white hairline p-5">
+          <span class="text-[10px] font-mono uppercase tracking-widest text-neutral-400 block mb-1">Venue Intersections</span>
+          <div class="text-3xl font-black text-petal-600" id="clash-count">02 Clashes</div>
+          <p class="text-[11px] font-mono text-neutral-500 mt-2">Dual allocation at Lab 03 [14:00]</p>
+        </div>
+
+        <div class="bg-white hairline p-5">
+          <span class="text-[10px] font-mono uppercase tracking-widest text-neutral-400 block mb-1">Unassigned Shifts</span>
+          <div class="text-3xl font-black text-black">03 Slots</div>
+          <p class="text-[11px] font-mono text-neutral-500 mt-2">Auditorium stage requires 1 lead</p>
+        </div>
+
+        <div class="bg-white hairline p-5">
+          <span class="text-[10px] font-mono uppercase tracking-widest text-neutral-400 block mb-1">Jury Sign-Offs</span>
+          <div class="text-3xl font-black text-leaf-600">01 Pending</div>
+          <p class="text-[11px] font-mono text-neutral-500 mt-2">AI Showcase score verification</p>
+        </div>
+      </div>
+
+      <!-- Clash Timeline Card -->
+      <div class="bg-white hairline p-6 space-y-4">
+        <h3 class="font-bold text-black text-sm uppercase tracking-wider font-mono">Temporal Schedule & Clash Detector</h3>
+
+        <div class="space-y-3" id="timeline-list">
+          <div id="clash-item" class="p-4 bg-gallery-50 hairline border-l-4 border-l-petal-500 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs font-bold text-petal-600 uppercase">Clash Flag: Venue Collision</span>
+                <span class="text-[10px] font-mono bg-petal-100 text-petal-700 px-1.5 py-0.5">Critical</span>
+              </div>
+              <p class="text-xs text-neutral-600 mt-1 font-mono">"Inter-University Code Clash" and "Robotics Simulation" simultaneous claim on <strong class="text-black">CSE Lab 3 (14:00 - 17:00)</strong>.</p>
+            </div>
+            <button onclick="reassignVenue()" class="hairline bg-white hover:bg-gallery-100 text-black px-4 py-2 text-xs font-mono uppercase font-bold shrink-0">
+              Shift to Lab 5 &rarr;
+            </button>
+          </div>
+
+          <div class="p-4 bg-white hairline border-l-4 border-l-leaf-500 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <span class="font-mono text-xs font-bold text-neutral-900 uppercase">Auditorium Main: AI Innovation Showcase</span>
+              <p class="text-xs text-neutral-500 mt-1 font-mono">11:00 — 13:30 • 4 Crew on duty • 3 Jurors assigned.</p>
+            </div>
+            <span class="text-xs font-mono text-leaf-700 bg-leaf-100 px-2 py-1 self-start md:self-center">Verified Clear</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 5: VOLUNTEER & FIELD OPERATIONS ================= -->
+    <section id="view-volunteer" class="view-panel hidden space-y-8">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+        
+        <!-- Left: Optical Scanner Simulation (6 Cols) -->
+        <div class="md:col-span-6 bg-white hairline p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-6">
+              <div>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-neutral-400 block">Station Check</span>
+                <h3 class="text-lg font-bold text-black uppercase tracking-tight">Optical QR Pass Verification</h3>
+              </div>
+              <span class="text-xs font-mono bg-leaf-100 text-leaf-700 px-2.5 py-1">Sensor Active</span>
+            </div>
+
+            <!-- Conceptual Viewfinder Frame -->
+            <div class="bg-gallery-100 hairline p-8 aspect-video flex flex-col items-center justify-center relative">
+              <div class="w-36 h-36 hairline border-black relative flex items-center justify-center">
+                <!-- 4 corner brackets -->
+                <div class="absolute -top-1 -left-1 w-2.5 h-2.5 bg-black"></div>
+                <div class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-black"></div>
+                <div class="absolute -bottom-1 -left-1 w-2.5 h-2.5 bg-black"></div>
+                <div class="absolute -bottom-1 -right-1 w-2.5 h-2.5 bg-black"></div>
+                <i data-lucide="qr-code" class="w-16 h-16 text-neutral-400"></i>
+              </div>
+              <span class="text-[11px] font-mono uppercase tracking-wider text-neutral-500 mt-4">Align visitor credential within reticle</span>
+            </div>
+
+            <div class="mt-4 flex gap-2">
+              <input type="text" id="manual-ticket-id" placeholder="Identifier: e.g. TICKET-9921" class="flex-1 bg-gallery-50 hairline px-4 py-2 text-xs font-mono text-black outline-none focus:border-black">
+              <button onclick="scanTicketSimulation()" class="bg-black hover:bg-neutral-800 text-white px-5 py-2 text-xs font-mono uppercase font-bold tracking-wider">
+                Validate
+              </button>
+            </div>
+          </div>
+
+          <div id="scan-result-card" class="mt-6 p-4 bg-leaf-50 hairline border-l-4 border-l-leaf-500 hidden">
+            <h5 class="text-xs font-bold text-black uppercase font-mono" id="scan-name">Tanvir Ahmed (ByteBenders)</h5>
+            <p class="text-[11px] font-mono text-neutral-600 mt-1" id="scan-meta">Entry Clearance: CSE Lab 3 Granted • Meal Pass Issued</p>
+          </div>
+        </div>
+
+        <!-- Right: Duty Roster & Dispatch (6 Cols) -->
+        <div class="md:col-span-6 space-y-6">
+          
+          <div class="bg-white hairline p-6">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-neutral-400 block mb-1">Roster Assignment</span>
+            <h3 class="text-lg font-bold text-black uppercase tracking-tight mb-4">Current Shift Order</h3>
+            
+            <div class="bg-gallery-50 p-4 hairline space-y-2 text-xs font-mono">
+              <div class="flex justify-between"><span class="text-neutral-400">Assigned Post:</span> <span class="font-bold text-black">CSE Lab 04 (Workstation Wing)</span></div>
+              <div class="flex justify-between"><span class="text-neutral-400">Shift Window:</span> <span class="text-black font-bold">13:30 — 16:30</span></div>
+              <div class="flex justify-between"><span class="text-neutral-400">Mandate:</span> <span class="text-neutral-700">Sandbox Environment Audit, ID Control</span></div>
+            </div>
+
+            <button onclick="requestSwapModal()" class="mt-4 w-full hairline hover:bg-gallery-100 text-black py-2.5 text-xs font-mono uppercase tracking-wider font-semibold">
+              Request Duty Reassignment
+            </button>
+          </div>
+
+          <!-- Fast Issue Logging -->
+          <div class="bg-white hairline p-6 space-y-3">
+            <h3 class="text-lg font-bold text-black uppercase tracking-tight">On-Ground Incident Ticket</h3>
+            
+            <select id="issue-category" class="w-full bg-gallery-50 hairline px-3 py-2 text-xs font-mono outline-none">
+              <option>Power & Distribution Disruption</option>
+              <option>Local Network / Switch Failure</option>
+              <option>Badge Discrepancy / Access Dispute</option>
+              <option>Jury Station Supply Shortage</option>
+            </select>
+
+            <input type="text" id="issue-desc" placeholder="Location & precise anomaly observation..." class="w-full bg-gallery-50 hairline px-3 py-2 text-xs font-mono outline-none focus:border-black">
+
+            <button onclick="submitIssue()" class="w-full bg-petal-600 hover:bg-petal-700 text-white py-2.5 text-xs font-mono uppercase tracking-wider font-bold">
+              Transmit Urgent Dispatch
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= VIEW 6: JURY & RUBRIC EVALUATION ================= -->
+    <section id="view-judge" class="view-panel hidden space-y-8">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 pb-4 hairline-b">
+        <div>
+          <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400">Section VI — Juror Assessment</span>
+          <h2 class="text-3xl font-black lowercase tracking-tight">evaluation matrix & artifacts.</h2>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-xs font-mono text-neutral-400 uppercase">Docket:</span>
+          <select id="eval-team-selector" onchange="loadTeamSubmission(this.value)" class="bg-white hairline px-3 py-2 text-xs font-mono font-bold outline-none">
+            <option value="neuro">Team #102: NeuroPulse (AI Showcase)</option>
+            <option value="smart">Team #108: SmartGrid IoT</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Artifacts -->
+        <div class="lg:col-span-6 bg-white hairline p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-xs font-mono uppercase tracking-wider text-neutral-400">Exhibition Artifacts</span>
+              <span class="text-xs font-mono bg-gallery-100 hairline px-2 py-0.5 font-bold">Rev 1.2 Final</span>
+            </div>
+
+            <p class="text-xs text-neutral-600 leading-relaxed font-mono mb-6" id="team-abstract">
+              "NeuroPulse is an on-device lightweight edge model for predictive maintenance in electrical labs using sound vibrations."
+            </p>
+
+            <div class="space-y-3 font-mono text-xs">
+              <a href="#codebase" class="flex justify-between items-center p-3 hairline bg-gallery-50 hover:bg-gallery-100 text-neutral-800">
+                <span class="font-bold flex items-center gap-2"><i data-lucide="folder-git-2" class="w-4 h-4"></i> repository: neuropulse-core</span>
+                <span>[inspect]</span>
+              </a>
+              <a href="#deck" class="flex justify-between items-center p-3 hairline bg-gallery-50 hover:bg-gallery-100 text-neutral-800">
+                <span class="font-bold flex items-center gap-2"><i data-lucide="file" class="w-4 h-4"></i> system_architecture_deck.pdf</span>
+                <span class="text-neutral-400">4.2MB</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="hairline-t pt-4 mt-8 flex justify-between items-center text-xs font-mono text-neutral-500">
+            <span>Juror Deliberation Phase</span>
+            <span class="text-black font-bold">2/3 Juror Forms Filed</span>
+          </div>
+        </div>
+
+        <!-- Rubric Controls -->
+        <div class="lg:col-span-6 bg-white hairline p-6 space-y-6">
+          <div class="flex justify-between items-center hairline-b pb-4">
+            <h3 class="font-mono text-xs uppercase tracking-wider font-bold text-black">Scoring Rubric Dimensions</h3>
+            <span class="text-xs font-mono text-neutral-500">Aggregate: <strong id="total-rubric-score" class="text-black text-sm">25</strong> / 30</span>
+          </div>
+
+          <div class="space-y-5 text-xs font-mono">
+            <div>
+              <div class="flex justify-between mb-1.5">
+                <span class="text-neutral-700">01. Algorithmic Novelty & Complexity</span>
+                <span id="score-val-1" class="font-bold text-black">8 / 10</span>
+              </div>
+              <input type="range" min="0" max="10" value="8" oninput="updateRubric()" id="slider-1" class="w-full accent-black cursor-pointer">
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1.5">
+                <span class="text-neutral-700">02. Engineering Rigor & Reliability</span>
+                <span id="score-val-2" class="font-bold text-black">9 / 10</span>
+              </div>
+              <input type="range" min="0" max="10" value="9" oninput="updateRubric()" id="slider-2" class="w-full accent-black cursor-pointer">
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1.5">
+                <span class="text-neutral-700">03. Defense Q&A & Coherence</span>
+                <span id="score-val-3" class="font-bold text-black">8 / 10</span>
+              </div>
+              <input type="range" min="0" max="10" value="8" oninput="updateRubric()" id="slider-3" class="w-full accent-black cursor-pointer">
+            </div>
+          </div>
+
+          <textarea id="judge-remarks" placeholder="Optional notes for final synthesis..." class="w-full bg-gallery-50 hairline p-3 text-xs font-mono outline-none focus:border-black resize-none h-20"></textarea>
+
+          <button onclick="submitScores()" class="w-full bg-black hover:bg-neutral-800 text-white py-3 text-xs font-mono uppercase tracking-wider font-bold">
+            Sign & Seal Evaluation
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= EDITORIAL FOOTER ================= -->
+  <footer class="hairline-t bg-white mt-auto py-8">
+    <div class="max-w-7xl mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-neutral-400">
+      <div class="flex items-center gap-3">
+        <div class="w-5 h-5 rounded-full border border-black flex items-center justify-center text-black">
+          <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24"><path d="M13 2L3 14h8l-2 8 10-12h-8l2-8z"/></svg>
+        </div>
+        <span class="text-black font-bold uppercase tracking-wider">PUB FestHub // CSE Fest '26</span>
+      </div>
+      <div>Designed with conceptual reference to Yuni Yoshida × uniform experiment</div>
+    </div>
+  </footer>
+
+  <!-- ================= MODALS ================= -->
+
+  <!-- Modal 1: Ticket / Pass (Exhibition Badge Format) -->
+  <div id="modal-ticket" class="fixed inset-0 bg-neutral-900/40 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-white hairline max-w-sm w-full p-8 text-center space-y-6 shadow-xl relative">
+      <div class="flex justify-between items-center text-[10px] font-mono uppercase tracking-widest text-neutral-400 hairline-b pb-3">
+        <span>Visitor Credential</span>
+        <button onclick="closeModal('modal-ticket')" class="text-black hover:text-petal-600 font-bold">Close [X]</button>
+      </div>
+
+      <div class="p-3 bg-white hairline inline-block mx-auto" id="qrcode-container"></div>
+
+      <div class="space-y-1">
+        <h4 class="font-black text-xl text-black lowercase">tanvir ahmed.</h4>
+        <p class="text-xs font-mono text-neutral-400 uppercase tracking-widest">PUB CSE • ID 2202051</p>
+        <span class="inline-block mt-3 text-[11px] font-mono bg-gallery-100 hairline px-3 py-1 font-bold">PASS-09921-CSE</span>
+      </div>
+
+      <p class="text-[10px] font-mono text-neutral-400 leading-normal">Flash upon checkpoint entry. Valid across Computer Science Laboratories and Main Lecture Halls.</p>
+    </div>
+  </div>
+
+  <!-- Modal 2: Registration -->
+  <div id="modal-reg" class="fixed inset-0 bg-neutral-900/40 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-white hairline max-w-md w-full p-8 space-y-6 shadow-xl">
+      <div class="flex justify-between items-center hairline-b pb-3">
+        <h3 class="font-bold text-base uppercase font-mono tracking-tight text-black">Exhibition Registration</h3>
+        <button onclick="closeModal('modal-reg')" class="text-neutral-400 hover:text-black font-mono text-xs">[Close]</button>
+      </div>
+
+      <div class="space-y-4 text-xs font-mono">
+        <div>
+          <label class="text-neutral-500 uppercase tracking-wider block mb-1">Target Stream</label>
+          <select class="w-full bg-gallery-50 hairline p-2.5 outline-none font-bold">
+            <option>Inter-University Code Clash</option>
+            <option>Campus AI Innovation Showcase</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="text-neutral-500 uppercase tracking-wider block mb-1">Team Designation</label>
+          <input type="text" placeholder="e.g. ByteBenders" class="w-full bg-gallery-50 hairline p-2.5 outline-none font-bold">
+        </div>
+
+        <div>
+          <label class="text-neutral-500 uppercase tracking-wider block mb-1">Member Accounts (CSV)</label>
+          <input type="text" placeholder="member1@pub.ac.bd, member2@pub.ac.bd" class="w-full bg-gallery-50 hairline p-2.5 outline-none">
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-3 pt-2">
+        <button onclick="closeModal('modal-reg')" class="px-4 py-2 text-xs font-mono uppercase text-neutral-400 hover:text-black">Cancel</button>
+        <button onclick="submitRegistration()" class="bg-black hover:bg-neutral-800 text-white px-5 py-2 text-xs font-mono uppercase font-bold tracking-wider">Confirm Entry</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SCRIPT LOGIC ================= -->
+  <script>
+    lucide.createIcons();
+
+    // 1. View Switcher
+    function switchView(viewId) {
+      document.querySelectorAll('.view-panel').forEach(p => p.classList.add('hidden'));
+      document.querySelectorAll('.nav-tab').forEach(t => {
+        t.classList.remove('text-black', 'font-bold', 'border-b-2', 'border-black');
+        t.classList.add('text-neutral-400');
+      });
+      
+      const targetPanel = document.getElementById(`view-${viewId}`);
+      const targetNav = document.getElementById(`nav-${viewId}`);
+
+      if (targetPanel) targetPanel.classList.remove('hidden');
+      if (targetNav) {
+        targetNav.classList.remove('text-neutral-400');
+        targetNav.classList.add('text-black', 'font-bold', 'border-b-2', 'border-black');
+      }
+
+      lucide.createIcons();
+    }
+    switchView('events');
+
+    // 2. Persona Role Controller
+    function onRoleChange(role) {
+      if (role === 'participant') switchView('events');
+      else if (role === 'organiser') switchView('ops');
+      else if (role === 'volunteer') switchView('volunteer');
+      else if (role === 'judge') switchView('judge');
+    }
+
+    // 3. Problem Set Loader
+    const problems = {
+      'A': {
+        title: "A. Bitwise Vault",
+        desc: "You are given an array of N integers. A vault opens if you can partition the array into two non-empty subsets such that the bitwise XOR sum of elements in both subsets are equal. Determine if it is possible.",
+        input: "2\n4\n1 2 4 7\n3\n3 3 0",
+        output: "YES\nYES"
+      },
+      'B': {
+        title: "B. Campus Pathways",
+        desc: "The campus has V seminar halls and E bidirectional pathways. Find the minimum total distance to visit every building at least once starting from Auditorium (Hall 1).",
+        input: "4 4\n1 2 3\n2 3 1\n3 4 2\n4 1 5",
+        output: "6"
+      },
+      'C': {
+        title: "C. Subsequence Clash",
+        desc: "Given two strings S and T, determine the lexicographically smallest common subsequence of maximum possible length.",
+        input: "abacaba\naabc",
+        output: "aac"
+      }
+    };
+
+    function loadProblem(key) {
+      const p = problems[key];
+      document.getElementById('prob-title').innerText = p.title;
+      document.getElementById('prob-desc').innerText = p.desc;
+      document.getElementById('sample-input').innerText = p.input;
+      document.getElementById('sample-output').innerText = p.output;
+
+      const pills = document.querySelectorAll('#problem-pills button');
+      pills.forEach((btn, idx) => {
+        if ((key === 'A' && idx === 0) || (key === 'B' && idx === 1) || (key === 'C' && idx === 2)) {
+          btn.className = "px-3 py-1.5 text-xs font-mono uppercase bg-black text-white font-bold";
+        } else {
+          btn.className = "px-3 py-1.5 text-xs font-mono uppercase hairline bg-white text-neutral-600 hover:text-black";
+        }
+      });
+    }
+
+    function copySample() {
+      navigator.clipboard.writeText(document.getElementById('sample-input').innerText);
+      alert('Sample sequence duplicated to clipboard.');
+    }
+
+    document.getElementById('practice-toggle').addEventListener('change', function(e) {
+      const box = document.getElementById('editorial-box');
+      if (e.target.checked) box.classList.remove('hidden');
+      else box.classList.add('hidden');
+    });
+
+    // 4. Code Execution Simulation with Petal-Tone Confetti
+    function runCode(isSubmit) {
+      const consoleBox = document.getElementById('judge-console');
+      const status = document.getElementById('judge-status');
+      const pill = document.getElementById('verdict-pill');
+      const output = document.getElementById('console-output');
+
+      consoleBox.classList.remove('hidden');
+      status.innerText = "Executing sandboxed test suites...";
+      pill.innerHTML = `<span class="text-neutral-500 font-mono">Running...</span>`;
+      output.innerText = "Compiling source via g++ -O3 -std=c++20...\nDispatched to Test Suite #01...";
+
+      setTimeout(() => {
+        if (!isSubmit) {
+          status.innerText = "Sample Verification Complete";
+          pill.innerHTML = `<span class="badge-ac-petal px-2 py-0.5 text-[10px] font-bold">SAMPLE PASS</span>`;
+          output.innerText = "Compilation successful (0.02s)\nRunning Sample 1: PASSED\nExecution Time: 0.003s\nMemory: 3.2MB";
+        } else {
+          status.innerText = "Verdict Finalized";
+          pill.innerHTML = `<span class="badge-ac-petal px-2 py-0.5 text-[10px] font-bold">ACCEPTED (AC)</span>`;
+          output.innerText = "Test 1: AC (0.01s)\nTest 2: AC (0.02s)\nTest 3: AC (0.04s)\nAll 15 hidden test vectors passed.\nSandbox container recycling initiated.";
+          
+          // Petal Pink & Stem Green Confetti Palette (Homage to poster)
+          confetti({
+            particleCount: 80,
+            spread: 60,
+            origin: { y: 0.7 },
+            colors: ['#E61E6E', '#EE468A', '#488443', '#84A964', '#141414']
+          });
+        }
+      }, 800);
+    }
+
+    // 5. Freeze Scoreboard Simulation
+    function toggleScoreboardFreeze() {
+      const isFrozen = document.getElementById('freeze-toggle').checked;
+      const indicator = document.getElementById('freeze-indicator');
+      const cell = document.getElementById('null-problem-c');
+
+      if (isFrozen) {
+        indicator.classList.remove('hidden');
+        cell.innerHTML = `<span class="badge-freeze-petal px-2 py-1 font-bold animate-pulse">? (2)</span>`;
+      } else {
+        indicator.classList.add('hidden');
+        cell.innerHTML = `<span class="badge-wa-petal px-2 py-1 font-bold">-1</span>`;
+      }
+    }
+
+    // 6. Ops Conflict Resolution
+    function reassignVenue() {
+      const clashItem = document.getElementById('clash-item');
+      clashItem.className = "p-4 bg-white hairline border-l-4 border-l-leaf-500 flex flex-col md:flex-row md:items-center justify-between gap-4";
+      clashItem.innerHTML = `
+        <div>
+          <span class="font-mono text-xs font-bold text-neutral-900 uppercase">RESOLVED: Robotics Simulation Shifted to Lab 5</span>
+          <p class="text-xs text-neutral-500 mt-1 font-mono">Temporal separation confirmed. No overlapping bookings recorded.</p>
+        </div>
+        <span class="text-xs font-mono text-leaf-700 bg-leaf-100 px-2 py-1 self-start md:self-center">Clash Cleared</span>
+      `;
+      document.getElementById('clash-count').innerText = "01 Clash";
+      document.getElementById('clash-badge').classList.add('hidden');
+      document.getElementById('readiness-pct').innerText = "94%";
+      document.getElementById('readiness-bar').style.width = "94%";
+      lucide.createIcons();
+    }
+
+    function resolveClashDemo() {
+      reassignVenue();
+      alert('Optimization routine executed: Conflicting venues shifted to reserve halls.');
+    }
+
+    // 7. QR Scanner Simulation
+    function scanTicketSimulation() {
+      const val = document.getElementById('manual-ticket-id').value || "TICKET-9921";
+      const card = document.getElementById('scan-result-card');
+      card.classList.remove('hidden');
+
+      if (val.includes('9921')) {
+        document.getElementById('scan-name').innerText = "Tanvir Ahmed (Team ByteBenders)";
+        document.getElementById('scan-meta').innerText = "Clearance: CSE Lab 3 ICPC Seat #12 Verified";
+      } else {
+        document.getElementById('scan-name').innerText = "Credential ID #" + val;
+        document.getElementById('scan-meta').innerText = "General Access Authorized";
+      }
+    }
+
+    function requestSwapModal() {
+      const reason = prompt("Enter rationale for shift substitution:", "Academic defense presentation at 14:00");
+      if (reason) alert("Substitution petition lodged with the coordinator docket.");
+    }
+
+    function submitIssue() {
+      const desc = document.getElementById('issue-desc').value;
+      if (!desc) return alert("Please specify anomaly description.");
+      alert("Incident transmitted to emergency floor coordinator queue.");
+      document.getElementById('issue-desc').value = '';
+    }
+
+    // 8. Juror Rubric Updates
+    function updateRubric() {
+      const s1 = parseInt(document.getElementById('slider-1').value);
+      const s2 = parseInt(document.getElementById('slider-2').value);
+      const s3 = parseInt(document.getElementById('slider-3').value);
+
+      document.getElementById('score-val-1').innerText = `${s1} / 10`;
+      document.getElementById('score-val-2').innerText = `${s2} / 10`;
+      document.getElementById('score-val-3').innerText = `${s3} / 10`;
+      document.getElementById('total-rubric-score').innerText = (s1 + s2 + s3);
+    }
+
+    function submitScores() {
+      const total = document.getElementById('total-rubric-score').innerText;
+      alert(`Score rating of ${total}/30 verified and committed to jury audit ledger.`);
+    }
+
+    function loadTeamSubmission(teamKey) {
+      if(teamKey === 'smart') {
+        document.getElementById('team-abstract').innerText = '"SmartGrid IoT enables self-healing energy distribution using microcontroller meshing."';
+      } else {
+        document.getElementById('team-abstract').innerText = '"NeuroPulse is an on-device lightweight edge model for predictive maintenance in electrical labs using sound vibrations."';
+      }
+    }
+
+    // 9. QR Pass Generator
+    let qrGenerated = false;
+    function openTicketModal() {
+      openModal('modal-ticket');
+      if (!qrGenerated) {
+        new QRCode(document.getElementById("qrcode-container"), {
+          text: "PUB-FEST26-PASS-09921-TANVIR",
+          width: 140,
+          height: 140,
+          colorDark: "#141414",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.H
+        });
+        qrGenerated = true;
+      }
+    }
+
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+    function submitRegistration() {
+      alert("Registration docket verified. Credential badge created.");
+      closeModal('modal-reg');
+    }
+  </script>
+</body>
+</html>

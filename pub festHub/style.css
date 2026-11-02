@@ -1,0 +1,127 @@
+/* Base Canvas & Background */
+body {
+  font-family: 'Nunito', sans-serif;
+  background: radial-gradient(circle at 10% 20%, #FFF5F7 0%, #FFF9F2 50%, #FAF6F0 100%);
+  color: #4A3B35;
+}
+
+/* Floral Atmosphere Layer */
+.floral-bg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 420px;
+  height: 450px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.25;
+  mix-blend-mode: multiply;
+  transition: all 0.7s ease;
+  background: url('https://images.unsplash.com/photo-1522383225653-ed111181a951?auto=format&fit=crop&w=1000&q=80') no-repeat top right / contain;
+  mask-image: radial-gradient(circle at top right, black 35%, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at top right, black 35%, transparent 75%);
+}
+
+@media (min-width: 768px) {
+  .floral-bg {
+    width: 620px;
+    height: 620px;
+  }
+}
+
+/* Scrapbook & Washi Tape Accents */
+.washi-tape {
+  background: rgba(255, 182, 193, 0.45);
+  backdrop-filter: blur(2px);
+  transform: rotate(-1.5deg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.soft-card {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1.5px solid #FFE4EA;
+  box-shadow: 0 10px 25px -5px rgba(255, 182, 193, 0.25), 0 8px 10px -6px rgba(255, 182, 193, 0.15);
+  backdrop-filter: blur(8px);
+}
+
+.soft-card:hover {
+  box-shadow: 0 15px 30px -5px rgba(255, 149, 169, 0.35);
+}
+
+/* Bespoke Dropdown Styles */
+.soft-dropdown {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23E03860' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 0.8rem;
+  padding-right: 2.25rem !important;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1.5px solid #FFD1DC;
+  color: #4A3B35;
+  font-weight: 700;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 6px -1px rgba(255, 182, 193, 0.2);
+}
+
+.soft-dropdown:hover {
+  border-color: #FFAFC0;
+  background-color: #FFFFFF;
+  box-shadow: 0 4px 12px -2px rgba(255, 149, 169, 0.25);
+  transform: translateY(-0.5px);
+}
+
+.soft-dropdown:focus {
+  outline: none;
+  border-color: #FF859F;
+  box-shadow: 0 0 0 3px rgba(255, 209, 220, 0.45);
+}
+
+.soft-dropdown option {
+  background-color: #FFFDF9;
+  color: #4A3B35;
+  padding: 10px 14px;
+  font-weight: 700;
+}
+
+/* Status & Verdict Badges */
+.badge-ac-soft {
+  background-color: #EBF7EB;
+  color: #3B7237;
+  border: 1px solid #C4E4C2;
+}
+
+.badge-wa-soft {
+  background-color: #FFF0F3;
+  color: #D13B62;
+  border: 1px solid #FFCCD7;
+}
+
+.badge-tle-soft {
+  background-color: #FEF9E7;
+  color: #B45309;
+  border: 1px solid #FDE68A;
+}
+
+.badge-freeze-soft {
+  background-color: #FFFBEB;
+  color: #B45309;
+  border: 1.5px dashed #FCD34D;
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #FFF5F7;
+  border-radius: 99px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #FFC0CB;
+  border-radius: 99px;
+}
