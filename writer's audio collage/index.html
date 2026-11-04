@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recall — A Writer's Interactive Journey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Space+Grotesk:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap"
+    rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <!-- Global overlays -->
+  <div class="screen-texture"></div>
+  <div class="vignette"></div>
+
+  <!-- Top Logo (for Landing & Title screens) -->
+  <div class="logo">
+    <svg viewBox="0 0 100 100" fill="none" stroke="#f5f2ec" stroke-width="2.4" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M16 28 C5 41 5 61 16 74" stroke-opacity="0.35" stroke-width="1.8" />
+      <path d="M23 37 C15 45 15 57 23 65" stroke-opacity="0.7" stroke-width="2.2" />
+      <path d="M77 37 C85 45 85 57 77 65" stroke-opacity="0.7" stroke-width="2.2" />
+      <path d="M84 28 C95 41 95 61 84 74" stroke-opacity="0.35" stroke-width="1.8" />
+      <path d="M50 14 L33 50 C34 63 39 71 39 80 L61 80 C61 71 66 63 67 50 Z" />
+      <line x1="50" y1="14" x2="50" y2="44" stroke-width="2" />
+      <circle cx="50" cy="47" r="3.2" fill="#f5f2ec" stroke="none" />
+      <path d="M39 52 C44 38 47 26 48 20" stroke-width="1.5" stroke-opacity="0.6" />
+      <path d="M61 52 C56 38 53 26 52 20" stroke-width="1.5" stroke-opacity="0.6" />
+      <line x1="36" y1="84" x2="64" y2="84" stroke-width="2.2" />
+    </svg>
+    <div class="logo-text">NIRA</div>
+    <div class="logo-sub">presents</div>
+  </div>
+  <div class="recollection-logo">RECALL</div>
+
+  <!-- SCREEN 1: Landing -->
+  <div id="landing" class="screen active">
+    <div class="content">
+      <div class="robot-logo brand-logo">
+        <svg viewBox="0 0 100 100" fill="none" stroke="#1a1a1a" stroke-width="2.4" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M16 28 C5 41 5 61 16 74" stroke-opacity="0.35" stroke-width="1.8" />
+          <path d="M23 37 C15 45 15 57 23 65" stroke-opacity="0.7" stroke-width="2.2" />
+          <path d="M77 37 C85 45 85 57 77 65" stroke-opacity="0.7" stroke-width="2.2" />
+          <path d="M84 28 C95 41 95 61 84 74" stroke-opacity="0.35" stroke-width="1.8" />
+          <path d="M50 14 L33 50 C34 63 39 71 39 80 L61 80 C61 71 66 63 67 50 Z" />
+          <line x1="50" y1="14" x2="50" y2="44" stroke-width="2" />
+          <circle cx="50" cy="47" r="3.2" fill="#1a1a1a" stroke="none" />
+          <path d="M39 52 C44 38 47 26 48 20" stroke-width="1.5" stroke-opacity="0.6" />
+          <path d="M61 52 C56 38 53 26 52 20" stroke-width="1.5" stroke-opacity="0.6" />
+          <line x1="36" y1="84" x2="64" y2="84" stroke-width="2.2" />
+        </svg>
+      </div>
+      <div class="brand">NIRA</div>
+      <div class="icon-row">
+        <span>🎵</span>
+        <span class="eq">=</span>
+        <span>🎧</span>
+      </div>
+      <p class="intro-text">
+        For the 2nd birthday, <span class="accent">Nira</span> presents <span class="accent2">Recall</span>, a sensory literary platform.
+      </p>
+      <p class="sub-text">So turn your speakers on, or put on your headphones.</p>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: Title Animation -->
+  <div id="title-screen" class="screen">
+    <div class="title-container">
+      <div class="recollection-title" id="recTitle">RECALL</div>
+      <div class="title-sub" id="titleSub">A journey through two decades of memory</div>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: Showcase (Main Verse Page) -->
+  <div id="showcase" class="screen">
+    <div class="showcase-bg" id="showcaseBg"></div>
+    <div class="showcase-content" id="showcaseContent">
+      <div class="piece-title" id="pieceTitle" title="Click to view verse explanation"></div>
+      <div class="piece-year" id="pieceYear"></div>
+      <div class="stanza-card">
+        <div class="stanza-display" id="stanzaDisplay"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom bar (Showcase screen) -->
+  <div class="bottom-bar" id="bottomBar" style="display:none;">
+    <span>Hold</span>
+    <div class="spacebar-pill">
+      <div class="spacebar-fill" id="spaceFill"></div>
+      <span>spacebar</span>
+    </div>
+    <span>to switch the writer</span>
+  </div>
+
+  <!-- Bottom Left: Writer Quick-link / Profile trigger (Showcase screen) -->
+  <div class="bottom-left-card" id="dossierWidget" style="display:none;" title="About the Writer">
+    <div class="thumb-wrap" id="dossierThumb"></div>
+    <div class="thumb-meta">
+      <div class="thumb-title" id="dossierWriter"></div>
+      <div class="thumb-sub">About the Writer</div>
+    </div>
+    <div class="thumb-dl" aria-hidden="true" title="About the Writer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Bottom Right Controls (Showcase screen) -->
+  <div class="bottom-right-utility" id="utility" style="display:none;">
+    <button class="right-angle-btn" id="rightAngleBtn" title="View verse explanation"
+      aria-label="View verse explanation">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+    <div class="bottom-right-row">
+      <div class="sound-toggle" id="soundToggle" title="Toggle audio soundscape">
+        <span id="soundIcon">🔊</span> <span id="soundLabel">Sound</span>
+      </div>
+      <div class="need-help" id="needHelp">
+        <span>🎧</span> Need help?
+      </div>
+      <div class="hashtag">#Recall</div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+     PAGE 1: WRITER PROFILE OVERLAY ("About the Writer")
+     ============================================================ -->
+  <div class="writer-profile-overlay" id="dossierDrawer" aria-hidden="true">
+    <!-- Top Left Brand -->
+    <div class="top-left-logo">
+      <div class="logo-box">
+        <svg viewBox="0 0 100 100" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M16 28 C5 41 5 61 16 74" stroke-opacity="0.35" stroke-width="1.8" />
+          <path d="M23 37 C15 45 15 57 23 65" stroke-opacity="0.7" stroke-width="2.2" />
+          <path d="M77 37 C85 45 85 57 77 65" stroke-opacity="0.7" stroke-width="2.2" />
+          <path d="M84 28 C95 41 95 61 84 74" stroke-opacity="0.35" stroke-width="1.8" />
+          <path d="M50 14 L33 50 C34 63 39 71 39 80 L61 80 C61 71 66 63 67 50 Z" />
+          <line x1="50" y1="14" x2="50" y2="44" stroke-width="2" />
+          <circle cx="50" cy="47" r="3.2" fill="#ffffff" stroke="none" />
+          <path d="M39 52 C44 38 47 26 48 20" stroke-width="1.5" stroke-opacity="0.6" />
+          <path d="M61 52 C56 38 53 26 52 20" stroke-width="1.5" stroke-opacity="0.6" />
+          <line x1="36" y1="84" x2="64" y2="84" stroke-width="2.2" />
+        </svg>
+        <div class="logo-name">RECALL</div>
+      </div>
+      <div class="header-meta" id="headerMeta">VIRGINIA WOOLF / TO THE LIGHTHOUSE</div>
+    </div>
+
+    <!-- Top Right Brand & Close -->
+    <div class="top-right">
+      <div class="recollection-brand">RECALL</div>
+      <div class="close-btn" id="dossierClose" title="Close Profile">✕</div>
+    </div>
+
+    <!-- Background Canvas -->
+    <div class="bg-stage">
+      <div class="bg-photo" id="bgPhoto"></div>
+    </div>
+
+    <!-- Editorial Foreground Card -->
+    <div class="editorial-card">
+      <div class="left-pane">
+        <div class="portrait-wrap">
+          <div class="pulse-ring"></div>
+          <img id="portraitImg" class="portrait-img" src="" alt="Writer Portrait" />
+        </div>
+      </div>
+
+      <div class="right-pane">
+        <div class="year-tag" id="yearTag">1927</div>
+        <div class="author-title" id="authorTitle">Virginia Woolf</div>
+        <div class="work-subtitle" id="workSubtitle">To the Lighthouse</div>
+        <div class="bio-excerpt" id="bioExcerpt"></div>
+        <div class="verse-actions">
+          <a class="discover-link" id="discoverLink" href="https://because.tv" target="_blank" rel="noopener">Discover
+            the writer on Because.tv →</a>
+          <div class="discover-link" id="profileGoToVerse" style="border-color:#fff; color:#fff;">Read verse explanation
+            →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Right -->
+    <div class="bottom-right">
+      <div class="need-help" id="profileNeedHelp">
+        <span>🎧</span> Need help?
+      </div>
+      <div class="hashtag">#Recall</div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+     PAGE 2: VERSE EXPLANATION OVERLAY ("About the Verse")
+     ============================================================ -->
+  <div class="writer-profile-overlay verse-profile-overlay" id="verseDrawer" aria-hidden="true">
+    <!-- Top Left Brand -->
+    <div class="top-left-logo">
+      <div class="logo-box">
+        <svg viewBox="0 0 100 100" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M16 28 C5 41 5 61 16 74" stroke-opacity="0.35" stroke-width="1.8" />
+          <path d="M23 37 C15 45 15 57 23 65" stroke-opacity="0.7" stroke-width="2.2" />
+          <path d="M77 37 C85 45 85 57 77 65" stroke-opacity="0.7" stroke-width="2.2" />
+          <path d="M84 28 C95 41 95 61 84 74" stroke-opacity="0.35" stroke-width="1.8" />
+          <path d="M50 14 L33 50 C34 63 39 71 39 80 L61 80 C61 71 66 63 67 50 Z" />
+          <line x1="50" y1="14" x2="50" y2="44" stroke-width="2" />
+          <circle cx="50" cy="47" r="3.2" fill="#ffffff" stroke="none" />
+          <path d="M39 52 C44 38 47 26 48 20" stroke-width="1.5" stroke-opacity="0.6" />
+          <path d="M61 52 C56 38 53 26 52 20" stroke-width="1.5" stroke-opacity="0.6" />
+          <line x1="36" y1="84" x2="64" y2="84" stroke-width="2.2" />
+        </svg>
+        <div class="logo-name">RECALL</div>
+      </div>
+      <div class="header-meta" id="verseHeaderMeta">VIRGINIA WOOLF / TO THE LIGHTHOUSE — VERSE ANALYSIS</div>
+    </div>
+
+    <!-- Top Right Brand & Close -->
+    <div class="top-right">
+      <div class="recollection-brand">RECALL</div>
+      <div class="close-btn" id="verseClose" title="Close Verse Explanation">✕</div>
+    </div>
+
+    <!-- Background Canvas -->
+    <div class="bg-stage">
+      <div class="bg-photo" id="verseBgPhoto"></div>
+    </div>
+
+    <!-- Editorial Foreground Card -->
+    <div class="editorial-card">
+      <div class="left-pane">
+        <div class="portrait-wrap verse-stanza-wrap">
+          <div class="pulse-ring"></div>
+          <div class="verse-quote-card">
+            <div class="quote-mark">“</div>
+            <div class="quote-text" id="verseCardQuote"></div>
+            <div class="quote-author" id="verseCardAuthor"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-pane">
+        <div class="year-tag" id="verseYearTag">VERSE ANALYSIS · 1927</div>
+        <div class="author-title" id="versePieceTitle">To the Lighthouse</div>
+        <div class="work-subtitle" id="verseAuthorSubtitle">Virginia Woolf</div>
+        <div class="bio-excerpt verse-explanation-body" id="verseExplanation"></div>
+        <div class="verse-actions">
+          <div class="discover-link" id="verseReturnBtn">Return to main verse page →</div>
+          <div class="discover-link" id="verseSwitchToWriterBtn" style="border-color:#fff; color:#fff;">View author's
+            biography →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Right -->
+    <div class="bottom-right">
+      <div class="need-help" id="verseNeedHelp">
+        <span>🎧</span> Need help?
+      </div>
+      <div class="hashtag">#Recall</div>
+    </div>
+  </div>
+
+  <!-- Help modal -->
+  <div class="help-modal" id="helpModal">
+    <div class="help-modal-inner">
+      <h3>How to navigate</h3>
+      <p>Hold <span class="key-demo">spacebar</span> to advance to the next writer. Release early to cancel.</p>
+      <p>Click the <strong>bottom-left card</strong> to view the author profile.</p>
+      <p>Click the <strong>right angle button (&gt;)</strong> or <strong>piece title</strong> to view the in-depth verse
+        analysis.</p>
+      <p>Press <span class="key-demo">ESC</span> or click ✕ in the top-right to return to the main verse page.</p>
+      <p style="margin-top:20px;opacity:0.6;font-size:12px;">Recall · A literary journey</p>
+      <button class="help-close" id="helpClose">Close</button>
+    </div>
+  </div>
+
+  <!-- Montage transition -->
+  <div id="montage"></div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
