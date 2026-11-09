@@ -1,0 +1,888 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PUB SuperVise | Project and Thesis Supervision Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            sand: {
+              50: '#faf8f5',
+              100: '#f5f1ec',
+              150: '#eee9e1',
+              200: '#e4ddd3',
+              300: '#d4cabb',
+              400: '#b8a994',
+              500: '#9a8b76',
+              600: '#7d6f5c',
+              700: '#5c5244',
+              800: '#3d372e',
+              900: '#2a2520',
+            },
+            leaf: {
+              50: '#f0f6f1',
+              100: '#e0ede3',
+              200: '#c5dccb',
+              300: '#a5c9b0',
+              400: '#72ab82',
+              500: '#4d8f60',
+              600: '#3a7349',
+              700: '#2f5c3c',
+              800: '#274a32',
+              900: '#1e3a28',
+            },
+            plum: {
+              50: '#f5f0f8',
+              100: '#ece4f2',
+              200: '#ddd0e8',
+              300: '#c7b3d9',
+              400: '#a98bc2',
+              500: '#8b68a8',
+              600: '#6f4f8b',
+              700: '#5a3f72',
+              800: '#47335b',
+              900: '#362847',
+            },
+            clay: {
+              50: '#faf2f0',
+              100: '#f5e5e1',
+              400: '#c97070',
+              500: '#b85858',
+              600: '#a04545',
+              700: '#843a3a',
+            },
+            honey: {
+              50: '#fdf8ed',
+              100: '#faf0d5',
+              200: '#f3e0b0',
+              400: '#d4a042',
+              500: '#c08d2f',
+              600: '#a67a28',
+            },
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 16px; width: 16px; border-radius: 50%;
+      background: #4d8f60; border: 2px solid #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,.15);
+      cursor: pointer;
+    }
+    input[type="range"]::-moz-range-thumb {
+      height: 16px; width: 16px; border-radius: 50%;
+      background: #4d8f60; border: 2px solid #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,.15);
+      cursor: pointer;
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #d4cabb; border-radius: 3px; }
+    input[type="checkbox"] { accent-color: #5a3f72; }
+    body { animation: fadeIn .35s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+    select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239a8b76' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; -webkit-appearance: none; appearance: none; padding-right: 28px; }
+  </style>
+</head>
+<body class="bg-sand-150 text-sand-800 font-sans min-h-screen flex flex-col antialiased">
+
+  <!-- Header -->
+  <header class="bg-sand-900 text-sand-100 sticky top-0 z-40 shadow-sm">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 bg-leaf-800 rounded-lg flex items-center justify-center text-leaf-200">
+          <i class="ph-bold ph-graduation-cap text-base"></i>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-[15px] font-bold tracking-tight text-white">PUB SuperVise</span>
+          <span class="text-[11px] text-sand-400 font-medium hidden sm:inline">Project &amp; Thesis Supervision Portal</span>
+        </div>
+      </div>
+      <select id="plotStationSelector" onchange="switchSector(this.value)" class="text-xs font-medium bg-sand-800 border border-sand-700 rounded-lg px-3 py-1.5 text-sand-200 focus:outline-none focus:ring-2 focus:ring-leaf-600 cursor-pointer">
+        <option value="coordinator">Coordinator &mdash; Master Oversight</option>
+        <option value="student">Student / Researcher &mdash; Project Workspace</option>
+        <option value="supervisor">Supervisor &mdash; Review &amp; Mentorship</option>
+        <option value="board">Examiner &mdash; Defence &amp; Evaluation Board</option>
+      </select>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-6xl w-full mx-auto px-5 sm:px-8 py-6 lg:py-8">
+
+    <!-- ======================================================== -->
+    <!-- 1. DIRECTOR VIEW                                         -->
+    <!-- ======================================================== -->
+    <section id="coordinatorView" class="space-y-5">
+      
+      <!-- Hero Banner — warm terracotta gradient -->
+      <div class="rounded-2xl overflow-hidden flex flex-col md:flex-row border border-sand-300/50" style="background: linear-gradient(135deg, #faf5f0 0%, #f5ebe0 60%, #eeddd0 100%)">
+        <div class="p-6 md:p-8 flex-1 flex flex-col justify-between">
+          <div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 text-clay-600 text-[11px] font-semibold tracking-wide bg-clay-100 rounded-full mb-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-clay-500"></span>
+              Coordinator Master Console
+            </span>
+            <h1 class="text-2xl sm:text-[28px] font-bold text-sand-900 leading-tight">Project &amp; Thesis Supervision Overview</h1>
+            <p class="text-[13px] text-sand-600 mt-2 max-w-xl leading-relaxed">
+              Supervising all final-year projects and theses across academic cohorts. Monitoring progress milestones, enforcing faculty load limits, and managing at-risk projects prior to defence scheduling.
+            </p>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-2.5">
+            <button onclick="openModal('assignModal')" class="px-4 py-2 bg-leaf-700 hover:bg-leaf-800 text-white text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-colors shadow-sm">
+              <i class="ph-bold ph-user-plus text-sm"></i>
+              Assign Supervisor
+            </button>
+            <button onclick="alert('Supervision cohort capacity audit exported.')" class="px-4 py-2 bg-sand-50/70 border border-sand-300 hover:border-sand-400 text-sand-700 text-xs font-medium rounded-lg transition-colors">
+              Export Capacity Census
+            </button>
+          </div>
+        </div>
+        <div class="w-full md:w-72 h-44 md:h-auto relative overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=800&q=80" alt="Supervision Environment" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#f5ebe0] via-[#f5ebe0]/30 to-transparent"></div>
+        </div>
+      </div>
+
+      <!-- Health Metrics — each with its own warm tint -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
+        <div class="bg-leaf-50 p-4 rounded-xl border border-leaf-200/50">
+          <span class="text-[11px] font-medium text-leaf-700/70 tracking-wide">Total Active Projects</span>
+          <p class="text-xl font-bold text-sand-900 mt-0.5">42 Projects</p>
+          <span class="text-[11px] text-leaf-600 font-medium">100% Cohort Registered</span>
+        </div>
+        <div class="bg-clay-50 p-4 rounded-xl border border-clay-100">
+          <span class="text-[11px] font-medium text-clay-600 tracking-wide">Projects At Risk</span>
+          <p class="text-xl font-bold text-clay-600 mt-0.5">3 Projects</p>
+          <span class="text-[11px] text-clay-600/80 font-medium">&gt;7 days milestone delay</span>
+        </div>
+        <div class="bg-honey-50 p-4 rounded-xl border border-honey-200/50">
+          <span class="text-[11px] font-medium text-honey-600/80 tracking-wide">Supervisor Capacity Load</span>
+          <p class="text-xl font-bold text-sand-900 mt-0.5">84% Capacity</p>
+          <span class="text-[11px] text-honey-500 font-medium">2 supervisors at ceiling</span>
+        </div>
+        <div class="bg-leaf-50 p-4 rounded-xl border border-leaf-200/50">
+          <span class="text-[11px] font-medium text-leaf-700/70 tracking-wide">Defences Scheduled</span>
+          <p class="text-xl font-bold text-leaf-700 mt-0.5">8 Defences</p>
+          <span class="text-[11px] text-sand-500 font-medium">Pre-defence verified</span>
+        </div>
+      </div>
+
+      <!-- Arborist Quota & Wilt Alerts -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        
+        <!-- Arborist Plot Quota — sandy warm card -->
+        <div class="p-5 rounded-xl border border-sand-200 space-y-4" style="background: linear-gradient(180deg, #faf8f3 0%, #f5efe6 100%)">
+          <div class="flex items-center justify-between pb-3 border-b border-sand-200/60">
+            <h3 class="font-semibold text-sm text-sand-900">Supervisor Load Limits</h3>
+            <span class="text-[11px] text-sand-500 font-medium">Max 4 projects</span>
+          </div>
+
+          <div class="space-y-4 text-xs">
+            <div>
+              <div class="flex justify-between font-medium text-sand-800 mb-1.5">
+                <span>Dr. Alan Turing</span>
+                <span class="text-clay-600 font-semibold">4 / 4 &mdash; Full</span>
+              </div>
+              <div class="w-full bg-sand-200 h-2 rounded-full overflow-hidden">
+                <div class="bg-clay-500 h-full w-full rounded-full"></div>
+              </div>
+              <p class="text-[11px] text-sand-500 mt-1">Allocation locked by maximum capacity rule.</p>
+            </div>
+
+            <div>
+              <div class="flex justify-between font-medium text-sand-800 mb-1.5">
+                <span>Dr. Sarah Connor</span>
+                <span class="text-sand-700 font-medium">3 / 4 &mdash; 75%</span>
+              </div>
+              <div class="w-full bg-sand-200 h-2 rounded-full overflow-hidden">
+                <div class="bg-honey-500 h-full w-3/4 rounded-full"></div>
+              </div>
+              <p class="text-[11px] text-sand-500 mt-1">1 project allocation slot remaining.</p>
+            </div>
+
+            <div>
+              <div class="flex justify-between font-medium text-sand-800 mb-1.5">
+                <span>Dr. Grace Hopper</span>
+                <span class="text-leaf-600 font-medium">1 / 4 &mdash; Open</span>
+              </div>
+              <div class="w-full bg-sand-200 h-2 rounded-full overflow-hidden">
+                <div class="bg-leaf-500 h-full w-1/4 rounded-full"></div>
+              </div>
+              <p class="text-[11px] text-sand-500 mt-1">Available for incoming proposal assignments.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wilt Warnings — subtle pink/warm bg -->
+        <div class="lg:col-span-2 p-5 rounded-xl border border-clay-100/80 space-y-4" style="background: linear-gradient(180deg, #fcf7f5 0%, #f8f0ed 100%)">
+          <div class="flex items-center justify-between pb-3 border-b border-clay-100/60">
+            <h3 class="font-semibold text-sm text-clay-700">Projects At Risk &amp; Delay Warnings</h3>
+            <span class="text-[11px] text-sand-500 font-medium">Overdue milestones</span>
+          </div>
+
+          <div class="space-y-3">
+            <div class="p-3.5 bg-clay-50 border border-clay-100 rounded-lg flex flex-col sm:flex-row justify-between sm:items-center gap-3">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2 py-0.5 bg-clay-600 text-white font-semibold text-[10px] rounded">OVERDUE 11 DAYS</span>
+                  <span class="text-xs font-medium text-sand-700">CS-402</span>
+                </div>
+                <h4 class="font-semibold text-[13px] text-sand-900 mt-1">Neural EEG Prosthetics Control Pipeline</h4>
+                <p class="text-xs text-sand-600">K. Miller, T. Davis &middot; Supervisor: Dr. Alan Turing</p>
+                <p class="text-xs text-clay-600 mt-1">Blocker: Biosensor laboratory equipment calibration failure</p>
+              </div>
+              <button class="shrink-0 px-3.5 py-1.5 bg-sand-50/80 border border-clay-400/30 text-clay-700 font-medium text-xs rounded-lg hover:bg-clay-50 transition-colors">
+                Inspect Project
+              </button>
+            </div>
+
+            <div class="p-3.5 bg-honey-50 border border-honey-100 rounded-lg flex flex-col sm:flex-row justify-between sm:items-center gap-3">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2 py-0.5 bg-honey-500 text-white font-semibold text-[10px] rounded">UNASSIGNED PROPOSAL</span>
+                  <span class="text-xs font-medium text-sand-700">CS-415</span>
+                </div>
+                <h4 class="font-semibold text-[13px] text-sand-900 mt-1">Microgrid Energy Storage Self-Balancing Architecture</h4>
+                <p class="text-xs text-sand-600">P. Adams, E. Stone &middot; Preferred: Dr. Hopper</p>
+              </div>
+              <button onclick="openModal('assignModal')" class="shrink-0 px-3.5 py-1.5 bg-honey-500 text-white font-medium text-xs rounded-lg hover:bg-honey-600 transition-colors shadow-sm">
+                Assign Supervisor
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Master Register Table — sage-tinted header -->
+      <div class="bg-sand-50 rounded-xl border border-sand-200 overflow-hidden">
+        <div class="p-4 bg-leaf-50/60 border-b border-leaf-200/40 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <h3 class="font-semibold text-sm text-sand-900">Active Thesis &amp; Project Register</h3>
+          <input type="text" placeholder="Search project ID, student, supervisor..." class="text-xs bg-sand-50 border border-sand-200 rounded-lg px-3 py-1.5 w-64 focus:outline-none focus:ring-1 focus:ring-leaf-600/50 placeholder:text-sand-400">
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-leaf-50/40 text-sand-500 text-[11px] tracking-wide border-b border-sand-200/60">
+              <tr>
+                <th class="p-3 font-medium">Project Code &amp; Title</th>
+                <th class="p-3 font-medium">Research Area</th>
+                <th class="p-3 font-medium">Team Members</th>
+                <th class="p-3 font-medium">Supervisor</th>
+                <th class="p-3 font-medium">Current Milestone</th>
+                <th class="p-3 font-medium">Status</th>
+                <th class="p-3 text-right font-medium">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-sand-150 text-sand-700">
+              <tr class="hover:bg-leaf-50/30 transition-colors">
+                <td class="p-3 font-semibold text-sand-900">CS-101: Vision AI Swarm Coordination</td>
+                <td class="p-3">Robotics &amp; CV</td>
+                <td class="p-3">Alex Vance, Eli Vance</td>
+                <td class="p-3 font-medium text-leaf-700">Dr. Alan Turing</td>
+                <td class="p-3"><span class="px-2 py-0.5 bg-leaf-100 text-leaf-700 rounded-full text-[11px] font-medium">Stage 3: Implementation</span></td>
+                <td class="p-3"><span class="px-2 py-0.5 bg-leaf-100 text-leaf-700 rounded-full text-[11px] font-medium">On Schedule</span></td>
+                <td class="p-3 text-right"><button class="text-leaf-700 font-medium hover:underline">Inspect</button></td>
+              </tr>
+              <tr class="hover:bg-leaf-50/30 transition-colors">
+                <td class="p-3 font-semibold text-sand-900">CS-102: Zero-Knowledge Verification Architecture</td>
+                <td class="p-3">Applied Cryptography</td>
+                <td class="p-3">Sarah J., Gordon F.</td>
+                <td class="p-3 font-medium text-leaf-700">Dr. Sarah Connor</td>
+                <td class="p-3"><span class="px-2 py-0.5 bg-honey-100 text-honey-600 rounded-full text-[11px] font-medium">Stage 4: Draft Report</span></td>
+                <td class="p-3"><span class="px-2 py-0.5 bg-clay-50 text-clay-600 rounded-full text-[11px] font-medium">Overdue</span></td>
+                <td class="p-3 text-right"><button class="text-leaf-700 font-medium hover:underline">Inspect</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- 2. STUDENT VIEW                                          -->
+    <!-- ======================================================== -->
+    <section id="studentView" class="hidden space-y-5">
+
+      <!-- Hero Banner — soft lavender gradient -->
+      <div class="rounded-2xl overflow-hidden flex flex-col md:flex-row border border-plum-200/50" style="background: linear-gradient(135deg, #f8f3fb 0%, #f2eaf7 60%, #eadff0 100%)">
+        <div class="p-6 md:p-8 flex-1 flex flex-col justify-between">
+          <div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 text-plum-600 text-[11px] font-semibold tracking-wide bg-plum-100 rounded-full mb-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-plum-500"></span>
+              Student Research Workspace
+            </span>
+            <h1 class="text-2xl sm:text-[28px] font-bold text-sand-900 leading-tight">Neural EEG Prosthetics Control Pipeline</h1>
+            <p class="text-xs text-sand-500 mt-1">Project ID: CS-2024-401 &middot; Supervisor: Dr. Alan Turing</p>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-2.5">
+            <button onclick="openModal('proposalModal')" class="px-4 py-2 bg-sand-50/70 border border-plum-200 hover:border-plum-300 text-plum-700 text-xs font-medium rounded-lg transition-colors">
+              Revise Proposal (Scope v1.2)
+            </button>
+            <button onclick="openModal('progressReportModal')" class="px-4 py-2 bg-plum-600 hover:bg-plum-700 text-white text-xs font-semibold rounded-lg transition-colors shadow-sm">
+              Submit Progress Deliverable
+            </button>
+          </div>
+        </div>
+        <div class="w-full md:w-72 h-44 md:h-auto relative overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1528183429752-a97d0bf99b5a?auto=format&fit=crop&w=800&q=80" alt="Student Research Project" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#f2eaf7] via-[#f2eaf7]/30 to-transparent"></div>
+        </div>
+      </div>
+
+      <!-- Sandbox Notice -->
+      <div class="p-3 bg-plum-50 border-l-[3px] border-plum-400 rounded-r-lg text-xs text-plum-800 flex justify-between items-center">
+        <span><strong>Project Sandboxing Active:</strong> You can only access your designated project. Historical deliverables are permanently archived and cannot be overwritten.</span>
+        <span class="text-[10px] font-medium bg-plum-100 px-2 py-0.5 rounded-full text-plum-700 shrink-0 ml-3">Immutable Versions</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        
+        <!-- Milestones & Version History -->
+        <div class="lg:col-span-2 space-y-5">
+          <div class="p-5 rounded-xl border border-plum-200/40 space-y-4" style="background: linear-gradient(180deg, #faf7fc 0%, #f5f0f8 100%)">
+            <div class="flex justify-between items-center pb-3 border-b border-plum-200/30">
+              <h3 class="font-semibold text-sm text-sand-900">Project Milestones &amp; Deliverables</h3>
+              <span class="text-xs text-leaf-600 font-medium">3 of 5 completed</span>
+            </div>
+
+            <div class="space-y-2.5 text-xs">
+              <!-- Stage 1 -->
+              <div class="p-3 bg-leaf-50/60 rounded-lg border border-leaf-200/30 flex justify-between items-start">
+                <div>
+                  <span class="font-medium text-sand-800">1. Literature Review &amp; Background Study</span>
+                  <p class="text-sand-500 mt-0.5">Alex Vance &middot; Approved by Dr. Turing (Scope v1.1)</p>
+                </div>
+                <span class="px-2 py-0.5 bg-leaf-100 text-leaf-700 font-medium rounded-full text-[11px] shrink-0">Completed Oct 12</span>
+              </div>
+
+              <!-- Stage 2 -->
+              <div class="p-3 bg-leaf-50/60 rounded-lg border border-leaf-200/30 flex justify-between items-start">
+                <div>
+                  <span class="font-medium text-sand-800">2. System Architecture &amp; Neural Filter Design</span>
+                  <p class="text-sand-500 mt-0.5">Eli Vance &middot; Approved by Dr. Turing (Scope v1.0)</p>
+                </div>
+                <span class="px-2 py-0.5 bg-leaf-100 text-leaf-700 font-medium rounded-full text-[11px] shrink-0">Completed Nov 02</span>
+              </div>
+
+              <!-- Stage 3 (Active) -->
+              <div class="p-3 bg-plum-50 rounded-lg border border-plum-200/50 flex justify-between items-start">
+                <div>
+                  <span class="font-medium text-plum-800">3. Firmware Prototype &amp; Code Implementation</span>
+                  <p class="text-sand-500 mt-0.5">Alex &amp; Eli &middot; 85% completed; signal filter integration active</p>
+                </div>
+                <span class="px-2 py-0.5 bg-plum-100 text-plum-700 font-medium rounded-full text-[11px] shrink-0">Due in 3 Days</span>
+              </div>
+
+              <!-- Stage 4 (Overdue) -->
+              <div class="p-3 bg-clay-50 rounded-lg border border-clay-100 flex justify-between items-start">
+                <div>
+                  <span class="font-medium text-clay-700">4. Draft Thesis Report &amp; Benchmark Documentation</span>
+                  <p class="text-clay-600/80 mt-0.5">Deadline lapsed Nov 20 &middot; Flagged automatically on coordinator dashboard</p>
+                </div>
+                <span class="px-2 py-0.5 bg-clay-600 text-white font-medium rounded-full text-[11px] shrink-0">Overdue</span>
+              </div>
+
+              <!-- Stage 5 -->
+              <div class="p-3 bg-sand-100/60 rounded-lg opacity-50 flex justify-between items-start">
+                <div>
+                  <span class="font-medium text-sand-700">5. Final Report, Code Digest &amp; Board Defence</span>
+                  <p class="text-sand-500 mt-0.5">Scheduled upon draft thesis approval</p>
+                </div>
+                <span class="px-2 py-0.5 bg-sand-200 text-sand-600 font-medium rounded-full text-[11px] shrink-0">Due Dec 15</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Version History — plum-tinted header -->
+          <div class="bg-sand-50 p-5 rounded-xl border border-plum-200/30 space-y-3">
+            <h3 class="font-semibold text-sm text-sand-900">Submission History &amp; Versioned Deliverables</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-plum-50/50 border-b border-plum-200/30 text-sand-500 text-[11px] tracking-wide">
+                  <tr>
+                    <th class="p-2.5 font-medium">Version</th>
+                    <th class="p-2.5 font-medium">Deliverable File</th>
+                    <th class="p-2.5 font-medium">Timestamp</th>
+                    <th class="p-2.5 font-medium">Reported Blockers</th>
+                    <th class="p-2.5 font-medium">Supervisor Status</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-sand-150 text-sand-700">
+                  <tr class="hover:bg-plum-50/30 transition-colors">
+                    <td class="p-2.5 font-semibold text-plum-600">v2.1</td>
+                    <td class="p-2.5 font-medium">Signal_Filter_Code_Nov.zip</td>
+                    <td class="p-2.5 text-sand-500">Yesterday, 14:22</td>
+                    <td class="p-2.5 text-sand-500">Hardware amplifier recalibration</td>
+                    <td class="p-2.5"><span class="px-2 py-0.5 bg-honey-100 text-honey-600 rounded-full font-medium text-[11px]">Pending Review</span></td>
+                  </tr>
+                  <tr class="hover:bg-plum-50/30 transition-colors">
+                    <td class="p-2.5 font-semibold text-plum-600">v2.0</td>
+                    <td class="p-2.5 font-medium">EEG_PreProcessing_Model.pdf</td>
+                    <td class="p-2.5 text-sand-500">Nov 10, 09:15</td>
+                    <td class="p-2.5 text-sand-500">None</td>
+                    <td class="p-2.5"><span class="px-2 py-0.5 bg-leaf-100 text-leaf-700 rounded-full font-medium text-[11px]">Approved with Notes</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat & Checklist sidebar -->
+        <div class="space-y-5">
+          
+          <!-- Chat — warm plum tinted -->
+          <div class="rounded-xl border border-plum-200/40 flex flex-col h-96 overflow-hidden" style="background: #faf7fc">
+            <div class="p-3 bg-plum-50 border-b border-plum-200/30 flex justify-between items-center">
+              <span class="text-xs font-semibold text-sand-800">Project Chat Channel</span>
+              <span class="text-[10px] bg-clay-500 text-white font-medium px-2 py-0.5 rounded-full">1 Unread</span>
+            </div>
+            <div class="flex-1 p-3 overflow-y-auto space-y-3 text-xs" id="chatContainer">
+              <div class="bg-sand-150 p-2.5 rounded-xl rounded-tl-sm max-w-[85%]">
+                <span class="font-semibold text-sand-700 text-[11px]">Dr. Alan Turing</span>
+                <p class="text-sand-800 mt-1 leading-relaxed">Check the sampling cutoff for the 256Hz notch filter. Ensure no signal noise degrades classifier accuracy.</p>
+                <span class="text-[10px] text-sand-400 block mt-1">10:14 AM</span>
+              </div>
+              <div class="bg-plum-600 text-white p-2.5 rounded-xl rounded-tr-sm max-w-[85%] ml-auto">
+                <span class="font-semibold text-plum-200 text-[11px]">You</span>
+                <p class="mt-1 leading-relaxed">Calibrated and uploaded in package v2.1 archive for verification.</p>
+                <span class="text-[10px] text-plum-300 block text-right mt-1">10:22 AM</span>
+              </div>
+            </div>
+            <div class="p-2.5 bg-plum-50/60 border-t border-plum-200/30 flex gap-2">
+              <input type="text" id="chatInput" placeholder="Message supervisor &amp; team..." class="text-xs flex-1 border border-plum-200/50 bg-sand-50 rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-plum-500/40 placeholder:text-sand-400">
+              <button onclick="sendChatMessage()" class="px-3 py-1.5 bg-plum-600 text-white text-xs font-medium rounded-lg hover:bg-plum-700 transition-colors">Send</button>
+            </div>
+          </div>
+
+          <!-- Defense Checklist — soft green tint -->
+          <div class="bg-leaf-50/50 p-5 rounded-xl border border-leaf-200/40 space-y-3">
+            <h4 class="font-semibold text-xs text-sand-800">Final Submission Checklist</h4>
+            <div class="space-y-2.5 text-xs">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" checked class="rounded">
+                <span class="text-sand-700">Final Thesis Report (PDF)</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" checked class="rounded">
+                <span class="text-sand-700">Verified Code Repository Link</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" class="rounded">
+                <span class="text-sand-700">A1 Project Poster (PDF)</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" class="rounded">
+                <span class="text-sand-700">Similarity Report (Turnitin &lt; 15%)</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- 3. SUPERVISOR VIEW                                       -->
+    <!-- ======================================================== -->
+    <section id="supervisorView" class="hidden space-y-5">
+
+      <!-- Hero Banner — sage green gradient -->
+      <div class="rounded-2xl overflow-hidden flex flex-col md:flex-row border border-leaf-200/50" style="background: linear-gradient(135deg, #f2f7f3 0%, #e8f0eb 60%, #dfe9e2 100%)">
+        <div class="p-6 md:p-8 flex-1 flex flex-col justify-between">
+          <div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 text-leaf-700 text-[11px] font-semibold tracking-wide bg-leaf-100 rounded-full mb-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-leaf-500"></span>
+              Supervisor Review Console
+            </span>
+            <h1 class="text-2xl sm:text-[28px] font-bold text-sand-900 leading-tight">Supervisor Console: Dr. Sarah Connor</h1>
+            <p class="text-xs text-sand-500 mt-1">Supervision Load: Carrying 3 of 4 Maximum Allocated Projects</p>
+          </div>
+          <div class="mt-6">
+            <button onclick="openModal('meetingModal')" class="px-4 py-2 bg-leaf-700 hover:bg-leaf-800 text-white text-xs font-semibold rounded-lg transition-colors shadow-sm">
+              Log Supervision Meeting
+            </button>
+          </div>
+        </div>
+        <div class="w-full md:w-72 h-44 md:h-auto relative overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=800&q=80" alt="Supervision Office" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#e8f0eb] via-[#e8f0eb]/30 to-transparent"></div>
+        </div>
+      </div>
+
+      <!-- Approval Pipeline — warm green card -->
+      <div class="rounded-xl border border-leaf-200/40 p-5 space-y-4" style="background: linear-gradient(180deg, #f5f9f6 0%, #eff5f1 100%)">
+        <h3 class="font-semibold text-sm text-sand-900">Deliverables Awaiting Review &amp; Approval</h3>
+
+        <div class="border border-sand-200/60 rounded-lg p-4 space-y-3 bg-sand-50/60">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <span class="px-2 py-0.5 bg-honey-100 text-honey-600 text-[10px] font-semibold rounded-full">REVISION REQUESTED</span>
+              <h4 class="font-semibold text-[13px] text-sand-900 mt-1">Zero-Knowledge Verification Architecture (v2.0)</h4>
+              <p class="text-xs text-sand-600">Sarah J., Gordon F. &middot; Milestone: Code Implementation</p>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="alert('Revision notice committed with supervisor comments.')" class="px-3.5 py-1.5 bg-honey-500 hover:bg-honey-600 text-white font-medium text-xs rounded-lg transition-colors">
+                Request Revision
+              </button>
+              <button onclick="alert('Stage approved and scope stamped as new approved version!')" class="px-3.5 py-1.5 bg-leaf-600 hover:bg-leaf-700 text-white font-medium text-xs rounded-lg transition-colors shadow-sm">
+                Approve Deliverable
+              </button>
+            </div>
+          </div>
+          <div class="text-xs bg-sand-50 p-3 rounded-lg border border-sand-200/60">
+            <label class="block font-medium text-sand-700 mb-1">Supervisor Guidance &amp; Scope Amendments:</label>
+            <textarea class="w-full text-xs p-2 border border-sand-200 rounded-lg bg-sand-50 focus:outline-none focus:ring-1 focus:ring-leaf-600/40" rows="2" placeholder="Specify technical issues or required scope revisions..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Meeting Logs — earthy tint -->
+      <div class="rounded-xl border border-sand-200 p-5 space-y-4" style="background: linear-gradient(180deg, #faf8f3 0%, #f5efe6 100%)">
+        <div class="flex justify-between items-center pb-3 border-b border-sand-200/60">
+          <h3 class="font-semibold text-sm text-sand-900">Supervision Meeting Register</h3>
+          <span class="text-[11px] text-sand-500 font-medium">Official university audit trail</span>
+        </div>
+        <div class="p-3.5 bg-sand-50/80 border border-sand-200/60 rounded-lg text-xs space-y-2">
+          <div class="flex justify-between font-medium text-sand-800">
+            <span>Bi-Weekly Sync: Architecture Review</span>
+            <span class="text-sand-500">Nov 18, 2024</span>
+          </div>
+          <p class="text-sand-600"><strong class="text-sand-700">Present:</strong> Dr. S. Connor, Sarah J., Gordon F.</p>
+          <p class="text-sand-600"><strong class="text-sand-700">Decisions:</strong> Refactor verifier module to reduce memory overhead on edge devices.</p>
+          <div class="p-2.5 bg-honey-50 border border-honey-200/50 rounded-lg text-honey-700 flex flex-col sm:flex-row justify-between gap-1">
+            <span><strong>Follow-up Action:</strong> Benchmark memory allocation across 500 test batches</span>
+            <span class="font-medium shrink-0">Gordon F. &mdash; Due Nov 28</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- 4. BOARD VIEW                                            -->
+    <!-- ======================================================== -->
+    <section id="boardView" class="hidden space-y-5">
+
+      <!-- Hero Banner — warm amber/gold gradient -->
+      <div class="rounded-2xl overflow-hidden flex flex-col md:flex-row border border-sand-300/50" style="background: linear-gradient(135deg, #fbf8f2 0%, #f5efe3 60%, #efe6d6 100%)">
+        <div class="p-6 md:p-8 flex-1 flex flex-col justify-between">
+          <div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 text-sand-600 text-[11px] font-semibold tracking-wide bg-honey-100 rounded-full mb-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-honey-500"></span>
+              Examination Board Evaluation
+            </span>
+            <h1 class="text-2xl sm:text-[28px] font-bold text-sand-900 leading-tight">Final Thesis Defence &amp; Evaluation Board</h1>
+            <p class="text-xs text-sand-500 mt-1">Scheduled Defence Session: Today, 14:00 PM (Auditorium 1)</p>
+          </div>
+        </div>
+        
+        <div class="w-full md:w-72 h-44 md:h-auto relative overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=800&q=80" alt="Examination Hall" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#f5efe3] via-[#f5efe3]/30 to-transparent"></div>
+        </div>
+      </div>
+
+      <!-- Candidate Card — warm -->
+      <div class="p-5 rounded-xl border border-sand-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4" style="background: linear-gradient(135deg, #faf8f3 0%, #f5efe6 100%)">
+        <div>
+          <span class="text-[11px] font-medium text-sand-500">Candidate Project: CS-2024-401</span>
+          <h2 class="text-lg font-bold text-sand-900 mt-0.5">Neural EEG Prosthetics Control Pipeline</h2>
+          <p class="text-xs text-sand-600">Alex Vance, Eli Vance &middot; Supervisor: Dr. Alan Turing</p>
+        </div>
+        <div class="bg-leaf-50 p-4 rounded-xl border border-leaf-200/40 text-right min-w-[130px]">
+          <span class="text-[10px] font-medium text-leaf-700/60 block">Computed Grade</span>
+          <span id="totalRubricScore" class="text-3xl font-bold text-leaf-700">86</span>
+          <span class="text-xs text-sand-500">/ 100</span>
+        </div>
+      </div>
+
+      <!-- Rubric — warm earthy card -->
+      <div class="rounded-xl border border-sand-200 p-5 space-y-5" style="background: linear-gradient(180deg, #faf8f3 0%, #f5f0e8 100%)">
+        <h3 class="font-semibold text-sm text-sand-900 pb-2 border-b border-sand-200/60">Academic Assessment Rubric Matrix</h3>
+
+        <!-- Criterion 1 -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between text-xs text-sand-800">
+            <span class="font-medium">1. Methodological Soundness &amp; Theory (30%)</span>
+            <span id="c1Val" class="text-leaf-700 font-semibold">26 / 30</span>
+          </div>
+          <input type="range" min="0" max="30" value="26" id="c1Input" oninput="calculateRubric()" class="w-full h-1.5 bg-sand-200 rounded-full appearance-none cursor-pointer">
+          <p class="text-[11px] text-sand-500">Mathematical controls, signal filtering validation, theoretical soundness.</p>
+        </div>
+
+        <!-- Criterion 2 -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between text-xs text-sand-800">
+            <span class="font-medium">2. Practical Implementation &amp; Code Quality (30%)</span>
+            <span id="c2Val" class="text-leaf-700 font-semibold">25 / 30</span>
+          </div>
+          <input type="range" min="0" max="30" value="25" id="c2Input" oninput="calculateRubric()" class="w-full h-1.5 bg-sand-200 rounded-full appearance-none cursor-pointer">
+          <p class="text-[11px] text-sand-500">Working prototype, unit testing, latency benchmarks, edge hardware integration.</p>
+        </div>
+
+        <!-- Criterion 3 -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between text-xs text-sand-800">
+            <span class="font-medium">3. Oral Defense Presentation &amp; Q&amp;A (20%)</span>
+            <span id="c3Val" class="text-leaf-700 font-semibold">18 / 20</span>
+          </div>
+          <input type="range" min="0" max="20" value="18" id="c3Input" oninput="calculateRubric()" class="w-full h-1.5 bg-sand-200 rounded-full appearance-none cursor-pointer">
+          <p class="text-[11px] text-sand-500">Clarity of defense, slide presentation, handling board critiques.</p>
+        </div>
+
+        <!-- Criterion 4 -->
+        <div class="space-y-1.5">
+          <div class="flex justify-between text-xs text-sand-800">
+            <span class="font-medium">4. Thesis Report Formatting &amp; Citation Integrity (20%)</span>
+            <span id="c4Val" class="text-leaf-700 font-semibold">17 / 20</span>
+          </div>
+          <input type="range" min="0" max="20" value="17" id="c4Input" oninput="calculateRubric()" class="w-full h-1.5 bg-sand-200 rounded-full appearance-none cursor-pointer">
+          <p class="text-[11px] text-sand-500">Turnitin index &lt; 15%, rigorous citations, formatting compliance.</p>
+        </div>
+
+        <div class="pt-4 border-t border-sand-200/60">
+          <label class="block text-xs font-medium text-sand-700 mb-1.5">Board Verdict &amp; Required Revisions:</label>
+          <textarea rows="2" class="w-full text-xs p-2.5 border border-sand-200 bg-sand-50 rounded-lg focus:outline-none focus:ring-1 focus:ring-leaf-600/40" placeholder="e.g., Passed with minor revisions required on Section 4 before final repository release."></textarea>
+        </div>
+
+        <div class="flex justify-end gap-2.5 pt-1">
+          <button class="px-4 py-2 text-xs font-medium bg-sand-50/80 border border-sand-300 text-sand-700 rounded-lg hover:border-sand-400 transition-colors">Save Draft</button>
+          <button onclick="alert('Final certification committed to University Registry.')" class="px-4 py-2 text-xs font-semibold bg-leaf-600 hover:bg-leaf-700 text-white rounded-lg transition-colors shadow-sm">Submit Final Evaluation</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-sand-200/60 py-4 bg-sand-100/50">
+    <p class="text-center text-[11px] text-sand-400">PUB SuperVise &middot; Project and Thesis Supervision and Collaboration Portal</p>
+  </footer>
+
+  <!-- ======================================================== -->
+  <!-- MODALS                                                    -->
+  <!-- ======================================================== -->
+
+  <!-- Modal 1: Seedling Spec Intake -->
+  <div id="proposalModal" class="hidden fixed inset-0 bg-sand-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="rounded-2xl max-w-lg w-full p-6 shadow-xl space-y-4 border border-sand-200/80" style="background: linear-gradient(180deg, #faf8f3 0%, #f5f0e8 100%)">
+      <div class="flex justify-between items-center pb-3 border-b border-sand-200/60">
+        <h3 class="text-sm font-semibold text-sand-900">Project / Thesis Proposal Submission</h3>
+        <button onclick="closeModal('proposalModal')" class="text-sand-400 hover:text-sand-700 text-lg leading-none">&times;</button>
+      </div>
+      <form onsubmit="handleProposalSubmit(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-medium text-sand-600 mb-1">Project Title</label>
+          <input required type="text" class="w-full p-2.5 bg-sand-50 border border-sand-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-leaf-600/40" value="Neural EEG Prosthetics Control Pipeline">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-medium text-sand-600 mb-1">Research Area</label>
+            <input required type="text" class="w-full p-2.5 bg-sand-50 border border-sand-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-leaf-600/40" value="Biomedical / Machine Learning">
+          </div>
+          <div>
+            <label class="block font-medium text-sand-600 mb-1">Preferred Supervisor</label>
+            <select class="w-full p-2.5 bg-sand-50 border border-sand-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-leaf-600/40">
+              <option>Dr. Alan Turing</option>
+              <option>Dr. Sarah Connor</option>
+              <option>Dr. Grace Hopper</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block font-medium text-sand-600 mb-1">Team Members (Names &amp; IDs)</label>
+          <input required type="text" class="w-full p-2.5 bg-sand-50 border border-sand-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-leaf-600/40" value="Alex Vance (CS101), Eli Vance (CS102)">
+        </div>
+        <div>
+          <label class="block font-medium text-sand-600 mb-1">Abstract &amp; Research Scope</label>
+          <textarea rows="3" class="w-full p-2.5 bg-sand-50 border border-sand-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-leaf-600/40">Design an end-to-end edge-computed embedded prosthetic limb decoder using deep temporal convolutional networks on multi-channel EEG.</textarea>
+        </div>
+        <div class="flex justify-end gap-2.5 pt-2 border-t border-sand-200/60">
+          <button type="button" onclick="closeModal('proposalModal')" class="px-3.5 py-1.5 border border-sand-300 rounded-lg text-sand-600 hover:border-sand-400 transition-colors">Cancel</button>
+          <button type="submit" class="px-4 py-1.5 bg-leaf-700 text-white rounded-lg font-semibold hover:bg-leaf-800 transition-colors shadow-sm">Submit Proposal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 2: Arborist Plot Allocation -->
+  <div id="assignModal" class="hidden fixed inset-0 bg-sand-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="rounded-2xl max-w-md w-full p-6 shadow-xl space-y-4 border border-sand-200/80" style="background: linear-gradient(180deg, #faf8f3 0%, #f5f0e8 100%)">
+      <div class="flex justify-between items-center pb-3 border-b border-sand-200/60">
+        <h3 class="text-sm font-semibold text-sand-900">Coordinator: Assign Supervisor</h3>
+        <button onclick="closeModal('assignModal')" class="text-sand-400 hover:text-sand-700 text-lg leading-none">&times;</button>
+      </div>
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-medium text-sand-600 mb-1">Target Project</label>
+          <select class="w-full p-2.5 bg-sand-50 border border-sand-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-leaf-600/40">
+            <option>CS-415: Microgrid Energy Storage Architecture</option>
+            <option>CS-419: Autonomous Drone Swarm</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-medium text-sand-600 mb-1">Select Supervisor</label>
+          <select id="supervisorSelect" onchange="checkCapacity(this.value)" class="w-full p-2.5 bg-sand-50 border border-sand-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-leaf-600/40">
+            <option value="hopper">Dr. Grace Hopper (1/4 &mdash; Capacity Available)</option>
+            <option value="connor">Dr. Sarah Connor (3/4 &mdash; 1 Slot Remaining)</option>
+            <option value="turing" disabled>Dr. Alan Turing (4/4 &mdash; Full)</option>
+          </select>
+          <p id="capWarning" class="text-[11px] text-leaf-600 mt-1.5 font-medium">Selected supervisor has capacity available.</p>
+        </div>
+        <div class="flex justify-end gap-2.5 pt-2 border-t border-sand-200/60">
+          <button type="button" onclick="closeModal('assignModal')" class="px-3.5 py-1.5 border border-sand-300 rounded-lg text-sand-600 hover:border-sand-400 transition-colors">Cancel</button>
+          <button onclick="commitAssignment()" class="px-4 py-1.5 bg-leaf-700 text-white rounded-lg font-semibold hover:bg-leaf-800 transition-colors shadow-sm">Confirm Allocation</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Progress Report -->
+  <div id="progressReportModal" class="hidden fixed inset-0 bg-sand-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="rounded-2xl max-w-lg w-full p-6 shadow-xl space-y-4 border border-plum-200/50" style="background: linear-gradient(180deg, #faf7fc 0%, #f5f0f8 100%)">
+      <div class="flex justify-between items-center pb-3 border-b border-plum-200/30">
+        <h3 class="text-sm font-semibold text-sand-900">Upload Progress Report &amp; Deliverables</h3>
+        <button onclick="closeModal('progressReportModal')" class="text-sand-400 hover:text-sand-700 text-lg leading-none">&times;</button>
+      </div>
+      <form onsubmit="handleProgressSubmit(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-medium text-sand-600 mb-1">Work Accomplished &amp; Evidence</label>
+          <textarea rows="2" required placeholder="State benchmark results, code commits..." class="w-full p-2.5 bg-sand-50 border border-plum-200/40 rounded-lg focus:outline-none focus:ring-1 focus:ring-plum-500/40"></textarea>
+        </div>
+        <div>
+          <label class="block font-medium text-sand-600 mb-1">Current Blockers / Impediments</label>
+          <input type="text" placeholder="e.g., Compute queue delays, sensor shortages..." class="w-full p-2.5 bg-sand-50 border border-plum-200/40 rounded-lg focus:outline-none focus:ring-1 focus:ring-plum-500/40">
+        </div>
+        <div>
+          <label class="block font-medium text-sand-600 mb-1">Next Immediate Action</label>
+          <input type="text" placeholder="e.g., Train transformer model on new patient cohort..." class="w-full p-2.5 bg-sand-50 border border-plum-200/40 rounded-lg focus:outline-none focus:ring-1 focus:ring-plum-500/40">
+        </div>
+        <div>
+          <label class="block font-medium text-sand-600 mb-1">Deliverable Archive (ZIP / PDF)</label>
+          <input type="file" class="w-full text-sand-600 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-plum-100 file:text-plum-700 file:cursor-pointer">
+          <p class="text-[10px] text-sand-400 mt-1">Permanently archived under a new version tag; prior submissions remain read-only.</p>
+        </div>
+        <div class="flex justify-end gap-2.5 pt-2 border-t border-plum-200/30">
+          <button type="button" onclick="closeModal('progressReportModal')" class="px-3.5 py-1.5 border border-sand-300 rounded-lg text-sand-600 hover:border-sand-400 transition-colors">Cancel</button>
+          <button type="submit" class="px-4 py-1.5 bg-plum-600 text-white rounded-lg font-semibold hover:bg-plum-700 transition-colors shadow-sm">Commit Deliverable</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 4: Meeting Log -->
+  <div id="meetingModal" class="hidden fixed inset-0 bg-sand-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="rounded-2xl max-w-md w-full p-6 shadow-xl space-y-4 border border-leaf-200/40" style="background: linear-gradient(180deg, #f5f9f6 0%, #eff5f1 100%)">
+      <div class="flex justify-between items-center pb-3 border-b border-leaf-200/30">
+        <h3 class="text-sm font-semibold text-sand-900">Record Supervision Meeting</h3>
+        <button onclick="closeModal('meetingModal')" class="text-sand-400 hover:text-sand-700 text-lg leading-none">&times;</button>
+      </div>
+      <form onsubmit="handleMeetingSubmit(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-medium text-sand-600 mb-1">Date</label>
+          <input type="date" required class="w-full p-2.5 bg-sand-50 border border-leaf-200/40 rounded-lg focus:outline-none focus:ring-1 focus:ring-leaf-600/40" value="2024-11-25">
+        </div>
+        <div>
+          <label class="block font-medium text-sand-600 mb-1">Attendees</label>
+          <input type="text" required placeholder="Staff and students present" class="w-full p-2.5 bg-sand-50 border border-leaf-200/40 rounded-lg focus:outline-none focus:ring-1 focus:ring-leaf-600/40">
+        </div>
+        <div>
+          <label class="block font-medium text-sand-600 mb-1">Technical Decisions</label>
+          <textarea rows="2" placeholder="Agreed scope adjustments, methodology shifts..." class="w-full p-2.5 bg-sand-50 border border-leaf-200/40 rounded-lg focus:outline-none focus:ring-1 focus:ring-leaf-600/40"></textarea>
+        </div>
+        <div>
+          <label class="block font-medium text-sand-600 mb-1">Action Item &amp; Deadline</label>
+          <input type="text" placeholder="Owner, task description, and due date" class="w-full p-2.5 bg-sand-50 border border-leaf-200/40 rounded-lg focus:outline-none focus:ring-1 focus:ring-leaf-600/40">
+        </div>
+        <div class="flex justify-end gap-2.5 pt-2 border-t border-leaf-200/30">
+          <button type="button" onclick="closeModal('meetingModal')" class="px-3.5 py-1.5 border border-sand-300 rounded-lg text-sand-600 hover:border-sand-400 transition-colors">Cancel</button>
+          <button type="submit" class="px-4 py-1.5 bg-leaf-700 text-white rounded-lg font-semibold hover:bg-leaf-800 transition-colors shadow-sm">Save Meeting Log</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Runtime Logic -->
+  <script>
+    function switchSector(sector) {
+      document.getElementById('coordinatorView').classList.add('hidden');
+      document.getElementById('studentView').classList.add('hidden');
+      document.getElementById('supervisorView').classList.add('hidden');
+      document.getElementById('boardView').classList.add('hidden');
+      document.getElementById(sector + 'View').classList.remove('hidden');
+    }
+
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+    function checkCapacity(val) {
+      const msg = document.getElementById('capWarning');
+      if (val === 'turing') {
+        msg.innerText = 'Cannot allocate: Supervisor at maximum capacity quota (4/4).';
+        msg.className = 'text-[11px] text-clay-600 mt-1.5 font-medium';
+      } else {
+        msg.innerText = 'Selected supervisor has capacity available.';
+        msg.className = 'text-[11px] text-leaf-600 mt-1.5 font-medium';
+      }
+    }
+
+    function commitAssignment() {
+      alert('Supervisor assignment confirmed and logged to project registry.');
+      closeModal('assignModal');
+    }
+
+    function calculateRubric() {
+      const c1 = parseInt(document.getElementById('c1Input').value) || 0;
+      const c2 = parseInt(document.getElementById('c2Input').value) || 0;
+      const c3 = parseInt(document.getElementById('c3Input').value) || 0;
+      const c4 = parseInt(document.getElementById('c4Input').value) || 0;
+      document.getElementById('c1Val').innerText = c1 + ' / 30';
+      document.getElementById('c2Val').innerText = c2 + ' / 30';
+      document.getElementById('c3Val').innerText = c3 + ' / 20';
+      document.getElementById('c4Val').innerText = c4 + ' / 20';
+      document.getElementById('totalRubricScore').innerText = c1 + c2 + c3 + c4;
+    }
+
+    function sendChatMessage() {
+      const input = document.getElementById('chatInput');
+      const val = input.value.trim();
+      if (!val) return;
+      const container = document.getElementById('chatContainer');
+      const msg = document.createElement('div');
+      msg.className = 'bg-plum-600 text-white p-2.5 rounded-xl rounded-tr-sm max-w-[85%] ml-auto text-xs';
+      msg.innerHTML = `<span class="font-semibold text-plum-200 text-[11px]">You</span><p class="mt-1 leading-relaxed">${val}</p><span class="text-[10px] text-plum-300 block text-right mt-1">Just now</span>`;
+      container.appendChild(msg);
+      input.value = '';
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function handleProposalSubmit(e) {
+      e.preventDefault();
+      alert('Proposal submitted successfully. Awaiting coordinator review.');
+      closeModal('proposalModal');
+    }
+    function handleProgressSubmit(e) {
+      e.preventDefault();
+      alert('Progress deliverable submitted and archived under new immutable version tag.');
+      closeModal('progressReportModal');
+    }
+    function handleMeetingSubmit(e) {
+      e.preventDefault();
+      alert('Supervision meeting log and follow-up actions saved to university audit register.');
+      closeModal('meetingModal');
+    }
+  </script>
+</body>
+</html>
