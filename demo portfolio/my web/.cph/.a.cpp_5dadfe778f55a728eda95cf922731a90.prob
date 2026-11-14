@@ -1,0 +1,1 @@
+{"name":"Local: a","url":"e:\\0.0 internship\\demo portfolio\\my web\\a.cpp","tests":[{"id":1794407139454,"input":"2\n5 3\n1 3 5\n7 3\n1 3 3","output":"5\n4"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\0.0 internship\\demo portfolio\\my web\\a.cpp","group":"local","local":true}
